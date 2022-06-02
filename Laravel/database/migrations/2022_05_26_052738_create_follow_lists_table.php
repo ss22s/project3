@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('followLists', function (Blueprint $table) {
             $table->unsignedBigInteger('UserID');
             $table->string('followerID');
-
+ 
             $table->foreign('UserID')->references('UserID')->on('users');
         });
     }
