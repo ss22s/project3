@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('UserID');
             $table->integer('bookID');
             $table->dateTime('registered_at');
-            $table->integer('finished');
+            $table->integer('finished')->nullable();
 
             $table->foreign('UserID')->references('UserID')->on('users');
         });
