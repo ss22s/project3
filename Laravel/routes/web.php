@@ -18,18 +18,13 @@ Route::get('/', function () {
 });
 
 //top関連
-Route::get('chatRoom',function(){
-    return view('TOP/chatRoom');
-});
-Route::get('contactUs',function(){
-    return view('TOP/contactUs');
-});
-Route::get('newBookReport',function(){
-    return view('TOP/newBookReport');
-});
-Route::get('ranking',function(){
-    return view('TOP/ranking');
-});
-Route::get('topMain',function(){
-    return view('TOP/topMain');
-});
+
+Route::get('/chatRoom','App\Http\Controllers\TopController@chatroom');
+
+Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
+
+ROute::get('/newBookReport','App\Http\Controllers\TopController@newBookReport');
+
+Route::get('/ranking','App\Http\Controllers\TopController@ranking');
+
+Route::get('/topMain','App\Http\Controllers\TopController@topMain');
