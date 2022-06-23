@@ -1,1 +1,2 @@
 マイページ
+{{$myData['UserName']}}
