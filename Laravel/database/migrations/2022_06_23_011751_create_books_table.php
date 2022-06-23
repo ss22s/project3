@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('followLists', function (Blueprint $table) {
-            $table->unsignedBigInteger('UserID');
-            $table->string('followerID');
-
-            $table->foreign('UserID')->references('UserID')->on('users');
+        Schema::create('books', function (Blueprint $table) {
+            $table->integer('bookID');
+            $table->string('book');
+            $table->string('auther');
+            $table->string('genre');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followLists');
+        Schema::dropIfExists('books');
     }
 };
