@@ -1,2 +1,1 @@
 マイページ
-{{$myData['UserName']}}
