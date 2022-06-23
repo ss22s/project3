@@ -7,6 +7,7 @@
     <title>新着感想</title>
 </head>
 <body>
+    @csrf
     <!-- foreach -->
     <div style="display:inline-block; border:2px solid; border-radius:30px; margin:10px; padding:10px;">
         <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
