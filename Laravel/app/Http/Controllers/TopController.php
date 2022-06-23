@@ -57,7 +57,7 @@ class TopController extends Controller
 
             $x++;
         }
-        dd($newBookReportData);
+        // dd($newBookReportData);
  
         return view('TOP/newBookReport',compact('newBookReportData'));
     }
