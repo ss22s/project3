@@ -43,22 +43,21 @@ class MyPageController extends Controller
         
         $x = 0;
         foreach($wantToBooksGet as $wantToBookGet){
-            $MyWantToBooks[$x]['bookID'] = $wantToBookGet['bookID'];
-            $MyWantToBooks[$x]['book'] = book::where('bookID',1001)->value('book');
+            $myWantToBooks[$x]['bookID'] = $wantToBookGet['bookID'];
+            $myWantToBooks[$x]['book'] = book::where('bookID',$wantToBookGet['bookID'])->value('book');
             $x++;
         }
         
-
         //読んだ本
 
         $finishedBookGet = finishedBook::where('userID',1)->get();
         $x = 0;
         foreach ($finishedBookGet as $finishedBook) {
-            $MyFinishedBooks[$x]['bookID'] = $finishedBook['bookID'];
-            $MyFinishedBooks[$x]['book'] = book::where('bookID',$finishedBook['bookID'])->value('book');
-            $MyFinishedBooks[$x]['reviewID'] = $finishedBook['reviewID'];
+            $myFinishedBooks[$x]['bookID'] = $finishedBook['bookID'];
+            $myFinishedBooks[$x]['book'] = book::where('bookID',$finishedBook['bookID'])->value('book');
+            $myFinishedBooks[$x]['reviewID'] = $finishedBook['reviewID'];
         }
-        dd($MyFinishedBooks);
+        
         return view('MyPage/myPage',compact('myData'));
     }
 }
