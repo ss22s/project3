@@ -9,8 +9,9 @@
     <div>
         <h1>ご意見 / お問い合わせ</h1>
         <div>
-            <form action="" method="post" name="form" onsubmit="return validate()">
-                <div>
+            <form action="/confirm" method="post" name="form" onsubmit="return validate()">
+            @csrf    
+            <div>
                     <div>
                         <label>お名前</label>
                         <input type="text" name="name" placeholder="例）田中太郎" value="">

@@ -21,10 +21,12 @@ Route::get('/', function () {
 
 Route::get('/chatRoom','App\Http\Controllers\TopController@chatroom');
 
-Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
-
 ROute::get('/newBookReport','App\Http\Controllers\TopController@newBookReport');
 
 Route::get('/ranking','App\Http\Controllers\TopController@ranking');
 
 Route::get('/topMain','App\Http\Controllers\TopController@topMain');
+
+//お問い合わせ
+Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
+Route::post('/confirm','App\Http\COntrollers\TopController@confirm');
