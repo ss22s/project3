@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Models\myPage;
 use App\Models\member;
+use App\Models\book;
 use App\Models\followList;
 use App\Models\wantToBook;
+use App\Models\finishedBook;
 
 class MyPageController extends Controller
 {
@@ -37,11 +39,26 @@ class MyPageController extends Controller
         }
 
         //読みたい本
-        $wantTobookGet = wantToBook::where('userID',1)->where('finished',null)->get();
-        dd($wantTobookGet);
+        $wantToBooksGet = wantToBook::where('userID',1)->where('finished',null)->get();
+        
+        $x = 0;
+        foreach($wantToBooksGet as $wantToBookGet){
+            $MyWantToBooks[$x]['bookID'] = $wantToBookGet['bookID'];
+            $MyWantToBooks[$x]['book'] = book::where('bookID',1001)->value('book');
+            $x++;
+        }
+        
 
         //読んだ本
 
+        $finishedBookGet = finishedBook::where('userID',1)->get();
+        $x = 0;
+        foreach ($finishedBookGet as $finishedBook) {
+            $MyFinishedBooks[$x]['bookID'] = $finishedBook['bookID'];
+            $MyFinishedBooks[$x]['book'] = book::where('bookID',$finishedBook['bookID'])->value('book');
+            $MyFinishedBooks[$x]['reviewID'] = $finishedBook['reviewID'];
+        }
+        dd($MyFinishedBooks);
         return view('MyPage/myPage',compact('myData'));
     }
 }
