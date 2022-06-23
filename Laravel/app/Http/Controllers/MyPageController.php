@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\myPage;
 use App\Models\member;
+use App\Models\followList;
+use App\Models\wantToBook;
 
 class MyPageController extends Controller
 {
@@ -24,8 +26,22 @@ class MyPageController extends Controller
         $myData['favoriteBook'] = $myPageDataGet['favoriteBook'];
         $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
-        // echo("AAA");
-//         dd($myData);
+        
+        //フォロー関連
+        $followListsGet = followList::where('UserID',1)->get();
+        $x = 0;
+        foreach($followListsGet as $followListGet){
+            $myFollowList[$x]['followUserID'] = $followListGet['followerID'];
+            $myFollowList[$x]['name'] = member::where('userID',$followListGet['followerID'])->value('name');
+            $x++;
+        }
+
+        //読みたい本
+        $wantTobookGet = wantToBook::where('userID',1)->where('finished',null)->get();
+        dd($wantTobookGet);
+
+        //読んだ本
+
         return view('MyPage/myPage',compact('myData'));
     }
 }
