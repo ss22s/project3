@@ -9,18 +9,19 @@
     <div>
         <h1>ご意見 / お問い合わせ</h1>
         <div>
-            <form action="" method="post" name="form" onsubmit="return validate()">
+            <form action="/confirm" method="post" name="form" onsubmit="return validate()">
+            @csrf
                 <div>
                     <div>
-                        <label>お名前</label>
+                        <label for="name">お名前</label>
                         <input type="text" name="name" placeholder="例）田中太郎" value="">
                     </div>
                     <div>
-                        <label>E-mail</label>
+                        <label for="email">E-mail</label>
                         <input type="text" name="email" placeholder="例）example@example.com" value="">
                     </div>
                     <div>
-                        <label>お問い合わせの種類</label>
+                        <label for="item">お問い合わせの種類</label>
                         <select name="item">
                             <option value="contact">お問い合わせ</option>
                             <option value="opinion">ご意見</option>
@@ -28,11 +29,11 @@
                         </select>
                     </div>
                     <div>
-                        <label>内容</label>
+                        <label for="content">内容</label>
                         <textarea name="content" rows="5" placeholder="お問合せ内容を入力"></textarea>
                     </div>
                 </div>
-                <button type="submit">送信</button>
+                <button type="submit">確認</button>
             </form>
         </div>
     </div>
