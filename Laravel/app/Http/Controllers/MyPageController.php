@@ -24,8 +24,8 @@ class MyPageController extends Controller
         $myData['favoriteBook'] = $myPageDataGet['favoriteBook'];
         $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
-
-        dd($myData);
-        return view('MyPage/myPage');
+        // echo("AAA");
+//         dd($myData);
+        return view('MyPage/myPage',compact('myData'));
     }
 }
