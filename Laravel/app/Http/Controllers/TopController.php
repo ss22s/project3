@@ -54,6 +54,7 @@ class TopController extends Controller
             $day = explode(" ", $bookReportData['created_at']);
             $newBookReportData["created_at"] = $day[0];
         }
+        // dd($newBookReportData);
  
         return view('TOP/newBookReport',compact('newBookReportData'));
     }
@@ -75,7 +76,6 @@ class TopController extends Controller
         $item = $request->input('item');
         //内容
         $content = $request->input('content');
-
 
         return view('TOP/confirm',compact('name','email','item','content'));
     }
