@@ -22,7 +22,7 @@ class wantToBooksSeeder extends Seeder
 
         \DB::table('wantToBooks')->insert([
             ['UserID' => 1,
-            'bookID' => 1000,
+            'bookID' => 1001,
             'registered_at' => '2022-01-11 13:10:00',
             'finished' => null],
         ]);

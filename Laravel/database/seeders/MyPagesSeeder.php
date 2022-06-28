@@ -22,18 +22,36 @@ class MyPagesSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         \DB::table('users')->insert([
-            ['UserID' => 1,
-            'name' => 'タロ',
-            'email' => 'aaa@bbb.com',
-            'pass' => '12345',
-            'exit' => null],
+            [
+                'UserID' => 1,
+                'name' => 'タロ',
+                'email' => 'aaa@bbb.com',
+                'pass' => '12345',
+                'exit' => null
+            ],
+            [
+                'UserID' => 2,
+                'name' => 'シロ',
+                'email' => '222@bbb.com',
+                'pass' => '22222',
+                'exit' => null
+            ],
+            [
+                'UserID' => 3,
+                'name' => 'タオ',
+                'email' => '333@bbb.com',
+                'pass' => '33333',
+                'exit' => null
+            ],
         ]);
 
         \DB::table('MyPages')->insert([
-            ['UserID' => 1,
-            'favoriteBook' => '苦しかったときの話をしようか',
-            'favoriteAuthor' => '森岡毅',
-            'freeText' => 'Hello!'],
+            [
+                'UserID' => 1,
+                'favoriteBook' => '苦しかったときの話をしようか',
+                'favoriteAuthor' => '森岡毅',
+                'freeText' => 'Hello!'
+            ],
         ]);
     }
 }

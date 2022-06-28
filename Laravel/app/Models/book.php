@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class myPage extends Model
+class book extends Model
 {
     use HasFactory;
-    protected $table = "MyPages";
 }
