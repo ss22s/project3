@@ -13,11 +13,10 @@
         <h2 style="text-align:center">{{$bookData['book']}}</h2>
         <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
         <!-- <img src = "書籍画像"> -->
-
+        <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
         <p style="display:inline-block; padding:5px;">【感想】<br>{{$bookData['comment']}}<!--mb_sbstrで字数制限--></p>
         <p style="text-align:right">{{$bookData['userName']}}</p>
         <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
-
     </div>
     @endforeach
 </body>
