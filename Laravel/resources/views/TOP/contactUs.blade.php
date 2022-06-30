@@ -16,15 +16,20 @@
                         <input type="text" name="name" placeholder="例）田中太郎" value="">
                     </div>
                     <div>
+<<<<<<< HEAD
+                        <label for="email">メールアドレス</label>
+                        <input type="text" name="email" placeholder="例）guest@example.com" value="">
+=======
                         <label>E-mail</label>
                         <input type="text" name="email" placeholder="例）example@example.com" value="">
+>>>>>>> refs/remotes/origin/2026
                     </div>
                     <div>
                         <label>お問い合わせの種類</label>
                         <select name="item">
-                            <option value="contact">お問い合わせ</option>
-                            <option value="opinion">ご意見</option>
-                            <option value="others">その他</option>
+                            <option value="お問い合わせ">お問い合わせ</option>
+                            <option value="ご意見">ご意見</option>
+                            <option value="その他">その他</option>
                         </select>
                     </div>
                     <div>
