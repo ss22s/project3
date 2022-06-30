@@ -84,6 +84,8 @@ class TopController extends Controller
             $newBookReportDatas[$x] = $newBookReportData;
             $x++;
         }
+
+        //dd($newBookReportDatas);
  
         return view('TOP/newBookReport',compact('newBookReportDatas'));
     }
