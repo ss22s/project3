@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bookReport;
 use App\Models\member;
+use App\Models\book;
 
 
 class TopController extends Controller
@@ -63,20 +64,22 @@ class TopController extends Controller
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
         $bookReportDatas = bookReport::where('Open',1)->latest()->get();
 
+        $x = 0;
+        
         foreach ($bookReportDatas as $bookReportData) {
-            $newBookReportData['reviewID'] = $bookReportData['reviewID'];
+            $newBookReportData[$x]['reviewID'] = $bookReportData['reviewID'];
             //user関連
-            $newBookReportData['userID'] = $bookReportData['userID'];
-            $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
+            $newBookReportData[$x]['userID'] = $bookReportData['userID'];
+            $newBookReportData[$x]["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
             //book関連
-            $newBookReportData['bookID'] = $bookReportData['bookID'];
-            $newBookReportData["book"] = "となりのトトロ";
+            $newBookReportData[$x]['bookID'] = $bookReportData['bookID'];
+            $newBookReportData[$x]["book"] = book::where('bookID', $newBookReportData[$x]['bookID'])->value('book');
             //感想関連
-            $newBookReportData["evaluation"] = $bookReportData["evaluation"];
-            $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
-            $newBookReportData["comment"] = $bookReportData["comment"];
+            $newBookReportData[$x]["evaluation"] = $bookReportData["evaluation"];
+            $newBookReportData[$x]["selectedComment"] = $bookReportData["selectedComment"];
+            $newBookReportData[$x]["comment"] = $bookReportData["comment"];
             $day = explode(" ", $bookReportData['created_at']);
-            $newBookReportData["created_at"] = $day[0];
+            $newBookReportData[$x]["created_at"] = $day[0];
         }
  
         return view('TOP/newBookReport',compact('newBookReportData'));
@@ -90,5 +93,13 @@ class TopController extends Controller
         return view('TOP/contactUS');
     }
 
+    public function confirm(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $item = $request->input('item');
+        $content = $request->input('content');
+
+        return view('TOP/confirm',compact('name','email','item','content'));
+    }
     
 }

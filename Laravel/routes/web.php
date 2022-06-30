@@ -45,7 +45,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //お問い合わせ
 Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
-Route::post('/confirm','App\Http\COntrollers\TopController@confirm');
+Route::post('/confirm','App\Http\Controllers\TopController@confirm');
 
 //マイページ関連
 Route::get('/myPage','App\Http\Controllers\MyPageController@myPage');
