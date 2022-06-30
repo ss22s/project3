@@ -62,7 +62,7 @@ class TopController extends Controller
 
     public function newBookReport(Request $request){
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
-        $bookReportDatas = bookReport::where('Open',1)->latest()->get();
+        $bookReportDatas = bookReport::where('Open',1)->latest()->take(6)->get();
 
         $x = 0;
         
