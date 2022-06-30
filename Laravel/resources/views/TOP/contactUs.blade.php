@@ -10,7 +10,7 @@
         <h1>ご意見 / お問い合わせ</h1>
         <div>
             <form action="/confirm" method="post" name="form" onsubmit="return validate()">
-            @csrf
+            @csrf    
                 <div>
                     <div>
                         <label>お名前</label>

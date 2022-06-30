@@ -1,11 +1,20 @@
 <?php return array(
     'root' => array(
+<<<<<<< HEAD
         'pretty_version' => '2026.x-dev',
         'version' => '2026.9999999.9999999.9999999-dev',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => '329c59197dd5fe9934c5dec63f7875efe5ad93e8',
+=======
+        'pretty_version' => '2027.x-dev',
+        'version' => '2027.9999999.9999999.9999999-dev',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => '3da4e123a1fc76d14620339601e9c3df5505ad2d',
+>>>>>>> 4e4b27c443a49ab39408492839f0ce1171511717
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -374,12 +383,21 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
+<<<<<<< HEAD
             'pretty_version' => '2026.x-dev',
             'version' => '2026.9999999.9999999.9999999-dev',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'reference' => '329c59197dd5fe9934c5dec63f7875efe5ad93e8',
+=======
+            'pretty_version' => '2027.x-dev',
+            'version' => '2027.9999999.9999999.9999999-dev',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => '3da4e123a1fc76d14620339601e9c3df5505ad2d',
+>>>>>>> 4e4b27c443a49ab39408492839f0ce1171511717
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

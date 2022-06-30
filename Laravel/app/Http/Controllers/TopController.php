@@ -90,5 +90,13 @@ class TopController extends Controller
         return view('TOP/contactUS');
     }
 
+    public function confirm(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $item = $request->input('item');
+        $content = $request->input('content');
+
+        return view('TOP/confirm',compact('name','email','item','content'));
+    }
     
 }
