@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>確認画面</h2>
-    <p>下記の内容でメッセージを送信します。よろしければ「送信」ボタンを押してください。</p>
+    <p>下記の内容でメッセージを送信します。よろしければ「送信」ボタンを押してください。あ</p>
     <form action="" method="POST">
         <input type="hidden" name="token" value="<?php echo escape($token); ?>">
         <div>
