@@ -9,10 +9,15 @@ TOP:)
 
 
 <br>
-<br>
 <hr>
+<br>
 ログイン:(
 <br>
 <a href="/login">ログイン</a><br>
 <a href="/register">新規登録</a><br>
  
+<br>
+<hr>
+<br>
+マイページ
+<a href="">マイページ</a>
