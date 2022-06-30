@@ -11,6 +11,7 @@
         <div>
             <form action="/confirm" method="post" name="form" onsubmit="return validate()">
             @csrf    
+
                 <div>
                     <div>
                         <label>お名前</label>
