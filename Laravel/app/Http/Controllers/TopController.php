@@ -80,6 +80,8 @@ class TopController extends Controller
             $newBookReportData[$x]["comment"] = $bookReportData["comment"];
             $day = explode(" ", $bookReportData['created_at']);
             $newBookReportData[$x]["created_at"] = $day[0];
+
+            $x++;
         }
  
         return view('TOP/newBookReport',compact('newBookReportData'));
