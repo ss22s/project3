@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('hello');
 });
 
+//Login
+Route::get('/login',function(){
+    return view('login');
+});
+Route::get('/register',function(){
+    return view('register');
+});
+
 //top関連
 
 Route::get('/chatRoom','App\Http\Controllers\TopController@chatroom');
@@ -37,7 +45,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //お問い合わせ
 Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
-Route::post('/confirm','App\Http\COntrollers\TopController@confirm');
+Route::post('/confirm','App\Http\Controllers\TopController@confirm');
 
 //マイページ関連
 Route::get('/myPage','App\Http\Controllers\MyPageController@myPage');

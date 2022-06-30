@@ -9,20 +9,16 @@
     <div>
         <h1>ご意見 / お問い合わせ</h1>
         <div>
-            <form action="" method="post" name="form" onsubmit="return validate()">
-                <div>
+            <form action="/confirm" method="post" name="form" onsubmit="return validate()">
+            @csrf    
+            <div>
                     <div>
                         <label>お名前</label>
                         <input type="text" name="name" placeholder="例）田中太郎" value="">
                     </div>
                     <div>
-<<<<<<< HEAD
                         <label for="email">メールアドレス</label>
                         <input type="text" name="email" placeholder="例）guest@example.com" value="">
-=======
-                        <label>E-mail</label>
-                        <input type="text" name="email" placeholder="例）example@example.com" value="">
->>>>>>> refs/remotes/origin/2026
                     </div>
                     <div>
                         <label>お問い合わせの種類</label>
