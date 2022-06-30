@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <p>下記の内容でメッセージを送信します。よろしければ「送信」ボタンを押してください。</p>
 
     <form action="/complete" method="POST">
-        @csrf
+    @csrf
         <input type="hidden" name="token" value="<?php echo escape($token); ?>">
         <div>
             <label for="name">お名前</label>
