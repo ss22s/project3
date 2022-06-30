@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bookReport;
 use App\Models\member;
+use App\Models\book;
 
 
 class TopController extends Controller
@@ -19,50 +20,26 @@ class TopController extends Controller
         //bookIDをカウントcount,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
 
-        //今はデータを直接入れている
-        $rankingDatas[0]['bookID'] = 1001;
-        $rankingDatas[0]['book'] ="となりのトトロ";
-        $rankingDatas[0]['auther'] ="スタジオジブリ";
-        $rankingDatas[0]['genre'] ="児童書";
+        $bookDatas = book::all();
+        $x = 0;
 
-        $rankingDatas[1]['bookID'] = 1002;
-        $rankingDatas[1]['book'] ="カラフル";
-        $rankingDatas[1]['auther'] ="森絵都";
-        $rankingDatas[1]['genre'] ="児童書";
-
-        $rankingDatas[2]['bookID'] = 1003;
-        $rankingDatas[2]['book'] ="ハリーポッターと賢者の石";
-        $rankingDatas[2]['auther'] ="J・K・ローリング";
-        $rankingDatas[2]['genre'] ="児童書";
-
-        $rankingDatas[3]['bookID'] = 1004;
-        $rankingDatas[3]['book'] ="基本情報技術者過去問題集";
-        $rankingDatas[3]['auther'] ="技術評論社";
-        $rankingDatas[3]['genre'] ="問題集";
-
-        $rankingDatas[4]['bookID'] = 1005;
-        $rankingDatas[4]['book'] ="Myojo";
-        $rankingDatas[4]['auther'] ="集英社";
-        $rankingDatas[4]['genre'] ="雑誌";
-
-        $rankingDatas[5]['bookID'] = 1006;
-        $rankingDatas[5]['book'] ="カードキャプターさくら";
-        $rankingDatas[5]['auther'] ="CLAMP";
-        $rankingDatas[5]['genre'] ="少女漫画";
-
-        $rankingDatas[6]['bookID'] = 1007;
-        $rankingDatas[6]['book'] ="わたしの美しい庭";
-        $rankingDatas[6]['auther'] ="凪良ゆう";
-        $rankingDatas[6]['genre'] ="小説・文芸";
-
+        foreach($bookDatas as $bookData){
+            $rankingDatas[$x]['bookID'] = $bookData['bookID'];
+            $rankingDatas[$x]['book'] = $bookData['book'];
+            $rankingDatas[$x]['auther'] = $bookData['auther'];
+            $rankingDatas[$x]['genre'] = $bookData['genre'];
+            $x++;
+        }
         
         return view('TOP/ranking',compact('rankingDatas'));
     }
 
     public function newBookReport(Request $request){
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
-        $bookReportDatas = bookReport::where('Open',1)->latest()->get();
+        $bookReportDatas = bookReport::where('Open',1)->latest()->take(6)->get();
 
+        $x = 0;
+        
         foreach ($bookReportDatas as $bookReportData) {
             $newBookReportData['reviewID'] = $bookReportData['reviewID'];
             //user関連
@@ -70,16 +47,19 @@ class TopController extends Controller
             $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
-            $newBookReportData["book"] = "となりのトトロ";
+            $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             //感想関連
             $newBookReportData["evaluation"] = $bookReportData["evaluation"];
             $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
             $newBookReportData["comment"] = $bookReportData["comment"];
             $day = explode(" ", $bookReportData['created_at']);
             $newBookReportData["created_at"] = $day[0];
+
+            $newBookReportDatas[$x] = $newBookReportData;
+            $x++;
         }
- 
-        return view('TOP/newBookReport',compact('newBookReportData'));
+        
+        return view('TOP/newBookReport',compact('newBookReportDatas'));
     }
 
     public function chatRoom(Request $request){
@@ -90,5 +70,13 @@ class TopController extends Controller
         return view('TOP/contactUS');
     }
 
+    public function confirm(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $item = $request->input('item');
+        $content = $request->input('content');
+
+        return view('TOP/confirm',compact('name','email','item','content'));
+    }
     
 }
