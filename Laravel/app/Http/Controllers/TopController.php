@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bookReport;
 use App\Models\member;
+use App\Models\book;
 
 
 class TopController extends Controller
@@ -70,7 +71,7 @@ class TopController extends Controller
             $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
-            $newBookReportData["book"] = "となりのトトロ";
+            $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             //感想関連
             $newBookReportData["evaluation"] = $bookReportData["evaluation"];
             $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
@@ -90,5 +91,13 @@ class TopController extends Controller
         return view('TOP/contactUS');
     }
 
+    public function confirm(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $item = $request->input('item');
+        $content = $request->input('content');
+
+        return view('TOP/confirm',compact('name','email','item','content'));
+    }
     
 }
