@@ -67,24 +67,25 @@ class TopController extends Controller
         $x = 0;
         
         foreach ($bookReportDatas as $bookReportData) {
-            $newBookReportData[$x]['reviewID'] = $bookReportData['reviewID'];
+            $newBookReportData['reviewID'] = $bookReportData['reviewID'];
             //user関連
-            $newBookReportData[$x]['userID'] = $bookReportData['userID'];
-            $newBookReportData[$x]["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
+            $newBookReportData['userID'] = $bookReportData['userID'];
+            $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
             //book関連
-            $newBookReportData[$x]['bookID'] = $bookReportData['bookID'];
-            $newBookReportData[$x]["book"] = book::where('bookID', $newBookReportData[$x]['bookID'])->value('book');
+            $newBookReportData['bookID'] = $bookReportData['bookID'];
+            $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             //感想関連
-            $newBookReportData[$x]["evaluation"] = $bookReportData["evaluation"];
-            $newBookReportData[$x]["selectedComment"] = $bookReportData["selectedComment"];
-            $newBookReportData[$x]["comment"] = $bookReportData["comment"];
+            $newBookReportData["evaluation"] = $bookReportData["evaluation"];
+            $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
+            $newBookReportData["comment"] = $bookReportData["comment"];
             $day = explode(" ", $bookReportData['created_at']);
-            $newBookReportData[$x]["created_at"] = $day[0];
+            $newBookReportData["created_at"] = $day[0];
 
+            $newBookReportDatas[$x] = $newBookReportData;
             $x++;
         }
  
-        return view('TOP/newBookReport',compact('newBookReportData'));
+        return view('TOP/newBookReport',compact('newBookReportDatas'));
     }
 
     public function chatRoom(Request $request){
