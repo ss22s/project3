@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\bookReport;
 use App\Models\member;
+use App\Models\book;
 
 
 class TopController extends Controller
@@ -70,7 +71,7 @@ class TopController extends Controller
             $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
-            $newBookReportData["book"] = "となりのトトロ";
+            $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             //感想関連
             $newBookReportData["evaluation"] = $bookReportData["evaluation"];
             $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
