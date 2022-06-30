@@ -10,6 +10,9 @@ use App\Models\bookReport;
 use App\Models\member;
 use App\Models\book;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendContactUsMail;
+
 
 class TopController extends Controller
 {
@@ -85,7 +88,20 @@ class TopController extends Controller
         $item = $request->input('item');
         $content = $request->input('content');
 
+        // sendMail($name,$email,$item,$content);
+        $to = [
+            [
+                'name' => 'Manager',
+                'email' => 'st002023@m01.kyoto-kcg.ac.jp'
+            ]
+            ];
+        Mail::to($to)->send(new SendContactUsMail($name,$email,$item,$content));
+
+        
+
         return view('TOP/complete',compact('name','email','item','content'));
     }
+    //st002023@m01.kyoto-kcg.ac.jp
+
     
 }
