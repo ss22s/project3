@@ -78,5 +78,14 @@ class TopController extends Controller
 
         return view('TOP/confirm',compact('name','email','item','content'));
     }
+
+    public function complete(Request $request){
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $item = $request->input('item');
+        $content = $request->input('content');
+
+        return view('TOP/complete',compact('name','email','item','content'));
+    }
     
 }
