@@ -11,7 +11,8 @@
         <div>
             <form action="/confirm" method="post" name="form" onsubmit="return validate()">
             @csrf    
-            <div>
+
+                <div>
                     <div>
                         <label>お名前</label>
                         <input type="text" name="name" placeholder="例）田中太郎" value="">
