@@ -8,7 +8,7 @@
 </head>
 <body>
     @csrf
-    @foreach($newBookReportData as $bookData)
+    @foreach($newBookReportDatas as $bookData)
     <div style="display:inline-block; border:2px solid; border-radius:30px; margin:10px; padding:10px;">
         <h2 style="text-align:center">{{$bookData['book']}}</h2>
         <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
