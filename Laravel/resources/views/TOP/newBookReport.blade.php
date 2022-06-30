@@ -17,6 +17,7 @@
         <p style="display:inline-block; padding:5px;">【感想】<br>{{$newBookReportData['comment']}}<!--mb_sbstrで字数制限--></p>
         <p style="text-align:right">{{$newBookReportData['userName']}}</p>
         <p style="text-align:right">更新日:{{$newBookReportData['created_at']}}</p>
+        <br>
     </div>
     @endforeach
 </body>
