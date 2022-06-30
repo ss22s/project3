@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('pass');
             $table->integer('exit')->nullable();
+            //
         });
     }
 
