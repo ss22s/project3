@@ -1,11 +1,20 @@
 <?php return array(
     'root' => array(
+<<<<<<< HEAD
         'pretty_version' => '2013.x-dev',
         'version' => '2013.9999999.9999999.9999999-dev',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => '755f5ef3d19a5b2f2a308c0d60ae6d931c6f0940',
+=======
+        'pretty_version' => '2012.x-dev',
+        'version' => '2012.9999999.9999999.9999999-dev',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => '931919c74aa04ec9e48d3b7c3ea29b377c4f8ddb',
+>>>>>>> refs/remotes/origin/2013
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -374,12 +383,21 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
+<<<<<<< HEAD
             'pretty_version' => '2013.x-dev',
             'version' => '2013.9999999.9999999.9999999-dev',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'reference' => '755f5ef3d19a5b2f2a308c0d60ae6d931c6f0940',
+=======
+            'pretty_version' => '2012.x-dev',
+            'version' => '2012.9999999.9999999.9999999-dev',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => '931919c74aa04ec9e48d3b7c3ea29b377c4f8ddb',
+>>>>>>> refs/remotes/origin/2013
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
