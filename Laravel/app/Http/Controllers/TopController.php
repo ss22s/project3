@@ -92,7 +92,7 @@ class TopController extends Controller
         $to = [
             [
                 'name' => 'Manager',
-                'email' => 'st002023@m01.kyoto-kcg.ac.jp'
+                'email' => 'cinnamondonuts02@gmail.com'
             ]
             ];
         Mail::to($to)->send(new SendContactUsMail($name,$email,$item,$content));
