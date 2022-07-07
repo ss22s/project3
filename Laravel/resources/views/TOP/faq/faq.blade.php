@@ -7,7 +7,7 @@
 <body>
     <h1>よくあるご質問</h1>
     <div>
-        <p>新規登録について</p>
+        <h4>新規登録について</h4>
         <a href="">
             <span class="icon--q">Q.</span>
             <div class="que">質問質問質問質問質問？</div>
@@ -18,7 +18,7 @@
         </a>
     </div>
     <div>
-        <p>ログインについて</p>
+        <h4>ログインについて</h4>
         <a href="">
             <span class="icon--q">Q.</span>
             <div class="que">質問質問質問質問質問？</div>
