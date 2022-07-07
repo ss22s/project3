@@ -23,7 +23,7 @@ class bookReportsSeeder extends Seeder
         \DB::table('bookReports')->insert([
             [
                 'reviewID' => 1,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1001,
                 'evaluation' => 4,
                 'selectedComment' => 2,
@@ -33,7 +33,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 2,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1004,
                 'evaluation' => 1,
                 'selectedComment' => 5,
@@ -43,7 +43,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 3,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1006,
                 'evaluation' => 3,
                 'selectedComment' => 2,
@@ -53,7 +53,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 4,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1002,
                 'evaluation' => 5,
                 'selectedComment' => 2,
@@ -63,7 +63,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 5,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1001,
                 'evaluation' =>1,
                 'selectedComment' => 5,
@@ -73,7 +73,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 6,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1004,
                 'evaluation' => 4,
                 'selectedComment' => 2,
@@ -83,7 +83,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 7,
-                'UserID' => 1,
+                'id' => 1,
                 'bookID' => 1002,
                 'evaluation' => 3,
                 'selectedComment' => 2,
@@ -91,6 +91,16 @@ class bookReportsSeeder extends Seeder
                 'Open' => 1,
                 'created_at' => '2003-01-15 9:15:00'
             ],
+            [
+                'reviewID' => 8,
+                'id' => 2,
+                'bookID' => 1001,
+                'evaluation' => 1,
+                'selectedComment' => 2,
+                'comment' =>'最悪でした。もう読むことはありません。あの有名な「となりのトトロ」ですから期待していたのでがっかりです。なにがダメかと言われると分かりませんが、とにかく酷すぎました。なぜこんなアニメが有名なのか謎です。噓です。良かったと思います。面白かったですごめんなさい。ジブリに恨みはないのでお許しください。',
+                'Open' => 1,
+                'created_at' => '2022-07-07 15:22:00'
+            ]
         ]);
     }
 }
