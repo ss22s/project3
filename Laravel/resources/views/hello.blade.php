@@ -11,6 +11,9 @@ TOP:) <br>
 <div>
 ログイン:(
 <br>
+@auth
+    ようこそ、{{Auth::user()->name}}<br>
+@endauth
 <a href="/login">ログイン</a><br>
 <a href="/register">新規登録</a><br>
 <a href={{ route('logout') }} onclick="event.preventDefault();
