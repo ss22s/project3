@@ -11,7 +11,7 @@ use App\Models\finishedBook;
 
 class BookController extends Controller
 {
-    public function detail(Request $request, int $bookID){
+    public function detail($bookID){
         return view('bookDetail');
     }
     
