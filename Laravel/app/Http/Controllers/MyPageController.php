@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\myPage;
 use App\Models\member;
+use App\Models\finishedBook;
+use App\Models\wantBook;
+use App\Models\book;
 
 class MyPageController extends Controller
 {
@@ -25,6 +28,40 @@ class MyPageController extends Controller
         $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
 
-        return view('MyPage/myPage',compact('myData'));
+        //本関連
+        $finishedBookDatasGet = finishedBook::where('userID',1)->get();
+        
+        $x = 0;
+        foreach($finishedBookDatasGet as $finishedBookDataGet){
+            $myFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
+            $myFinishedBookdatas[$x]['book'] = book::where('bookID',$finishedBookDataGet['bookID'])->value('book');
+            //日付関連
+            $finishDateGet = explode(" ",$finishedBookDataGet['date']);
+            $finishDate = explode("-",$finishDateGet[0]);
+            
+            $myFinishedBookdatas[$x]['finishDate'] = $finishDate[0]. "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+            $myFinishedBookdatas[$x]['reviewID'] = $finishedBookDataGet['reviewID'];
+
+            $x++;
+        }
+        
+        $wantToBookDatasGet = wantBook::where('userID',1)->where('finished',null)->get();
+        $x = 0;
+        foreach($wantToBookDatasGet as $wantToBookDataGet){
+            $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
+            $myWantToBookdatas[$x]['book'] = book::where('bookID',$wantToBookDataGet['bookID'])->value('book');
+            //日付関連
+            $registerDateGet = explode(" ",$wantToBookDataGet['date']);
+            $registerDate = explode("-",$registerDateGet[0]);
+            
+            $myWantToBookdatas[$x]['registerDate'] = $registerDate[0]. "年" .  $registerDate[1] . "月" .  $registerDate[2] . "日";
+            $myWantToBookdatas[$x]['reviewID'] = $wantToBookDataGet['reviewID'];
+
+            $x++;
+        }
+
+dd($finishedBookDataGet);
+
+        return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas'));
     }
 }

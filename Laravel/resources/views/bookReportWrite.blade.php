@@ -5,7 +5,7 @@
     formのinputのname指定
         本のタイトル：book
         本の著者（後で自動化）:author
-        読んだ日：finishedDay
+        読んだ日：finishedDate
         評価：evaluation
         ひとこと感想:selectで"selectedComment"
              itemのvalueを0~の数字に
