@@ -58,5 +58,5 @@ Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')/* ->middlew
     Route::get('/reportRegister','App\Http\Controllers\BookController@register');
 
 //本の詳細ページ
-Route::get('/detail','App\Http\Controllers\BookController@detail')
+Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
     ->name('book.detail');
