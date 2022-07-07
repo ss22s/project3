@@ -8,9 +8,20 @@ TOP:) <br>
 
 </div>
 <hr>
+
 <div>
 ログイン:(
 <br>
+
+@guest
+<a href="/login">ログイン</a><br>
+<a href="/register">新規登録</a>
+@endguest
+@auth
+ログイン済み
+<!--ここのログアウト-->
+@endauth
+
 @auth
     ようこそ、{{Auth::user()->name}}<br>
 @endauth
@@ -22,6 +33,7 @@ TOP:) <br>
 </a>
 <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
     @csrf
+
 </div>
 <hr>
 <div>
