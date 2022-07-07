@@ -46,8 +46,8 @@ class TopController extends Controller
         foreach ($bookReportDatas as $bookReportData) {
             $newBookReportData['reviewID'] = $bookReportData['reviewID'];
             //user関連
-            $newBookReportData['userID'] = $bookReportData['userID'];
-            $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
+            $newBookReportData['userID'] = $bookReportData['id'];
+            $newBookReportData["userName"] = member::where('id',$bookReportData['id'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
             $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');

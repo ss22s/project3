@@ -16,11 +16,11 @@ class MyPageController extends Controller
     //
     public function myPage(Request $request){
 
-        $myPageDataGet = myPage::where('UserID',1)->first();
-        $userDataGet = member::where('UserID',1)->first();
+        $myPageDataGet = myPage::where('id',1)->first();
+        $userDataGet = member::where('id',1)->first();
 
         //userデータ
-        $myData['userID'] = $myPageDataGet['UserID'];
+        $myData['userID'] = $myPageDataGet['id'];
         $myData['userName'] = $userDataGet['name'];
         $myData['userEmail'] = $userDataGet['email'];
         //マイページ関連
@@ -29,7 +29,7 @@ class MyPageController extends Controller
         $myData['freeText'] = $myPageDataGet['freeText'];
 
         //本関連
-        $finishedBookDatasGet = finishedBook::where('userID',1)->get();
+        $finishedBookDatasGet = finishedBook::where('id',1)->get();
         
         $x = 0;
         foreach($finishedBookDatasGet as $finishedBookDataGet){
@@ -45,7 +45,7 @@ class MyPageController extends Controller
             $x++;
         }
         
-        $wantToBookDatasGet = wantBook::where('userID',1)->where('finished',null)->get();
+        $wantToBookDatasGet = wantBook::where('id',1)->where('finished',null)->get();
         $x = 0;
         foreach($wantToBookDatasGet as $wantToBookDataGet){
             $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];

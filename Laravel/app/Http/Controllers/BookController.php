@@ -25,7 +25,7 @@ class BookController extends Controller
         //登録：新着感想
         //reviewは自動加算.userはログイン情報sessionからもらう
         DB::table('bookReports')->insert([
-            'userID' => "1",
+            'id' => "1",
             'bookID' => $bookID,
             'evaluation' => $reportDatasGet['evaluation'],
             "selectedComment" => $reportDatasGet['selectedComment'],
@@ -34,11 +34,11 @@ class BookController extends Controller
 
         ]);
 
-        $reviewIDget = bookReport::where('userID',1)->where('bookID',$bookID)->value('reviewID');
+        $reviewIDget = bookReport::where('id',1)->where('bookID',$bookID)->value('reviewID');
 
         //登録：読んだ本
         DB::table('finishedBook')->insert([
-            'userID' => 1,
+            'id' => 1,
             'bookID' => $bookID,
             'date' => $reportDatasGet['finishedDay'],
             'reviewID' => $reviewIDget,
