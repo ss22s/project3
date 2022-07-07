@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('finishedBooks', function (Blueprint $table) {
-            $table->unsignedBigInteger('UserID');
+            $table->unsignedBigInteger('id');
             $table->integer('bookID');
             $table->dateTime('date');
             $table->unsignedBigInteger('reviewID');
 
             $table->foreign('reviewID')->references('reviewID')->on('bookReports');
-            $table->foreign('UserID')->references('UserID')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

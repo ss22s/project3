@@ -17,20 +17,11 @@ class MyPagesSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        DB::table('users')->truncate();
         DB::table('MyPages')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        \DB::table('users')->insert([
-            ['UserID' => 1,
-            'name' => 'タロ',
-            'email' => 'aaa@bbb.com',
-            'pass' => '12345',
-            'exit' => null],
-        ]);
-
         \DB::table('MyPages')->insert([
-            ['UserID' => 1,
+            ['id' => 1,
             'favoriteBook' => '苦しかったときの話をしようか',
             'favoriteAuthor' => '森岡毅',
             'freeText' => 'Hello!'],

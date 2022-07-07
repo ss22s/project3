@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('followLists', function (Blueprint $table) {
-            $table->unsignedBigInteger('UserID');
+            $table->unsignedBigInteger('id');
             $table->string('followerID');
 
-            $table->foreign('UserID')->references('UserID')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
