@@ -63,7 +63,7 @@ class MyPageController extends Controller
         }
 
         //followList
-        $followListGet = followList::
+        $followListGet = followList::where('id',$user['id'])->get();
 
         return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas'));
     }
