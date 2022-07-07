@@ -49,7 +49,7 @@ Route::post('/confirm','App\Http\Controllers\TopController@confirm');
 Route::post('/complete','App\Http\Controllers\TopController@complete');
 
 //マイページ関連
-Route::get('/myPage','App\Http\Controllers\MyPageController@myPage');
+Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')/* ->middleware('auth') */;
 
 //book関連
     //感想を書く

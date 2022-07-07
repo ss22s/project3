@@ -12,7 +12,13 @@ TOP:) <br>
 ログイン:(
 <br>
 <a href="/login">ログイン</a><br>
-<a href="/register">新規登録</a>
+<a href="/register">新規登録</a><br>
+<a href={{ route('logout') }} onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">
+    ログアウト
+</a>
+<form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
+    @csrf
 </div>
 <hr>
 <div>
