@@ -5,7 +5,7 @@
     <title>お問い合わせ</title>
 </head>
 <body>
-    <div><a href="./faq/faq.blade.php"><h1>よくある質問</h1></a></div>
+    <div><a href="/faq"><h1>よくある質問</h1></a></div>
     <div>
         <h1>ご意見 / お問い合わせ</h1>
         <div>

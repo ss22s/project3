@@ -70,6 +70,10 @@ class TopController extends Controller
         return view('TOP/contactUS');
     }
 
+    public function faq(Request $request){
+        return view('TOP/faq/faq');
+    }
+
     public function confirm(Request $request){
         $name = $request->input('name');
         $email = $request->input('email');
