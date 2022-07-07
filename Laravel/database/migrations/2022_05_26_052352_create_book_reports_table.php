@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('bookReports', function (Blueprint $table) {
             $table->id('reviewID');
-            $table->unsignedBigInteger('UserID');
+            $table->unsignedBigInteger('id');
             $table->integer('bookID');
             $table->integer('evaluation');
             $table->integer('selectedComment');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('Open');
             $table->dateTime('created_at');
 
-            $table->foreign('UserID')->references('UserID')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
