@@ -13,9 +13,8 @@
     <div>
         @csrf
         @for($i = 0; $i < 7; $i++) <div>
-            <!-- 書影 -->
-            <!-- 本の詳細ページリンク -->
-            <h4>{{$i+1}}位：<a href="">{{$rankingDatas[$i]['book']}}</a></h4>
+            <!-- 書影(※書影にもリンクつける) -->
+            <h4>{{$i+1}}位：<a href="{{ route('book.detail', $rankingDatas[$i]['bookID'] )}}">{{$rankingDatas[$i]['book']}}</a></h4>
             <p>作者：{{$rankingDatas[$i]['auther']}}</p>
             <p>ジャンル：{{$rankingDatas[$i]['genre']}}</p>
     </div>
