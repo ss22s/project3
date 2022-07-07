@@ -16,12 +16,14 @@
         @if($data == 6)
             @break
         @else
-            <div style="display:inline-block; border:2px solid; border-radius:30px; margin:10px; padding:10px;">
+            <div style="display:inline-block; border:2px solid; border-radius:30px; margin:20px; padding:10px;">
                 <h2 style="text-align:center">{{$bookData['book']}}</h2>
                 <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
                 <!-- <img src = "書籍画像"> -->
                 <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
-                <p style="display:inline-block; text-align:center; padding:5px;">【感想】<br>{{$bookData['comment']}}<!--mb_sbstrで字数制限--></p>
+                <p style="display:inline-block; text-align:center; padding:5px;">【感想】<br>{{$bookData['comment']}}</p>
+                <!-- {!! nl2br(e(Str::limit($bookData['comment'], 30))) !!} -->
+                <!-- ↑数字は文字数指定(現在15文字） -->
                 <p style="text-align:right">{{$bookData['userName']}}</p>
                 <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
             </div>
