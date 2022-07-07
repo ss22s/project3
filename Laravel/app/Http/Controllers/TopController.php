@@ -17,6 +17,8 @@ use App\Mail\SendContactUsMail;
 class TopController extends Controller
 {
     //
+
+    
     public function ranking(Request $request){
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
@@ -66,6 +68,9 @@ class TopController extends Controller
     }
 
     public function chatRoom(Request $request){
+        if(Auth::check()){
+
+        }
         return view('TOP/chatRoom');
     }
 

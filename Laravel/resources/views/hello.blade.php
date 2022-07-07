@@ -8,11 +8,18 @@ TOP:) <br>
 
 </div>
 <hr>
+
 <div>
 ログイン:(
 <br>
+@guest
 <a href="/login">ログイン</a><br>
 <a href="/register">新規登録</a>
+@endguest
+@auth
+ログイン済み
+<!--ここのログアウト-->
+@endauth
 </div>
 <hr>
 <div>
