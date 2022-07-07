@@ -50,19 +50,14 @@ class MyPageController extends Controller
         foreach($wantToBookDatasGet as $wantToBookDataGet){
             $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
             $myWantToBookdatas[$x]['book'] = book::where('bookID',$wantToBookDataGet['bookID'])->value('book');
+            
             //日付関連
-            
             $registerDateGet = explode(" ",$wantToBookDataGet['registered_at']);
-            dd($registerDateGet);
-            $registerDate = explode("-",$registerDateGet[0]);
-            
+            $registerDate = explode("-",$registerDateGet[0]);            
             $myWantToBookdatas[$x]['registerDate'] = $registerDate[0]. "年" .  $registerDate[1] . "月" .  $registerDate[2] . "日";
-            $myWantToBookdatas[$x]['reviewID'] = $wantToBookDataGet['reviewID'];
-
+            
             $x++;
         }
-
-dd($finishedBookDataGet);
 
         return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas'));
     }
