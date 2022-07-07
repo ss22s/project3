@@ -17,7 +17,7 @@
             @break
         @else
             <div style="display:inline-block; border:2px solid; border-radius:30px; text-align:center; margin:20px; padding:10px; width:450px;">
-                    <a href="{{route('book.detail',['bookID'=>$bookData['bookID']"><h2 style="text-align:center">{{$bookData['book']}}</h2></a>
+                    <a href="{{route('book.detail',['bookID'=>'bookData'])}}"><h2 style="text-align:center">{{$bookData['book']}}</h2></a>
                     <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
                     <!-- <img src = "書籍画像"> -->
                     <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
