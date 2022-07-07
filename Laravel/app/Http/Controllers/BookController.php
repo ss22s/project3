@@ -12,7 +12,7 @@ use App\Models\finishedBook;
 class BookController extends Controller
 {
     public function detail($bookID){
-        return view('bookDetail');
+        return view('TOP/bookDetail');
     }
     
     //
