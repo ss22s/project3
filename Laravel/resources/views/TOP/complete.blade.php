@@ -52,7 +52,7 @@ if(!empty($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
     $header = "From: " . mb_encode_mimeheader($fromName) . "<{$fromEmail}>";
 
     //受信用のメールアドレスを変数myEmailに格納
-    $myEmail = "sharerary@sharerary.com";
+    $myEmail = "st022023@m01.kyoto-kcg.ac.jp";
 
     //フォーム入力者にメールを送信する
     mb_send_mail($email, $subject, $body, $header);
