@@ -21,7 +21,7 @@ class followListsSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         \DB::table('followLists')->insert([
-            ['UserID' => 1,
+            ['id' => 1,
             'followerID' => 1],
         ]);
     }

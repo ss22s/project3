@@ -10,10 +10,15 @@ use App\Models\bookReport;
 use App\Models\member;
 use App\Models\book;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendContactUsMail;
+
 
 class TopController extends Controller
 {
     //
+
+    
     public function ranking(Request $request){
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
@@ -43,8 +48,8 @@ class TopController extends Controller
         foreach ($bookReportDatas as $bookReportData) {
             $newBookReportData['reviewID'] = $bookReportData['reviewID'];
             //user関連
-            $newBookReportData['userID'] = $bookReportData['userID'];
-            $newBookReportData["userName"] = member::where('UserID',$bookReportData['UserID'])->value('name');
+            $newBookReportData['userID'] = $bookReportData['id'];
+            $newBookReportData["userName"] = member::where('id',$bookReportData['id'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
             $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
@@ -63,6 +68,9 @@ class TopController extends Controller
     }
 
     public function chatRoom(Request $request){
+        if(Auth::check()){
+
+        }
         return view('TOP/chatRoom');
     }
 
@@ -89,7 +97,20 @@ class TopController extends Controller
         $item = $request->input('item');
         $content = $request->input('content');
 
+        // sendMail($name,$email,$item,$content);
+        $to = [
+            [
+                'name' => 'Manager',
+                'email' => 'cinnamondonuts02@gmail.com'
+            ]
+            ];
+        Mail::to($to)->send(new SendContactUsMail($name,$email,$item,$content));
+
+        
+
         return view('TOP/complete',compact('name','email','item','content'));
     }
+    //st002023@m01.kyoto-kcg.ac.jp
+
     
 }
