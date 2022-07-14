@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id');
             $table->integer('bookID');
             $table->integer('evaluation');
-            $table->integer('selectedComment');
+            $table->string('selectedComment');
             $table->string('comment',10000);
             $table->integer('Open');
             $table->dateTime('created_at');
