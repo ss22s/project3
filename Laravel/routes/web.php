@@ -49,6 +49,9 @@ Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
 Route::post('/confirm','App\Http\Controllers\TopController@confirm');
 Route::post('/complete','App\Http\Controllers\TopController@complete');
 
+//よくあるご質問
+Route::get('/faq','App\Http\Controllers\TopController@faq');
+
 //マイページ関連
 Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware('auth');
 
