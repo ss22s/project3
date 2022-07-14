@@ -68,9 +68,7 @@ class TopController extends Controller
     }
 
     public function chatRoom(Request $request){
-        if(Auth::check()){
-
-        }
+        
         return view('TOP/chatRoom');
     }
 
