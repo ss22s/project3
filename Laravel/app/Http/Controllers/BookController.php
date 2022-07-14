@@ -22,7 +22,7 @@ class BookController extends Controller
 
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
     public function register(Request $request){
-        $reportDatasGet = $request->only('book','author','finishedDate','evaluation','selectedComment','comment','open');
+        $reportDatasGet = $request->only('book','finishedDate','evaluation','selectedComment','comment','open');
         
         $bookID = Book::where('book',$reportDatasGet['book'])->value('bookID');
         
