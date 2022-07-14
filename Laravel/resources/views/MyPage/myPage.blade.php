@@ -10,10 +10,6 @@
 <!--データ表示のみ-->
 マイページ
 <hr>
-<!-- @guest
-ログインしてください<br>
-<a href="/login">ログイン</a><br>
-@endguest -->
 @auth
 <div>
     <b>ユーザ名：</b>{{Auth::user()->name}} <br>
