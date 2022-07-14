@@ -4,20 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 
 use App\Models\myPage;
 use App\Models\member;
 use App\Models\finishedBook;
 use App\Models\wantBook;
 use App\Models\book;
+use App\Models\followList;
 
 class MyPageController extends Controller
 {
     //
     public function myPage(Request $request){
+        //ログイン済みデータ取得
+        $user = Auth::user();
 
-        $myPageDataGet = myPage::where('id',1)->first();
-        $userDataGet = member::where('id',1)->first();
+        $myPageDataGet = myPage::where('id',$user['id'])->first();
+        $userDataGet = member::where('id',$user['id'])->first();
 
         //userデータ
         $myData['userID'] = $myPageDataGet['id'];
@@ -29,8 +33,7 @@ class MyPageController extends Controller
         $myData['freeText'] = $myPageDataGet['freeText'];
 
         //本関連
-        $finishedBookDatasGet = finishedBook::where('id',1)->get();
-        
+        $finishedBookDatasGet = finishedBook::where('id',$user['id'])->get();
         $x = 0;
         foreach($finishedBookDatasGet as $finishedBookDataGet){
             $myFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
@@ -45,7 +48,7 @@ class MyPageController extends Controller
             $x++;
         }
         
-        $wantToBookDatasGet = wantBook::where('id',1)->where('finished',null)->get();
+        $wantToBookDatasGet = wantBook::where('id',$user['id'])->where('finished',null)->get();
         $x = 0;
         foreach($wantToBookDatasGet as $wantToBookDataGet){
             $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
@@ -58,6 +61,9 @@ class MyPageController extends Controller
             
             $x++;
         }
+
+        //followList
+        $followListGet = followList::where('id',$user['id'])->get();
 
         return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas'));
     }

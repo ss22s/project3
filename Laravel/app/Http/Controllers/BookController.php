@@ -11,10 +11,15 @@ use App\Models\finishedBook;
 
 class BookController extends Controller
 {
+    public function detail($bookID){
+        return view('TOP/bookDetail');
+    }
+    
     //
     public function write(){
         return view('bookReportWrite');
     }
+
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
     public function register(Request $request){
         $reportDatasGet = $request->only('book','author','finishedDate','evaluation','selectedComment','comment','open');
