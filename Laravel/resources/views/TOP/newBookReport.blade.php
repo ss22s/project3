@@ -16,6 +16,7 @@
         @if($data == 6)
             @break
         @else
+        <div style="text-align:center;">
             <div style="display:inline-block; border:2px solid; border-radius:30px; text-align:center; margin:20px; padding:10px; width:450px;">
                     <a href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}"><h2 style="text-align:center">{{$bookData['book']}}</h2></a>
                     <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
@@ -23,12 +24,10 @@
                     <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
                     <br>
                     <p style="display:inline-block; padding:5px;">【感想】<br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
-                    <!-- {!! nl2br(e(Str::limit($bookData['comment'], 100))) !!} -->
-                    <!-- ↑文字数指定(現在15文字） -->
-                    <p style="text-align:right">{{$bookData['userName']}}</p>
+                    <p style="text-align:right; font-size:18px;">{{$bookData['userName']}}</p>
                     <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
             </div>
-            <br>
+        </div>
             @php
                 $data++;
             @endphp
