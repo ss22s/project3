@@ -53,7 +53,7 @@ Route::post('/complete','App\Http\Controllers\TopController@complete');
 Route::get('/faq','App\Http\Controllers\TopController@faq');
 
 //マイページ関連
-Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')/* ->middleware('auth') */;
+Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware('auth');
 
 //book関連
     //感想を書く
