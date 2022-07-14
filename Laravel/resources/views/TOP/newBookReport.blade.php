@@ -24,7 +24,7 @@
                     <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
                     <br>
                     <p style="display:inline-block; padding:5px;">【感想】<br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
-                    <p style="text-align:right">{{$bookData['userName']}}</p>
+                    <p style="text-align:right; font-size:18px;">{{$bookData['userName']}}</p>
                     <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
             </div>
         </div>
