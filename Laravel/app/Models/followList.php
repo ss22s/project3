@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class followList extends Model
 {
     use HasFactory;
+    protected $table ="followLists";
 }
