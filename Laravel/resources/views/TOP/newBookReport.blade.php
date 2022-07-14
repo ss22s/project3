@@ -23,7 +23,7 @@
                     <!-- <img src = "書籍画像"> -->
                     <span style="border:1px solid; font-size:20px; border-radius:50px; margin:10px; padding:20px;">icon</span> 
                     <br>
-                    <p style="display:inline-block; padding:5px;"><hr><em style="font-size:25px;">【感想】 </em><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
+                    <p style="display:inline-block; padding:5px;"><hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
                     <p style="text-align:right; font-size:18px;">{{$bookData['userName']}}</p>
                     <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
             </div>
