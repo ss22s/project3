@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('MyPages', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->string('favoriteBook');
-            $table->string('favoriteAuthor');
-            $table->string('freeText');
+            $table->string('favoriteBook')->nullable();
+            $table->string('favoriteAuthor')->nullable();
+            $table->string('freeText')->nullable();
 
             $table->primary('id');
             $table->foreign('id')->references('id')->on('users');
