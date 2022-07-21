@@ -33,10 +33,6 @@ class BookController extends Controller
         $selectedCommentsTOP = array_slice($selectedCommentsCount,0,3);
         return view('TOP/bookDetail',compact('bookData','selectedCommentsTOP'));
 
-        //
-        dd($bookID);
-
-        return view('TOP/bookDetail');
 
     }
 
@@ -49,7 +45,6 @@ class BookController extends Controller
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
     public function register(Request $request)
     {
-
         //渡すメッセージ
         $message = "";
 
@@ -57,10 +52,7 @@ class BookController extends Controller
         $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
         //selectedComment
         $selectedCommentGet = $request->input('selectedComment');
-
         $selectedComment = implode(',', $selectedCommentGet);
-
-        $selectedComment = implode('/',$selectedCommentGet);
         
         $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
         $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
@@ -72,20 +64,6 @@ class BookController extends Controller
 
         //登録：新着感想
         //reviewは自動加算.userはログイン情報sessionからもらう
-        if (!(DB::table('bookReports')->where('id', $userData['id'])->where('bookID', $bookID)->exists())) {
-            DB::table('bookReports')->insert([
-                'id' => $userData['id'],
-                'bookID' => $bookID,
-                'evaluation' => $reportDatasGet['evaluation'],
-
-                "selectedComment" =>  $selectedComment,
-
-                "selectedComment" => $reportDatasGet['selectedComment'],
-
-                "comment" => $reportDatasGet['comment'],
-                "Open" => $reportDatasGet['open'],
-                "created_at" => $today
-            ]);
 
         DB::table('bookReports')->insert([
             'id' => $userData['id'],
