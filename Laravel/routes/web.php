@@ -49,13 +49,16 @@ Route::get('/contactUs','App\Http\Controllers\TopController@contactUS');
 Route::post('/confirm','App\Http\Controllers\TopController@confirm');
 Route::post('/complete','App\Http\Controllers\TopController@complete');
 
+//よくあるご質問
+Route::get('/faq','App\Http\Controllers\TopController@faq');
+
 //マイページ関連
-Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')/* ->middleware('auth') */;
+Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware('auth');
 
 //book関連
     //感想を書く
     Route::get('/reportWrite','App\Http\Controllers\BookController@write');
-    Route::get('/reportRegister','App\Http\Controllers\BookController@register');
+    Route::post('/reportRegister','App\Http\Controllers\BookController@register');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')

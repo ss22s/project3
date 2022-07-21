@@ -19,6 +19,9 @@ class MyPageController extends Controller
     public function myPage(Request $request){
         //ログイン済みデータ取得
         $user = Auth::user();
+        if(Auth::user() == null){
+            return view('MyPage/myPage');
+        }
 
         $myPageDataGet = myPage::where('id',$user['id'])->first();
         $userDataGet = member::where('id',$user['id'])->first();
@@ -49,7 +52,7 @@ class MyPageController extends Controller
         }
         
         $wantToBookDatasGet = wantBook::where('id',$user['id'])->where('finished',null)->get();
-        $x = 0;
+        $x = $this->setZero($x);
         foreach($wantToBookDatasGet as $wantToBookDataGet){
             $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
             $myWantToBookdatas[$x]['book'] = book::where('bookID',$wantToBookDataGet['bookID'])->value('book');
@@ -61,10 +64,20 @@ class MyPageController extends Controller
             
             $x++;
         }
-
         //followList
         $followListGet = followList::where('id',$user['id'])->get();
+        $x = $this->setZero($x);
+        foreach ($followListGet as $followListSet) {
+            $followLists[$x]['followerID'] = $followListSet['followerID'];
+            $followLists[$x]['followerName'] = member::where('id',$followLists[$x]['followerID'])->value('name');
 
-        return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas'));
+            $x++;
+        }
+
+        return view('MyPage/myPage',compact('myData','myFinishedBookdatas','myWantToBookdatas','followLists'));
+    }
+
+    public function setZero($x){
+        return $x = 0;
     }
 }
