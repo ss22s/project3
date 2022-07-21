@@ -15,9 +15,14 @@ class BookController extends Controller
     public function detail($bookID)
     {
         $x = 0;
-        //数加算
-        $selectedCommentsCount = array_fill(0, 10, 0);
         
+        $selectedCommentsCountSet = array_fill(0, 10, 0);
+        foreach($selectedCommentsCountSet as $commentAdd){
+            $selectedCommentsCount[$x]['value'] = $x;
+            $selectedCommentsCount[$x]['comment'] = $this->commentAdd($x);
+            $selectedCommentsCount[$x]['number'] = "0";
+            $x++;
+        }
         //TODO:本データを外部から取る場合、書き換え
         $bookData = Book::where('bookID', $bookID)->first();
         //TODO:ひとこと感想TOP3.やり方が綺麗でない
@@ -25,15 +30,18 @@ class BookController extends Controller
         foreach ($selectedCommentsGet as $selectedCommentGet) {
             $selectedCommentsExplode = explode(',', $selectedCommentGet['selectedComment']);
             
-            foreach ($selectedCommentsExplode as $commentNum) {            
-                $selectedCommentsCount[$commentNum]++;
+            foreach ($selectedCommentsExplode as $commentNum) {     
+                $selectedCommentsCount[$commentNum]['number']++;
             }
-            arsort($selectedCommentsCount);
         }
-        $selectedCommentsTOP = array_slice($selectedCommentsCount,0,3);
-        $this->commentAdd($selectedCommentsTOP);
+        foreach ($selectedCommentsCount as $Number) {
+            $NumGet[] = $Number['number'];
+        }
 
-        return view('TOP/bookDetail',compact('bookData','selectedCommentsTOP'));
+        array_multisort($NumGet,SORT_DESC, $selectedCommentsCount);
+        $selectedCommentsTop = array_slice($selectedCommentsCount,0,3);
+
+        return view('TOP/bookDetail',compact('bookData','selectedCommentsTop'));
 
 
     }
@@ -100,73 +108,38 @@ class BookController extends Controller
     }
 
     public function commentAdd($comment){
-        if ($comment === 0) {
-            return [
-                'weather' => "快晴", //Clear sky
-                'weatherimg' => "sun",
-            ];
+        if ($comment == 0) {
+            return "感動した";
         }
-        if ($comment === 1) {
-            return [
-                'weather' => "晴れ", //Mainly clear
-                'weatherimg' => "sun",
-            ];
+        if ($comment == 1) {
+            return "笑った";
         }
-        if ($comment === 2) {
-            return [
-                'weather' => "晴れ時々くもり", //partly cloudy
-                'weatherimg' => "sunandcloud",
-            ];
+        if ($comment == 2) {
+            return "面白かった";
         }
-        if ($comment === 3) {
-            return [
-                'weather' => "曇り", //overcast
-                'weatherimg' => "cloud",
-            ];
+        if ($comment == 3) {
+            return "怖かった";
         }
-        if ($comment < 51) {
-            return [
-                'weather' => "霧", //Fog 
-                'weatherimg' => "fog",
-            ];
+        if ($comment == 4) {
+            return "ぞくぞくした";
         }
-        if ($comment < 61) {
-            return [
-                'weather' => "小雨", //Drizzle,Freezing Drizzle
-                'weatherimg' => "rain",
-            ];
+        if ($comment == 5) {
+            return "文章が好き";
         }
-        if ($comment < 71) {
-            return [
-                'weather' => "雨", //Rain,Freezing Rain
-                'weatherimg' => "rain",
-            ];
+        if ($comment == 6) {
+            return "描写が綺麗";
         }
-        if ($comment < 80) {
-            return [
-                'weather' => "雪", //Snow fall.Snow grains
-                'weatherimg' => "snow",
-            ];
+        if ($comment == 7) {
+            return "泣いた";
         }
-        if ($comment < 85) {
-            return [
-                'weather' => "にわか雨", //Rain showers
-                'weatherimg' => "rain",
-            ];
+        if ($comment == 8) {
+            return  "オススメしたい";
         }
-        if ($comment < 95) {
-            return [
-                'weather' => "にわか雪", //Snow showers
-                'weatherimg' => "snow",
-            ];
+        if ($comment == 9) {
+            return "つまらなかった";
         }
-        if ($comment < 100) {
-            return [
-                'weather' => "雷雨", //Snow showers
-                'weatherimg' => "thunder",
-            ];
-        }
+        
 
-        return ['weather' => "?", 'weatherimg' => ""];
+        
     }
 }
