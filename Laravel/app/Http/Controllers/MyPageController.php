@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Auth;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\myPage;
 use App\Models\member;
 use App\Models\finishedBook;
@@ -57,7 +56,6 @@ class MyPageController extends Controller
             $myFinishedBookdatas = "";
         }
 
-        //読みたい本
         if (DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()) {
             $wantToBookDatasGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
             $x = $this->setZero($x);
@@ -75,6 +73,7 @@ class MyPageController extends Controller
         } else {
             $myWantToBookdatas = "";
         }
+
         //followList
         if (DB::table('wantToBooks')->where('id', $user['id'])->exists()) {
             $followListGet = followList::where('id', $user['id'])->get();
