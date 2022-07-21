@@ -7,6 +7,10 @@
 </div>
 <hr>
 <div>
-みんなのひとこと感想TOP3
-
+<h4>みんなのひとこと感想TOP3</h4> 
+@foreach($selectedCommentsTop as $selectedCommentTop)
+@if($selectedCommentTop['number'] != 0)
+{{$selectedCommentTop['comment']}}  {{$selectedCommentTop['number']}}人<br>
+@endif
+@endforeach
 </div>
