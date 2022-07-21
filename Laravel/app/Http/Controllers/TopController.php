@@ -20,22 +20,23 @@ class TopController extends Controller
 
     
     public function ranking(Request $request){
+        $x = 0;
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
+        $bookDatasGet = BookReport::selectRaw('bookID')->GroupBy('bookID')->limit(7)->get();
         //bookIDをカウントcount,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
-
-        $bookDatas = book::all();
-        $x = 0;
-
-        foreach($bookDatas as $bookData){
-            $rankingDatas[$x]['bookID'] = $bookData['bookID'];
-            $rankingDatas[$x]['book'] = $bookData['book'];
-            $rankingDatas[$x]['auther'] = $bookData['auther'];
-            $rankingDatas[$x]['genre'] = $bookData['genre'];
+        
+        $this->setZero($x);
+        foreach($bookDatasGet as $bookDatas){
+            $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
+            $rankingDatas[$x]['book'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('book');
+            $rankingDatas[$x]['auther'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('auther');
+            $rankingDatas[$x]['genre'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('genre');
+            $rankingDatas[$x]['count'] = bookReport::where('bookID',$rankingDatas[$x]['bookID'])->count();
             $x++;
         }
-        
+
         return view('TOP/ranking',compact('rankingDatas'));
     }
 
@@ -110,5 +111,8 @@ class TopController extends Controller
     }
     //st002023@m01.kyoto-kcg.ac.jp
 
+    public function setZero($x){
+        return $x = 0;
+    }
     
 }
