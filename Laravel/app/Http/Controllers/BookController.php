@@ -23,19 +23,15 @@ class BookController extends Controller
         //TODO:ひとこと感想TOP3.やり方が綺麗でない
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
-            $cnt = 0;
-            $selectedCommentsExplode = explode('/', $selectedCommentGet['selectedComment']);
+            $selectedCommentsExplode = explode(',', $selectedCommentGet['selectedComment']);
             
-            foreach ($selectedCommentsExplode as $commentNum) {
-                
+            foreach ($selectedCommentsExplode as $commentNum) {            
                 $selectedCommentsCount[$commentNum]++;
             }
-            // rsort($selectedCommentsCount);
+            arsort($selectedCommentsCount);
         }
-
-        dd($selectedCommentsCount);
-
-        return view('TOP/bookDetail');
+        $selectedCommentsTOP = array_slice($selectedCommentsCount,0,3);
+        return view('TOP/bookDetail',compact('bookData','selectedCommentsTOP'));
     }
 
     //
