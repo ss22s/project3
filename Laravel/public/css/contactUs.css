@@ -1,0 +1,85 @@
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.form {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #9c9c9c;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.contents {
+    margin-bottom: 30px;
+}
+
+.label_left {
+    display: inline-block;
+    width: 45%;
+    border-left: solid 5px gray;
+    padding-left: 15px;
+    vertical-align: top;
+}
+
+.form input[type="text"] {
+    padding: 10px;
+    width: 75%;
+    background-color: rgb(234, 239, 241);
+    border: none;
+    display: block;
+}
+
+.form textarea {
+    padding: 10px;
+    height: 100px;
+    font-size: 14px;
+    width: 75%;
+    border: none;
+    background-color: rgb(234, 239, 241);
+    display: block;
+}
+
+.form select {
+    height: 35px;
+    width: 75%;
+    display: block;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.form button {
+    background: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: 0.3s;
+}
+
+.form button:hover {
+    background: #9c9c9c;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+}
+
+.faq {
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.faq:hover {
+    color: #9c9c9c;
+}

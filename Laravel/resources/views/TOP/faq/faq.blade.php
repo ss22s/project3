@@ -7,6 +7,7 @@
     <title>よくあるご質問</title>
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
     <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/9-2-2/css/9-2-2.css">
+    <link rel="stylesheet" type="text/css" href="css/faq.css">
 </head>
 <body>
     <h1>よくあるご質問</h1>
