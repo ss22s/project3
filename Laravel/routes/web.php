@@ -57,7 +57,7 @@ Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware
 
 //book関連
     //感想を書く
-    Route::get('/reportWrite','App\Http\Controllers\BookController@write');
+    Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');;
     Route::post('/reportRegister','App\Http\Controllers\BookController@register');
 
 //本の詳細ページ
