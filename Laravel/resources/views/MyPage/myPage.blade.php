@@ -24,32 +24,48 @@
 <hr>
 <div>
     <b>フォロー</b>
+    @if($followLists != "")
     <div>
     @foreach($followLists as $followList)
     {{$followList['followerName']}}
     <br>
     @endforeach
     </div>
+    @else
+    <br>
+    フォローしている人はいません。
+    @endif 
 </div>
 <hr>
 <div>
     <b>読みたい本リスト</b>
+    @if($myWantToBookdatas != "")
     <div>
     @foreach($myWantToBookdatas as $myWantToBookdata)
     {{$myWantToBookdata['book']}}
     <br>
     @endforeach
     </div>
+    @else
+    <br>
+    読みたい本は登録されていません。
+    @endif
+
 </div>
 <hr>
 <div>
     <b>読んだ本リスト</b>
+    @if($myFinishedBookdatas != "")
     <div>
     @foreach($myFinishedBookdatas as $myFinishedBookdata)
     {{$myFinishedBookdata['book']}}
     <br>
     @endforeach
     </div>
+    @else
+    <br>
+    読んだ本はありません。
+    @endif
 </div>
 @endauth
 
