@@ -12,13 +12,18 @@
     </div>
     <div>
         @csrf
-        @for($i = 0; $i < 7; $i++) <div>
-            <!-- 書影(※書影にもリンクつける) -->
-            <h4>{{$i+1}}位：<a href="{{ route('book.detail', $rankingDatas[$i]['bookID'] )}}">{{$rankingDatas[$i]['book']}}</a></h4>
-            <p>作者：{{$rankingDatas[$i]['auther']}}</p>
-            <p>ジャンル：{{$rankingDatas[$i]['genre']}}</p>
-    </div>
-    @endfor
+        @php
+        $rank = 1;
+        @endphp
+        @foreach($rankingDatas as $bookData)
+        <!-- 書影(※書影にもリンクつける) -->
+        <h4>{{$rank}}位：<a href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+        <p>作者：{{$bookData['auther']}}</p>
+        <p>ジャンル：{{$bookData['genre']}}</p>
+        @php
+        $rank ++;
+        @endphp
+        @endforeach
     </div>
 </body>
 
