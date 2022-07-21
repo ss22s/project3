@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>お問い合わせ</title>
+    <link rel="stylesheet" type="text/css" href="css/contactUs.css">
 </head>
 <body>
     <div><a href="/faq"><h1>よくあるご質問</h1></a></div>
     <div>
         <h1>ご意見 / お問い合わせ</h1>
-        <div>
+        <div class="contactForm">
             <form action="/confirm" method="post" name="form" onsubmit="return validate()">
             @csrf    
 
