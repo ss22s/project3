@@ -33,7 +33,7 @@
                     <label class="label_left">内容</label>
                     <textarea name="content" rows="5" placeholder="お問合せ内容を入力"></textarea>
                 </div>
-                <div>
+                <div class="btns">
                     <button type="submit">送信</button>
                 </div>
             </form>
