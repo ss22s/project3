@@ -5,3 +5,8 @@
 著者：{{$bookData['auther']}} <br>
 ジャンル：{{$bookData['genre']}}
 </div>
+<hr>
+<div>
+みんなのひとこと感想TOP3
+
+</div>
