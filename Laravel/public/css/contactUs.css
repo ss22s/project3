@@ -53,6 +53,18 @@ h1 {
 .form button {
     background: black;
     color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: 0.5s;
+}
+
+.form button:hover {
+    background: #9c9c9c;
+    color: white;
+    border: none;
     font-size: 16px;
     font-weight: bold;
     padding: 10px 20px;
@@ -62,6 +74,7 @@ h1 {
 .faq {
     text-decoration: none;
     color: black;
+    transition: 0.5s;
 }
 
 .faq:hover {
