@@ -52,7 +52,7 @@ if(!empty($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
     $header = "From: " . mb_encode_mimeheader($fromName) . "<{$fromEmail}>";
 
     //受信用のメールアドレスを変数myEmailに格納
-    $myEmail = "sharerary@sharerary.com";
+    $myEmail = "st022023@m01.kyoto-kcg.ac.jp";
 
     //フォーム入力者にメールを送信する
     mb_send_mail($email, $subject, $body, $header);
@@ -73,7 +73,7 @@ if(!empty($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
     <h2>送信完了</h2>
     <p>メッセージありがとうございました。入力したメールアドレス宛に確認メールを送信致しましたので、ご確認ください。</p>
     <p>なお、数十分経過してもメールが届かない場合はメッセージを送信できていない可能性がございます。お手数ですが、お問い合わせページよりもう一度メッセージの送信をお願い致します。</p>
-    <a href="hello.blade.php">
+    <a href="/">
         <button class="btn" type="button">トップページに戻る</button>
     </a>
 </body>

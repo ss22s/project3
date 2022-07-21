@@ -21,7 +21,7 @@ class wantToBooksSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         \DB::table('wantToBooks')->insert([
-            ['UserID' => 1,
+            ['id' => 1,
             'bookID' => 1001,
             'registered_at' => '2022-01-11 13:10:00',
             'finished' => null],
