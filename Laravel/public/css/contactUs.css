@@ -58,7 +58,7 @@ h1 {
     font-weight: bold;
     padding: 10px 20px;
     margin: 0 5px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .form button:hover {
@@ -74,7 +74,7 @@ h1 {
 .faq {
     text-decoration: none;
     color: black;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .faq:hover {
