@@ -14,8 +14,13 @@ class BookController extends Controller
 {
     public function detail($bookID)
     {
-        //
-        dd($bookID);
+        //TODO:本データを外部から取る場合、書き換え
+        $bookDataGet = Book::where('bookID',$bookID)->first();
+        //ひとこと感想TOP3
+
+        
+        dd($bookDataGet);
+
         return view('TOP/bookDetail');
     }
 
@@ -32,7 +37,7 @@ class BookController extends Controller
         $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
         //selectedComment
         $selectedCommentGet = $request->input('selectedComment');
-        $selectedComment = implode('/',$selectedCommentGet);
+        $selectedComment = implode(',',$selectedCommentGet);
         
         //created_atの日付
         $today = date("Y-m-d");
