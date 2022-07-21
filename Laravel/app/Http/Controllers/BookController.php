@@ -14,6 +14,10 @@ class BookController extends Controller
 {
     public function detail($bookID)
     {
+
+        //
+        dd($bookID);
+
         return view('TOP/bookDetail');
     }
 
@@ -26,8 +30,16 @@ class BookController extends Controller
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
     public function register(Request $request)
     {
+
+        $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation',  'comment', 'open');
+        $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+        //selectedComment
+        $selectedCommentGet = $request->input('selectedComment');
+        $selectedComment = implode('/',$selectedCommentGet);
+        
         $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
         $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+
         //created_atの日付
         $today = date("Y-m-d");
         //user情報
@@ -40,7 +52,11 @@ class BookController extends Controller
                 'id' => $userData['id'],
                 'bookID' => $bookID,
                 'evaluation' => $reportDatasGet['evaluation'],
+
+                "selectedComment" =>  $selectedComment,
+
                 "selectedComment" => $reportDatasGet['selectedComment'],
+
                 "comment" => $reportDatasGet['comment'],
                 "Open" => $reportDatasGet['open'],
                 "created_at" => $today
