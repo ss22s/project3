@@ -14,15 +14,15 @@
             @csrf    
 
                 <div class="contents">
-                    <label>お名前</label>
+                    <label class="label_left">お名前</label>
                     <input type="text" name="name" placeholder="例）田中太郎" value="">
                 </div>
                 <div class="contents">
-                    <label for="email">メールアドレス</label>
+                    <label for="email" class="label_left">メールアドレス</label>
                     <input type="text" name="email" placeholder="例）guest@example.com" value="">
                 </div>
                 <div class="contents">
-                    <label>お問い合わせの種類</label>
+                    <label class="label_left">お問い合わせの種類</label>
                     <select name="item">
                         <option value="お問い合わせ">お問い合わせ</option>
                         <option value="ご意見">ご意見</option>
@@ -30,7 +30,7 @@
                     </select>
                 </div>
                 <div class="contents">
-                    <label>内容</label>
+                    <label class="label_left">内容</label>
                     <textarea name="content" rows="5" placeholder="お問合せ内容を入力"></textarea>
                 </div>
                 <div>
