@@ -58,3 +58,12 @@ h1 {
     padding: 10px 20px;
     margin: 0 5px;
 }
+
+.faq {
+    text-decoration: none;
+    color: black;
+}
+
+.faq:hover {
+    color: #9c9c9c;
+}
