@@ -61,7 +61,7 @@ class MyPageController extends Controller
             $registerDateGet = explode(" ",$wantToBookDataGet['registered_at']);
             $registerDate = explode("-",$registerDateGet[0]);            
             $myWantToBookdatas[$x]['registerDate'] = $registerDate[0]. "年" .  $registerDate[1] . "月" .  $registerDate[2] . "日";
-            
+
             $x++;
         }
         //followList
