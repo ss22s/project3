@@ -32,7 +32,7 @@ class BookController extends Controller
         }
         $selectedCommentsTOP = array_slice($selectedCommentsCount,0,3);
         $this->commentAdd($selectedCommentsTOP);
-        
+
         return view('TOP/bookDetail',compact('bookData','selectedCommentsTOP'));
 
 
@@ -98,4 +98,76 @@ class BookController extends Controller
         //eturn redirect('home')->with('result', '感想の登録の成功しました！');
         return view('hello');
     }
+
+    public function commentAdd($comment){
+        if ($comment === 0) {
+            return [
+                'weather' => "快晴", //Clear sky
+                'weatherimg' => "sun",
+            ];
+        }
+        if ($comment === 1) {
+            return [
+                'weather' => "晴れ", //Mainly clear
+                'weatherimg' => "sun",
+            ];
+        }
+        if ($comment === 2) {
+            return [
+                'weather' => "晴れ時々くもり", //partly cloudy
+                'weatherimg' => "sunandcloud",
+            ];
+        }
+        if ($comment === 3) {
+            return [
+                'weather' => "曇り", //overcast
+                'weatherimg' => "cloud",
+            ];
+        }
+        if ($comment < 51) {
+            return [
+                'weather' => "霧", //Fog 
+                'weatherimg' => "fog",
+            ];
+        }
+        if ($comment < 61) {
+            return [
+                'weather' => "小雨", //Drizzle,Freezing Drizzle
+                'weatherimg' => "rain",
+            ];
+        }
+        if ($comment < 71) {
+            return [
+                'weather' => "雨", //Rain,Freezing Rain
+                'weatherimg' => "rain",
+            ];
+        }
+        if ($comment < 80) {
+            return [
+                'weather' => "雪", //Snow fall.Snow grains
+                'weatherimg' => "snow",
+            ];
+        }
+        if ($comment < 85) {
+            return [
+                'weather' => "にわか雨", //Rain showers
+                'weatherimg' => "rain",
+            ];
+        }
+        if ($comment < 95) {
+            return [
+                'weather' => "にわか雪", //Snow showers
+                'weatherimg' => "snow",
+            ];
+        }
+        if ($comment < 100) {
+            return [
+                'weather' => "雷雨", //Snow showers
+                'weatherimg' => "thunder",
+            ];
+        }
+
+        return ['weather' => "?", 'weatherimg' => ""];
+    }
+}
 }
