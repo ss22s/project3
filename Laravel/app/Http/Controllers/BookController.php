@@ -169,4 +169,9 @@ class BookController extends Controller
 
         return ['weather' => "?", 'weatherimg' => ""];
     }
+<<<<<<< HEAD
 }
+=======
+}
+}
+>>>>>>> c3f01c7c2a239ec8be2d7492fc6a5e69b0b15607
