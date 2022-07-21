@@ -31,6 +31,8 @@ class BookController extends Controller
             arsort($selectedCommentsCount);
         }
         $selectedCommentsTOP = array_slice($selectedCommentsCount,0,3);
+        $this->commentAdd($selectedCommentsTOP);
+        
         return view('TOP/bookDetail',compact('bookData','selectedCommentsTOP'));
 
 
