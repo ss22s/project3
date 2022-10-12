@@ -5,6 +5,12 @@
 著者：{{$bookData['auther']}} <br>
 ジャンル：{{$bookData['genre']}}
 </div>
+
+<div>
+<button>読みたい本リストに追加する</button>
+<a href="{{ route('mypage.wantBook', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
+</div>
+
 <hr>
 <div>
 <h4>みんなのひとこと感想TOP3</h4> 
@@ -14,3 +20,4 @@
 @endif
 @endforeach
 </div>
+<h4></h4>

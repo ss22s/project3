@@ -95,4 +95,11 @@ class MyPageController extends Controller
     {
         return $x = 0;
     }
+
+    public function wantBook($bookID){
+        //TODO:読みたい本リストに追加する
+        $user = Auth::user();
+        
+        return view('hello');
+    } 
 }
