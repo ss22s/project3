@@ -99,6 +99,10 @@ class MyPageController extends Controller
     public function wantBook($bookID){
         //TODO:読みたい本リストに追加する
         $user = Auth::user();
+        if (Auth::user() == null) {
+            return view('MyPage/myPage');
+        }
+
         
         return view('hello');
     } 
