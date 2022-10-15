@@ -54,14 +54,15 @@ Route::get('/faq','App\Http\Controllers\TopController@faq');
 
 //マイページ関連
 Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware('auth');
-    //読みたい本リストに追加
-    Route::get('/wantBook/{bookID}','App\Http\COntrollers\MyPageController@WantBook')
-        ->name('mypage.wantBook');
 
 //book関連
     //感想を書く
     Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');;
     Route::post('/reportRegister','App\Http\Controllers\BookController@register');
+
+    //読みたい本リストに追加
+    Route::get('/wantBook/{bookID}','App\Http\COntrollers\BookController@WantBook')
+        ->name('book.wantBook');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')

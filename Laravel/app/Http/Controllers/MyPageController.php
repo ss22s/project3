@@ -37,8 +37,9 @@ class MyPageController extends Controller
         $myData['freeText'] = $myPageDataGet['freeText'];
 
         //本関連
+        //読んだ本リスト
         if (DB::table('finishedBooks')->where('id', $user['id'])->exists()) {
-            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->orderBy('date','desc')->take(3)->get();
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
                 $myFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
@@ -56,8 +57,9 @@ class MyPageController extends Controller
             $myFinishedBookdatas = "";
         }
 
+        //読みたい本リスト
         if (DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()) {
-            $wantToBookDatasGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
+            $wantToBookDatasGet = wantBook::where('id', $user['id'])->where('finished', null)->orderBy('registered_at','desc')->take(3)->get();
             $x = $this->setZero($x);
             foreach ($wantToBookDatasGet as $wantToBookDataGet) {
                 $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
@@ -96,23 +98,4 @@ class MyPageController extends Controller
         return $x = 0;
     }
 
-    public function wantBook($bookID){
-        //TODO:読みたい本リストに追加する
-        $user = Auth::user();
-        if (Auth::user() == null) {
-            return view('MyPage/myPage');
-        }
-        //registered_atの日付
-        $today = date("Y-m-d H:i:s");
-
-        //DBに追加
-        DB::table('wantToBooks')->insert([
-            ['id' => $user['id'],
-            'bookid' => $bookID,
-             'registered_at' => $today,
-             'finished' => null],
-        ]);
-        
-        return view('hello');
-    } 
 }

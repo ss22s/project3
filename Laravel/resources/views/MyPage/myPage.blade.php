@@ -38,8 +38,10 @@
 </div>
 <hr>
 <div>
+    {{-- TODO:隙間などはCSSに変更 --}}
     <b>読みたい本リスト</b>
     @if($myWantToBookdatas != "")
+    &emsp;&emsp; <a href="">もっと見る</a>
     <div>
     @foreach($myWantToBookdatas as $myWantToBookdata)
     {{$myWantToBookdata['book']}}
@@ -56,6 +58,7 @@
 <div>
     <b>読んだ本リスト</b>
     @if($myFinishedBookdatas != "")
+    &emsp;&emsp; <a href="">もっと見る</a>
     <div>
     @foreach($myFinishedBookdatas as $myFinishedBookdata)
     {{$myFinishedBookdata['book']}}
@@ -68,6 +71,7 @@
     @endif
 </div>
 @endauth
-
+<hr>
+<h4><a href="/">TOPへ</a> </h4>
 </body>
 </html>
