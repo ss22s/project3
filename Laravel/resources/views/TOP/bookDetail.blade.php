@@ -7,8 +7,9 @@
 </div>
 
 <div>
-<button>読みたい本リストに追加する</button>
+<button>
 <a href="{{ route('mypage.wantBook', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
+</button>
 </div>
 
 <hr>

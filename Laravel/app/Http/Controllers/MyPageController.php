@@ -102,7 +102,16 @@ class MyPageController extends Controller
         if (Auth::user() == null) {
             return view('MyPage/myPage');
         }
+        //registered_atの日付
+        $today = date("Y-m-d H:i:s");
 
+        //DBに追加
+        DB::table('wantToBooks')->insert([
+            ['id' => $user['id'],
+            'bookid' => $bookID,
+             'registered_at' => $today,
+             'finished' => null],
+        ]);
         
         return view('hello');
     } 
