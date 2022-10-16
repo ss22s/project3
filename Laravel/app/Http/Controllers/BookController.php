@@ -139,7 +139,7 @@ class BookController extends Controller
         }
     }
 
-    public function wantBook($bookID)
+    public function wantBookAdd($bookID)
     {
         //TODO:読みたい本リストに追加する
         $user = Auth::user();

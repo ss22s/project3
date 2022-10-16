@@ -8,7 +8,7 @@
 
 <div>
     <button>
-        <a href="{{ route('book.wantBook', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
+        <a href="{{ route('book.wantBookAdd', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
     </button>
     {{-- TODO:フラッシュメッセージらしいCSS 成功と失敗で分けてもいい --}}
     @if(session('Message'))
