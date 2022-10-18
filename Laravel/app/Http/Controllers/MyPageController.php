@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 //使用するDB
+use App\Models\User;
 use App\Models\myPage;
 use App\Models\member;
 use App\Models\finishedBook;
@@ -108,11 +109,22 @@ class MyPageController extends Controller
         
         //ログイン済みデータ取得
         $user = Auth::user();
-        if (Auth::user() == null) {
-            return view('MyPage/myPage');
-        }
+        
+        $userDataGet = User::where('id',$user['id'])->first();
 
-        return view('MyPage/userInfoPage');
+        $userData['id'] = $userDataGet['id'];
+        $userData['name'] = $userDataGet['name'];
+        $userData['email'] = $userDataGet['email'];
+
+        //本に関するデータ
+        $userBookDataGet = MyPage::where('id',$user['id'])->first();
+
+        $userData['favoriteBook'] = $userBookDataGet['favoriteBook'];
+        $userData['favoriteAuthor'] = $userBookDataGet['favoriteAuthor'];
+        $userData['freeText'] = $userBookDataGet['freeText'];
+        
+
+        return view('MyPage/userInfoPage',compact('userData'));
     }
 
     //読みたい本リストページ表示
@@ -127,9 +139,9 @@ class MyPageController extends Controller
 
         //ログイン済みデータ取得
         $user = Auth::user();
-        if (Auth::user() == null) {
-            return view('MyPage/myPage');
-        }
+        // if (Auth::user() == null) {
+        //     return view('MyPage/myPage');
+        // }
 
         //回す分の変数
         $x = 0;

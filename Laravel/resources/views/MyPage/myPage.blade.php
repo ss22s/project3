@@ -18,6 +18,9 @@
         &emsp;&emsp;<a href="/userInfo">ユーザ情報を編集する</a>
         <p style="margin-left:20px">
             <b>ユーザ名：</b>{{Auth::user()->name}} <br>
+            @if(Auth::user()->email == $myData['userEmail'])
+            <b>メールアドレス：</b>{{Auth::user()->email}}
+            @endif <br>
             <b>イチオシの一冊：</b>{{$myData['favoriteBook']}} <br>
             <b>好きな著者：</b>{{$myData['favoriteAuther']}} <br>
             <b>自由記述欄：</b>{{$myData['freeText']}}
