@@ -15,9 +15,9 @@ class BookController extends Controller
     public function detail($bookID)
     {
         $x = 0;
-        
+
         $selectedCommentsCountSet = array_fill(0, 10, 0);
-        foreach($selectedCommentsCountSet as $commentAdd){
+        foreach ($selectedCommentsCountSet as $commentAdd) {
             $selectedCommentsCount[$x]['value'] = $x;
             $selectedCommentsCount[$x]['comment'] = $this->commentAdd($x);
             $selectedCommentsCount[$x]['number'] = "0";
@@ -29,8 +29,8 @@ class BookController extends Controller
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
             $selectedCommentsExplode = explode(',', $selectedCommentGet['selectedComment']);
-            
-            foreach ($selectedCommentsExplode as $commentNum) {     
+
+            foreach ($selectedCommentsExplode as $commentNum) {
                 $selectedCommentsCount[$commentNum]['number']++;
             }
         }
@@ -38,12 +38,10 @@ class BookController extends Controller
             $NumGet[] = $Number['number'];
         }
 
-        array_multisort($NumGet,SORT_DESC, $selectedCommentsCount);
-        $selectedCommentsTop = array_slice($selectedCommentsCount,0,3);
+        array_multisort($NumGet, SORT_DESC, $selectedCommentsCount);
+        $selectedCommentsTop = array_slice($selectedCommentsCount, 0, 3);
 
-        return view('TOP/bookDetail',compact('bookData','selectedCommentsTop'));
-
-
+        return view('TOP/bookDetail', compact('bookData', 'selectedCommentsTop'));
     }
 
     //
@@ -63,10 +61,10 @@ class BookController extends Controller
         //selectedComment
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
-        
+
         $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
         $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
-        
+
         //created_atの日付
         $today = date("Y-m-d H:i:s");
         //user情報
@@ -107,7 +105,8 @@ class BookController extends Controller
         return view('hello');
     }
 
-    public function commentAdd($comment){
+    public function commentAdd($comment)
+    {
         if ($comment == 0) {
             return "感動した";
         }
@@ -138,8 +137,34 @@ class BookController extends Controller
         if ($comment == 9) {
             return "つまらなかった";
         }
-        
+    }
 
+    public function wantBookAdd($bookID)
+    {
+        //TODO:読みたい本リストに追加する
+        $user = Auth::user();
+        if (Auth::user() == null) {
+            return view('MyPage/myPage');
+        }
+        //registered_atの日付
+        $today = date("Y-m-d H:i:s");
+
+        //DBに追加
+        if (!(DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
+            DB::table('wantToBooks')->insert([
+                [
+                    'id' => $user['id'],
+                    'bookid' => $bookID,
+                    'registered_at' => $today,
+                    'finished' => null
+                ],
+            ]);
+            $flashMessage = "リストに追加しました！";
+        } else {
+            $flashMessage = "この本は既に読みたい本リストに追加されています";
+        }
+        //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
         
+        return back()->with('Message', $flashMessage);
     }
 }
