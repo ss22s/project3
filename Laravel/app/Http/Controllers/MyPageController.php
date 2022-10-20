@@ -134,6 +134,13 @@ class MyPageController extends Controller
 
     //読みたい本リストページ表示
     public function wantToBooks(Request $request){
+        //ログイン済みデータ取得
+        $user = Auth::user();
+
+        //回す分の変数
+        $x = 0;
+
+        
 
         return view('MyPage/wantToBooksPage');
     }
