@@ -151,6 +151,7 @@ class MyPageController extends Controller
             $x++;
         }
 
+        
         return view('MyPage/wantToBooksPage',compact('wantBooks'));
     }
 
