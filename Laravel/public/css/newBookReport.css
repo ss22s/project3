@@ -1,13 +1,13 @@
 .main{
     text-align:center;
-    background-color:#eb943c;
+    background-color:#eee8e1;
     /* #eaddcd */
     /* #eee8e1 */
     color:#454541
 }
 
 .box{
-    background-color:#ffffff;
+    background-color:#ececec;
     display:inline-block;
     border:2px solid;
     border-radius:30px;
@@ -21,8 +21,8 @@
     color:#454541;
 }
 .title:hover{
-    color:#D2B48C;
-    /* #a09588 */
+    color:#a09588;
+    /* #D2B48C */
 }
 
 .image{
