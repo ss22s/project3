@@ -54,11 +54,21 @@ Route::get('/faq','App\Http\Controllers\TopController@faq');
 
 //マイページ関連
 Route::get('/myPage','App\Http\Controllers\MyPageController@myPage')->middleware('auth');
+//ユーザ情報変更
+Route::get('/userInfo','App\Http\Controllers\MypageController@userInfoChange')->middleware('auth');
+//読みたい本リストページ
+Route::get('/wantToBooks','App\Http\Controllers\MypageController@wantToBooks')->middleware('auth');
+//読んだ本リストページ
+Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks')->middleware('auth');
 
 //book関連
     //感想を書く
-    Route::get('/reportWrite','App\Http\Controllers\BookController@write');
+    Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');
     Route::post('/reportRegister','App\Http\Controllers\BookController@register');
+
+    //読みたい本リストに追加
+    Route::get('/wantBook/{bookID}','App\Http\COntrollers\BookController@WantBookAdd')
+        ->name('book.wantBookAdd');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
