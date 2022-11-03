@@ -1,4 +1,5 @@
 .main{
+    min-height:100vh;
     text-align:center;
     background-color:#eee8e1;
     /* #eaddcd */
@@ -21,8 +22,8 @@
     color:#454541;
 }
 .title:hover{
-    color:#a09588;
-    /* #D2B48C */
+    color:#D2B48C;
+    /* #D2B48Ca09588 */
 }
 
 .image{
