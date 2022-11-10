@@ -24,7 +24,16 @@ class finishedBooksSeeder extends Seeder
             ['id' => 1,
             'bookID' => 1001,
             'date' => '2022-01-15 15:25:00',
-            'reviewID' => 1]
+            'reviewID' => 1,
+            'delete' => null]
+        ]);
+
+        \DB::table('finishedBooks')->insert([
+            ['id' => 1,
+            'bookID' => 1006,
+            'date' => '2022-02-15 11:54:00',
+            'reviewID' => 3,
+            'delete' => 1]
         ]);
     }
 }
