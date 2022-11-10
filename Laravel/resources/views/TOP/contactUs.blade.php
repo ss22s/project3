@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/contactUs.css">
 </head>
 <body>
-    <a href="/faq" class="faq"><h1>よくあるご質問</h1></a>
     <div>
+        <div class="atag"><a href="/faq" class="faq">よくあるご質問</a></div>
         <h1>ご意見 / お問い合わせ</h1>
         <div>
             <form action="/confirm" class="form" method="post" name="form" onsubmit="return validate()">
