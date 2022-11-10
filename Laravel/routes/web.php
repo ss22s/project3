@@ -61,6 +61,10 @@ Route::get('/wantToBooks','App\Http\Controllers\MypageController@wantToBooks')->
 //読んだ本リストページ
 Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks')->middleware('auth');
 
+//listページ関連
+Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
+    ->name('list.delete');
+
 //book関連
     //感想を書く
     Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');
