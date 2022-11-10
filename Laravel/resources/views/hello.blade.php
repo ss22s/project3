@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="css/hello.css">
+<div class="main">
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,54 +18,43 @@
 </head>
 <body>
 
-<div>
-    <h4> sharerary </h4>
-    sharerary
-    <br>
-    sharerary<br>
-    sharerary<br>
-</div>
+    <div class="mypage">
+        <a class="mypagelink" href="/myPage">マイページ</a>
+    </div>
+    <div class="login">
+        @guest
+        <a class="loginlink" href="/login">ログイン</a><br>
+        <a class="loginlink" href="/register">新規登録</a>
+        @endguest
+        @auth
+    </div>
+    <div class="logout">
+        <p class="message">
+            ログイン済み<br>
+            <!--ここのログアウト-->
+            ようこそ、{{Auth::user()->name}}<br>
+        </p>
+        <a class="logoutlink" href={{ route('logout') }} onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+            ログアウト
+        </a>
+        <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
+            @csrf
+        @endauth
+    </div>
 
-
-<div class="box">
-TOP:) <br>
-<a href="/">Top</a><br>
-<a href="/ranking">ランキング</a><br>
-<a href="/newBookReport">新着感想</a><br>  
-<a href="/chatRoom">掲示板</a><br>
-<a href="/contactUs">お問い合わせ</a>
-
-</div>
-<hr>
-
-<div>
-ログイン:(
-<br>
-
-@guest
-<a href="/login">ログイン</a><br>
-<a href="/register">新規登録</a>
-@endguest
-@auth
-ログイン済み<br>
-<!--ここのログアウト-->
-ようこそ、{{Auth::user()->name}}<br>
-<a href={{ route('logout') }} onclick="event.preventDefault();
-    document.getElementById('logout-form').submit();">
-    ログアウト
-</a>
-<form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
-    @csrf
-@endauth
-</div>
-<hr>
-<div>
-マイページ<br>
-<a href="/myPage">マイページ</a><br>
-</div>
-<hr>
-<div>
-    <a href="/reportWrite">感想を書く</a>
+    <div class="toppage">
+        <hr class="line">
+        <a class="toppagelink" href="/">Top</a><br>
+        <a class="toppagelink" href="/ranking">ランキング</a><br>
+        <a class="toppagelink" href="/newBookReport">新着感想</a><br>  
+        <a class="toppagelink" href="/chatRoom">掲示板</a><br>
+        <a class="toppagelink" href="/contactUs">お問い合わせ</a>
+    </div>
+    <hr class="line">
+    <div>
+        <a class="toppagelink" href="/reportWrite">感想を書く</a>
+    </div>
 </div>
 </body>
 </html>
