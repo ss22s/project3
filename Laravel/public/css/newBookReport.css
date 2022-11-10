@@ -55,3 +55,18 @@
 .p3{
     text-align:right;
 }
+.toppage{
+    padding-top:50px;
+    right:30px;
+}
+.toppagelink{
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}

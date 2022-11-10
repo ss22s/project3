@@ -32,5 +32,8 @@
             @endphp
         @endif
     @endforeach
+    <div class="toppage">
+        <a class="toppagelink" href="/">TOPへ</a>
+    </div>
 </body>
 </html>
