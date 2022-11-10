@@ -5,19 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    *{
-        background-color: #faf9f8;
-    }
-    div{
-        background-color: #FFFFFF	;
-        margin: 30px;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/hello.css">
     <title>Document</title>
 </head>
 <body>
-
+<div class="main">
     <div class="mypage">
         <a class="mypagelink" href="/myPage">マイページ</a>
     </div>
