@@ -1,5 +1,22 @@
 <link rel="stylesheet" type="text/css" href="css/hello.css">
 <div class="main">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    *{
+        background-color: #faf9f8;
+    }
+    div{
+        background-color: #FFFFFF	;
+        margin: 30px;
+    }
+    </style>
+    <title>Document</title>
+</head>
+<body>
 
     <div class="mypage">
         <a class="mypagelink" href="/myPage">マイページ</a>
@@ -39,3 +56,5 @@
         <a class="toppagelink" href="/reportWrite">感想を書く</a>
     </div>
 </div>
+</body>
+</html>
