@@ -134,8 +134,25 @@ class MyPageController extends Controller
 
     //読みたい本リストページ表示
     public function wantToBooks(Request $request){
+        //ログイン済みデータ取得
+        $user = Auth::user();
 
-        return view('MyPage/wantToBooksPage');
+        //回す分の変数
+        $x = 0;
+
+        $wantBookGet = wantBook::where('id',$user['id'])->get(); 
+
+        foreach ($wantBookGet as $wantBookSet) {
+            $bookID = $wantBookSet['bookID'];
+            $wantBooks[$x]['bookID'] = $bookID;
+
+            $wantBooks[$x]['book'] = book::where('bookID',$bookID)->first();
+
+            $x++;
+        }
+
+        
+        return view('MyPage/wantToBooksPage',compact('wantBooks'));
     }
 
     //読んだ本リストページ表示

@@ -1,21 +1,29 @@
-.main{
+.top{
     min-height:100vh;
+    background-color: #eee8e1;
+    text-align:center;
+}
+
+.main{
+    display:inline-block;
+    vertical-align:top;
     text-align:center;
     background-color:#eee8e1;
     /* #eaddcd */
     /* #eee8e1 */
-    color:#454541
+    color:#454541;
+    margin-right:-10px;
 }
 
 .box{
-    background-color:#efefef;
     display:inline-block;
+    background-color:#efefef;
     border:2px solid;
     border-radius:30px;
-    text-align:center;
     margin:20px;
     padding:10px;
-    width:450px;
+    width:300px;
+    height:550px;
 }
 
 .title{
@@ -46,4 +54,19 @@
 
 .p3{
     text-align:right;
+}
+.toppage{
+    padding-top:50px;
+    right:30px;
+}
+.toppagelink{
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
 }
