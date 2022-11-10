@@ -11,8 +11,8 @@ h1 {
 .form {
     width: 80%;
     margin: 20px auto;
-    border:2px dashed #D2B48C;
-    /* border: 1px solid #9c9c9c; */
+    border:1px solid #a48660;
+    background-color: #f4f2f0;
     padding: 50px;
     box-sizing: border-box;
 }
@@ -23,8 +23,7 @@ h1 {
 
 .label_left {
     display: inline-block;
-    width: 45%;
-    border-left: solid 5px gray;
+    border-left: solid 5px #a48660;
     padding-left: 15px;
     vertical-align: top;
 }
@@ -32,7 +31,7 @@ h1 {
 .form input[type="text"] {
     padding: 10px;
     width: 75%;
-    background-color: rgb(234, 239, 241);
+    background-color: white;
     border: none;
     display: block;
 }
@@ -43,13 +42,13 @@ h1 {
     font-size: 14px;
     width: 75%;
     border: none;
-    background-color: rgb(234, 239, 241);
+    background-color: white;
     display: block;
 }
 
 .form select {
     height: 35px;
-    width: 75%;
+    width: 77%;
     display: block;
 }
 

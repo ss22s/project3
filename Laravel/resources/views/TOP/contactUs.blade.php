@@ -12,7 +12,7 @@
         <div>
             <form action="/confirm" class="form" method="post" name="form" onsubmit="return validate()">
             @csrf    
-                
+
                 <div class="contents">
                     <label class="label_left">お名前</label>
                     <input type="text" name="name" placeholder="例）田中太郎" value="">
