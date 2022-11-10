@@ -222,4 +222,14 @@ class MyPageController extends Controller
         }
 
     }
+
+    //ユーザー情報編集処理
+    public function changeName(Request $request){
+        DB::table('users')->where('id',Auth::id())->update(['name' => $request->name]);
+        DB::table('users')->where('id',Auth::id())->update(['email' => $request->email]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteBook' => $request->favoriteBook]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteAuthor' => $request->favoriteAuthor]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['freeText' => $request->freeText]);
+        return back();
+    }
 }

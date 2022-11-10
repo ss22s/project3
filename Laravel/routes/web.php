@@ -73,3 +73,6 @@ Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
     ->name('book.detail');
+
+//マイページ編集
+Route::post('/changeName','App\Http\Controllers\MyPageController@changeName');
