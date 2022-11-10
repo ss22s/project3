@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+
 //使用するDB
 use App\Models\User;
 use App\Models\myPage;
@@ -18,12 +19,14 @@ use App\Models\followList;
 
 class MyPageController extends Controller
 {
+
     public function setZero($x)
     {
         return $x = 0;
     }
 
     //マイページ表示
+
     public function myPage(Request $request)
     {
         //ログイン済みデータ取得
@@ -43,6 +46,7 @@ class MyPageController extends Controller
         $myData['favoriteBook'] = $myPageDataGet['favoriteBook'];
         $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
+
 
         //変数置く
         $x = 0;
@@ -103,6 +107,7 @@ class MyPageController extends Controller
 
         return view('MyPage/myPage', compact('myData', 'myFinishedBookdatas', 'myWantToBookdatas', 'followLists'));
     }
+
 
     //ユーザ情報編集ページ
     public function userInfoChange(Request $request){
@@ -215,5 +220,6 @@ class MyPageController extends Controller
         if ($comment == 9) {
             return "つまらなかった";
         }
+
     }
 }
