@@ -47,8 +47,21 @@ class BookController extends Controller
     public function searchPageGet(){
         return view('TOP/searchBooks');
     }
-    public function search(){
-        
+    public function search(Request $request){
+        $searchWordGet = $request->input('searchWord');
+        $searchwords = preg_split("( |　)",$searchWordGet);
+        dd($searchwords);
+
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?q';
+        $searchURL =urldecode("$baseURL=$searchWordGet");
+
+        $searchGet = file_get_contents($searchURL);
+
+        dd($searchGet);
+
+
+
+        return view ('bookReportWrite');
     }
     //
     public function write()
