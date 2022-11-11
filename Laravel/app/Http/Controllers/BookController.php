@@ -44,28 +44,57 @@ class BookController extends Controller
         return view('TOP/bookDetail', compact('bookData', 'selectedCommentsTop'));
     }
 
-    public function searchPageGet(){
-        return view('TOP/searchBooks');
+    public function searchPageGet(Request $request)
+    {
+        $count = 0;
+        $request->session()->forget('page');
+        return view('TOP/searchBooks', compact('count'));
     }
-    public function search(Request $request){
-        $searchWordGet = $request->input('searchWord');
-        $searchwords = preg_split("( |　)",$searchWordGet);
-        dd($searchwords);
+    public function search(Request $request)
+    {
+        //TODO:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
+        $count = $request->input('count');
 
-        $baseURL = 'https://www.googleapis.com/books/v1/volumes?q';
-        $searchURL =urldecode("$baseURL=$searchWordGet");
+        if (isset($_POST['search'])) {
+            
+            $count = 0;
+        }
+        //TODO:countに対して　次へのボタン押されたとき+10,前へは-10するif文
+
+        $searchWordGet = $request->input('searchWord');
+        $searchwords = preg_split("( |　)", $searchWordGet);
+
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?projection=lite&q';
+
+        if (count($searchwords) == 1) {
+            $searchURL = urldecode("$baseURL=$searchWordGet");
+        } else {
+            $isFirst = true;
+            $wordsSet = "";
+            foreach ($searchwords as $searchword) {
+                if ($isFirst) {
+                    $wordsSet =  $searchword;
+                    $isFirst = false;
+                } else {
+                    $wordsSet .= "+" .   $searchword;
+                }
+            }
+        }
+        $searchURL = urldecode("$baseURL=$searchWordGet");
 
         $searchGet = file_get_contents($searchURL);
 
-        dd($searchGet);
+        //TODO:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
+       $count++;
 
-
-
-        return view ('bookReportWrite');
+       session(['page' => 'true']);
+        //return back()->with(compact('count','ok'));
+        return view('TOP/searchBooks',compact('count'));
     }
     //
-    public function write()
+    public function write(request $request)
     {
+        $request->session()->forget('page');
         return view('bookReportWrite');
     }
 
@@ -183,8 +212,7 @@ class BookController extends Controller
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
         //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
-        
+
         return back()->with('Message', $flashMessage);
     }
 }
-
