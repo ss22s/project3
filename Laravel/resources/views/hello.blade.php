@@ -41,6 +41,7 @@
             <a class="toppagelink" href="/chatRoom">掲示板</a><br>
             <a class="toppagelink" href="/contactUs">お問い合わせ</a>
         </div>
+
         <hr class="line">
         <div>
             <a class="toppagelink" href="/reportWrite">感想を書く</a>

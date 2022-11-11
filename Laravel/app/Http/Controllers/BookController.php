@@ -44,6 +44,12 @@ class BookController extends Controller
         return view('TOP/bookDetail', compact('bookData', 'selectedCommentsTop'));
     }
 
+    public function searchPageGet(){
+        return view('TOP/searchBooks');
+    }
+    public function search(){
+        
+    }
     //
     public function write()
     {

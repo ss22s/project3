@@ -67,7 +67,8 @@ Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
 
 //book関連
     //感想を書く
-    Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');
+    Route::get('/reportWrite','App\Http\Controllers\BookController@searchPageGet')->middleware('auth');
+    Route::get('searchBooks','App\Http\Controllers\BookController@search');
     Route::post('/reportRegister','App\Http\Controllers\BookController@register');
 
     //読みたい本リストに追加

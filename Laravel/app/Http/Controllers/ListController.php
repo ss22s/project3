@@ -24,11 +24,11 @@ class ListController extends Controller
         
         if(end($DBdecide) == "wantToBooks"){
             //読みたい本リストのDBから削除する
-            //TODO:本当に消すか消したことを示すカラムを作ってそこにキーを持たせるか　今は消している
-            wantBook::where('id',$user['id'])->where('bookID',$bookID)->where('finished',null)->delete();
+            //wantBook::where('id',$user['id'])->where('bookID',$bookID)->where('finished',null)->delete();
+            wantBook::where('id',$user['id'])->where('bookID',$bookID)->where('finished',null)->update(['finished' => 1]);
 
         }else if(end($DBdecide) == "finishedBooks"){
-            finishedBook::where('id',$user['id'])->where('bookID',$bookID)->delete();
+            finishedBook::where('id',$user['id'])->where('bookID',$bookID)->update(['finished' => 1]);
 
         }else{
 
