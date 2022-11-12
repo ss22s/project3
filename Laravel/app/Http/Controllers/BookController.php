@@ -23,9 +23,9 @@ class BookController extends Controller
             $selectedCommentsCount[$x]['number'] = "0";
             $x++;
         }
-        //TODO:本データを外部から取る場合、書き換え
+        //TODO27:本データを外部から取る場合、書き換え
         $bookData = Book::where('bookID', $bookID)->first();
-        //TODO:ひとこと感想TOP3.やり方が綺麗でない
+        //TODO27:ひとこと感想TOP3.やり方が綺麗でない
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
             $selectedCommentsExplode = explode(',', $selectedCommentGet['selectedComment']);
@@ -48,18 +48,19 @@ class BookController extends Controller
     {
         $count = 0;
         $request->session()->forget('page');
+        session(['select' => 'search']);
         return view('TOP/searchBooks', compact('count'));
     }
     public function search(Request $request)
     {
-        //TODO:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
+        //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
         $count = $request->input('count');
 
         if (isset($_POST['search'])) {
             
             $count = 0;
         }
-        //TODO:countに対して　次へのボタン押されたとき+10,前へは-10するif文
+        //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
         $searchWordGet = $request->input('searchWord');
         $searchwords = preg_split("( |　)", $searchWordGet);
@@ -84,7 +85,7 @@ class BookController extends Controller
 
         $searchGet = file_get_contents($searchURL);
 
-        //TODO:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
+        //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
        $count++;
 
        session(['page' => 'true']);
