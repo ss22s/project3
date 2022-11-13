@@ -92,6 +92,13 @@ class BookController extends Controller
         //return back()->with(compact('count','ok'));
         return view('TOP/searchBooks',compact('count'));
     }
+    public function selectFromwantToBooks(Request $request){
+        $count = 0;
+        session(['select' => 'wantToBooks']);
+        return view('TOP/searchBooks',compact('count'));
+    }
+
+
     //
     public function write(request $request)
     {

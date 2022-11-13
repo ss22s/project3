@@ -11,29 +11,41 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
     <title>本の検索</title>
-
+    <script>
+        $(function(){
+            $('button').click(function(){
+                alert("D");
+            });
+        })
+    </script>
     <!--TODO27:ここのコードきもすぎ-->
     @if(session('select') == 'search')
     <script>
         $(function() {
-            //$('#search').removeClass('select').addClass('notselect');
             if ($('.select').attr('id') != 'search') {
                 $('.select').addClass('notselect');
+                $('*').prop('disabled',false);
                 $('*').removeClass('select');
+                $('#search').removeClass('notselect');
                 $('#search').addClass('select');
+                $('button[name=search]').prop("disabled",true);
+                alert("A");
             }
-            alert("A");
+            
         });
     </script>
     @elseif(session('select') == 'wantToBooks')
     <script>
+        alert("E");
         $(function() {
             if ($('.select').attr('id') != 'wantToBooks') {
                 $('.select').addClass('notselect');
+                $('*').prop('disabled',false);
                 $('*').removeClass('select');
-                $('#search').addClass('select');
+                $('#wantToBooks').removeClass('notselect');
+                $('#wantToBooks').addClass('select');
+                alert("B");   
             }
-            alert("A");
         });
     </script>
     @elseif(session('select') == 'finishedBooks')
@@ -41,10 +53,12 @@
         $(function() {
             if ($('.select').attr('id') != 'finishedBooks') {
                 $('.select').addClass('notselect');
+                $('*').prop('disabled',false);
                 $('*').removeClass('select');
-                $('#search').addClass('select');
+                $('#finishedBooks').removeClass('notselect');
+                $('#finishedBooks').addClass('select');
             }
-            alert("A");
+            alert("c");
         });
     </script>
     @endif
@@ -56,20 +70,24 @@
     <div class="top">
         感想を書く本を選択します
         <div class="nav">
+            <form method="post">
+                <!--TODO27：formの縦向きになるのをなんとかする　ならないなら左か右に固定に変える-->
+                @csrf
             <div class="select" id="search">
-                <button type="submit" name="search"> 検索</button>
+                <button type="submit" name="search" disabled> 検索</button>
                 <!-- 検索 -->
             </div>
             <div class="notselect" id="wantToBooks">
-            <button type="submit" name="wantToBooks">読みたい本リストから選択</button>
+            <button type="submit" name="wantToBooks" formaction="selectFromwantToBooks">読みたい本リストから選択</button>
             </div>
             <div class="notselect" id="finishedBooks">
-                <button type="submit" name="finishedBooks">読んだ本リストから選択</button>
+                <button type="submit" name="finishedBooks" formaction="selectFromfinishedBooks">読んだ本リストから選択</button>
             </div>
 
             @if(session('page'))
             <h1>あああああああああ</h1>
             @endif
+            </form>
         </div>
     </div>
     <main>
