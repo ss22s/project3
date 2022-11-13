@@ -89,7 +89,14 @@ class BookController extends Controller
        $count++;
 
        session(['page' => 'true']);
+       session(['select' => 'search']);
         //return back()->with(compact('count','ok'));
+        return view('TOP/searchBooks',compact('count'));
+    }
+    
+    public function selectFromsearch(Request $request){
+        $count =0;
+        session(['select' => 'search']);
         return view('TOP/searchBooks',compact('count'));
     }
     public function selectFromwantToBooks(Request $request){
@@ -98,6 +105,11 @@ class BookController extends Controller
         return view('TOP/searchBooks',compact('count'));
     }
 
+    public function selectFromfinishedBooks(Request $request){
+        $count = 0;
+        session(['select' => 'finishedBooks']);
+        return view('TOP/searchBooks',compact('count'));
+    }
 
     //
     public function write(request $request)

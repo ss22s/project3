@@ -27,8 +27,11 @@
                 $('*').prop('disabled',false);
                 $('*').removeClass('select');
                 $('#search').removeClass('notselect');
+
                 $('#search').addClass('select');
                 $('button[name=search]').prop("disabled",true);
+
+                // $('#searchContent').show();
                 alert("A");
             }
             
@@ -41,9 +44,11 @@
             if ($('.select').attr('id') != 'wantToBooks') {
                 $('.select').addClass('notselect');
                 $('*').prop('disabled',false);
+
                 $('*').removeClass('select');
                 $('#wantToBooks').removeClass('notselect');
                 $('#wantToBooks').addClass('select');
+                $('button[name=wantToBooks]').prop("disabled",true);
                 alert("B");   
             }
         });
@@ -54,9 +59,11 @@
             if ($('.select').attr('id') != 'finishedBooks') {
                 $('.select').addClass('notselect');
                 $('*').prop('disabled',false);
+
                 $('*').removeClass('select');
                 $('#finishedBooks').removeClass('notselect');
                 $('#finishedBooks').addClass('select');
+                $('button[name=finishedBooks]').prop("disabled",true);
             }
             alert("c");
         });
@@ -70,11 +77,11 @@
     <div class="top">
         感想を書く本を選択します
         <div class="nav">
-            <form method="post">
+            <form class="form-inline" method="post">
                 <!--TODO27：formの縦向きになるのをなんとかする　ならないなら左か右に固定に変える-->
                 @csrf
-            <div class="select" id="search">
-                <button type="submit" name="search" disabled> 検索</button>
+            <div class="notselect" id="search">
+                <button type="submit" name="search" formaction="selectFromsearch" disabled> 検索</button>
                 <!-- 検索 -->
             </div>
             <div class="notselect" id="wantToBooks">
@@ -84,15 +91,15 @@
                 <button type="submit" name="finishedBooks" formaction="selectFromfinishedBooks">読んだ本リストから選択</button>
             </div>
 
-            @if(session('page'))
-            <h1>あああああああああ</h1>
-            @endif
             </form>
         </div>
     </div>
     <main>
         <!--TODO27:mainにsession selectが何かで表示するもの変化させる-->
-        @if(1==1)
+        
+        @if(session('select') == 'search')
+        <div id="searchContent">
+        AAAAAAAs
         <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13 など</h5>
         <h5>複数のワードで検索する際はワードの間にスペースを入れて下さい</h5>
         <form action="/searchBooks" method="post">
@@ -101,7 +108,24 @@
             <input type="hidden" name="count" value="{{$count}}">
             <button type="submit" name="search">検索</button>
         </form>
+        </div>
+        @if(session('page'))
+            <h1>あああああああああ</h1>
+            @endif
         @endif
+        <!--  style="display:none" -->
+        @if(session('select') == 'wantToBooks')
+        <div id="wantToBooksContent">
+        
+            BBBBBBBBB
+            @endif
+        </div>
+        @if(session('select') == 'finishedBooks')
+        <div id="finishedBooksContent">
+    CCCCCCCc
+    </div>
+    @endif
+        </div>
         の度アドグローブはコーポレートサイトのデザインをリニューアルいたしました！<br>
         今回はリニューアルでデザイン面などを主に担当した プロダクトデザイン部の伊東さん、フルモトさん にリニューアル時のあれこれについて、インタビューでお話を聞いてみました。
         <br>

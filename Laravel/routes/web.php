@@ -70,7 +70,10 @@ Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
     Route::get('/reportWrite','App\Http\Controllers\BookController@searchPageGet')->middleware('auth');
     
     Route::post('searchBooks','App\Http\Controllers\BookController@search');
+
+    Route::post('selectFromsearch','App\Http\Controllers\BookController@selectFromsearch');
     Route::post('selectFromwantToBooks','App\Http\Controllers\BookController@selectFromwantToBooks');
+    Route::post('selectFromfinishedBooks','App\Http\Controllers\BookController@selectFromfinishedBooks');
 
     Route::post('/reportRegister','App\Http\Controllers\BookController@register');
     //読みたい本リストに追加
@@ -80,3 +83,7 @@ Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
     ->name('book.detail');
+
+    Route::get('/MenuBar',function(){
+        return view('MenuBar');
+    });
