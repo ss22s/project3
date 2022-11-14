@@ -178,14 +178,13 @@ class BookController extends Controller
         //渡すメッセージ
         $message = "";
 
-        $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation',  'comment', 'open');
-        $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation',  'comment', 'open');
+        $bookID = $reportDatasGet['bookID'];
         //selectedComment
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
 
-        $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
-        $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
 
         //created_atの日付
         $today = date("Y-m-d H:i:s");
