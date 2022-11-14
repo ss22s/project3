@@ -57,7 +57,7 @@ class BookController extends Controller
         $count = $request->input('count');
 
         if (isset($_POST['search'])) {
-            
+
             $count = 0;
         }
         //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
@@ -86,36 +86,90 @@ class BookController extends Controller
         $searchGet = file_get_contents($searchURL);
 
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
-       $count++;
+        $count++;
 
-       session(['page' => 'true']);
-       session(['select' => 'search']);
-        //return back()->with(compact('count','ok'));
-        return view('TOP/searchBooks',compact('count'));
-    }
-    
-    public function selectFromsearch(Request $request){
-        $count =0;
+        session(['page' => 'true']);
         session(['select' => 'search']);
-        return view('TOP/searchBooks',compact('count'));
+        //return back()->with(compact('count','ok'));
+        return view('TOP/searchBooks', compact('count'));
     }
-    public function selectFromwantToBooks(Request $request){
+
+    public function selectFromsearch(Request $request)
+    {
+        $count = 0;
+        session(['select' => 'search']);
+        return view('TOP/searchBooks', compact('count'));
+    }
+
+    public function selectFromwantToBooks(Request $request)
+    {
         $count = 0;
         session(['select' => 'wantToBooks']);
-        return view('TOP/searchBooks',compact('count'));
+
+        $user = Auth::user();
+        if(DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()){
+        $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
+
+            $x = 0;
+            foreach ($wantBookGet as $wantBookSet) {
+                $bookID = $wantBookSet['bookID'];
+                $bookDataget = book::where('bookID', $bookID)->first();
+                $wantBooks[$x]['bookID'] = $bookID;
+
+                $wantBooks[$x]['book'] = $bookDataget['book'];
+                $wantBooks[$x]['auther'] = $bookDataget['auther'];
+                $wantBooks[$x]['genre'] = $bookDataget['genre'];
+
+                $x++;
+            }
+        } else {
+            $wantBooks = "";
+        }
+
+        
+        return view('TOP/searchBooks', compact('count', 'wantBooks'));
     }
 
-    public function selectFromfinishedBooks(Request $request){
+    public function selectFromfinishedBooks(Request $request)
+    {
         $count = 0;
         session(['select' => 'finishedBooks']);
-        return view('TOP/searchBooks',compact('count'));
+        $user = Auth::user();
+
+        if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
+            $x = $this->setZero($x);
+            foreach ($finishedBookDatasGet as $finishedBookDataGet) {
+
+                $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
+                $finishedBooks[$x]['bookID'] = $finishedBookDataGet['bookID'];
+                $finishedBooks[$x]['book'] = $bookDataget['bookID'];
+                $finishedBooks[$x]['auther'] = $bookDataget['auther'];
+                $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                //日付関連
+                $finishDateGet = explode(" ", $finishedBookDataGet['date']);
+                $finishDate = explode("-", $finishDateGet[0]);
+
+                $finishedBooks[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                
+                $x++;
+            }
+        } else {
+            $finishedBooks = "";
+        }
+
+        return view('TOP/searchBooks', compact('count','finishedBooks'));
     }
 
     //
     public function write(request $request)
     {
+        $bookID = request()->input('bookID');
+        $book = DB::table('books')->where('bookID',$bookID)->value('book');
+
+       // dd($bookID);
         $request->session()->forget('page');
-        return view('bookReportWrite');
+        return view('bookReportWrite',compact('bookID','book'));
     }
 
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
