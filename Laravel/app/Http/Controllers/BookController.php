@@ -51,12 +51,13 @@ class BookController extends Controller
         session(['select' => 'search']);
         return view('TOP/searchBooks', compact('count'));
     }
+
     public function search(Request $request)
     {
         //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
         $count = $request->input('count');
 
-        if (isset($_POST['search'])) {
+        if (isset($_POST['searchbook'])) {
 
             $count = 0;
         }
@@ -65,7 +66,7 @@ class BookController extends Controller
         $searchWordGet = $request->input('searchWord');
         $searchwords = preg_split("( |　)", $searchWordGet);
 
-        $baseURL = 'https://www.googleapis.com/books/v1/volumes?projection=lite&q';
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
 
         if (count($searchwords) == 1) {
             $searchURL = urldecode("$baseURL=$searchWordGet");
@@ -77,20 +78,51 @@ class BookController extends Controller
                     $wordsSet =  $searchword;
                     $isFirst = false;
                 } else {
-                    $wordsSet .= "+" .   $searchword;
+                    $wordsSet .= "+" .   $searchword . "+isbn:";
                 }
             }
+            $searchURL = urldecode("$baseURL=$searchWordGet");
         }
-        $searchURL = urldecode("$baseURL=$searchWordGet");
-
-        $searchGet = file_get_contents($searchURL);
-
+        //dd($searchURL);
+        $url = $searchURL . '&maxResults=40' . '&startIndex=' . $count;
+        $searchGet = file_get_contents($url);
+        $searchDatas = json_decode($searchGet);
+        //dd($searchDatas);
+        $bookDatasGet = $searchDatas->items;
+        dd($bookDatasGet);
+        
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
-        $count++;
 
+        $x= 0;
+        $bookData[] = "";
+        foreach ($bookDatasGet as $bookDataSet ) {
+            if(count($bookData) == 10){
+                break;
+            } else{
+            if(count($bookDataSet->volumeInfo->industryIdentifiers) == 1){
+                $count++;
+                continue;
+            } else if(count($bookDataSet->volumeInfo->industryIdentifiers) == 2){
+                $count++;
+                $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
+                if(count($bookDataSet->volumeInfo->authors) != 1){
+
+                }else{
+                $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
+                }
+                $bookData[$x][]
+
+                dd($bookDataSet->volumeInfo->title);
+            }
+            dd($bookDataSet->volumeInfo->title);
+        }
+        }
+
+
+        session(['searhWord'=> $searchWordGet]);
         session(['page' => 'true']);
         session(['select' => 'search']);
-        //return back()->with(compact('count','ok'));
+
         return view('TOP/searchBooks', compact('count'));
     }
 
