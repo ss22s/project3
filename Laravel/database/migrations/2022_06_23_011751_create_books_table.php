@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->integer('bookID');
             $table->string('book');
-            $table->string('auther');
+            $table->string('author');
             $table->string('genre');
         });
     }

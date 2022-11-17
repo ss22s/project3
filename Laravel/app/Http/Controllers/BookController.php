@@ -95,28 +95,30 @@ class BookController extends Controller
 
         $x= 0;
         $bookData[] = "";
-        // foreach ($bookDatasGet as $bookDataSet ) {
-        //     if(count($bookData) == 10){
-        //         break;
-        //     } else{
-        //     if(count($bookDataSet->volumeInfo->industryIdentifiers) == 1){
-        //         $count++;
-        //         continue;
-        //     } else if(count($bookDataSet->volumeInfo->industryIdentifiers) == 2){
-        //         $count++;
-        //         $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
-        //         if(count($bookDataSet->volumeInfo->authors) != 1){
+        foreach ($bookDatasGet as $bookDataSet ) {
+            if(count($bookData) == 10){
+                break;
+            } else{
+            if(count($bookDataSet->volumeInfo->industryIdentifiers) == 1){
+                $count++;
+                continue;
+            } else if(count($bookDataSet->volumeInfo->industryIdentifiers) == 2){
+                $count++;
+                $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
+                if(count($bookDataSet->volumeInfo->authors) != 1){
+                    foreach($bookDataSet->volumeInfo->authors as $author){
 
-        //         }else{
-        //         $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
-        //         }
-        //         $bookData[$x][]
+                    }
+                }else{
+                $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
+                }
+                //$bookData[$x][]
 
-        //         //dd($bookDataSet->volumeInfo->title);
-        //     }
-        //     dd($bookDataSet->volumeInfo->title);
-        // }
-        // }
+                //dd($bookDataSet->volumeInfo->title);
+            }
+            dd($bookDataSet->volumeInfo->title);
+        }
+        }
 
 
         session(['searhWord'=> $searchWordGet]);
@@ -169,7 +171,7 @@ class BookController extends Controller
         $user = Auth::user();
 
         if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
-            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->where('reviewID',null)->get();
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
 
