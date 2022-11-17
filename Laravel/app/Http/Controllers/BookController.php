@@ -96,9 +96,11 @@ class BookController extends Controller
         $x = 0;
         $bookData = array();
         foreach ($bookDatasGet as $bookDataSet) {
+            //Dataの数が10個になったら終わる
             if (count($bookData) == 10) {
                 break;
             } else {
+                //本かどうか確かめる　論文なら飛ばす
                 if (count($bookDataSet->volumeInfo->industryIdentifiers) == 1) {
                     $count++;
                     continue;
@@ -107,8 +109,11 @@ class BookController extends Controller
                     $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
 
                     //dd($bookDataSet);
-                    if (!(property_exists($bookDataSet, 'volumeInfo->authors'))) {
+                    //作者名がなければ不明で登録
+                    if (!(property_exists($bookDataSet, 'volumeInfo'))) {
+                        if(!(property_exists($bookDataSet->volumeInfo, 'volumeInfo'))){
                         $bookData[$x]['author'] = "不明";
+                        }
                     } else {
                         if (count($bookDataSet->volumeInfo->authors) != 1) {
                             $countAuthor = 0;
@@ -125,11 +130,11 @@ class BookController extends Controller
                         }
                        
                     }
-                    //dd($bookData);
+                    dd($bookData);
                     
                 }
                 dd($bookDataSet->volumeInfo->title);
-            }
+             }
         }
 
 
