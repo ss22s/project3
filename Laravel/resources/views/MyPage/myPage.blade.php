@@ -13,6 +13,7 @@
     <hr> -->
     @auth
     <div class="main">
+        <div class="page">マイページ</div><br>
         <div class="box1">
             <h1 class="menu">ユーザ情報</h1>
             <a class="link" href="/userInfo">ユーザ情報を編集する</a>
@@ -86,9 +87,10 @@
             </div>
         </div>
         @endauth
-        <div class="toppage">
+        <div>
             <a class="toppagelink" href="/">TOPへ</a>
         </div>
+        <br>
     </div>
 </body>
 

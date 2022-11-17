@@ -4,9 +4,18 @@
     text-align:center;
 }
 
+.page{
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
+}
+
 .main{
     display:inline-block;
     vertical-align:top;
+    padding-top:50px;
     text-align:center;
     background-color:#eee8e1;
     /* #eaddcd */
@@ -55,10 +64,7 @@
 .p3{
     text-align:right;
 }
-.toppage{
-    padding-top:50px;
-    right:30px;
-}
+
 .toppagelink{
     display:inline-block;
     text-decoration:none;

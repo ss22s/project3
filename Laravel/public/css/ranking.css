@@ -1,0 +1,36 @@
+.main{
+    min-height:100vh;
+    background-color:#eee8e1;
+    text-align:center;
+    /* #eaddcd */
+    /* #eee8e1 */
+}
+
+.page{
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
+}
+
+.box{
+    background-color:#efefef;
+    border:2px solid;
+    border-radius:30px;
+    padding:10px;
+    margin:30px auto;
+    width:300px;
+}
+
+.toppagelink{
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
