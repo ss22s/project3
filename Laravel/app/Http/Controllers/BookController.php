@@ -171,7 +171,7 @@ class BookController extends Controller
         $user = Auth::user();
 
         if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
-            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->where('reviewID',null)->get();
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
 
