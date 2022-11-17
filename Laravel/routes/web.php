@@ -80,3 +80,7 @@ Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
 
 //マイページ編集
 Route::post('/changeName','App\Http\Controllers\MyPageController@changeName');
+//退会処理
+Route::get('/userCancel',function(){
+    return view('MyPage/userCancel');
+});
