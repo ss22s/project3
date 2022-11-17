@@ -12,7 +12,7 @@
     @php
         $data = 0;
     @endphp
-
+    <div class="page">新着感想</div>
     @foreach($newBookReportDatas as $bookData)
         @if($data == 6)
             @break
@@ -32,8 +32,9 @@
             @endphp
         @endif
     @endforeach
-    <div class="toppage">
+    <div>
         <a class="toppagelink" href="/">TOPへ</a>
     </div>
+    <br>
 </body>
 </html>
