@@ -151,10 +151,11 @@
             感想を編集する場合は<a href="">ここ</a>から
 
             @else
-            <form action="/write" method="post">
                 @csrf
                 @foreach($finishedBooks as $finishedBook)
                 <p class="bookdata">
+                <form action="/write" method="post">
+                    @csrf
                     <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
                     <button class="buttoncss">
                         <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
@@ -162,9 +163,9 @@
                         <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
                         <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
                     </button>
+                </form>
                 </p>
                 @endforeach
-            </form>
             @endif
         </div>
         @endif
