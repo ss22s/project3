@@ -1,8 +1,18 @@
 body {
-    background-color: white;
+    background-color: #eee8e1;
 }
+
 h1 {
     text-align: center;
     padding: 20px;
     margin: 20px;
+}
+
+.faq {
+    background-color: #f4f2f0;
+    border: 1px solid #a48660;
+}
+
+.box {
+    background-color: #eee8e1;
 }

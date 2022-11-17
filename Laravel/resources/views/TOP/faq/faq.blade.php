@@ -13,36 +13,44 @@
     <h1>よくあるご質問</h1>
     <ul class="accordion-area">
         <li>
-            <section>
+            <div class="faq">
+            <!-- <section> -->
                 <h3 class="title">新規登録についての質問</h3>
                 <div class="box">
                     <p>あいうえおあいうえおあいうえお</p>
                 </div>
-            </section>
+            <!-- </section> -->
+            </div>
         </li>
         <li>
-            <section>
+            <div class="faq">
+            <!-- <section> -->
                 <h3 class="title">ログインについての質問</h3>
                 <div class="box">
                     <p>あいうえおあいうえおあいうえお</p>
                 </div>
-            </section>
+            <!-- </section> -->
+            </div>
         </li>
         <li>
-            <section>
+            <div class="faq">
+            <!-- <section> -->
                 <h3 class="title">マイページについての質問</h3>
                 <div class="box">
                     <p>あいうえおあいうえおあいうえお</p>
                 </div>
-            </section>
+            <!-- </section> -->
+            </div>
         </li>
         <li>
-            <section>
+            <div class="faq">
+            <!-- <section> -->
                 <h3 class="title">検索機能についての質問</h3>
                 <div class="box">
                     <p>あいうえおあいうえおあいうえお</p>
                 </div>
-            </section>
+            <!-- </section> -->
+            </div>
         </li>
     </ul>
 
