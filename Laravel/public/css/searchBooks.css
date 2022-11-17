@@ -75,8 +75,21 @@ form {
 /*読みたい本リストの部分CSS*/
 .bookdata{
     border: thick  #4D4B49 double;
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
     
 }
 .bookselectdata{
     display: inline-block;
+}
+
+.linecss{
+    border-width: 50px;
+}
+h2{
+    border-bottom: 10px solid;
+}
+.datacss{
+    text-align: left;
 }

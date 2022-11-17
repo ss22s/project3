@@ -109,10 +109,30 @@
         </div>
         <!-- TODO27:検索結果表示 page-->
         @if(session('page'))
-            <h1>あああああああああ</h1>
-            <form action="/searchBooks" method="post">
-                <input type="hidden">
+            <h2>検索結果</h2> 
+            @foreach($bookDatas as $bookData)
+            <form action="/write" method="post">
+                @csrf
+                <p class="bookdata">
+                <input type="hidden" name="id" value="{{$bookData['id']}}">
+                <button class="buttoncss datacss">
+                <b>本のタイトル：</b>{{$bookData['title']}}<br>
+                <b>著者：</b>{{$bookData['author']}}<br>
+                <b>カテゴリ：</b>{{$bookData['categories']}}<br>
+                <b>ISBN：</b>{{$bookData['isbn13']}}<br>
+                <b>説明：</b>{{$bookData['description']}}<br>
+                </button>
+                </p>
             </form>
+            @endforeach
+            <form  method="post">
+                @csrf
+                <input type="hidden" name="count" value="{{$count-1}}">
+                <button formaction="/before">前へ</button>
+                <input type="hidden" name="count" value="{{$count}}">
+                <button formaction="/next">次へ</button>
+            </form>
+
         @endif
         @endif
         <!--  style="display:none" -->
