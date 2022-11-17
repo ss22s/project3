@@ -78,7 +78,6 @@
         感想を書く本を選択します
         <div class="nav">
             <form class="form-inline" method="post">
-                <!--TODO27：formの縦向きになるのをなんとかする　ならないなら左か右に固定に変える-->
                 @csrf
                 <div class="notselect" id="search">
                     <button class="buttoncss" type="submit" name="search" formaction="selectFromsearch" disabled> 検索</button>
@@ -109,29 +108,37 @@
         </div>
         <!-- TODO27:検索結果表示 page-->
         @if(session('page'))
-            <h2>検索結果</h2> 
-            @foreach($bookDatas as $bookData)
-            <form action="/write" method="post">
-                @csrf
-                <p class="bookdata">
-                <input type="hidden" name="id" value="{{$bookData['id']}}">
+        <h2>検索結果</h2>
+        @foreach($bookDatas as $bookData)
+        <form action="/write" method="post">
+            @csrf
+            <p class="bookdata">
+                <input type="hidden" name="id" value="{{$bookData['isbn13']}}">
                 <button class="buttoncss datacss">
-                <b>本のタイトル：</b>{{$bookData['title']}}<br>
-                <b>著者：</b>{{$bookData['author']}}<br>
-                <b>カテゴリ：</b>{{$bookData['categories']}}<br>
-                <b>ISBN：</b>{{$bookData['isbn13']}}<br>
-                <b>説明：</b>{{$bookData['description']}}<br>
+                    <b>本のタイトル：</b>{{$bookData['title']}}<br>
+                    <b>著者：</b>{{$bookData['author']}}<br>
+                    <b>カテゴリ：</b>{{$bookData['categories']}}<br>
+                    <b>ISBN：</b>{{$bookData['isbn13']}}<br>
+                    <b>説明：</b>{{$bookData['description']}}<br>
                 </button>
-                </p>
-            </form>
-            @endforeach
-            <form  method="post">
+            </p>
+        </form>
+        @endforeach
+        <div class="pagebutton">
+            <form method="post">
                 @csrf
+                <input type="hidden" name="searchWord" value="{{session('searchWord')}}">
                 <input type="hidden" name="count" value="{{$count-1}}">
-                <button formaction="/before">前へ</button>
+                @if($count == 1)
+                <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ" disabled>
+                @else
+                <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ">
+                @endif
                 <input type="hidden" name="count" value="{{$count}}">
-                <button formaction="/next">次へ</button>
+                <b>{{$count}}</b>
+                <input type="submit" class="buttoncss" name="next" formaction="/next" value="次へ">
             </form>
+        </div>
 
         @endif
         @endif
@@ -171,21 +178,21 @@
             感想を編集する場合は<a href="">ここ</a>から
 
             @else
+            @csrf
+            @foreach($finishedBooks as $finishedBook)
+            <p class="bookdata">
+            <form action="/write" method="post">
                 @csrf
-                @foreach($finishedBooks as $finishedBook)
-                <p class="bookdata">
-                <form action="/write" method="post">
-                    @csrf
-                    <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
-                    <button class="buttoncss">
-                        <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
-                        <b>著者：</b>{{$finishedBook['author']}}<br>
-                        <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
-                        <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
-                    </button>
-                </form>
-                </p>
-                @endforeach
+                <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
+                <button class="buttoncss">
+                    <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
+                    <b>著者：</b>{{$finishedBook['author']}}<br>
+                    <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
+                    <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
+                </button>
+            </form>
+            </p>
+            @endforeach
             @endif
         </div>
         @endif

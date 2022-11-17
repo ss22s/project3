@@ -58,9 +58,15 @@ class BookController extends Controller
         //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
         $count = $request->input('count');
 
-        if (!(isset($_POST['next'])) || !(isset($_POST['before']))) {
+        if (!(isset($_POST['next'])) && !(isset($_POST['before']))) {
 
             $count = 0;
+        }
+        if($request->input('next') != null){
+            echo "NEXT";
+        }
+        if($request->input('before') != null){
+            $count= $count-2;
         }
         //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
@@ -102,6 +108,9 @@ class BookController extends Controller
 
         $x = 0;
         $bookDatas = array();
+        if(!($request->input('before') != null)){
+           
+        }
         $count++;
         foreach ($bookDatasGet as $bookDataSet) {
             //Dataの数が10個になったら終わる
@@ -109,19 +118,19 @@ class BookController extends Controller
             //     break;
             // } else {
             //本かどうか確かめる　論文なら飛ばす    本ならISBNとタイトルを取る
-            // if(property_exists($bookDataSet->volumeInfo,'industryIdentifiers')){
+            if(property_exists($bookDataSet->volumeInfo,'industryIdentifiers')){
 
-            // if (count($bookDataSet->volumeInfo->industryIdentifiers) == 1) {
+            if (count($bookDataSet->volumeInfo->industryIdentifiers) == 1) {
+            continue;
 
+            } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
 
-            // } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
-
-            // foreach ($bookDataSet->volumeInfo->industryIdentifiers as $isbn) {
-            //     if ($isbn->type == "ISBN_13") {
-            //         $bookDatas[$x]['isbn13'] = $isbn->identifier;
-            //     }
-            // }
-            $bookDatas[$x]['id'] = $bookDataSet->id;
+            foreach ($bookDataSet->volumeInfo->industryIdentifiers as $isbn) {
+                if ($isbn->type == "ISBN_13") {
+                    $bookDatas[$x]['isbn13'] = $isbn->identifier;
+                }
+            }
+            // $bookDatas[$x]['id'] = $bookDataSet->id;
             $bookDatas[$x]['title'] = $bookDataSet->volumeInfo->title;
 
             //本ならISBN
@@ -185,9 +194,9 @@ class BookController extends Controller
             } else {
                 $bookDatas[$x]['Thumbnail'] = $bookDataSet->volumeInfo->imageLinks->smallThumbnail;
             }
-            //}
+            }
 
-            //  }
+              }
             $x++;
         }
         // }
