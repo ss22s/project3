@@ -175,7 +175,7 @@ class BookController extends Controller
 
                 $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
                 $finishedBooks[$x]['bookID'] = $finishedBookDataGet['bookID'];
-                $finishedBooks[$x]['book'] = $bookDataget['bookID'];
+                $finishedBooks[$x]['book'] = $bookDataget['book'];
                 $finishedBooks[$x]['author'] = $bookDataget['author'];
                 $finishedBooks[$x]['genre'] = $bookDataget['genre'];
                 //日付関連
