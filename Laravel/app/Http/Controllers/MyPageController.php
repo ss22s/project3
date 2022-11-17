@@ -170,7 +170,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-
+        
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
             
@@ -197,10 +197,11 @@ class MyPageController extends Controller
                 //コメント
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
 
-                $x++;
+                
             }
+            $x++;
         }
-
+        dd($finishedBooks);
         return view('Mypage/finishedBooksPage',compact('finishedBooks'));
     }
 

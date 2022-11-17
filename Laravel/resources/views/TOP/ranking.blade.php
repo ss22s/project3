@@ -28,7 +28,7 @@
             <h4 class="ranking"><div class="rank1">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
-            <p>作者：{{$bookData['auther']}}</p>
+            <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
@@ -39,7 +39,7 @@
             <h4 class="ranking"><div class="rank2">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
-            <p>作者：{{$bookData['auther']}}</p>
+            <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
@@ -50,7 +50,7 @@
             <h4 class="ranking"><div class="rank3">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
-            <p>作者：{{$bookData['auther']}}</p>
+            <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
@@ -61,7 +61,7 @@
             <h4 class="ranking"><div>{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
-            <p>作者：{{$bookData['auther']}}</p>
+            <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
 
