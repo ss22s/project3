@@ -112,7 +112,7 @@ class BookController extends Controller
                 }
                 $bookData[$x][]
 
-                dd($bookDataSet->volumeInfo->title);
+                //dd($bookDataSet->volumeInfo->title);
             }
             dd($bookDataSet->volumeInfo->title);
         }
@@ -149,7 +149,7 @@ class BookController extends Controller
                 $wantBooks[$x]['bookID'] = $bookID;
 
                 $wantBooks[$x]['book'] = $bookDataget['book'];
-                $wantBooks[$x]['auther'] = $bookDataget['auther'];
+                $wantBooks[$x]['author'] = $bookDataget['author'];
                 $wantBooks[$x]['genre'] = $bookDataget['genre'];
 
                 $x++;
@@ -176,7 +176,7 @@ class BookController extends Controller
                 $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
                 $finishedBooks[$x]['bookID'] = $finishedBookDataGet['bookID'];
                 $finishedBooks[$x]['book'] = $bookDataget['bookID'];
-                $finishedBooks[$x]['auther'] = $bookDataget['auther'];
+                $finishedBooks[$x]['author'] = $bookDataget['author'];
                 $finishedBooks[$x]['genre'] = $bookDataget['genre'];
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);

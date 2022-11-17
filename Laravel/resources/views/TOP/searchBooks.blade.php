@@ -111,7 +111,7 @@
         @if(session('page'))
             <h1>あああああああああ</h1>
             <form action="/searchBooks" method="post">
-                <input type="hidden"
+                <input type="hidden">
             </form>
         @endif
         @endif
@@ -131,7 +131,7 @@
                         <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
                         <button class="buttoncss">
                             <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
-                            <b>著者：</b>{{$wantBook['auther']}}<br>
+                            <b>著者：</b>{{$wantBook['author']}}<br>
                             <b>ジャンル：</b>{{$wantBook['genre']}}
                         </button>
                     </p>
@@ -158,7 +158,7 @@
                     <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
                     <button class="buttoncss">
                         <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
-                        <b>著者：</b>{{$finishedBook['auther']}}<br>
+                        <b>著者：</b>{{$finishedBook['author']}}<br>
                         <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
                         <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
                     </button>

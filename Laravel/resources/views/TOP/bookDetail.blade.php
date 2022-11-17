@@ -2,7 +2,7 @@
 
 <div>
     タイトル：{{$bookData['book']}} <br>
-    著者：{{$bookData['auther']}} <br>
+    著者：{{$bookData['author']}} <br>
     ジャンル：{{$bookData['genre']}}
 </div>
 
