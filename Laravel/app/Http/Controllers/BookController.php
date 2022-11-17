@@ -23,9 +23,9 @@ class BookController extends Controller
             $selectedCommentsCount[$x]['number'] = "0";
             $x++;
         }
-        //TODO:本データを外部から取る場合、書き換え
+        //TODO27:本データを外部から取る場合、書き換え
         $bookData = Book::where('bookID', $bookID)->first();
-        //TODO:ひとこと感想TOP3.やり方が綺麗でない
+        //TODO27:ひとこと感想TOP3.やり方が綺麗でない
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
             $selectedCommentsExplode = explode(',', $selectedCommentGet['selectedComment']);
@@ -44,10 +44,164 @@ class BookController extends Controller
         return view('TOP/bookDetail', compact('bookData', 'selectedCommentsTop'));
     }
 
-    //
-    public function write()
+    public function searchPageGet(Request $request)
     {
-        return view('bookReportWrite');
+        $count = 0;
+        $request->session()->forget('page');
+        session(['select' => 'search']);
+        return view('TOP/searchBooks', compact('count'));
+    }
+
+    public function search(Request $request)
+    {
+        //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
+        $count = $request->input('count');
+
+        if (isset($_POST['searchbook'])) {
+
+            $count = 0;
+        }
+        //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
+
+        $searchWordGet = $request->input('searchWord');
+        $searchwords = preg_split("( |　)", $searchWordGet);
+
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+
+        if (count($searchwords) == 1) {
+            $searchURL = urldecode("$baseURL=$searchWordGet");
+        } else {
+            $isFirst = true;
+            $wordsSet = "";
+            foreach ($searchwords as $searchword) {
+                if ($isFirst) {
+                    $wordsSet =  $searchword;
+                    $isFirst = false;
+                } else {
+                    $wordsSet .= "+" .   $searchword . "+isbn:";
+                }
+            }
+            $searchURL = urldecode("$baseURL=$searchWordGet");
+        }
+        //dd($searchURL);
+        $url = $searchURL . '&maxResults=40' . '&startIndex=' . $count;
+        $searchGet = file_get_contents($url);
+        $searchDatas = json_decode($searchGet);
+        //dd($searchDatas);
+        $bookDatasGet = $searchDatas->items;
+        dd($bookDatasGet);
+        
+        //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
+
+        $x= 0;
+        $bookData[] = "";
+        // foreach ($bookDatasGet as $bookDataSet ) {
+        //     if(count($bookData) == 10){
+        //         break;
+        //     } else{
+        //     if(count($bookDataSet->volumeInfo->industryIdentifiers) == 1){
+        //         $count++;
+        //         continue;
+        //     } else if(count($bookDataSet->volumeInfo->industryIdentifiers) == 2){
+        //         $count++;
+        //         $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
+        //         if(count($bookDataSet->volumeInfo->authors) != 1){
+
+        //         }else{
+        //         $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
+        //         }
+        //         $bookData[$x][]
+
+        //         //dd($bookDataSet->volumeInfo->title);
+        //     }
+        //     dd($bookDataSet->volumeInfo->title);
+        // }
+        // }
+
+
+        session(['searhWord'=> $searchWordGet]);
+        session(['page' => 'true']);
+        session(['select' => 'search']);
+
+        return view('TOP/searchBooks', compact('count'));
+    }
+
+    public function selectFromsearch(Request $request)
+    {
+        $count = 0;
+        session(['select' => 'search']);
+        return view('TOP/searchBooks', compact('count'));
+    }
+
+    public function selectFromwantToBooks(Request $request)
+    {
+        $count = 0;
+        session(['select' => 'wantToBooks']);
+
+        $user = Auth::user();
+        if(DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()){
+        $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
+
+            $x = 0;
+            foreach ($wantBookGet as $wantBookSet) {
+                $bookID = $wantBookSet['bookID'];
+                $bookDataget = book::where('bookID', $bookID)->first();
+                $wantBooks[$x]['bookID'] = $bookID;
+
+                $wantBooks[$x]['book'] = $bookDataget['book'];
+                $wantBooks[$x]['author'] = $bookDataget['author'];
+                $wantBooks[$x]['genre'] = $bookDataget['genre'];
+
+                $x++;
+            }
+        } else {
+            $wantBooks = "";
+        }
+
+        
+        return view('TOP/searchBooks', compact('count', 'wantBooks'));
+    }
+
+    public function selectFromfinishedBooks(Request $request)
+    {
+        $count = 0;
+        session(['select' => 'finishedBooks']);
+        $user = Auth::user();
+
+        if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
+            $x = $this->setZero($x);
+            foreach ($finishedBookDatasGet as $finishedBookDataGet) {
+
+                $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
+                $finishedBooks[$x]['bookID'] = $finishedBookDataGet['bookID'];
+                $finishedBooks[$x]['book'] = $bookDataget['bookID'];
+                $finishedBooks[$x]['author'] = $bookDataget['author'];
+                $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                //日付関連
+                $finishDateGet = explode(" ", $finishedBookDataGet['date']);
+                $finishDate = explode("-", $finishDateGet[0]);
+
+                $finishedBooks[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                
+                $x++;
+            }
+        } else {
+            $finishedBooks = "";
+        }
+
+        return view('TOP/searchBooks', compact('count','finishedBooks'));
+    }
+
+    //
+    public function write(request $request)
+    {
+        $bookID = request()->input('bookID');
+        $book = DB::table('books')->where('bookID',$bookID)->value('book');
+
+       // dd($bookID);
+        $request->session()->forget('page');
+        return view('bookReportWrite',compact('bookID','book'));
     }
 
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'
@@ -56,14 +210,13 @@ class BookController extends Controller
         //渡すメッセージ
         $message = "";
 
-        $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation',  'comment', 'open');
-        $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation',  'comment', 'open');
+        $bookID = $reportDatasGet['bookID'];
         //selectedComment
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
 
-        $reportDatasGet = $request->only('book', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
-        $bookID = Book::where('book', $reportDatasGet['book'])->value('bookID');
+        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
 
         //created_atの日付
         $today = date("Y-m-d H:i:s");
@@ -164,8 +317,7 @@ class BookController extends Controller
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
         //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
-        
+
         return back()->with('Message', $flashMessage);
     }
 }
-

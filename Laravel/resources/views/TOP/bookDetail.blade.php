@@ -2,7 +2,7 @@
 
 <div>
     タイトル：{{$bookData['book']}} <br>
-    著者：{{$bookData['auther']}} <br>
+    著者：{{$bookData['author']}} <br>
     ジャンル：{{$bookData['genre']}}
 </div>
 
@@ -10,7 +10,7 @@
     <button>
         <a href="{{ route('book.wantBookAdd', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
     </button>
-    {{-- TODO:フラッシュメッセージらしいCSS 成功と失敗で分けてもいい --}}
+    {{-- TODO:フラッシュメッセージらしいCSS 成功と失敗で分けてもいい alertにするのか--}}
     @if(session('Message'))
     <div>
         {{session('Message')}}
