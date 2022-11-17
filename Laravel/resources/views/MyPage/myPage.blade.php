@@ -23,7 +23,7 @@
                 <b class="bold">メールアドレス：</b>{{Auth::user()->email}}
                 @endif <br>
                 <b class="bold">イチオシの一冊：</b>{{$myData['favoriteBook']}} <br>
-                <b class="bold">好きな著者：</b>{{$myData['favoriteAuther']}} <br>
+                <b class="bold">好きな著者：</b>{{$myData['favoriteAuthor']}} <br>
                 <b class="bold">自由記述欄：</b>{{$myData['freeText']}}
             </p>
         </div>

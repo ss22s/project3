@@ -100,6 +100,36 @@ class bookReportsSeeder extends Seeder
                 'comment' =>'名作と名高い「となりのトトロ」の感想です。子供だけではなく大人にも愛されるアニメである理由がよくわかりました。私は子供の頃からトトロが大好きでしたが、大人になってから再度見てみると、子供の視点では気付かなかった魅力を見つけることができました。子供も大人も楽しめる、そんな素晴らしいアニメです。どんな人にもおすすめできます！',
                 'Open' => 1,
                 'created_at' => '2022-07-07 15:22:00'
+            ],
+            [
+                'reviewID' => 9,
+                'id' => 1,
+                'bookID' => 1003,
+                'evaluation' => 1,
+                'selectedComment' => '3,5',
+                'comment' =>'おもしろい',
+                'Open' => 1,
+                'created_at' => '2022-10-14 11:22:00'
+            ],
+            [
+                'reviewID' => 10,
+                'id' => 1,
+                'bookID' => 1007,
+                'evaluation' => 1,
+                'selectedComment' => '4',
+                'comment' =>'kawaii',
+                'Open' => 1,
+                'created_at' => '2021-07-07 15:22:00'
+            ],
+            [
+                'reviewID' => 11,
+                'id' => 1,
+                'bookID' => 1005,
+                'evaluation' => 1,
+                'selectedComment' => '2',
+                'comment' =>'yeah',
+                'Open' => 1,
+                'created_at' => '2021-04-13 15:22:00'
             ]
         ]);
     }

@@ -31,7 +31,7 @@ class TopController extends Controller
         foreach($bookDatasGet as $bookDatas){
             $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
             $rankingDatas[$x]['book'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('book');
-            $rankingDatas[$x]['auther'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('auther');
+            $rankingDatas[$x]['author'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('author');
             $rankingDatas[$x]['genre'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('genre');
             $rankingDatas[$x]['count'] = bookReport::where('bookID',$rankingDatas[$x]['bookID'])->count();
             $x++;

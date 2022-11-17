@@ -17,6 +17,12 @@
         $rank = 1;
         @endphp
         @foreach($rankingDatas as $bookData)
+
+        <!-- 書影(※書影にもリンクつける) -->
+        <h4>{{$rank}}位：<a href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+        <p>作者：{{$bookData['author']}}</p>
+        <p>ジャンル：{{$bookData['genre']}}</p>
+
         @if($rank == 1)
         <div class="box1">
             <h4 class="ranking"><div class="rank1">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
@@ -58,6 +64,7 @@
             <p>作者：{{$bookData['auther']}}</p>
             <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
+
         @php
         $rank ++;
         @endphp
