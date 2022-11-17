@@ -44,7 +44,7 @@ class MyPageController extends Controller
         $myData['userEmail'] = $userDataGet['email'];
         //マイページ関連
         $myData['favoriteBook'] = $myPageDataGet['favoriteBook'];
-        $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
+        $myData['favoriteAuthor'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
 
 
@@ -179,7 +179,7 @@ class MyPageController extends Controller
             //本関連
             $finishedBooks[$x]['bookID'] = $finishedBooksSet['bookID'];
             $finishedBooks[$x]['book'] = book::where('bookID', $finishedBooksSet['bookID'])->value('book');
-            $finishedBooks[$x]['auther'] = book::where('bookID', $finishedBooksSet['bookID'])->value('auther');
+            $finishedBooks[$x]['author'] = book::where('bookID', $finishedBooksSet['bookID'])->value('author');
             $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
             //感想関連
             //TODO:感想はまだ書いてなくて読んだ本リストに追加だけした時、Keyを持たせて区別するかreviewのnullで判断するか
@@ -238,5 +238,15 @@ class MyPageController extends Controller
             return "つまらなかった";
         }
 
+    }
+
+    //ユーザー情報編集処理
+    public function changeName(Request $request){
+        DB::table('users')->where('id',Auth::id())->update(['name' => $request->name]);
+        DB::table('users')->where('id',Auth::id())->update(['email' => $request->email]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteBook' => $request->favoriteBook]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteAuthor' => $request->favoriteAuthor]);
+        DB::table('MyPages')->where('id',Auth::id())->update(['freeText' => $request->freeText]);
+        return back();
     }
 }

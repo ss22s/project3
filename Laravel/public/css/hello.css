@@ -1,0 +1,88 @@
+.main{
+    min-height:100vh;
+    text-align:center;
+    background-color:#eee8e1;
+    /* #eaddcd */
+    /* #eee8e1 */
+}
+
+.line{
+    border-top:2px dashed #D2B48C;
+}
+
+.mypage{
+    text-align:right;
+    position:absolute;
+    padding-top:80px;
+    right:200px;
+}
+.mypagelink{
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+
+.login{
+    text-align:right;
+    position:absolute;
+    padding-top:50px;
+    right:30px;
+}
+.loginlink{
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+
+.logout{
+    text-align:right;
+    position:absolute;
+    padding-top:2px;
+    right:30px;
+}
+.message{
+    padding:10px 30px;
+    margin:2px;
+    font-size:18px;
+    color:#454541;
+}
+.logoutlink{
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+
+
+.toppage{
+    padding-top:200px;
+}
+.toppagelink{
+    width:180px;
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 10px;
+    margin:10px;
+    font-size:30px;
+    color:#454541;
+    background:#efefef;
+    border:solid 3px#454541;
+    border-radius:10px;
+}

@@ -29,11 +29,27 @@ class finishedBooksSeeder extends Seeder
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
+            ['id' => 2,
             'bookID' => 1006,
             'date' => '2022-02-15 11:54:00',
             'reviewID' => 3,
             'delete' => 1]
+        ]);
+
+        \DB::table('finishedBooks')->insert([
+            ['id' => 1,
+            'bookID' => 1005,
+            'date' => '2022-03-18 16:24:00',
+            'reviewID' => null,
+            'delete' => null]
+        ]);
+
+        \DB::table('finishedBooks')->insert([
+            ['id' => 3,
+            'bookID' => 1002,
+            'date' => '2022-03-23 13:54:00',
+            'reviewID' => 2,
+            'delete' => null]
         ]);
     }
 }
