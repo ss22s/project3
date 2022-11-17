@@ -4,6 +4,7 @@
     text-align:center;
 }
 
+
 .open {
     cursor: pointer;
     /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */

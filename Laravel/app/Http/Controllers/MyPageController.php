@@ -201,7 +201,6 @@ class MyPageController extends Controller
             }
             $x++;
         }
-        dd($finishedBooks);
         return view('Mypage/finishedBooksPage', compact('finishedBooks'));
     }
 
