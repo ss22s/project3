@@ -10,14 +10,18 @@
     <link rel="stylesheet" type="text/css" href="css/faq.css">
 </head>
 <body>
+    <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
     <h1>よくあるご質問</h1>
     <ul class="accordion-area">
         <li>
             <div class="faq">
             <!-- <section> -->
-                <h3 class="title">新規登録についての質問</h3>
+                <h3 class="title">読んだ本はどこから登録できますか？</h3>
                 <div class="box">
-                    <p>あいうえおあいうえおあいうえお</p>
+                    <p>
+                        トップページの「感想を書く」ボタンをクリックすると読んだ本やその感想を登録することができるページに飛びます。<br>
+                        <a class="reportWriteLink" href="/reportWrite">こちら</a>から登録ページに飛ぶことができます。
+                    </p>
                 </div>
             <!-- </section> -->
             </div>
@@ -25,9 +29,12 @@
         <li>
             <div class="faq">
             <!-- <section> -->
-                <h3 class="title">ログインについての質問</h3>
+                <h3 class="title">自分の読んだ本はどこから確認できますか？</h3>
                 <div class="box">
-                    <p>あいうえおあいうえおあいうえお</p>
+                    <p>
+                        トップページの「マイページ」ボタンをクリックした先のマイページの「読んだ本リスト」から確認することができます。<br>
+                        <a class="myPageLink" href="/myPage">こちら</a>からマイページに飛ぶことができます。
+                    </p>
                 </div>
             <!-- </section> -->
             </div>
@@ -35,9 +42,12 @@
         <li>
             <div class="faq">
             <!-- <section> -->
-                <h3 class="title">マイページについての質問</h3>
+                <h3 class="title">ユーザー情報の変更はどこからできますか？</h3>
                 <div class="box">
-                    <p>あいうえおあいうえおあいうえお</p>
+                    <p>
+                        トップページの「マイページ」ボタンをクリックした先のマイページでユーザー情報を編集することができます。<br>
+                        <a class="myPageLink" href="/myPage">こちら</a>からマイページに飛ぶことができます。
+                    </p>
                 </div>
             <!-- </section> -->
             </div>
@@ -45,9 +55,12 @@
         <li>
             <div class="faq">
             <!-- <section> -->
-                <h3 class="title">検索機能についての質問</h3>
+                <h3 class="title">他のユーザーの感想はどこから見られますか？</h3>
                 <div class="box">
-                    <p>あいうえおあいうえおあいうえお</p>
+                    <p>
+                        トップページの「新着感想」ボタンをクリックすると他のユーザーの感想を見ることができます。<br>
+                        <a class="newBookReportLink" href="/newBookReport">こちら</a>から新着感想ページに飛ぶことができます。
+                    </p>
                 </div>
             <!-- </section> -->
             </div>
