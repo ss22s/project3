@@ -78,21 +78,23 @@ class BookController extends Controller
                     $wordsSet =  $searchword;
                     $isFirst = false;
                 } else {
-                    $wordsSet .= "+" .   $searchword . "+isbn:";
+                    $wordsSet .= "%2b" .   $searchword ;
                 }
             }
-            $searchURL = urldecode("$baseURL=$searchWordGet");
+            //dd($wordsSet);
+            $searchURL = urldecode("$baseURL=$wordsSet");
         }
         //dd($searchURL);
         $url = $searchURL . '&maxResults=40' . '&startIndex=' . $count;
         $searchGet = file_get_contents($url);
         $searchDatas = json_decode($searchGet);
-        //dd($searchDatas);
+        
         $bookDatasGet = $searchDatas->items;
-        //dd($bookDatasGet);
+        dd($bookDatasGet);
 
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
 
+        
         $x = 0;
         $bookData = array();
         foreach ($bookDatasGet as $bookDataSet) {
@@ -108,12 +110,11 @@ class BookController extends Controller
                     $count++;
                     $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
 
-                    //dd($bookDataSet);
+                    //dd($bookDataSet->volumeInfo->authors);
                     //作者名がなければ不明で登録
-                    if (!(property_exists($bookDataSet, 'volumeInfo'))) {
-                        if(!(property_exists($bookDataSet->volumeInfo, 'volumeInfo'))){
+                    if (!(property_exists($bookDataSet->volumeInfo, 'authors'))) {
                         $bookData[$x]['author'] = "不明";
-                        }
+                        
                     } else {
                         if (count($bookDataSet->volumeInfo->authors) != 1) {
                             $countAuthor = 0;
@@ -128,11 +129,27 @@ class BookController extends Controller
                         } else {
                             $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
                         }
-                       
                     }
-                    dd($bookData);
-                    
+                    if(!(property_exists($bookDataSet->volumeInfo,'categories'))){
+                        $bookData[$x]['categories'] = "不明";
+                    }else{
+                        if (count($bookDataSet->volumeInfo->categories) != 1) {
+                            $countCategories = 0;
+                            foreach ($bookDataSet->volumeInfo->categories as $categories) {
+                               
+                                if ($countCategories == 0) {
+                                    $bookData[$x]['categories'] = $categories;
+                                    
+                                }else{
+                                    $bookData[$x]['categories'] .= "," . $categories;
+                                }
+                            }
+                        } else {
+                            $bookData[$x]['categories'] = $bookDataSet->volumeInfo->categories[0];
+                        }
+                    }                    
                 }
+                dd($bookData);
                 dd($bookDataSet->volumeInfo->title);
              }
         }
