@@ -27,7 +27,7 @@
     <div>
         
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleBook">
-            感想の詳細
+            ユーザー情報の編集
         </button>
 
         <!-- Modal -->
@@ -59,7 +59,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 </html>
