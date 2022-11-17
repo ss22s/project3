@@ -89,39 +89,56 @@ class BookController extends Controller
         $searchDatas = json_decode($searchGet);
         //dd($searchDatas);
         $bookDatasGet = $searchDatas->items;
-        dd($bookDatasGet);
-        
+        //dd($bookDatasGet);
+
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
 
-        $x= 0;
-        $bookData[] = "";
-        foreach ($bookDatasGet as $bookDataSet ) {
-            if(count($bookData) == 10){
+        $x = 0;
+        $bookData = array();
+        foreach ($bookDatasGet as $bookDataSet) {
+            //Dataの数が10個になったら終わる
+            if (count($bookData) == 10) {
                 break;
-            } else{
-            if(count($bookDataSet->volumeInfo->industryIdentifiers) == 1){
-                $count++;
-                continue;
-            } else if(count($bookDataSet->volumeInfo->industryIdentifiers) == 2){
-                $count++;
-                $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
-                if(count($bookDataSet->volumeInfo->authors) != 1){
-                    foreach($bookDataSet->volumeInfo->authors as $author){
+            } else {
+                //本かどうか確かめる　論文なら飛ばす
+                if (count($bookDataSet->volumeInfo->industryIdentifiers) == 1) {
+                    $count++;
+                    continue;
+                } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
+                    $count++;
+                    $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
 
+                    //dd($bookDataSet);
+                    //作者名がなければ不明で登録
+                    if (!(property_exists($bookDataSet, 'volumeInfo'))) {
+                        if(!(property_exists($bookDataSet->volumeInfo, 'volumeInfo'))){
+                        $bookData[$x]['author'] = "不明";
+                        }
+                    } else {
+                        if (count($bookDataSet->volumeInfo->authors) != 1) {
+                            $countAuthor = 0;
+                            foreach ($bookDataSet->volumeInfo->authors as $author) {
+                                if ($countAuthor == 0) {
+                                    $bookData[$x]['author'] = $author;
+                                    
+                                }else{
+                                    $bookData[$x]['author'] .= "," . $author;
+                                }
+                            }
+                        } else {
+                            $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
+                        }
+                       
                     }
-                }else{
-                $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
+                    dd($bookData);
+                    
                 }
-                //$bookData[$x][]
-
-                //dd($bookDataSet->volumeInfo->title);
-            }
-            dd($bookDataSet->volumeInfo->title);
-        }
+                dd($bookDataSet->volumeInfo->title);
+             }
         }
 
 
-        session(['searhWord'=> $searchWordGet]);
+        session(['searhWord' => $searchWordGet]);
         session(['page' => 'true']);
         session(['select' => 'search']);
 
@@ -141,8 +158,8 @@ class BookController extends Controller
         session(['select' => 'wantToBooks']);
 
         $user = Auth::user();
-        if(DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()){
-        $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
+        if (DB::table('wantToBooks')->where('id', $user['id'])->where('finished', null)->exists()) {
+            $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
 
             $x = 0;
             foreach ($wantBookGet as $wantBookSet) {
@@ -160,7 +177,7 @@ class BookController extends Controller
             $wantBooks = "";
         }
 
-        
+
         return view('TOP/searchBooks', compact('count', 'wantBooks'));
     }
 
@@ -170,8 +187,8 @@ class BookController extends Controller
         session(['select' => 'finishedBooks']);
         $user = Auth::user();
 
-        if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
-            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->where('reviewID',null)->get();
+        if (DB::table('finishedBooks')->where('id', $user['id'])->where('reviewID', null)->exists()) {
+            $finishedBookDatasGet = finishedBook::where('id', $user['id'])->where('reviewID', null)->get();
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
 
@@ -185,25 +202,25 @@ class BookController extends Controller
                 $finishDate = explode("-", $finishDateGet[0]);
 
                 $finishedBooks[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
-                
+
                 $x++;
             }
         } else {
             $finishedBooks = "";
         }
 
-        return view('TOP/searchBooks', compact('count','finishedBooks'));
+        return view('TOP/searchBooks', compact('count', 'finishedBooks'));
     }
 
     //
     public function write(request $request)
     {
         $bookID = request()->input('bookID');
-        $book = DB::table('books')->where('bookID',$bookID)->value('book');
+        $book = DB::table('books')->where('bookID', $bookID)->value('book');
 
-       // dd($bookID);
+        // dd($bookID);
         $request->session()->forget('page');
-        return view('bookReportWrite',compact('bookID','book'));
+        return view('bookReportWrite', compact('bookID', 'book'));
     }
 
     //'reviewID' => 7以降,'UserID'、'bookID'、'evaluation'、'selectedComment'、'comment'、'Open'、'created_at'

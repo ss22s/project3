@@ -14,7 +14,7 @@
     <script>
         $(function() {
             $('button').click(function() {
-                alert("D");
+                //alert("D");
             });
         })
     </script>
