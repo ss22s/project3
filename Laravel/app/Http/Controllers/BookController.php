@@ -170,7 +170,7 @@ class BookController extends Controller
 
         if(DB::table('finishedBooks')->where('id',$user['id'])->where('reviewID',null)->exists()){
             $finishedBookDatasGet = finishedBook::where('id', $user['id'])->get();
-            $x = $this->setZero($x);
+            $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
 
                 $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
