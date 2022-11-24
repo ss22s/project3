@@ -57,16 +57,24 @@ class BookController extends Controller
     {
         //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
         $count = $request->input('count');
+        $pageCount = $request->input('pageCount');
 
         if (!(isset($_POST['next'])) && !(isset($_POST['before']))) {
-
+            $pageCount = 1;
             $count = 0;
         }
         if($request->input('next') != null){
             echo "NEXT";
+            $pageCount++;
+           
+            
         }
         if($request->input('before') != null){
-            $count= $count-2;
+            echo "BEFORE";
+            $pageCount--;
+            $count= ($count-20);
+            echo $count;
+            
         }
         //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
@@ -95,14 +103,14 @@ class BookController extends Controller
         }
         //dd($searchURL);
 
-        $url = $searchURL . '&maxResults=10' . '&startIndex=' . $count;
+        $url = $searchURL . '&maxResults=30' . '&startIndex=' . $count+1;
         $searchGet = file_get_contents($url);
         echo $url;
         $searchDatas = json_decode($searchGet);
 
         $bookDatasGet = $searchDatas->items;
         //dd($searchDatas);
-        // dd($bookDatasGet);
+        //dd($bookDatasGet);
 
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
 
@@ -111,12 +119,13 @@ class BookController extends Controller
         if(!($request->input('before') != null)){
            
         }
-        $count++;
+        //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
             //Dataの数が10個になったら終わる
-            // if (count($bookDatas) == 10) {
-            //     break;
-            // } else {
+            if (count($bookDatas) == 10) {
+                echo $count;
+                break;
+            } else {
             //本かどうか確かめる　論文なら飛ばす    本ならISBNとタイトルを取る
             if(property_exists($bookDataSet->volumeInfo,'industryIdentifiers')){
 
@@ -124,7 +133,8 @@ class BookController extends Controller
             continue;
 
             } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
-
+                $count++;
+                $bookDatas[$x]['num'] = $count;
             foreach ($bookDataSet->volumeInfo->industryIdentifiers as $isbn) {
                 if ($isbn->type == "ISBN_13") {
                     $bookDatas[$x]['isbn13'] = $isbn->identifier;
@@ -199,7 +209,7 @@ class BookController extends Controller
               }
             $x++;
         }
-        // }
+         }
 
         //dd($bookDatas);
 
@@ -207,7 +217,7 @@ class BookController extends Controller
         session(['page' => 'true']);
         session(['select' => 'search']);
 
-        return view('TOP/searchBooks', compact('count', 'bookDatas'));
+        return view('TOP/searchBooks', compact('count', 'bookDatas','pageCount'));
     }
 
     public function selectFromsearch(Request $request)
@@ -282,8 +292,25 @@ class BookController extends Controller
     //
     public function write(request $request)
     {
-        $bookID = request()->input('bookID');
-        $book = DB::table('books')->where('bookID', $bookID)->value('book');
+        $bookID = request()->input('isbn');
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+
+        $searchwords = 'isbn:' . $bookID;
+        $URL = urldecode("$baseURL=$searchwords");
+        $searchGet = file_get_contents($URL);
+        echo $URL;
+        $searchDatas = json_decode($searchGet);
+        //dd($searchDatas);
+
+        $bookDatasGet = $searchDatas->items;
+        //dd($bookDatasGet);
+        foreach ($bookDatasGet as $bookDatasSet) {
+            $book = $bookDatasSet->volumeInfo->title;
+        }
+        
+        //$bookID = request()->input('bookID');
+        
+        //$book = DB::table('books')->where('bookID', $bookID)->value('book');
 
         // dd($bookID);
         $request->session()->forget('page');

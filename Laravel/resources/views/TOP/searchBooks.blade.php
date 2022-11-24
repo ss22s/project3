@@ -16,6 +16,7 @@
             $('button').click(function() {
                 //alert("D");
             });
+            $pageCount = $count / 10; 
         })
     </script>
     <!--TODO27:ここのコードきもすぎ-->
@@ -113,8 +114,9 @@
         <form action="/write" method="post">
             @csrf
             <p class="bookdata">
-                <input type="hidden" name="id" value="{{$bookData['isbn13']}}">
+                <input type="hidden" name="isbn" value="{{$bookData['isbn13']}}">
                 <button class="buttoncss datacss">
+                    <b>本の番号：</b>{{$bookData['num']}}<br>
                     <b>本のタイトル：</b>{{$bookData['title']}}<br>
                     <b>著者：</b>{{$bookData['author']}}<br>
                     <b>カテゴリ：</b>{{$bookData['categories']}}<br>
@@ -129,13 +131,14 @@
                 @csrf
                 <input type="hidden" name="searchWord" value="{{session('searchWord')}}">
                 <input type="hidden" name="count" value="{{$count-1}}">
+                <input type="hidden" name="pageCount" value="{{$pageCount}}">
                 @if($count == 1)
                 <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ" disabled>
                 @else
                 <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ">
                 @endif
                 <input type="hidden" name="count" value="{{$count}}">
-                <b>{{$count}}</b>
+                <b>{{$pageCount}}</b>
                 <input type="submit" class="buttoncss" name="next" formaction="/next" value="次へ">
             </form>
         </div>
