@@ -11,23 +11,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     
-    <title>ユーザ情報</title>
+    <title>退会</title>
 </head>
 <body>
 
-    <h4>ユーザ情報編集</h4>
-        <b>ユーザ名：</b>{{$userData['name']}} <br>
-        <b>メールアドレス：</b>{{$userData['email']}} <br>
-        <b>イチオシの一冊：</b>{{$userData['favoriteBook']}} <br>
-        <b>好きな著者：</b>{{$userData['favoriteAuthor']}} <br>
-        <b>自由記述欄：</b>{{$userData['freeText']}}<br>
+    <h2>退会ページ</h2>
+    退会すると全ての情報が失われます。<br>
+    失われた情報は元に戻せませんが、本当に退会しますか？
 
-        <!-- モーダルを開くボタン・リンク -->
-    <!--TODO:foreach文で出す際にdata-targetとidを感想のIDにする-->
-    <div>
-        
+    <div>     
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleBook">
-            ユーザー情報の編集
+            退会する
         </button>
 
         <!-- Modal -->
@@ -35,32 +29,25 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">感想</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">退会</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         {{--内容--}}
-                        <form action="/changeName" method="post" accept-charset="UTF-8">
-		                {{ csrf_field() }}
-                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"><br>
-                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"><br>
-                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"><br>
-                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"><br>
-                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"><br>
+                        全ての情報が失われます。<br>
+                        本当に退会しますか？
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">中止</button>
+                    <button type="submit" class="btn btn-primary">退会する</button>
                     </form>
                 </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <a href="/userCancel">退会したい</a>
 
 </body>
 </html>

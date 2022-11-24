@@ -30,7 +30,10 @@
             @csrf
             <div>
                 <label>本のタイトル：</label>
-                <input type="text" name="book" placeholder="例：となりのトトロ">
+                <input type="hidden" name="bookID" value="{{$bookID}}">
+                <!-- <input type="text" name="book" placeholder="例：となりのトトロ"> -->
+                <b>{{$book}}</b>
+                <button method="get" formaction="/selectBooks">変更する</button>
             </div>
             <br>
             <div>

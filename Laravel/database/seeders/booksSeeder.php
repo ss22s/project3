@@ -23,49 +23,49 @@ class booksSeeder extends Seeder
         \DB::table('books')->insert([
             ['bookID' => 1001,
             'book' => 'となりのトトロ',
-            'auther' => 'スタジオジブリ',
+            'author' => 'スタジオジブリ',
             'genre' => '児童書'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1002,
             'book' => 'カラフル',
-            'auther' => '森絵都',
+            'author' => '森絵都',
             'genre' => '児童書'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1003,
             'book' => 'ハリーポッターと賢者の石',
-            'auther' => 'J・K・ローリング',
+            'author' => 'J・K・ローリング',
             'genre' => '児童書'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1004,
             'book' => '基本情報技術者過去問題集',
-            'auther' => '技術評論社',
+            'author' => '技術評論社',
             'genre' => '問題集'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1005,
             'book' => 'Myojo',
-            'auther' => '集英社',
+            'author' => '集英社',
             'genre' => '雑誌'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1006,
             'book' => 'カードキャプターさくら',
-            'auther' => 'CLAMP',
+            'author' => 'CLAMP',
             'genre' => '少女漫画'],
         ]);
 
         \DB::table('books')->insert([
             ['bookID' => 1007,
             'book' => 'わたしの美しい庭',
-            'auther' => '凪良ゆう',
+            'author' => '凪良ゆう',
             'genre' => '小説・文芸'],
         ]);
     }

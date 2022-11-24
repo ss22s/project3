@@ -13,6 +13,7 @@
     <hr> -->
     @auth
     <div class="main">
+        <div class="page">マイページ</div><br>
         <div class="box1">
             <h1 class="menu">ユーザ情報</h1>
             <a class="link" href="/userInfo">ユーザ情報を編集する</a>
@@ -22,7 +23,7 @@
                 <b class="bold">メールアドレス：</b>{{Auth::user()->email}}
                 @endif <br>
                 <b class="bold">イチオシの一冊：</b>{{$myData['favoriteBook']}} <br>
-                <b class="bold">好きな著者：</b>{{$myData['favoriteAuther']}} <br>
+                <b class="bold">好きな著者：</b>{{$myData['favoriteAuthor']}} <br>
                 <b class="bold">自由記述欄：</b>{{$myData['freeText']}}
             </p>
         </div>
@@ -86,9 +87,10 @@
             </div>
         </div>
         @endauth
-        <div class="toppage">
+        <div>
             <a class="toppagelink" href="/">TOPへ</a>
         </div>
+        <br>
     </div>
 </body>
 
