@@ -65,6 +65,19 @@
             <!-- </section> -->
             </div>
         </li>
+        <li>
+            <div class="faq">
+            <!-- <section> -->
+                <h3 class="title">感想が書かれている本の詳細はどこから確認できますか？</h3>
+                <div class="box">
+                    <p>
+                        新着感想ページで感想が書かれている本のタイトルをクリックすると、本の詳細を確認することができます。<br>
+                        <a class="newBookReportLink" href="/newBookReport">こちら</a>から新着感想ページに飛ぶことができます。
+                    </p>
+                </div>
+            <!-- </section> -->
+            </div>
+        </li>
     </ul>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
