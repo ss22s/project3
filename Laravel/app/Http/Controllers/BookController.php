@@ -48,7 +48,9 @@ class BookController extends Controller
     {
         $count = 0;
         $request->session()->forget('page');
-        $request->session()->forget('searchWord');
+        $request->session()->forget('searchTitle');
+        $request->session()->forget('searchAuthor');
+        $request->session()->forget('searchISBN');
         session(['select' => 'search']);
         return view('TOP/searchBooks', compact('count'));
     }
@@ -64,48 +66,76 @@ class BookController extends Controller
             $count = 0;
         }
         if($request->input('next') != null){
-            echo "NEXT";
+            //echo "NEXT";
             $pageCount++;
-           
+            $count = ($count+10);
             
         }
         if($request->input('before') != null){
-            echo "BEFORE";
+            // echo "BEFORE";
             $pageCount--;
-            $count= ($count-20);
-            echo $count;
+            $count = ($count-10);
+            if($count < 0){
+                $count = 0;
+            }
             
         }
         //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
-        $searchWordGet = $request->input('searchWord');
+        // $searchWordGet = $request->input('searchWord');
+        $searchTitleGet = $request->input('searchTitle');
+        $searchAuthorGet = $request->input('searchAuthor');
+        $searchISBNGet = $request->input('searchISBN');
 
+        $params  = array();
+        if($searchTitleGet != null){
+            $params += array('intitle'=>$searchTitleGet);
+        }
+        if($searchAuthorGet != null){
+            $params += array('inauthor'=>$searchAuthorGet);
+        }
+        if($searchISBNGet != null){
+            $params += array('isbn'=>$searchISBNGet);
+        }
+        //dd($param);
 
-        $searchwords = preg_split("( |　)", $searchWordGet);
-
-        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
-
-        if (count($searchwords) == 1) {
-            $searchURL = urldecode("$baseURL=$searchWordGet");
-        } else {
-            $isFirst = true;
-            $wordsSet = "";
-            foreach ($searchwords as $searchword) {
-                if ($isFirst) {
-                    $wordsSet =  $searchword;
-                    $isFirst = false;
-                } else {
-                    $wordsSet .= "%2b" .   $searchword;
-                }
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q=';
+        $foreachCount = 0;
+        $searchURL ="";
+        foreach ($params as $key => $value) {
+            if($foreachCount == 0){
+                $searchURL = $baseURL . $key . ':' . $value ; 
+            }else{
+                $searchURL .= '+' . $key . ':' . $value ;
             }
-            //dd($wordsSet);
-            $searchURL = urldecode("$baseURL=$wordsSet");
+            $foreachCount++;
         }
         //dd($searchURL);
+        // $searchwords = preg_split("( |　)", $searchWordGet);
 
-        $url = $searchURL . '&maxResults=30' . '&startIndex=' . $count+1;
+        // $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+
+        // if (count($searchwords) == 1) {
+        //     $searchURL = urldecode("$baseURL=$searchWordGet");
+        // } else {
+        //     $isFirst = true;
+        //     $wordsSet = "";
+        //     foreach ($searchwords as $searchword) {
+        //         if ($isFirst) {
+        //             $wordsSet =  $searchword;
+        //             $isFirst = false;
+        //         } else {
+        //             $wordsSet .= "%2b" .   $searchword;
+        //         }
+        //     }
+        //     //dd($wordsSet);
+        //     $searchURL = urldecode("$baseURL=$wordsSet");
+        // }
+        //dd($searchURL);
+
+        $url = $searchURL . '&maxResults=10' . '&startIndex=' . $count;
         $searchGet = file_get_contents($url);
-        echo $url;
+        // echo $url;
         $searchDatas = json_decode($searchGet);
 
         $bookDatasGet = $searchDatas->items;
@@ -116,16 +146,17 @@ class BookController extends Controller
 
         $x = 0;
         $bookDatas = array();
+        $bookcount = 0;
         if(!($request->input('before') != null)){
-           
+           //?
         }
         //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
             //Dataの数が10個になったら終わる
-            if (count($bookDatas) == 10) {
-                echo $count;
-                break;
-            } else {
+            // if (count($bookDatas) == 10) {
+            //     echo $count;
+            //     break;
+            // } else {
             //本かどうか確かめる　論文なら飛ばす    本ならISBNとタイトルを取る
             if(property_exists($bookDataSet->volumeInfo,'industryIdentifiers')){
 
@@ -133,8 +164,8 @@ class BookController extends Controller
             continue;
 
             } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
-                $count++;
-                $bookDatas[$x]['num'] = $count;
+                // $bookcount++;
+                // $bookDatas[$x]['num'] = $bookcount;
             foreach ($bookDataSet->volumeInfo->industryIdentifiers as $isbn) {
                 if ($isbn->type == "ISBN_13") {
                     $bookDatas[$x]['isbn13'] = $isbn->identifier;
@@ -206,14 +237,17 @@ class BookController extends Controller
             }
             }
 
-              }
+            //   }
             $x++;
         }
          }
 
         //dd($bookDatas);
 
-        session(['searchWord' => $searchWordGet]);
+        // session(['searchWord' => $searchWordGet]);
+        session(['searchTitle' => $searchTitleGet]);
+        session(['searchAuthor' => $searchAuthorGet]);
+        session(['searchISBN' => $searchISBNGet]);
         session(['page' => 'true']);
         session(['select' => 'search']);
 
@@ -293,7 +327,7 @@ class BookController extends Controller
     public function write(request $request)
     {
         $bookID = request()->input('isbn');
-        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q=';
 
         $searchwords = 'isbn:' . $bookID;
         $URL = urldecode("$baseURL=$searchwords");

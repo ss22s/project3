@@ -16,7 +16,20 @@
             $('button').click(function() {
                 //alert("D");
             });
-            $pageCount = $count / 10; 
+            if($('#searchTitle').val() != null || $('#searchAuthor').val() != null || $('#searchISBN').val() != null){
+                $('button[name=searchBooks]').prop("disabled", false);
+            };
+
+            // $pageCount = $count / 10; 
+            $(document).on('change', '.searchwords', function(e) {
+                if ($('#searchTitle').val() != null || $('#searchAuthor').val() != null || $('#searchISBN').val() != null) {
+                    
+                    $('button[name=searchBooks]').prop("disabled", false);
+                }
+                
+                // if()
+            });
+
         })
     </script>
     <!--TODO27:ここのコードきもすぎ-->
@@ -98,25 +111,36 @@
         @if(session('select') == 'search')
         <div id="searchContent">
             <h3>検索する</h3>
-            <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13 など</h5>
-            <h5>複数のワードで検索する際はワードの間にスペースを入れて下さい</h5>
-            <form action="/searchBooks" method="post">
+            <!-- <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13 など</h5>
+            <h5>複数のワードで検索する際はワードの間にスペースを入れて下さい</h5> -->
+            <!-- <form action="/searchBooks" method="post">
                 @csrf
                 <input type="text" name="searchWord" value="{{session('searchWord')}}" placeholder="例:となりのトトロ" required>
                 <input type="hidden" name="count" value="{{$count}}">
                 <button type="submit" name="searchbook">検索</button>
+            </form> -->
+            <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13</h5>
+            <form action="/searchBooks" method="post">
+                @csrf
+                <b>本のタイトル</b> &nbsp;<input class="searchwords" id="searchTitle" type="text" name="searchTitle" value="{{session('searchTitle')}}" placeholder="例:こころ"><br>
+                <b>著者</b> &nbsp;<input class="searchwords" id="searchAuthor" type="text" name="searchAuthor" value="{{session('searchAuthor')}}" placeholder="例:夏目漱石"><br>
+                <b>ISBN</b> &nbsp;<input class="searchwords" id="searchISBN" type="text" name="searchISBN" value="{{session('searchISBN')}}" placeholder="例:9784903620305"><br>
+                <button type="submit" name="searchBooks" disabled>検索</button>
             </form>
         </div>
         <!-- TODO27:検索結果表示 page-->
         @if(session('page'))
         <h2>検索結果</h2>
+        @if($bookDatas == [])
+        <b>何も見つかりませんでした。検索ワードを変えて検索してみてください</b>
+        @else
         @foreach($bookDatas as $bookData)
         <form action="/write" method="post">
             @csrf
             <p class="bookdata">
                 <input type="hidden" name="isbn" value="{{$bookData['isbn13']}}">
                 <button class="buttoncss datacss">
-                    <b>本の番号：</b>{{$bookData['num']}}<br>
+
                     <b>本のタイトル：</b>{{$bookData['title']}}<br>
                     <b>著者：</b>{{$bookData['author']}}<br>
                     <b>カテゴリ：</b>{{$bookData['categories']}}<br>
@@ -127,21 +151,24 @@
         </form>
         @endforeach
         <div class="pagebutton">
-            <form method="post">
+            <form method="post" class="form-inline">
                 @csrf
-                <input type="hidden" name="searchWord" value="{{session('searchWord')}}">
-                <input type="hidden" name="count" value="{{$count-1}}">
+                <input type="hidden" name="searchTitle" value="{{session('searchTitle')}}">
+                <input type="hidden" name="searchAuthor" value="{{session('searchAuthor')}}">
+                <input type="hidden" name="searchISBN" value="{{session('searchISBN')}}">
+                <input type="hidden" name="count" value="{{$count}}">
                 <input type="hidden" name="pageCount" value="{{$pageCount}}">
-                @if($count == 1)
+                @if($pageCount == 1)
                 <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ" disabled>
                 @else
                 <input type="submit" class="buttoncss" name="before" formaction="/before" value="前へ">
                 @endif
-                <input type="hidden" name="count" value="{{$count}}">
+                <!-- <input type="hidden" name="count" value="{{$count}}"> -->
                 <b>{{$pageCount}}</b>
                 <input type="submit" class="buttoncss" name="next" formaction="/next" value="次へ">
             </form>
         </div>
+        @endif
 
         @endif
         @endif
@@ -183,18 +210,22 @@
             @else
             @csrf
             @foreach($finishedBooks as $finishedBook)
-            <p class="bookdata">
+            <div class="bookselectdata">
+            
             <form action="/write" method="post">
                 @csrf
                 <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
+                <p class="bookdata">
                 <button class="buttoncss">
                     <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
                     <b>著者：</b>{{$finishedBook['author']}}<br>
                     <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
                     <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
                 </button>
+                </p>
             </form>
-            </p>
+            
+            </div>
             @endforeach
             @endif
         </div>
