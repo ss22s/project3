@@ -138,7 +138,7 @@
         <form action="/write" method="post">
             @csrf
             <p class="bookdata">
-                <input type="hidden" name="isbn" value="{{$bookData['isbn13']}}">
+                <input type="hidden" name="bookISBN" value="{{$bookData['isbn13']}}">
                 <button class="buttoncss datacss">
 
                     <b>本のタイトル：</b>{{$bookData['title']}}<br>
@@ -185,11 +185,11 @@
                 <form action="/write" method="post" class="bookselectdata">
                     @csrf
                     <p class="bookdata">
-                        <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
+                        <input type="hidden" name="bookISBN" value="{{$wantBook['bookISBN']}}">
                         <button class="buttoncss">
                             <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
                             <b>著者：</b>{{$wantBook['author']}}<br>
-                            <b>ジャンル：</b>{{$wantBook['genre']}}
+                            
                         </button>
                     </p>
                 </form>
@@ -214,12 +214,11 @@
             
             <form action="/write" method="post">
                 @csrf
-                <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
+                <input type="hidden" name="bookISBN" value="{{$finishedBook['bookISBN']}}">
                 <p class="bookdata">
                 <button class="buttoncss">
                     <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
                     <b>著者：</b>{{$finishedBook['author']}}<br>
-                    <b>ジャンル：</b>{{$finishedBook['genre']}}<br>
                     <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
                 </button>
                 </p>

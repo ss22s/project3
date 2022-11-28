@@ -57,8 +57,8 @@ class MyPageController extends Controller
             $finishedBookDatasGet = finishedBook::where('id', $user['id'])->orderBy('date', 'desc')->take(3)->get();
             $x = $this->setZero($x);
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
-                $myFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
-                $myFinishedBookdatas[$x]['book'] = book::where('bookID', $finishedBookDataGet['bookID'])->value('book');
+                $myFinishedBookdatas[$x]['bookISBN'] = $finishedBookDataGet['bookISBN'];
+                $myFinishedBookdatas[$x]['book'] = book::where('bookISBN', $finishedBookDataGet['bookISBN'])->value('book');
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
@@ -77,8 +77,8 @@ class MyPageController extends Controller
             $wantToBookDatasGet = wantBook::where('id', $user['id'])->where('finished', null)->orderBy('registered_at', 'desc')->take(3)->get();
             $x = $this->setZero($x);
             foreach ($wantToBookDatasGet as $wantToBookDataGet) {
-                $myWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
-                $myWantToBookdatas[$x]['book'] = book::where('bookID', $wantToBookDataGet['bookID'])->value('book');
+                $myWantToBookdatas[$x]['bookISBN'] = $wantToBookDataGet['bookISBN'];
+                $myWantToBookdatas[$x]['book'] = book::where('bookISBN', $wantToBookDataGet['bookISBN'])->value('book');
 
                 //日付関連
                 $registerDateGet = explode(" ", $wantToBookDataGet['registered_at']);
@@ -143,10 +143,10 @@ class MyPageController extends Controller
         $wantBookGet = wantBook::where('id',$user['id'])->get(); 
 
         foreach ($wantBookGet as $wantBookSet) {
-            $bookID = $wantBookSet['bookID'];
-            $wantBooks[$x]['bookID'] = $bookID;
+            $bookISBN = $wantBookSet['bookISBN'];
+            $wantBooks[$x]['bookISBN'] = $bookISBN;
 
-            $wantBooks[$x]['book'] = book::where('bookID',$bookID)->first();
+            $wantBooks[$x]['book'] = book::where('bookISBN',$bookISBN)->first();
 
             $x++;
         }
@@ -177,10 +177,10 @@ class MyPageController extends Controller
             $reviewID = $finishedBooksSet['reviewID'];
             $finishedBooks[$x]['reviewID'] = $reviewID;
             //本関連
-            $finishedBooks[$x]['bookID'] = $finishedBooksSet['bookID'];
-            $finishedBooks[$x]['book'] = book::where('bookID', $finishedBooksSet['bookID'])->value('book');
-            $finishedBooks[$x]['author'] = book::where('bookID', $finishedBooksSet['bookID'])->value('author');
-            $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
+            $finishedBooks[$x]['bookISBN'] = $finishedBooksSet['bookISBN'];
+            $finishedBooks[$x]['book'] = book::where('bookISBN', $finishedBooksSet['bookISBN'])->value('book');
+            $finishedBooks[$x]['author'] = book::where('bookISBN', $finishedBooksSet['bookISBN'])->value('author');
+            $finishedBooks[$x]['genre'] = book::where('bookISBN', $finishedBooksSet['bookISBN'])->value('genre');
             //感想関連
             //TODO:感想はまだ書いてなくて読んだ本リストに追加だけした時、Keyを持たせて区別するかreviewのnullで判断するか
             if ($finishedBooksSet['reviewID'] != null) {
