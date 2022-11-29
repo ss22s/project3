@@ -44,6 +44,7 @@
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['categories']}}</p>
+            <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
         $rank ++;
@@ -55,6 +56,7 @@
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['categories']}}</p>
+            <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
         $rank ++;
@@ -66,6 +68,7 @@
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['categories']}}</p>
+            <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
         @php
         $rank ++;
@@ -77,14 +80,13 @@
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
             <p>ジャンル：{{$bookData['categories']}}</p>
+            <p>ジャンル：{{$bookData['genre']}}</p>
         </div>
-
         @php
         $rank ++;
         @endphp
         @endif
         @endforeach
-
         <div>
             <a class="toppagelink" href="/">TOPへ</a>
         </div>
