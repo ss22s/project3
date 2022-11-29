@@ -20,7 +20,7 @@
     border:2px solid;
     border-radius:30px;
     margin:30px auto;
-    width:340px;
+    width:400px;
 }
 
 .box2{
@@ -29,13 +29,14 @@
     background-color:#efefef;
     border:2px solid;
     border-radius:30px;
-    margin:30px;
-    width:340px;
+    margin:20px;
+    width:400px;
 }
 
 .ranking{
     color:#454541;
     font-size:24px;
+    padding:15px;
 }
 
 .rank1{
