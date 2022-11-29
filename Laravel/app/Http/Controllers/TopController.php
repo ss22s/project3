@@ -24,26 +24,25 @@ class TopController extends Controller
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
         $bookDatasGet = BookReport::selectRaw('bookID')->GroupBy('bookID')->limit(7)->get();
-        //bookIDをカウントcount,多い順に並び替え(配列)
+        //bookIDをカウントcoD,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
-        
+
         $this->setZero($x);
         foreach($bookDatasGet as $bookDatas){
             $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
             $rankingDatas[$x]['book'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('book');
             $rankingDatas[$x]['author'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('author');
-            $rankingDatas[$x]['genre'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('genre');
+            $rankingDatas[$x]['categories'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('categories');
             $rankingDatas[$x]['count'] = bookReport::where('bookID',$rankingDatas[$x]['bookID'])->count();
             $x++;
         }
-
+        
         return view('TOP/ranking',compact('rankingDatas'));
     }
 
     public function newBookReport(Request $request){
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
         $bookReportDatas = bookReport::where('Open',1)->latest()->take(6)->get();
-
         $x = 0;
         
         foreach ($bookReportDatas as $bookReportData) {

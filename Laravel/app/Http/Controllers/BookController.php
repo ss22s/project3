@@ -48,6 +48,9 @@ class BookController extends Controller
     {
         $count = 0;
         $request->session()->forget('page');
+        $request->session()->forget('searchTitle');
+        $request->session()->forget('searchAuthor');
+        $request->session()->forget('searchISBN');
         session(['select' => 'search']);
         return view('TOP/searchBooks', compact('count'));
     }
@@ -56,98 +59,134 @@ class BookController extends Controller
     {
         //TODO27:次へ、をしてページ数増えてる時に新しい検索をしたときの対処方法 if文で分岐　検索を押されるたびにcountを0にする
         $count = $request->input('count');
+        $pageCount = $request->input('pageCount');
 
-        if (isset($_POST['searchbook'])) {
-
+        if (!(isset($_POST['next'])) && !(isset($_POST['before']))) {
+            $pageCount = 1;
             $count = 0;
+        }
+        if ($request->input('next') != null) {
+            //echo "NEXT";
+            $pageCount++;
+            $count = ($count + 10);
+        }
+        if ($request->input('before') != null) {
+            // echo "BEFORE";
+            $pageCount--;
+            $count = ($count - 10);
+            if ($count < 0) {
+                $count = 0;
+            }
         }
         //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
-        $searchWordGet = $request->input('searchWord');
-        $searchwords = preg_split("( |　)", $searchWordGet);
+        // $searchWordGet = $request->input('searchWord');
+        $searchTitleGet = $request->input('searchTitle');
+        $searchAuthorGet = $request->input('searchAuthor');
+        $searchISBNGet = $request->input('searchISBN');
 
-        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+        $params  = array();
+        if ($searchTitleGet != null) {
+            $params += array('intitle' => $searchTitleGet);
+        }
+        if ($searchAuthorGet != null) {
+            $params += array('inauthor' => $searchAuthorGet);
+        }
+        if ($searchISBNGet != null) {
+            $params += array('isbn' => $searchISBNGet);
+        }
+        //dd($param);
 
-        if (count($searchwords) == 1) {
-            $searchURL = urldecode("$baseURL=$searchWordGet");
-        } else {
-            $isFirst = true;
-            $wordsSet = "";
-            foreach ($searchwords as $searchword) {
-                if ($isFirst) {
-                    $wordsSet =  $searchword;
-                    $isFirst = false;
-                } else {
-                    $wordsSet .= "+" .   $searchword . "+isbn:";
-                }
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q=';
+        $foreachCount = 0;
+        $searchURL = "";
+        foreach ($params as $key => $value) {
+            if ($foreachCount == 0) {
+                $searchURL = $baseURL . $key . ':' . $value;
+            } else {
+                $searchURL .= '+' . $key . ':' . $value;
             }
-            $searchURL = urldecode("$baseURL=$searchWordGet");
+            $foreachCount++;
         }
         //dd($searchURL);
-        $url = $searchURL . '&maxResults=40' . '&startIndex=' . $count;
+        // $searchwords = preg_split("( |　)", $searchWordGet);
+
+        // $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q';
+
+        // if (count($searchwords) == 1) {
+        //     $searchURL = urldecode("$baseURL=$searchWordGet");
+        // } else {
+        //     $isFirst = true;
+        //     $wordsSet = "";
+        //     foreach ($searchwords as $searchword) {
+        //         if ($isFirst) {
+        //             $wordsSet =  $searchword;
+        //             $isFirst = false;
+        //         } else {
+        //             $wordsSet .= "%2b" .   $searchword;
+        //         }
+        //     }
+        //     //dd($wordsSet);
+        //     $searchURL = urldecode("$baseURL=$wordsSet");
+        // }
+        //dd($searchURL);
+
+        $url = $searchURL . '&maxResults=10' . '&startIndex=' . $count;
         $searchGet = file_get_contents($url);
+        // echo $url;
         $searchDatas = json_decode($searchGet);
-        //dd($searchDatas);
+
         $bookDatasGet = $searchDatas->items;
+        //dd($searchDatas);
         //dd($bookDatasGet);
 
         //TODO27:backに変数持たせるのと、本が決まったらsession pageを消す 検索結果出すとこ書く
 
         $x = 0;
-        $bookData = array();
+        $bookDatas = array();
+        $bookcount = 0;
+        if (!($request->input('before') != null)) {
+            //?
+        }
+        //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
-            //Dataの数が10個になったら終わる
-            if (count($bookData) == 10) {
-                break;
-            } else {
-                //本かどうか確かめる　論文なら飛ばす
-                if (count($bookDataSet->volumeInfo->industryIdentifiers) == 1) {
-                    $count++;
-                    continue;
-                } else if (count($bookDataSet->volumeInfo->industryIdentifiers) == 2) {
-                    $count++;
-                    $bookData[$x]['title'] = $bookDataSet->volumeInfo->title;
 
-                    //dd($bookDataSet);
-                    //作者名がなければ不明で登録
-                    if (!(property_exists($bookDataSet, 'volumeInfo'))) {
-                        if(!(property_exists($bookDataSet->volumeInfo, 'volumeInfo'))){
-                        $bookData[$x]['author'] = "不明";
-                        }
-                    } else {
-                        if (count($bookDataSet->volumeInfo->authors) != 1) {
-                            $countAuthor = 0;
-                            foreach ($bookDataSet->volumeInfo->authors as $author) {
-                                if ($countAuthor == 0) {
-                                    $bookData[$x]['author'] = $author;
-                                    
-                                }else{
-                                    $bookData[$x]['author'] .= "," . $author;
-                                }
-                            }
-                        } else {
-                            $bookData[$x]['author'] = $bookDataSet->volumeInfo->authors[0];
-                        }
-                       
-                    }
-                    dd($bookData);
-                    
-                }
-                dd($bookDataSet->volumeInfo->title);
-             }
+            $bookDatas[$x]['id'] = $bookDataSet->id;
+            //本かどうか確かめる　 本ならISBNとタイトルを取る
+
+            $bookDatas[$x]['isbn13'] = $this->setISBN($bookDataSet);
+            
+            $bookDatas[$x]['title'] = $bookDataSet->volumeInfo->title;
+            
+            //作者名がなければ不明で登録
+            $bookDatas[$x]['author'] = $this->setAuthor($bookDataSet);
+            
+            //カテゴリ
+            $bookDatas[$x]['categories'] = $this->setCategories($bookDataSet);
+           
+            //詳細
+            $bookDatas[$x]['description'] = $this->setDescription($bookDataSet);
+            
+            $x++;
         }
 
 
-        session(['searhWord' => $searchWordGet]);
+        // /dd($bookDatas);
+
+        // session(['searchWord' => $searchWordGet]);
+        session(['searchTitle' => $searchTitleGet]);
+        session(['searchAuthor' => $searchAuthorGet]);
+        session(['searchISBN' => $searchISBNGet]);
         session(['page' => 'true']);
         session(['select' => 'search']);
 
-        return view('TOP/searchBooks', compact('count'));
+        return view('TOP/searchBooks', compact('count', 'bookDatas', 'pageCount'));
     }
 
     public function selectFromsearch(Request $request)
     {
         $count = 0;
+        $request->session()->forget('page');
         session(['select' => 'search']);
         return view('TOP/searchBooks', compact('count'));
     }
@@ -155,6 +194,7 @@ class BookController extends Controller
     public function selectFromwantToBooks(Request $request)
     {
         $count = 0;
+        $request->session()->forget('page');
         session(['select' => 'wantToBooks']);
 
         $user = Auth::user();
@@ -164,19 +204,25 @@ class BookController extends Controller
             $x = 0;
             foreach ($wantBookGet as $wantBookSet) {
                 $bookID = $wantBookSet['bookID'];
-                $bookDataget = book::where('bookID', $bookID)->first();
+
+                $bookDataGet = book::where('bookID', $bookID)->first();
+                // dd($bookDataGet);
+                //$bookDataGet = $this->booksearchId($bookID);
+                // $bookDataSet = (array_shift($bookDataGet));
                 $wantBooks[$x]['bookID'] = $bookID;
 
-                $wantBooks[$x]['book'] = $bookDataget['book'];
-                $wantBooks[$x]['author'] = $bookDataget['author'];
-                $wantBooks[$x]['genre'] = $bookDataget['genre'];
+                $wantBooks[$x]['book'] = $bookDataGet['book'];
+
+                //作者
+                $wantBooks[$x]['author'] = $bookDataGet['author'];
+
+                // $wantBooks[$x]['genre'] = $bookDataSet['genre'];
 
                 $x++;
             }
         } else {
             $wantBooks = "";
         }
-
 
         return view('TOP/searchBooks', compact('count', 'wantBooks'));
     }
@@ -191,12 +237,17 @@ class BookController extends Controller
             $finishedBookDatasGet = finishedBook::where('id', $user['id'])->where('reviewID', null)->get();
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
+                $bookID = $finishedBookDataGet['bookID'];
+                $finishedBooks[$x]['bookID'] = $bookID;
 
-                $bookDataget = book::where('bookID', $finishedBookDataGet['bookID'])->first();
-                $finishedBooks[$x]['bookID'] = $finishedBookDataGet['bookID'];
-                $finishedBooks[$x]['book'] = $bookDataget['book'];
-                $finishedBooks[$x]['author'] = $bookDataget['author'];
-                $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                $bookDataGet = book::where('bookID', $finishedBookDataGet['bookID'])->first();
+                // $bookDataGet = $this->booksearchId($bookID);
+
+                $finishedBooks[$x]['book'] = $bookDataGet['book'];
+
+                $finishedBooks[$x]['author'] = $bookDataGet['author'];
+
+                // $finishedBooks[$x]['genre'] = $bookDataget['genre'];
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
@@ -216,7 +267,13 @@ class BookController extends Controller
     public function write(request $request)
     {
         $bookID = request()->input('bookID');
-        $book = DB::table('books')->where('bookID', $bookID)->value('book');
+        $bookDatasGet = $this->booksearchId($bookID);
+        
+        $book = $bookDatasGet->volumeInfo->title;
+        
+        //$bookID = request()->input('bookID');
+
+        //$book = DB::table('books')->where('bookID', $bookID)->value('book');
 
         // dd($bookID);
         $request->session()->forget('page');
@@ -257,6 +314,7 @@ class BookController extends Controller
 
 
         $reviewIDget = bookReport::where('id', $userData['id'])->where('bookID', $bookID)->value('reviewID');
+
         if (!(DB::table('finishedBooks')->where('id', $userData['id'])->where('bookID', $bookID)->exists())) {
             //登録：読んだ本
             DB::table('finishedBooks')->insert([
@@ -271,11 +329,25 @@ class BookController extends Controller
                 'finished' => 1,
             ]);
         }
+        //bookテーブルにまだ登録されていなければ登録する
+        if (!(DB::table('books')->where('bookID', $bookID)->exists())) {
+            $bookDataGet = $this->booksearchId($bookID);
+            //dd($bookDataGet);
+
+            DB::table('books')->insert([
+                'bookID' => $bookID,
+                'book' => $bookDataGet->volumeInfo->title,
+                'author' => $this->setAuthor($bookDataGet),
+                'ISBN' => $this->setISBN($bookDataGet),
+                'categories' => $this->setCategories($bookDataGet),
+            ]);
+        }
 
         //入った場所に返す
         //eturn redirect('home')->with('result', '感想の登録の成功しました！');
         return view('hello');
     }
+
 
     public function commentAdd($comment)
     {
@@ -326,7 +398,7 @@ class BookController extends Controller
             DB::table('wantToBooks')->insert([
                 [
                     'id' => $user['id'],
-                    'bookid' => $bookID,
+                    'bookiD' => $bookID,
                     'registered_at' => $today,
                     'finished' => null
                 ],
@@ -338,5 +410,91 @@ class BookController extends Controller
         //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
 
         return back()->with('Message', $flashMessage);
+    }
+
+    public function booksearchId($bookID)
+    {
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes';
+
+        // $searchwords = 'isbn:' . $bookID;
+        $URL = urldecode("$baseURL/$bookID");
+        $searchGet = file_get_contents($URL);
+        // echo $URL;
+        $searchDatas = json_decode($searchGet);
+        return $searchDatas;
+    }
+
+    //値をセットするfunction
+
+    public function setAuthor($bookData)
+    {
+        $authors = "";
+        if (!(property_exists($bookData->volumeInfo, 'authors'))) {
+            $authors = "不明";
+        } else {
+            if (count($bookData->volumeInfo->authors) != 1) {
+                $countAuthor = 0;
+                foreach ($bookData->volumeInfo->authors as $author) {
+                    if ($countAuthor == 0) {
+                        $authors = $author;
+                    } else {
+                        $authors = $authors . "," . $author;
+                    }
+                    $countAuthor++;
+                }
+            } else {
+                $authors = $bookData->volumeInfo->authors[0];
+            }
+        }
+        return $authors;
+    }
+
+    public function setCategories($bookData){
+        if (!(property_exists($bookData->volumeInfo, 'categories'))) {
+            $categories = "不明";
+        } else {
+            if (count($bookData->volumeInfo->categories) != 1) {
+                $countCategories = 0;
+                foreach ($bookData->volumeInfo->categories as $categories) {
+
+                    if ($countCategories == 0) {
+                        $categories = $categories;
+                    } else {
+                        $categories .= "," . $categories;
+                    }
+                }
+            } else {
+                $categories = $bookData->volumeInfo->categories[0];
+            }
+        }
+
+        return $categories;
+    }
+
+    public function setISBN($bookData){
+        if (property_exists($bookData->volumeInfo, 'industryIdentifiers')) {
+
+            if (count($bookData->volumeInfo->industryIdentifiers) == 2) {
+                foreach ($bookData->volumeInfo->industryIdentifiers as $isbn) {
+                    if ($isbn->type == "ISBN_13") {
+                        $ISBN = $isbn->identifier;
+                    }
+                }
+            } else {
+                $ISBN = "不明";
+            }
+        } else {
+            $ISBN = "不明";
+        }
+        return $ISBN;
+    }
+
+    public function setDescription($bookData){
+        if (!(property_exists($bookData->volumeInfo, 'description'))) {
+            $description = "";
+        } else {
+            $description = $bookData->volumeInfo->description;
+        }
+        return $description;
     }
 }
