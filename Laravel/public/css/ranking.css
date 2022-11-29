@@ -77,3 +77,6 @@
     border:solid 3px#D2B48C;
     border-radius:10px;
 }
+.toppagelink:hover{
+    color:#efefef;
+}
