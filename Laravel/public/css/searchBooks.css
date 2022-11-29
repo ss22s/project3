@@ -32,6 +32,10 @@ body {
     background-color: #eee8e1; 
 }
 
+.btn{
+    display: inline-block;
+}
+
 .form-inline{
     display: flex;
     width: 100%;

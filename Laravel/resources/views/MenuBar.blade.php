@@ -50,6 +50,7 @@
       <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
         @csrf
         @endauth
+      </form>
     </div>
     <!-- <div class="dropdown mt-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
