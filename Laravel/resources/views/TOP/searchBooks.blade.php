@@ -86,6 +86,7 @@
 </head>
 
 <body>
+    
     <!--TODO27:ボタン押したら開く感じにしてもいいね 上か左でどの手段か選択　それが開いてる感じ-->
     <!--TODO27:詳細検索をつけてもいい　クリックすると開くかModal-->
     <div class="top">
@@ -138,14 +139,15 @@
         <form action="/write" method="post">
             @csrf
             <p class="bookdata">
-                <input type="hidden" name="bookISBN" value="{{$bookData['isbn13']}}">
+                <input type="hidden" name="bookID" value="{{$bookData['id']}}">
                 <button class="buttoncss datacss">
 
                     <b>本のタイトル：</b>{{$bookData['title']}}<br>
                     <b>著者：</b>{{$bookData['author']}}<br>
                     <b>カテゴリ：</b>{{$bookData['categories']}}<br>
                     <b>ISBN：</b>{{$bookData['isbn13']}}<br>
-                    <b>説明：</b>{{$bookData['description']}}<br>
+                    <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
+                    <b>説明：</b>{{ Str::limit($bookData['description'], 200) }}
                 </button>
             </p>
         </form>
@@ -185,7 +187,7 @@
                 <form action="/write" method="post" class="bookselectdata">
                     @csrf
                     <p class="bookdata">
-                        <input type="hidden" name="bookISBN" value="{{$wantBook['bookISBN']}}">
+                        <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
                         <button class="buttoncss">
                             <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
                             <b>著者：</b>{{$wantBook['author']}}<br>
@@ -214,7 +216,7 @@
             
             <form action="/write" method="post">
                 @csrf
-                <input type="hidden" name="bookISBN" value="{{$finishedBook['bookISBN']}}">
+                <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
                 <p class="bookdata">
                 <button class="buttoncss">
                     <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>

@@ -24,7 +24,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 1,
                 'id' => 1,
-                'bookISBN' => 9784196695813,
+                'bookID' => 'Y2YPcgAACAAJ',
                 'evaluation' => 4,
                 'selectedComment' => '2',
                 'comment' => 'たぶんよかった。',
@@ -34,7 +34,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 2,
                 'id' => 1,
-                'bookISBN' => 9784295011538,
+                'bookID' => 'FccyEAAAQBAJ',
                 'evaluation' => 1,
                 'selectedComment' => '5',
                 'comment' => 'よくなかった。',
@@ -44,7 +44,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 3,
                 'id' => 1,
-                'bookISBN' => 9784063930993,
+                'bookID' => 'RYzKtAEACAAJ',
                 'evaluation' => 3,
                 'selectedComment' => '2',
                 'comment' => '普通',
@@ -54,7 +54,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 4,
                 'id' => 1,
-                'bookISBN' => 9784167741013,
+                'bookID' => 'xMMeNwAACAAJ',
                 'evaluation' => 5,
                 'selectedComment' => '2',
                 'comment' => '最高だった。',
@@ -64,7 +64,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 5,
                 'id' => 1,
-                'bookISBN' => 9784196695813,
+                'bookID' => 'Y2YPcgAACAAJ',
                 'evaluation' =>1,
                 'selectedComment' => '5',
                 'comment' => '二度と読まない。',
@@ -74,7 +74,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 6,
                 'id' => 1,
-                'bookISBN' => 9784295011538,
+                'bookID' => 'FccyEAAAQBAJ',
                 'evaluation' => 4,
                 'selectedComment' => '2',
                 'comment' => '普通。まあまあ',
@@ -84,7 +84,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 7,
                 'id' => 1,
-                'bookISBN' => 9784167741013,
+                'bookID' => 'xMMeNwAACAAJ',
                 'evaluation' => 3,
                 'selectedComment' => '2',
                 'comment' => 'よかった。',
@@ -94,7 +94,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 8,
                 'id' => 2,
-                'bookISBN' => 9784196695813,
+                'bookID' => 'Y2YPcgAACAAJ',
                 'evaluation' => 1,
                 'selectedComment' => '2',
                 'comment' =>'名作と名高い「となりのトトロ」の感想です。子供だけではなく大人にも愛されるアニメである理由がよくわかりました。私は子供の頃からトトロが大好きでしたが、大人になってから再度見てみると、子供の視点では気付かなかった魅力を見つけることができました。子供も大人も楽しめる、そんな素晴らしいアニメです。どんな人にもおすすめできます！',
@@ -104,7 +104,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 9,
                 'id' => 1,
-                'bookISBN' => 9784863893313,
+                'bookID' => 'jfApAQAAMAAJ',
                 'evaluation' => 1,
                 'selectedComment' => '3,5',
                 'comment' =>'おもしろい',
@@ -114,7 +114,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 10,
                 'id' => 1,
-                'bookISBN' => 9784591164853,
+                'bookID' => 'ZM9MzQEACAAJ',
                 'evaluation' => 1,
                 'selectedComment' => '4',
                 'comment' =>'kawaii',
@@ -124,7 +124,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 11,
                 'id' => 1,
-                'bookISBN' => 9784081023509,
+                'bookID' => 'FLc9zwEACAAJ',
                 'evaluation' => 1,
                 'selectedComment' => '2',
                 'comment' =>'yeah',

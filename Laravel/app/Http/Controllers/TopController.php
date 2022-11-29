@@ -23,17 +23,17 @@ class TopController extends Controller
         $x = 0;
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
-        $bookDatasGet = BookReport::selectRaw('bookISBN')->GroupBy('bookISBN')->limit(7)->get();
-        //bookISBNをカウントcount,多い順に並び替え(配列)
+        $bookDatasGet = BookReport::selectRaw('bookID')->GroupBy('bookID')->limit(7)->get();
+        //bookIDをカウントcoD,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
 
         $this->setZero($x);
         foreach($bookDatasGet as $bookDatas){
-            $rankingDatas[$x]['bookISBN'] = $bookDatas['bookISBN'];
-            $rankingDatas[$x]['book'] = book::where('bookISBN',$rankingDatas[$x]['bookISBN'])->value('book');
-            $rankingDatas[$x]['author'] = book::where('bookISBN',$rankingDatas[$x]['bookISBN'])->value('author');
-            $rankingDatas[$x]['genre'] = book::where('bookISBN',$rankingDatas[$x]['bookISBN'])->value('genre');
-            $rankingDatas[$x]['count'] = bookReport::where('bookISBN',$rankingDatas[$x]['bookISBN'])->count();
+            $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
+            $rankingDatas[$x]['book'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('book');
+            $rankingDatas[$x]['author'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('author');
+            $rankingDatas[$x]['categories'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('categories');
+            $rankingDatas[$x]['count'] = bookReport::where('bookID',$rankingDatas[$x]['bookID'])->count();
             $x++;
         }
         
@@ -51,8 +51,8 @@ class TopController extends Controller
             $newBookReportData['userID'] = $bookReportData['id'];
             $newBookReportData["userName"] = member::where('id',$bookReportData['id'])->value('name');
             //book関連
-            $newBookReportData['bookISBN'] = $bookReportData['bookISBN'];
-            $newBookReportData["book"] = book::where('bookISBN', $newBookReportData['bookISBN'])->value('book');
+            $newBookReportData['bookID'] = $bookReportData['bookID'];
+            $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             //感想関連
             $newBookReportData["evaluation"] = $bookReportData["evaluation"];
             $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];

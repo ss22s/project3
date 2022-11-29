@@ -22,7 +22,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784196695813,
+            'bookID' => 'Y2YPcgAACAAJ',
             'date' => '2022-01-15 15:25:00',
             'reviewID' => 1,
             'delete' => null]
@@ -30,7 +30,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 2,
-            'bookISBN' => 9784063930993,
+            'bookID' => 'FA-dDQAAQBAJ',
             'date' => '2022-02-15 11:54:00',
             'reviewID' => 3,
             'delete' => 1]
@@ -38,7 +38,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784081023509,
+            'bookID' => 'FLc9zwEACAAJ',
             'date' => '2022-03-18 16:24:00',
             'reviewID' => null,
             'delete' => null]
@@ -46,7 +46,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 3,
-            'bookISBN' => 9784167741013,
+            'bookID' => 'xMMeNwAACAAJ',
             'date' => '2022-03-23 13:54:00',
             'reviewID' => 2,
             'delete' => null]
@@ -54,7 +54,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784863893313,
+            'bookID' => 'jfApAQAAMAAJ',
             'date' => '2021-03-18 16:24:00',
             'reviewID' => null,
             'delete' => null]
@@ -62,7 +62,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784167741013,
+            'bookID' => 'xMMeNwAACAAJ',
             'date' => '2022-05-08 10:20:00',
             'reviewID' => null,
             'delete' => null]
@@ -70,7 +70,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784295011538,
+            'bookID' => 'FccyEAAAQBAJ',
             'date' => '2020-09-13 12:00:00',
             'reviewID' => null,
             'delete' => null]
@@ -78,7 +78,7 @@ class finishedBooksSeeder extends Seeder
 
         \DB::table('finishedBooks')->insert([
             ['id' => 1,
-            'bookISBN' => 9784063930993,
+            'bookID' => 'FA-dDQAAQBAJ',
             'date' => '2021-12-24 00:00:00',
             'reviewID' => null,
             'delete' => null]

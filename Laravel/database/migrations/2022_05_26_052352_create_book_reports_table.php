@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bookReports', function (Blueprint $table) {
             $table->id('reviewID');
             $table->unsignedBigInteger('id');
-            $table->bigInteger('bookISBN');
+            $table->string('bookID');
             $table->integer('evaluation');
             $table->string('selectedComment');
             $table->string('comment',10000);
