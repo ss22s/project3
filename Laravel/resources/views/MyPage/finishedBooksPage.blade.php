@@ -19,14 +19,19 @@
     {{-- TODO:読んだ本リストのページ --}}
     {{-- finishedBooksにデータ入っるのでforeachなどで回すと取り出せる！ 
         感想はまだ書いてないけど、読んだ本リストに追加したものはfor回している中でif(reviewID != null) で判断できる--}}
-    <h3>読んだ本リスト</h3>
+    <div class="page">読んだ本リスト</div>
 
-    <div>
+    <div class="main">
         @csrf
         @foreach($finishedBooks as $finishedBook)
         <!-- 書影(※書影にもリンクつける) -->
-        <div>
-            <label class="open" for="pop-up">{{$finishedBook['book']}}</label>
+        <div class="box">
+            <label class="open title" for="pop-up">
+                <span class="image">書影</span>
+                {{$finishedBook['book']}}
+            </label>
+
+            <!-- <img src = "書籍画像"> -->
             <input type="checkbox" id="pop-up">
             <div class="overlay">
                 <div class="window">
@@ -37,14 +42,24 @@
                     <!-- 読んだ日 -->
                     <!-- 編集ボタン→編集ページに移動 -->
                     <!-- 削除ボタン -->
-                    <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">{{$finishedBook['book']}}</a>
-                    <p class="text">{{$finishedBook['author']}}</p>
-                    <p class="text">{{$finishedBook['genre']}}</p>
+                    <div id="left">
+                        <span class="image">書影</span>
+                        <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">本の詳細</a>
+                    </div>
+                    <div id="right">
+                        <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">{{$finishedBook['book']}}</a>
+                        <p class="text">{{$finishedBook['author']}}</p>
+                        <p class="text">{{$finishedBook['genre']}}</p>
+                    </div>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
+    <div>
+        <a class="toppagelink" href="/">TOPへ</a>
+    </div>
+    <br>
 </body>
 
 </html>

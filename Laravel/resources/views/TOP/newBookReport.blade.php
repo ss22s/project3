@@ -19,7 +19,7 @@
         @else
         <div class="main">
             <div class="box">
-                    <a class="title" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}"><h2>{{$bookData['book']}}</h2></a>
+                    <a class="title" href="{{route('book.detail',['bookISBN'=>$bookData['bookISBN']])}}"><h2>{{$bookData['book']}}</h2></a>
                     <span class="image">書影</span>
                     <!-- <img src = "書籍画像"> -->
                     <p class="p1"><hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
