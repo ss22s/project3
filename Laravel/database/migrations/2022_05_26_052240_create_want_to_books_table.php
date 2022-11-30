@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('wantToBooks', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->bigInteger('bookISBN');
+            $table->string('bookID');
             $table->dateTime('registered_at');
             $table->integer('finished')->nullable();
 

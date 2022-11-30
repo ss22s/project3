@@ -3,13 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <link href="css/searchBooks.css" rel="stylesheet" type="text/css">
     <!--jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>    
+    
+    <link href="css/searchBooks.css" rel="stylesheet" type="text/css">
     <title>本の検索</title>
     <script>
         $(function() {
@@ -86,6 +83,8 @@
 </head>
 
 <body>
+    
+    
     <!--TODO27:ボタン押したら開く感じにしてもいいね 上か左でどの手段か選択　それが開いてる感じ-->
     <!--TODO27:詳細検索をつけてもいい　クリックすると開くかModal-->
     <div class="top">
@@ -108,6 +107,9 @@
         </div>
     </div>
     <main>
+    <div>
+            @include('MenuBar')
+        </div>
         @if(session('select') == 'search')
         <div id="searchContent">
             <h3>検索する</h3>
@@ -138,14 +140,15 @@
         <form action="/write" method="post">
             @csrf
             <p class="bookdata">
-                <input type="hidden" name="bookISBN" value="{{$bookData['isbn13']}}">
+                <input type="hidden" name="bookID" value="{{$bookData['id']}}">
                 <button class="buttoncss datacss">
 
                     <b>本のタイトル：</b>{{$bookData['title']}}<br>
                     <b>著者：</b>{{$bookData['author']}}<br>
                     <b>カテゴリ：</b>{{$bookData['categories']}}<br>
                     <b>ISBN：</b>{{$bookData['isbn13']}}<br>
-                    <b>説明：</b>{{$bookData['description']}}<br>
+                    <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
+                    <b>説明：</b>{{ Str::limit($bookData['description'], 200) }}
                 </button>
             </p>
         </form>
@@ -185,7 +188,7 @@
                 <form action="/write" method="post" class="bookselectdata">
                     @csrf
                     <p class="bookdata">
-                        <input type="hidden" name="bookISBN" value="{{$wantBook['bookISBN']}}">
+                        <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
                         <button class="buttoncss">
                             <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
                             <b>著者：</b>{{$wantBook['author']}}<br>
@@ -214,7 +217,7 @@
             
             <form action="/write" method="post">
                 @csrf
-                <input type="hidden" name="bookISBN" value="{{$finishedBook['bookISBN']}}">
+                <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
                 <p class="bookdata">
                 <button class="buttoncss">
                     <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
@@ -229,8 +232,9 @@
             @endif
         </div>
         @endif
-
+       
     </main>
+    <link href="css/searchBooks.css" rel="stylesheet" type="text/css">
 </body>
 
 </html>

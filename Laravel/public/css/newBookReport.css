@@ -31,8 +31,8 @@
     border-radius:30px;
     margin:20px;
     padding:10px;
-    width:340px;
-    height:550px;
+    width:380px;
+    height:580px;
 }
 
 .title{
@@ -40,6 +40,12 @@
 }
 .title:hover{
     color:#D2B48C;
+}
+
+.booklink{
+    padding:15px;
+    font-size:26px;
+    font-weight:700;
 }
 
 .image{
@@ -74,4 +80,7 @@
     background:#D2B48C;
     border:solid 3px#D2B48C;
     border-radius:10px;
+}
+.toppagelink:hover{
+    color:#efefef;
 }
