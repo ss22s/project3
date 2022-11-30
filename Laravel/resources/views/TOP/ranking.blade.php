@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/ranking.css">
+
+  <link rel="stylesheet" type="text/css" href="css/ranking.css">
+</head>
     <title>TOP-ランキング</title>
 </head>
 
 <body>
+<div class="MenuBar">
+    @include('MenuBar')
+    </div>
     <div class="main">
         <div class="page">ランキング</div>
         @csrf
@@ -17,13 +22,14 @@
         $rank = 1;
         @endphp
         @foreach($rankingDatas as $bookData)
+
         @if($rank == 1)
         <div class="box1">
             <h4 class="ranking"><div class="rank1">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
-            <p>ジャンル：{{$bookData['genre']}}</p>
+            <p>ジャンル：{{$bookData['categories']}}</p>
         </div>
         @php
         $rank ++;
@@ -34,7 +40,7 @@
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
-            <p>ジャンル：{{$bookData['genre']}}</p>
+            <p>ジャンル：{{$bookData['categories']}}</p>
         </div>
         @php
         $rank ++;
@@ -45,7 +51,7 @@
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
-            <p>ジャンル：{{$bookData['genre']}}</p>
+            <p>ジャンル：{{$bookData['categories']}}</p>
         </div>
         @php
         $rank ++;
@@ -56,7 +62,7 @@
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">書影</span>
             <p>作者：{{$bookData['author']}}</p>
-            <p>ジャンル：{{$bookData['genre']}}</p>
+            <p>ジャンル：{{$bookData['categories']}}</p>
         </div>
         @php
         $rank ++;
@@ -68,5 +74,6 @@
         </div>
         <br>
     </div>
+    
 </body>
 </html>

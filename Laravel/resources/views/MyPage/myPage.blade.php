@@ -8,12 +8,17 @@
 </head>
 
 <body>
-    <!--データ表示のみ-->
-    <!-- <h3>マイページ</h3>
-    <hr> -->
+   
     @auth
+    <div class="MenuBar">
+    @include('MenuBar')
+    </div>
     <div class="main">
-        <div class="page">マイページ</div><br>
+        <div class="page">マイページ</div>
+        <div class="MenuBarBox">
+        </div>
+        <br>
+        
         <div class="box1">
             <h1 class="menu">ユーザ情報</h1>
             <a class="link" href="/userInfo">ユーザ情報を編集する</a>
