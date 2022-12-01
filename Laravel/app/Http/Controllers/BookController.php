@@ -25,6 +25,8 @@ class BookController extends Controller
         }
         //TODO27:本データを外部から取る場合、書き換え
         $bookData = Book::where('bookID', $bookID)->first();
+        $bookThumbnail = $this->setThumbnail($bookID);
+        
         //TODO27:ひとこと感想TOP3.やり方が綺麗でない
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
@@ -41,7 +43,7 @@ class BookController extends Controller
         array_multisort($NumGet, SORT_DESC, $selectedCommentsCount);
         $selectedCommentsTop = array_slice($selectedCommentsCount, 0, 3);
 
-        return view('TOP/bookDetail', compact('bookData', 'selectedCommentsTop'));
+        return view('TOP/bookDetail', compact('bookData','bookThumbnail','selectedCommentsTop'));
     }
 
     public function searchPageGet(Request $request)
@@ -78,7 +80,6 @@ class BookController extends Controller
                 $count = 0;
             }
         }
-        //TODO27:countに対して　次へのボタン押されたとき+10,前へは-10するif文
 
         // $searchWordGet = $request->input('searchWord');
         $searchTitleGet = $request->input('searchTitle');
@@ -207,14 +208,14 @@ class BookController extends Controller
 
                 $bookDataGet = book::where('bookID', $bookID)->first();
                 // dd($bookDataGet);
-                //$bookDataGet = $this->booksearchId($bookID);
-                // $bookDataSet = (array_shift($bookDataGet));
+                
                 $wantBooks[$x]['bookID'] = $bookID;
-
                 $wantBooks[$x]['book'] = $bookDataGet['book'];
 
                 //作者
                 $wantBooks[$x]['author'] = $bookDataGet['author'];
+
+                $wantBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
 
                 // $wantBooks[$x]['genre'] = $bookDataSet['genre'];
 
@@ -496,5 +497,12 @@ class BookController extends Controller
             $description = $bookData->volumeInfo->description;
         }
         return $description;
+    }
+
+    public function setThumbnail($bookID){
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
+        $thumbnailUrl = $frontUrl. $bookID . $backUrl;
+        return $thumbnailUrl;
     }
 }

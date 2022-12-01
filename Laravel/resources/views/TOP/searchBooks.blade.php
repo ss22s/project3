@@ -190,6 +190,7 @@
                     <p class="bookdata">
                         <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
                         <button class="buttoncss">
+                        <!-- <img src="{{$wantBook['thumbnail']}}" alt="書影" width="90" height="120"> -->
                             <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
                             <b>著者：</b>{{$wantBook['author']}}<br>
                             
