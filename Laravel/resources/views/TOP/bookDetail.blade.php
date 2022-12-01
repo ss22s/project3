@@ -13,9 +13,10 @@
     <h3>本の詳細ページ</h3>
 
 <div>
+   <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200"><br>
     タイトル：{{$bookData['book']}} <br>
     著者：{{$bookData['author']}} <br>
-    ジャンル：{{$bookData['genre']}}
+    カテゴリ：{{$bookData['categories']}}
 </div>
 
 <div>

@@ -27,8 +27,9 @@
             <a class="title" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
                 <p class="booklink">{{$bookData['book']}}</p>
             </a>
-            <span class="image">書影</span>
-            <!-- <img src = "書籍画像"> -->
+            <span class="image">
+            <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
+            </span>
             <p class="p1">
                 <hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}
             </p>
