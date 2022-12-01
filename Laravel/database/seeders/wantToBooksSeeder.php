@@ -22,14 +22,21 @@ class wantToBooksSeeder extends Seeder
 
         \DB::table('wantToBooks')->insert([
             ['id' => 1,
-            'bookID' => 1002,
+            'bookID' => 'xMMeNwAACAAJ',
             'registered_at' => '2022-01-11 13:10:00',
             'finished' => null],
         ]);
 
         \DB::table('wantToBooks')->insert([
+            ['id' => 1,
+            'bookID' => 'Y2YPcgAACAAJ',
+            'registered_at' => '2021-01-10 13:10:00',
+            'finished' => null],
+        ]);
+
+        \DB::table('wantToBooks')->insert([
             ['id' => 2,
-            'bookID' => 1003,
+            'bookID' => 'jfApAQAAMAAJ',
             'registered_at' => '2022-01-12 16:10:00',
             'finished' => 1],
         ]);

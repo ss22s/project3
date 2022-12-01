@@ -4,6 +4,15 @@
     text-align:center;
     /* #eaddcd */
     /* #eee8e1 */
+    
+}
+
+.page{
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
 }
 
 .box1{
@@ -60,8 +69,8 @@
     text-align:right;
     padding:15px;
     color:#454541;
-    margin:20px 5px;
-    width:250px;
+    margin:20px 10px;
+    width:265px;
 }
 
 .list{
@@ -69,11 +78,6 @@
     justify-content:center;
 }
 
-.toppage{
-    text-align:center;
-    padding-top:50px;
-    right:30px;
-}
 .toppagelink{
     display:inline-block;
     text-decoration:none;
@@ -84,4 +88,7 @@
     background:#D2B48C;
     border:solid 3px#D2B48C;
     border-radius:10px;
+}
+.toppagelink:hover{
+    color:#efefef;
 }

@@ -170,7 +170,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-
+        
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
             
@@ -180,7 +180,7 @@ class MyPageController extends Controller
             $finishedBooks[$x]['bookID'] = $finishedBooksSet['bookID'];
             $finishedBooks[$x]['book'] = book::where('bookID', $finishedBooksSet['bookID'])->value('book');
             $finishedBooks[$x]['author'] = book::where('bookID', $finishedBooksSet['bookID'])->value('author');
-            $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
+            // $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
             //感想関連
             //TODO:感想はまだ書いてなくて読んだ本リストに追加だけした時、Keyを持たせて区別するかreviewのnullで判断するか
             if ($finishedBooksSet['reviewID'] != null) {
@@ -197,10 +197,10 @@ class MyPageController extends Controller
                 //コメント
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
 
-                $x++;
+                
             }
+            $x++;
         }
-
         return view('Mypage/finishedBooksPage',compact('finishedBooks'));
     }
 
