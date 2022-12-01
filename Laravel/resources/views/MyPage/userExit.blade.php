@@ -36,6 +36,8 @@
                     </div>
                     <div class="modal-body">
                         {{--内容--}}
+                    <form action="/userExit" method="post" accept-charset="UTF-8">
+                    @csrf
                         全ての情報が失われます。<br>
                         本当に退会しますか？
                     </div>

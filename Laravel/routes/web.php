@@ -90,11 +90,12 @@ Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
 //マイページ編集
 Route::post('/changeName','App\Http\Controllers\MyPageController@changeName');
 //退会処理
-Route::get('/userCancel',function(){
-    return view('MyPage/userCancel');
+Route::get('/userExit',function(){
+    return view('MyPage/userExit');
 });
 
-    Route::get('/MenuBar',function(){
-        return view('MenuBar');
-    });
+Route::post('/userExit','App\Http\Controllers\MyPageController@userExit');
 
+Route::get('/MenuBar',function(){
+    return view('MenuBar');
+});

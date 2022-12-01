@@ -249,4 +249,9 @@ class MyPageController extends Controller
         DB::table('MyPages')->where('id',Auth::id())->update(['freeText' => $request->freeText]);
         return back();
     }
+    public function userExit(Request $request){
+        DB::table('users')->where('id',Auth::id())->update(['exit' => 1]);
+        Auth::logout();
+        return view('/hello');
+    }
 }
