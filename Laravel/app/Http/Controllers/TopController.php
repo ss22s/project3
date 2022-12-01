@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,16 +27,18 @@ class TopController extends Controller
         $bookDatasGet = BookReport::selectRaw('bookID')->GroupBy('bookID')->limit(7)->get();
         //bookIDをカウントcoD,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
-
         $this->setZero($x);
         foreach($bookDatasGet as $bookDatas){
             $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
-            $rankingDatas[$x]['book'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('book');
-            $rankingDatas[$x]['author'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('author');
-            $rankingDatas[$x]['categories'] = book::where('bookID',$rankingDatas[$x]['bookID'])->value('categories');
-            $rankingDatas[$x]['count'] = bookReport::where('bookID',$rankingDatas[$x]['bookID'])->count();
+            $bookDataSet = book::where('bookID',$bookDatas['bookID'])->first();
+            $rankingDatas[$x]['book'] = $bookDataSet['book'];
+            $rankingDatas[$x]['author'] = $bookDataSet['author'];
+            $rankingDatas[$x]['categories'] = $bookDataSet['categories'];
+            $rankingDatas[$x]['thumbnail'] = $this->setThumbnail($bookDatas['bookID']);
+            $rankingDatas[$x]['count'] = bookReport::where('bookID',$bookDatas['bookID'])->count();
             $x++;
         }
+        
         
         return view('TOP/ranking',compact('rankingDatas'));
     }
@@ -53,6 +56,7 @@ class TopController extends Controller
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
             $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
+            $newBookReportData['thumbnail'] = $this->setThumbnail($bookReportData['bookID']);
             //感想関連
             $newBookReportData["evaluation"] = $bookReportData["evaluation"];
             $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
@@ -112,6 +116,13 @@ class TopController extends Controller
 
     public function setZero($x){
         return $x = 0;
+    }
+
+    public function setThumbnail($bookID){
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
+        $thumbnailUrl = $frontUrl. $bookID . $backUrl;
+        return $thumbnailUrl;
     }
     
 }
