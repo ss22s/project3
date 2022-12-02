@@ -43,6 +43,9 @@
       <p class="message">
         <b>{{Auth::user()->name}}</b>としてログイン済み<br>
       </p>
+      <div class="mypage">
+            <a class="mypagelink" href="/myPage">マイページ</a>
+        </div>
       <a class="logoutlink" href={{ route('logout') }} onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
         ログアウト
