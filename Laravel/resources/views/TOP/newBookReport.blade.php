@@ -33,7 +33,9 @@
             <p class="p1">
                 <hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}
             </p>
+            <a href="{{route('user',['userID' => $bookData['userID']])}}"> 
             <p class="p2">{{$bookData['userName']}}</p>
+            </a>
             <p class="p3">更新日:{{$bookData['created_at']}}</p>
         </div>
     </div>

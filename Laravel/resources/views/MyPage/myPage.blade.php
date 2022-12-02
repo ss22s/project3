@@ -44,7 +44,7 @@
                 <div>
                     <p class="data">
                         @foreach($followLists as $followList)
-                        {{$followList['followerName']}}
+                        <a href="{{route('user',['userID' => $followList['followerID']])}}"> {{$followList['followerName']}}</a>
                         <br>
                         @endforeach
                     </p>
