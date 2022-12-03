@@ -41,6 +41,9 @@
     @endforeach
 </div>
 <hr>
+<p>
+    <h4>感想</h4>
+</p>
 <h4><a href="/">TOPへ</a> </h4>
 </body>
 </html>

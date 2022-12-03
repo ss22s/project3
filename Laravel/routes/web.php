@@ -103,7 +103,7 @@ Route::get('/userCancel',function(){
     return view('MyPage/userCancel');
 });
 
-    Route::get('/MenuBar',function(){
-        return view('MenuBar');
+    Route::get('/searchBox',function(){
+        return view('searchBox');
     });
 
