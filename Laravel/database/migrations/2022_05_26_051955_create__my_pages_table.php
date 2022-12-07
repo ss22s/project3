@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('favoriteBook')->nullable();
             $table->string('favoriteAuthor')->nullable();
             $table->string('freeText')->nullable();
-            $table->string('showWantToBook')->nullable();
-            $table->string('showFinishedBook')->nullable();
-            $table->string('showFollowList')->nullable();
+            $table->integer('showWantToBook')->nullable();
+            $table->integer('showFinishedBook')->nullable();
+            $table->integer('showFollowList')->nullable();
 
             $table->primary('id');
             $table->foreign('id')->references('id')->on('users');
