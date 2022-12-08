@@ -27,14 +27,13 @@ class MyPageController extends Controller
 
     //マイページ表示
 
-    public function myPage(Request $request)
+    public function myPage()
     {
         //ログイン済みデータ取得
         $user = Auth::user();
         if (Auth::user() == null) {
             return view('MyPage/myPage');
         }
-
         $myPageDataGet = myPage::where('id', $user['id'])->first();
         $userDataGet = member::where('id', $user['id'])->first();
 
@@ -104,7 +103,6 @@ class MyPageController extends Controller
         } else {
             $followLists = "";
         }
-
         return view('MyPage/myPage', compact('myData', 'myFinishedBookdatas', 'myWantToBookdatas', 'followLists'));
     }
 
@@ -242,11 +240,12 @@ class MyPageController extends Controller
 
     //ユーザー情報編集処理
     public function changeName(Request $request){
-        DB::table('users')->where('id',Auth::id())->update(['name' => $request->name]);
-        DB::table('users')->where('id',Auth::id())->update(['email' => $request->email]);
-        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteBook' => $request->favoriteBook]);
-        DB::table('MyPages')->where('id',Auth::id())->update(['favoriteAuthor' => $request->favoriteAuthor]);
-        DB::table('MyPages')->where('id',Auth::id())->update(['freeText' => $request->freeText]);
+        $userID = Auth::id();
+        DB::table('users')->where('id',$userID)->update(['name' => $request->name]);
+        DB::table('users')->where('id',$userID)->update(['email' => $request->email]);
+        DB::table('MyPages')->where('id',$userID)->update(['favoriteBook' => $request->favoriteBook]);
+        DB::table('MyPages')->where('id',$userID)->update(['favoriteAuthor' => $request->favoriteAuthor]);
+        DB::table('MyPages')->where('id',$userID)->update(['freeText' => $request->freeText]);
         return back();
     }
 }

@@ -10,17 +10,21 @@ use Illuminate\Support\Facades\DB;
 use App\Models\bookReport;
 use App\Models\member;
 use App\Models\book;
+use App\Models\Mypage;
+use App\Models\followList;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendContactUsMail;
 
+use app;
 
 class TopController extends Controller
 {
     //
 
-    
-    public function ranking(Request $request){
+
+    public function ranking(Request $request)
+    {
         $x = 0;
         //rankingの本
         //DBの感想created_atが二週間以内のものを検索(whereBetween)
@@ -28,31 +32,32 @@ class TopController extends Controller
         //bookIDをカウントcoD,多い順に並び替え(配列)
         //take,limitで上から決まった件数(7)のみviewへ
         $this->setZero($x);
-        foreach($bookDatasGet as $bookDatas){
+        foreach ($bookDatasGet as $bookDatas) {
             $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
-            $bookDataSet = book::where('bookID',$bookDatas['bookID'])->first();
+            $bookDataSet = book::where('bookID', $bookDatas['bookID'])->first();
             $rankingDatas[$x]['book'] = $bookDataSet['book'];
             $rankingDatas[$x]['author'] = $bookDataSet['author'];
             $rankingDatas[$x]['categories'] = $bookDataSet['categories'];
             $rankingDatas[$x]['thumbnail'] = $this->setThumbnail($bookDatas['bookID']);
-            $rankingDatas[$x]['count'] = bookReport::where('bookID',$bookDatas['bookID'])->count();
+            $rankingDatas[$x]['count'] = bookReport::where('bookID', $bookDatas['bookID'])->count();
             $x++;
         }
-        
-        
-        return view('TOP/ranking',compact('rankingDatas'));
+
+
+        return view('TOP/ranking', compact('rankingDatas'));
     }
 
-    public function newBookReport(Request $request){
+    public function newBookReport(Request $request)
+    {
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
-        $bookReportDatas = bookReport::where('Open',1)->latest()->take(6)->get();
+        $bookReportDatas = bookReport::where('Open', 1)->latest()->take(6)->get();
         $x = 0;
-        
+
         foreach ($bookReportDatas as $bookReportData) {
             $newBookReportData['reviewID'] = $bookReportData['reviewID'];
             //user関連
             $newBookReportData['userID'] = $bookReportData['id'];
-            $newBookReportData["userName"] = member::where('id',$bookReportData['id'])->value('name');
+            $newBookReportData["userName"] = member::where('id', $bookReportData['id'])->value('name');
             //book関連
             $newBookReportData['bookID'] = $bookReportData['bookID'];
             $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
@@ -67,33 +72,38 @@ class TopController extends Controller
             $newBookReportDatas[$x] = $newBookReportData;
             $x++;
         }
-        
-        return view('TOP/newBookReport',compact('newBookReportDatas'));
+
+        return view('TOP/newBookReport', compact('newBookReportDatas'));
     }
 
-    public function chatRoom(Request $request){
-        
+    public function chatRoom()
+    {
+
         return view('TOP/chatRoom');
     }
 
-    public function contactUs(Request $request){
+    public function contactUs(Request $request)
+    {
         return view('TOP/contactUS');
     }
 
-    public function faq(Request $request){
+    public function faq(Request $request)
+    {
         return view('TOP/faq/faq');
     }
 
-    public function confirm(Request $request){
+    public function confirm(Request $request)
+    {
         $name = $request->input('name');
         $email = $request->input('email');
         $item = $request->input('item');
         $content = $request->input('content');
 
-        return view('TOP/confirm',compact('name','email','item','content'));
+        return view('TOP/confirm', compact('name', 'email', 'item', 'content'));
     }
 
-    public function complete(Request $request){
+    public function complete(Request $request)
+    {
         $name = $request->input('name');
         $email = $request->input('email');
         $item = $request->input('item');
@@ -105,24 +115,64 @@ class TopController extends Controller
                 'name' => 'Manager',
                 'email' => 'cinnamondonuts02@gmail.com'
             ]
-            ];
-        Mail::to($to)->send(new SendContactUsMail($name,$email,$item,$content));
+        ];
+        Mail::to($to)->send(new SendContactUsMail($name, $email, $item, $content));
 
-        
 
-        return view('TOP/complete',compact('name','email','item','content'));
+
+        return view('TOP/complete', compact('name', 'email', 'item', 'content'));
     }
     //st002023@m01.kyoto-kcg.ac.jp
 
-    public function setZero($x){
+    public function setZero($x)
+    {
         return $x = 0;
     }
 
-    public function setThumbnail($bookID){
+    public function setThumbnail($bookID)
+    {
         $frontUrl = 'http://books.google.com/books/content?id=';
         $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
-        $thumbnailUrl = $frontUrl. $bookID . $backUrl;
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
         return $thumbnailUrl;
     }
-    
+
+    public function userPage($userID)
+    {
+       
+        $myData = Auth::user();
+
+        if ($myData == null || $myData['id'] != $userID) {
+            //userのページ表示
+            $userData = Mypage::where('id', $userID)->first();
+            $userData['name'] = member::where('id', $userID)->value('name');
+            $userData['id'] = $userID;
+            //TODO27:読みたい本リストとか公開設定にしてたら表示する
+            //TODO27:書いた感想の中で公開設定のものはいくつか表示？
+            return view('userPage', compact('userData'));
+        } else if ($myData['id'] == $userID) {
+
+            return redirect()->action([MyPageController::class, 'myPage']);
+        }
+    }
+
+    public function userFollow($userID)
+    {
+        $flashMessage = "まだ";
+        $myData = Auth::user();
+
+        if ((DB::table('followLists')->where('id', $myData['id'])->where('followerID', $userID)->exists())) {
+            $flashMessage = "失敗";
+        } else {
+            DB::table('followLists')->insert([
+                [
+                    'id' => $myData['id'],
+                    'followerID' => $userID
+                ],
+            ]);
+            $flashMessage = "成功";
+        }
+        
+        return back()->with('FollowMessage', $flashMessage);
+    }
 }

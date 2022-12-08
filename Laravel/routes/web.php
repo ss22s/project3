@@ -65,6 +65,12 @@ Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks
 Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
     ->name('list.delete');
 
+//user
+Route::get('/user/{userID}','App\Http\Controllers\TopController@userPage')
+->name('user');
+Route::get('/follow/{userID}','App\Http\Controllers\TopController@userFollow')
+->name('user.follow')->middleware('auth');
+
 //book関連
     //感想を書く
     Route::get('/selectBooks','App\Http\Controllers\BookController@searchPageGet')->middleware('auth');
@@ -97,7 +103,7 @@ Route::get('/userCancel',function(){
     return view('MyPage/userCancel');
 });
 
-    Route::get('/MenuBar',function(){
-        return view('MenuBar');
+    Route::get('/searchBox',function(){
+        return view('searchBox');
     });
 
