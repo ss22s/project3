@@ -44,7 +44,7 @@ class bookReportsSeeder extends Seeder
             [
                 'reviewID' => 3,
                 'id' => 1,
-                'bookID' => 'RYzKtAEACAAJ',
+                'bookID' => 'FA-dDQAAQBAJ',
                 'evaluation' => 3,
                 'selectedComment' => '2',
                 'comment' => '普通',

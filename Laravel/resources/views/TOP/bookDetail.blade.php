@@ -13,9 +13,10 @@
     <h3>本の詳細ページ</h3>
 
 <div>
+   <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200"><br>
     タイトル：{{$bookData['book']}} <br>
     著者：{{$bookData['author']}} <br>
-    ジャンル：{{$bookData['genre']}}
+    カテゴリ：{{$bookData['categories']}}
 </div>
 
 <div>
@@ -40,6 +41,9 @@
     @endforeach
 </div>
 <hr>
+<p>
+    <h4>感想</h4>
+</p>
 <h4><a href="/">TOPへ</a> </h4>
 </body>
 </html>
