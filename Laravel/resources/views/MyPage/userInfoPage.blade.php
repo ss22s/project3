@@ -29,7 +29,7 @@
     <!--TODO:foreach文で出す際にdata-targetとidを感想のIDにする-->
     <div>
         
-        <button type="button" class="btn btn-primary hensyu-btn" data-toggle="modal" data-target="#exampleBook">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleBook">
             ユーザー情報の編集
         </button>
 
@@ -54,8 +54,8 @@
                         <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"><br>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
+                    <button type="submit" class="btn btn-primary savebtn">保存</button>
                     </form>
                 </div>
                 </div>
