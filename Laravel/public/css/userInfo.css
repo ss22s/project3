@@ -3,7 +3,7 @@
     text-align: center;
 }
 
-.box1{
+.box1 {
     display:inline-block;
     background:#efefef;
     border:solid 3px#454541;
@@ -16,8 +16,40 @@
     text-align: left;
 }
 
-.menu{
+.menu {
     font-size:26px;
     color:#D2B48C;
     text-align:center;
+}
+
+.btn-primary {
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+
+.btn-primary:hover {
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+}
+
+.btn-primary:active {
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+}
+
+.link{
+    color:#454541;
+    text-decoration: underline;
+}
+.link:hover{
+    color:#D2B48C;
 }

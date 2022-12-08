@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <a href="/userCancel">退会したい</a>
+    <a class="link" href="/userCancel">退会したい</a>
 
 </body>
 </html>
