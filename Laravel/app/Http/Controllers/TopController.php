@@ -54,7 +54,7 @@ class TopController extends Controller
     public function newBookReport(Request $request)
     {
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
-        $bookReportDatas = bookReport::where('Open', 1)->latest()->take(6)->get();
+        $bookReportDatas = bookReport::where('Open', null)->latest()->take(6)->get();
         $x = 0;
 
         foreach ($bookReportDatas as $bookReportData) {
@@ -128,18 +128,6 @@ class TopController extends Controller
     }
     //st002023@m01.kyoto-kcg.ac.jp
 
-    public function setZero($x)
-    {
-        return $x = 0;
-    }
-
-    public function setThumbnail($bookID)
-    {
-        $frontUrl = 'http://books.google.com/books/content?id=';
-        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
-        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
-        return $thumbnailUrl;
-    }
 
     public function userPage($userID)
     {
@@ -212,9 +200,30 @@ class TopController extends Controller
             }
 
             //書いた感想
-            // if(DB::table('bookReports')->where('id',$userID)->where('Open',1)->)
+            if (DB::table('bookReports')->where('id', $userID)->where('Open', null)->exists()) {
+                $bookReportGet = DB::table('bookReports')->where('id', $userID)->where('Open', null)->latest()->take(5)->get();
+                $x = 0;
+                foreach ($bookReportGet as $bookReportset) {
+                    $userBookReport['reviewID'] = $bookReportset['reviewID'];
+            
+                    //book関連
+                    $userBookReport['bookID'] = $bookReportset['bookID'];
+                    $userBookReport["book"] = book::where('bookID', $userBookReport['bookID'])->value('book');
+                    $userBookReport['thumbnail'] = $this->setThumbnail($bookReportset['bookID']);
+                    //感想関連
+                    $userBookReport["evaluation"] = $bookReportset["evaluation"];
+                    $userBookReport["selectedComment"] = $bookReportset["selectedComment"];
+                    $userBookReport["comment"] = $bookReportset["comment"];
+                    $day = explode(" ", $bookReportset['created_at']);
+                    $userBookReport["created_at"] = $day[0];
 
-            return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists'));
+                    $userBookReportdatas[$x] = $userBookReport;
+
+                    $x++;
+                }
+            }
+
+            return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists','userBookReportdatas'));
         } else if ($myData['id'] == $userID) {
 
             return redirect()->action([MyPageController::class, 'myPage']);
@@ -239,5 +248,19 @@ class TopController extends Controller
         }
 
         return back()->with('FollowMessage', $flashMessage);
+    }
+
+
+    public function setZero($x)
+    {
+        return $x = 0;
+    }
+
+    public function setThumbnail($bookID)
+    {
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
+        return $thumbnailUrl;
     }
 }
