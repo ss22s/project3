@@ -1,3 +1,7 @@
+body {
+    background-color:#eee8e1;
+}
+
 h1 {
     text-align: center;
     padding: 20px;
@@ -7,19 +11,20 @@ h1 {
 .form {
     width: 80%;
     margin: 20px auto;
-    border: 1px solid #9c9c9c;
+    border:1px solid #a48660;
+    background-color: #f4f2f0;
     padding: 50px;
     box-sizing: border-box;
 }
 
 .contents {
     margin-bottom: 30px;
+    margin-left: 20%;
 }
 
 .label_left {
     display: inline-block;
-    width: 45%;
-    border-left: solid 5px gray;
+    border-left: solid 5px #a48660;
     padding-left: 15px;
     vertical-align: top;
 }
@@ -27,7 +32,7 @@ h1 {
 .form input[type="text"] {
     padding: 10px;
     width: 75%;
-    background-color: rgb(234, 239, 241);
+    background-color: white;
     border: none;
     display: block;
 }
@@ -38,13 +43,13 @@ h1 {
     font-size: 14px;
     width: 75%;
     border: none;
-    background-color: rgb(234, 239, 241);
+    background-color: white;
     display: block;
 }
 
 .form select {
     height: 35px;
-    width: 75%;
+    width: 77%;
     display: block;
 }
 
@@ -74,12 +79,30 @@ h1 {
     margin: 0 5px;
 }
 
-.faq {
-    text-decoration: none;
-    color: black;
-    transition: 0.3s;
+.linkbutton {
+    text-align: right;
 }
 
-.faq:hover {
-    color: #9c9c9c;
+.toppagelink {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}
+
+.faq {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
 }
