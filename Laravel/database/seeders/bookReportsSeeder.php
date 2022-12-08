@@ -28,7 +28,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 4,
                 'selectedComment' => '2',
                 'comment' => 'たぶんよかった。',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-01-15 9:15:00'
             ],
             [
@@ -38,7 +38,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 1,
                 'selectedComment' => '5',
                 'comment' => 'よくなかった。',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2021-02-05 6:15:00'
             ],
             [
@@ -58,7 +58,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 5,
                 'selectedComment' => '2',
                 'comment' => '最高だった。',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-04-15 9:15:00'
             ],
             [
@@ -68,7 +68,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' =>1,
                 'selectedComment' => '5',
                 'comment' => '二度と読まない。',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-06-30 9:15:00'
             ],
             [
@@ -78,7 +78,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 4,
                 'selectedComment' => '2',
                 'comment' => '普通。まあまあ',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-04-20 9:15:00'
             ],
             [
@@ -88,7 +88,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 3,
                 'selectedComment' => '2',
                 'comment' => 'よかった。',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2003-01-15 9:15:00'
             ],
             [
@@ -98,7 +98,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 1,
                 'selectedComment' => '2',
                 'comment' =>'名作と名高い「となりのトトロ」の感想です。子供だけではなく大人にも愛されるアニメである理由がよくわかりました。私は子供の頃からトトロが大好きでしたが、大人になってから再度見てみると、子供の視点では気付かなかった魅力を見つけることができました。子供も大人も楽しめる、そんな素晴らしいアニメです。どんな人にもおすすめできます！',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-07-07 15:22:00'
             ],
             [
@@ -108,7 +108,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 1,
                 'selectedComment' => '3,5',
                 'comment' =>'おもしろい',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2022-10-14 11:22:00'
             ],
             [
@@ -128,7 +128,7 @@ class bookReportsSeeder extends Seeder
                 'evaluation' => 1,
                 'selectedComment' => '2',
                 'comment' =>'yeah',
-                'Open' => 1,
+                'Open' => null,
                 'created_at' => '2021-04-13 15:22:00'
             ]
         ]);
