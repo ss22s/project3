@@ -7,7 +7,6 @@
 </head>
 <body>
     <div>
-        <!-- <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a><a href="/faq" class="faq">よくあるご質問</a></div> -->
         <div class="page">ご意見 / お問い合わせ</div>
         <div class="faqlink"><a href="/faq" class="faq">よくあるご質問</a></div>
         <div>
