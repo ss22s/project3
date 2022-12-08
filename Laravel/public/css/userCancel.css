@@ -2,6 +2,10 @@ body {
     background-color:#eee8e1;
 }
 
-h1 {
-    text-align: center;
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
 }

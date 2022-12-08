@@ -2,10 +2,12 @@ body {
     background-color:#eee8e1;
 }
 
-h1 {
-    text-align: center;
-    padding: 20px;
-    margin: 0;
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
 }
 
 .form {
@@ -79,8 +81,12 @@ h1 {
     margin: 0 5px;
 }
 
-.linkbutton {
+.faqlink {
     text-align: right;
+}
+
+.linkbutton {
+    text-align: center;
 }
 
 .toppagelink {
