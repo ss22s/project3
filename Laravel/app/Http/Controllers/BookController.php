@@ -26,7 +26,7 @@ class BookController extends Controller
         //TODO27:本データを外部から取る場合、書き換え
         $bookData = Book::where('bookID', $bookID)->first();
         $bookThumbnail = $this->setThumbnail($bookID);
-        
+
         //TODO27:ひとこと感想TOP3.やり方が綺麗でない
         $selectedCommentsGet = bookReport::selectraw('selectedComment')->where('bookID', $bookID)->get();
         foreach ($selectedCommentsGet as $selectedCommentGet) {
@@ -43,7 +43,7 @@ class BookController extends Controller
         array_multisort($NumGet, SORT_DESC, $selectedCommentsCount);
         $selectedCommentsTop = array_slice($selectedCommentsCount, 0, 3);
 
-        return view('TOP/bookDetail', compact('bookData','bookThumbnail','selectedCommentsTop'));
+        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop'));
     }
 
     public function searchPageGet(Request $request)
@@ -156,18 +156,18 @@ class BookController extends Controller
             //本かどうか確かめる　 本ならISBNとタイトルを取る
 
             $bookDatas[$x]['isbn13'] = $this->setISBN($bookDataSet);
-            
+
             $bookDatas[$x]['title'] = $bookDataSet->volumeInfo->title;
-            
+
             //作者名がなければ不明で登録
             $bookDatas[$x]['author'] = $this->setAuthor($bookDataSet);
-            
+
             //カテゴリ
             $bookDatas[$x]['categories'] = $this->setCategories($bookDataSet);
-           
+
             //詳細
             $bookDatas[$x]['description'] = $this->setDescription($bookDataSet);
-            
+
             $x++;
         }
 
@@ -208,7 +208,7 @@ class BookController extends Controller
 
                 $bookDataGet = book::where('bookID', $bookID)->first();
                 // dd($bookDataGet);
-                
+
                 $wantBooks[$x]['bookID'] = $bookID;
                 $wantBooks[$x]['book'] = $bookDataGet['book'];
 
@@ -269,9 +269,9 @@ class BookController extends Controller
     {
         $bookID = request()->input('bookID');
         $bookDatasGet = $this->booksearchId($bookID);
-        
+
         $book = $bookDatasGet->volumeInfo->title;
-        
+
         //$bookID = request()->input('bookID');
 
         //$book = DB::table('books')->where('bookID', $bookID)->value('book');
@@ -450,7 +450,8 @@ class BookController extends Controller
         return $authors;
     }
 
-    public function setCategories($bookData){
+    public function setCategories($bookData)
+    {
         if (!(property_exists($bookData->volumeInfo, 'categories'))) {
             $categories = "不明";
         } else {
@@ -472,7 +473,8 @@ class BookController extends Controller
         return $categories;
     }
 
-    public function setISBN($bookData){
+    public function setISBN($bookData)
+    {
         if (property_exists($bookData->volumeInfo, 'industryIdentifiers')) {
 
             if (count($bookData->volumeInfo->industryIdentifiers) == 2) {
@@ -490,7 +492,8 @@ class BookController extends Controller
         return $ISBN;
     }
 
-    public function setDescription($bookData){
+    public function setDescription($bookData)
+    {
         if (!(property_exists($bookData->volumeInfo, 'description'))) {
             $description = "";
         } else {
@@ -499,10 +502,11 @@ class BookController extends Controller
         return $description;
     }
 
-    public function setThumbnail($bookID){
+    public function setThumbnail($bookID)
+    {
         $frontUrl = 'http://books.google.com/books/content?id=';
         $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
-        $thumbnailUrl = $frontUrl. $bookID . $backUrl;
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
         return $thumbnailUrl;
     }
 }
