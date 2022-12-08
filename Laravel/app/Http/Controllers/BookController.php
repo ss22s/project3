@@ -293,8 +293,10 @@ class BookController extends Controller
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
 
-        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
-
+        $open = $request->input('Open');
+        if ($open != 0) {
+            $open = null;
+        }
         //created_atの日付
         $today = date("Y-m-d H:i:s");
         //user情報
@@ -309,7 +311,7 @@ class BookController extends Controller
             'evaluation' => $reportDatasGet['evaluation'],
             "selectedComment" =>  $selectedComment,
             "comment" => $reportDatasGet['comment'],
-            "Open" => $reportDatasGet['open'],
+            "Open" => $open,
             "created_at" => $today
         ]);
 

@@ -75,8 +75,8 @@
             <br>
             <div>
                 <label>公開：</label>
-                <input type="radio" name="open" value="1">公開
-                <input type="radio" name="open" value="0" checked>非公開
+                <input type="radio" name="open" value="0">公開
+                <input type="radio" name="open" value="1" checked>非公開
             </div>
             <br>
             <div>
