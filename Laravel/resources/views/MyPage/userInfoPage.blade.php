@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <a href="/userCancel">退会したい</a>
+    <a href="/userExit">退会したい</a>
 
 </body>
 </html>
