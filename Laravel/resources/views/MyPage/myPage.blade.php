@@ -8,19 +8,14 @@
 </head>
 
 <body>
-   
     @auth
-    <div class="MenuBar">
-    @include('MenuBar')
-    </div>
     <div class="main">
-        <div class="page">マイページ</div>
-        <div class="MenuBarBox">
+        <div class="menuBar">
+            @include('MenuBar')
         </div>
-        <br>
-        
+        <div class="page">マイページ</div>
         <div class="box1">
-            <h1 class="menu">ユーザ情報</h1>
+            <h1 class="content">ユーザ情報</h1>
             <a class="link" href="/userInfo">ユーザ情報を編集する</a>
             <p class="data">
                 <b class="bold">ユーザ名：</b>{{Auth::user()->name}} <br>
@@ -39,12 +34,12 @@
         <br>
         <div class="list">
             <div class="box2">
-                <h1 class="menu">フォロー</h1>
+                <h1 class="content">フォロー</h1>
                 @if($followLists != "")
                 <div>
                     <p class="data">
                         @foreach($followLists as $followList)
-                        <a href="{{route('user',['userID' => $followList['followerID']])}}"> {{$followList['followerName']}}</a>
+                        <a class="link" href="{{route('user',['userID' => $followList['followerID']])}}"> {{$followList['followerName']}}</a>
                         <br>
                         @endforeach
                     </p>
@@ -57,7 +52,7 @@
             </div>
             <div class="box2">
                 {{-- TODO:隙間などはCSSに変更 --}}
-                <h1 class="menu">読みたい本リスト</h1>
+                <h1 class="content">読みたい本リスト</h1>
                 @if($myWantToBookdatas != "")
                 <div>
                     <p class="data">
@@ -74,7 +69,7 @@
                 @endif
             </div>
             <div class="box2">
-                <h1 class="menu">読んだ本リスト</h1>
+                <h1 class="content">読んだ本リスト</h1>
                 @if($myFinishedBookdatas != "")
                 <div>
                     <p class="data">
