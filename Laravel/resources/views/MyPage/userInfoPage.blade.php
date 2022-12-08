@@ -44,11 +44,11 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
-                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"><br>
-                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"><br>
-                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"><br>
-                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"><br>
-                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"><br>
+                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}" size="35"><br>
+                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}" size="35"><br>
+                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}" size="35"><br>
+                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}" size="35"><br>
+                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}" size="35"><br>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
