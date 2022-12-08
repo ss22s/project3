@@ -12,10 +12,10 @@
 </head>
 
 <body>
-<div class="MenuBar">
-    @include('MenuBar')
-    </div>
     <div class="main">
+    <div class="menuBar">
+        @include('MenuBar')
+    </div>
         <div class="page">ランキング</div>
         @csrf
         @php
