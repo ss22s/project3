@@ -1,3 +1,23 @@
-body {
+.main {
     background-color:#eee8e1;
+    text-align: center;
+}
+
+.box1{
+    display:inline-block;
+    background:#efefef;
+    border:solid 3px#454541;
+    border-radius:10px;
+    font-size:20px;
+    padding:15px;
+    color:#454541;
+    margin:20px;
+    width:840px;
+    text-align: left;
+}
+
+.menu{
+    font-size:26px;
+    color:#D2B48C;
+    text-align:center;
 }

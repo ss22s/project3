@@ -15,14 +15,15 @@
     
     <title>ユーザ情報</title>
 </head>
-<body>
-
-    <h4>ユーザ情報編集</h4>
+<body class="main">
+    <div class="box1">
+    <h4 class="menu">ユーザ情報編集</h4>
         <b>ユーザ名：</b>{{$userData['name']}} <br>
         <b>メールアドレス：</b>{{$userData['email']}} <br>
         <b>イチオシの一冊：</b>{{$userData['favoriteBook']}} <br>
         <b>好きな著者：</b>{{$userData['favoriteAuthor']}} <br>
         <b>自由記述欄：</b>{{$userData['freeText']}}<br>
+    </div>
 
         <!-- モーダルを開くボタン・リンク -->
     <!--TODO:foreach文で出す際にdata-targetとidを感想のIDにする-->
