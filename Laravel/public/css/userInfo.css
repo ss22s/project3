@@ -1,3 +1,5 @@
+
+
 .main {
     background-color:#eee8e1;
     text-align: center;
@@ -35,15 +37,22 @@
 }
 
 .btn-primary:hover {
-    color:#efefef;
-    background:#D2B48C;
-    border:solid 3px#D2B48C;
+    color: #efefef;
+    background-color: #D2B48C;
+    border-color: #D2B48C;
 }
 
-.btn-primary:active {
-    color:#efefef;
-    background:#D2B48C;
-    border:solid 3px#D2B48C;
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #efefef;
+  background-color: #D2B48C;
+  border-color: #D2B48C;
+}
+
+.btn-primary:focus, .btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: none;
 }
 
 .link{

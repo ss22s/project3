@@ -29,7 +29,7 @@
     <!--TODO:foreach文で出す際にdata-targetとidを感想のIDにする-->
     <div>
         
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleBook">
+        <button type="button" class="btn btn-primary hensyu-btn" data-toggle="modal" data-target="#exampleBook">
             ユーザー情報の編集
         </button>
 
