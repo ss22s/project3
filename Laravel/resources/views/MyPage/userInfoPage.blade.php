@@ -47,11 +47,11 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
-                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"><br>
-                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"><br>
-                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"><br>
-                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"><br>
-                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"><br>
+                        <div class="label"><b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"></div>
+                        <div class="label"><b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"></div>
+                        <div class="label"><b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
+                        <div class="label"><b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
+                        <div class="label"><b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
