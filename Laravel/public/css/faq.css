@@ -3,7 +3,7 @@ body {
 }
 
 .linkbutton {
-    text-align: right;
+    text-align: center;
 }
 
 .toppagelink {
@@ -18,10 +18,12 @@ body {
     border-radius:10px;
 }
 
-h1 {
-    text-align: center;
-    padding: 20px;
-    margin: 20px;
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
 }
 
 .faq {
