@@ -18,13 +18,17 @@
 <body>
 
     <div class="page">退会ページ</div>
+    <div class="contents">
     退会すると全ての情報が失われます。<br>
     失われた情報は元に戻せませんが、本当に退会しますか？
+    </div>
 
-    <div>     
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleBook">
+    <div>
+        <div align="center">     
+        <button type="button" class="btn btn-primary taikaibtn" data-toggle="modal" data-target="#exampleBook">
             退会する
         </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleBook" tabindex="-1" role="dialog">
