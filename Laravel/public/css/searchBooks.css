@@ -1,72 +1,85 @@
-.menuBar{
-    text-align:left;
+.menuBar {
+    text-align: left;
 }
-.menu1{
-    background-color:#eee8e1;
-    color:#454541;
-    border:none;
+
+.menu1 {
+    background-color: #eee8e1;
+    color: #454541;
+    border: none;
     position: relative;
-    height:50px;
-    width:50px;
+    height: 50px;
+    width: 50px;
     display: inline-block;
     box-sizing: border-box;
-    border-radius:4px;
+    border-radius: 4px;
 }
+
 .menu1 div {
     position: absolute;
-    left:7px;
-    height:4px;
-    width:30px;
-    background-color:#454541;
-    border-radius:2px;
+    left: 7px;
+    height: 4px;
+    width: 30px;
+    background-color: #454541;
+    border-radius: 2px;
     display: inline-block;
     box-sizing: border-box;
-  }
-  .menu1 div:nth-of-type(1) {
+}
+
+.menu1 div:nth-of-type(1) {
     bottom: 30px;
-  }
-  .menu1 div:nth-of-type(2) {
+}
+
+.menu1 div:nth-of-type(2) {
     bottom: 20px;
-  }
-  .menu1 div:nth-of-type(3) {
+}
+
+.menu1 div:nth-of-type(3) {
     bottom: 10px;
-  }  
-  .offcanvas-header{
-    background-color:#eee8e1;
-    color:#D2B48C;
-  }
-.toppagelink{
-    display:inline-block;
-    text-decoration:none;
-    padding:10px 30px;
-    margin:5px;
-    font-size:20px;
-    color:#efefef;
-    background:#D2B48C;
-    border:solid 3px#D2B48C;
-    border-radius:10px;
 }
-.toppagelink:hover{
-    color:#efefef;
+
+.offcanvas-header {
+    background-color: #eee8e1;
+    color: #D2B48C;
 }
-.message{
-    font-size:18px;
+
+.toppagelink {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 20px;
+    color: #efefef;
+    background: #D2B48C;
+    border: solid 3px#D2B48C;
+    border-radius: 10px;
 }
-.mypagelink{
-    font-size:24px;
+
+.toppagelink:hover {
+    color: #efefef;
+}
+
+.message {
+    font-size: 18px;
+}
+
+.mypagelink {
+    font-size: 24px;
     color: #454541;
 }
-.mypagelink:hover{
-    font-size:24px;
-    color:#D2B48C;
+
+.mypagelink:hover {
+    font-size: 24px;
+    color: #D2B48C;
 }
-.logoutlink{
-    font-size:24px;
+
+.logoutlink {
+    font-size: 24px;
     color: #454541;
 }
-.logoutlink:hover{
-    font-size:24px;
-    color:#D2B48C;
+
+.logoutlink:hover {
+    font-size: 24px;
+    color: #D2B48C;
 }
 
 .top {
@@ -76,7 +89,10 @@
     /* background-color:#eee8e1; */
     font-size: 25px;
     background-color: whitesmoke;
-    width: 100%;
+    width: 94%;
+    /* border: #454541 2px solid;
+    padding-top: 5px; */
+    
 }
 
 .nav {
@@ -84,10 +100,14 @@
     padding: auto;
     display: flex;
     height: auto;
-    width: 100%;
+    width: 94%;
+    /* border: #454541 2px solid;
+    padding-bottom: 5px; */
+
     /* background-color:#eee8e1; */
     /* padding-bottom: 10px; */
 }
+
 .top>.nav {
     /* padding-left: 10px; */
     position: fixed;
@@ -100,14 +120,14 @@ main {
 }
 
 body {
-    background-color: #eee8e1; 
+    background-color: #eee8e1;
 }
 
-.btn{
+.btn {
     display: inline-block;
 }
 
-.form-inline{
+.form-inline {
     display: flex;
     width: 100%;
 }
@@ -127,7 +147,7 @@ body {
 .select {
     font-size: 20px;
     padding: 10px;
-    background-color: #eee8e1;
+    background-color: whitesmoke;
     width: 100%;
     height: auto;
     border: 3px solid #4D4B49;
@@ -136,7 +156,7 @@ body {
 }
 
 
-.buttoncss{
+.buttoncss {
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -150,30 +170,77 @@ body {
 }
 
 /*読みたい本リストの部分CSS*/
-.bookdata{
-    border: thick  #4D4B49 double;
-    border-bottom: thick  #4D4B49 double;
-    width: 90%;
+.bookdata {
+    border: thick #4D4B49 double;
+    border-bottom: thick #4D4B49 double;
+    width: 100%;
     margin: auto;
     margin-top: 1rem;
-    background-color: #f8f5f2ca ;
-    
-}
-.bookselectdata{
-    display: inline-block;
-    
+    background-color: #f8f5f2ca;
+    display: flex;
+    /* display: inline-block; */
 }
 
-.linecss{
+
+.bookselectdata {
+    display: inline-block;
+
+}
+
+.linecss {
     border-width: 50px;
 }
-h2{
+
+h2 {
     border-bottom: 10px solid;
 }
-.datacss{
+
+.datacss {
     text-align: left;
 }
-.pagebutton{
-   margin-left: 20%;
-   margin-right: 20%;
+
+.pagebutton {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.pagecount{
+    font-size:  30px;
+}
+
+ div#content {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+ div#main {
+    width: 94%;
+    float: right;
+}
+
+  nav {
+    width: 6%;
+    float: left;
+    position: fixed;
+    height: 100%;
+}
+
+.bookdatas{
+    overflow: hidden;
+    height:150px;
+    display: flex;
+    align-items: center;
+}
+
+.bookInfo{
+    float: right;
+    padding-left: 100px;
+    min-height: 130px;
+ 
+}
+.bookPhoto{
+    float: left;
+    position: fixed;
+    width:90px;
+     height:120px;
 }

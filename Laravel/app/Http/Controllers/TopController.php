@@ -204,23 +204,25 @@ class TopController extends Controller
                 $bookReportGet = DB::table('bookReports')->where('id', $userID)->where('Open', null)->latest()->take(5)->get();
                 $x = 0;
                 foreach ($bookReportGet as $bookReportset) {
-                    $userBookReport['reviewID'] = $bookReportset['reviewID'];
+                    $userBookReport['reviewID'] = $bookReportset->reviewID;
             
                     //book関連
-                    $userBookReport['bookID'] = $bookReportset['bookID'];
+                    $userBookReport['bookID'] = $bookReportset->bookID;
                     $userBookReport["book"] = book::where('bookID', $userBookReport['bookID'])->value('book');
-                    $userBookReport['thumbnail'] = $this->setThumbnail($bookReportset['bookID']);
+                    $userBookReport['thumbnail'] = $this->setThumbnail($bookReportset->bookID);
                     //感想関連
-                    $userBookReport["evaluation"] = $bookReportset["evaluation"];
-                    $userBookReport["selectedComment"] = $bookReportset["selectedComment"];
-                    $userBookReport["comment"] = $bookReportset["comment"];
-                    $day = explode(" ", $bookReportset['created_at']);
+                    $userBookReport["evaluation"] = $bookReportset->evaluation;
+                    $userBookReport["selectedComment"] = $bookReportset->selectedComment;
+                    $userBookReport["comment"] = $bookReportset->comment;
+                    $day = explode(" ", $bookReportset->created_at);
                     $userBookReport["created_at"] = $day[0];
 
                     $userBookReportdatas[$x] = $userBookReport;
 
                     $x++;
                 }
+            }else {
+                $userBookReportdatas = "";
             }
 
             return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists','userBookReportdatas'));
@@ -260,6 +262,14 @@ class TopController extends Controller
     {
         $frontUrl = 'http://books.google.com/books/content?id=';
         $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
+        return $thumbnailUrl;
+    }
+
+    public function setThumbnailSmall($bookID)
+    {
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=5&source=gbs_api';
         $thumbnailUrl = $frontUrl . $bookID . $backUrl;
         return $thumbnailUrl;
     }
