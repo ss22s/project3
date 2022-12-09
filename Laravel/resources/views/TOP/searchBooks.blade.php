@@ -88,6 +88,9 @@
     <!--TODO27:ボタン押したら開く感じにしてもいいね 上か左でどの手段か選択　それが開いてる感じ-->
     <!--TODO27:詳細検索をつけてもいい　クリックすると開くかModal-->
     <div class="top">
+        <div class="menuBar">
+            @include('MenuBar')
+        </div>
         感想を書く本を選択します
         <div class="nav">
             <form class="form-inline" method="post">
@@ -107,9 +110,6 @@
         </div>
     </div>
     <main>
-    <div>
-            @include('MenuBar')
-        </div>
         @if(session('select') == 'search')
         <div id="searchContent">
             <h3>検索する</h3>
