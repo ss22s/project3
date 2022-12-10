@@ -44,8 +44,11 @@
 
         <hr class="line">
         <div>
-            <a class="toppagelink" href="/selectBooks">感想を書く</a>
-        </div>
+            <a class="toppagelink" href="/selectBooks">
+                感想を書く
+            </a>
+        
+            </div>
     </div>
 </body>
 </html>
