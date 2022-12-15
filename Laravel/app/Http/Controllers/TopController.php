@@ -7,10 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+
 use App\Models\bookReport;
 use App\Models\member;
 use App\Models\book;
+
 use App\Models\Mypage;
+use App\Models\wantBook;
+use App\Models\finishedBook;
 use App\Models\followList;
 
 use Illuminate\Support\Facades\Mail;
@@ -50,7 +54,7 @@ class TopController extends Controller
     public function newBookReport(Request $request)
     {
         //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
-        $bookReportDatas = bookReport::where('Open', 1)->latest()->take(6)->get();
+        $bookReportDatas = bookReport::where('Open', null)->latest()->take(6)->get();
         $x = 0;
 
         foreach ($bookReportDatas as $bookReportData) {
@@ -124,22 +128,10 @@ class TopController extends Controller
     }
     //st002023@m01.kyoto-kcg.ac.jp
 
-    public function setZero($x)
-    {
-        return $x = 0;
-    }
-
-    public function setThumbnail($bookID)
-    {
-        $frontUrl = 'http://books.google.com/books/content?id=';
-        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
-        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
-        return $thumbnailUrl;
-    }
 
     public function userPage($userID)
     {
-       
+
         $myData = Auth::user();
 
         if ($myData == null || $myData['id'] != $userID) {
@@ -147,9 +139,93 @@ class TopController extends Controller
             $userData = Mypage::where('id', $userID)->first();
             $userData['name'] = member::where('id', $userID)->value('name');
             $userData['id'] = $userID;
-            //TODO27:読みたい本リストとか公開設定にしてたら表示する
-            //TODO27:書いた感想の中で公開設定のものはいくつか表示？
-            return view('userPage', compact('userData'));
+
+            //読みたい本リスト
+            if (DB::table('MyPages')->where('id', $userID)->where('showWantToBook', null)->exists()) {
+                if (DB::table('wantToBooks')->where('id', $userID)->where('finished', null)->exists()) {
+                    $wantToBookDatasGet = wantBook::where('id', $userID)->where('finished', null)->orderBy('registered_at', 'desc')->take(3)->get();
+                    $x = 0;
+                    foreach ($wantToBookDatasGet as $wantToBookDataGet) {
+                        $userWantToBookdatas[$x]['bookID'] = $wantToBookDataGet['bookID'];
+                        $userWantToBookdatas[$x]['book'] = book::where('bookID', $wantToBookDataGet['bookID'])->value('book');
+                        $x++;
+                    }
+                } else {
+                    $userWantToBookdatas = "";
+                }
+            } else if (DB::table('MyPages')->where('id', $userID)->where('showWantToBook', null)->exists()) {
+                $userWantToBookdatas = "非公開";
+            }
+
+            //読んだ本リスト
+            if (DB::table('MyPages')->where('id', $userID)->where('showFinishedBook', null)->exists()) {
+                if (DB::table('finishedBooks')->where('id', $userID)->exists()) {
+                    $finishedBookDatasGet = finishedBook::where('id', $userID)->orderBy('date', 'desc')->take(3)->get();
+                    $x = 0;
+                    foreach ($finishedBookDatasGet as $finishedBookDataGet) {
+                        $userFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
+                        $userFinishedBookdatas[$x]['book'] = book::where('bookID', $finishedBookDataGet['bookID'])->value('book');
+                        //日付関連
+                        $finishDateGet = explode(" ", $finishedBookDataGet['date']);
+                        $finishDate = explode("-", $finishDateGet[0]);
+
+                        $userFinishedBookdatas[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                        $userFinishedBookdatas[$x]['reviewID'] = $finishedBookDataGet['reviewID'];
+
+                        $x++;
+                    }
+                } else {
+                    $userFinishedBookdatas = "";
+                }
+            } else if (DB::table('MyPages')->where('id', $userID)->where('showFinishedBook', null)->exists()) {
+                $userFinishedBookdatas = "非公開";
+            }
+
+            //フォローリスト
+            if (DB::table('MyPages')->where('id', $userID)->where('showFollowList', null)->exists()) {
+                if (DB::table('followLists')->where('id', $userID)->exists()) {
+                    $followListGet = followList::where('id', $userID)->get();
+                    $x = 0;
+                    foreach ($followListGet as $followListSet) {
+                        $userFollowLists[$x]['followerID'] = $followListSet['followerID'];
+                        $userFollowLists[$x]['followerName'] = member::where('id', $userFollowLists[$x]['followerID'])->value('name');
+
+                        $x++;
+                    }
+                } else {
+                    $userFollowLists = "";
+                }
+            } else {
+                $userFollowLists = "非公開";
+            }
+
+            //書いた感想
+            if (DB::table('bookReports')->where('id', $userID)->where('Open', null)->exists()) {
+                $bookReportGet = DB::table('bookReports')->where('id', $userID)->where('Open', null)->latest()->take(5)->get();
+                $x = 0;
+                foreach ($bookReportGet as $bookReportset) {
+                    $userBookReport['reviewID'] = $bookReportset->reviewID;
+            
+                    //book関連
+                    $userBookReport['bookID'] = $bookReportset->bookID;
+                    $userBookReport["book"] = book::where('bookID', $userBookReport['bookID'])->value('book');
+                    $userBookReport['thumbnail'] = $this->setThumbnail($bookReportset->bookID);
+                    //感想関連
+                    $userBookReport["evaluation"] = $bookReportset->evaluation;
+                    $userBookReport["selectedComment"] = $bookReportset->selectedComment;
+                    $userBookReport["comment"] = $bookReportset->comment;
+                    $day = explode(" ", $bookReportset->created_at);
+                    $userBookReport["created_at"] = $day[0];
+
+                    $userBookReportdatas[$x] = $userBookReport;
+
+                    $x++;
+                }
+            }else {
+                $userBookReportdatas = "";
+            }
+
+            return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists','userBookReportdatas'));
         } else if ($myData['id'] == $userID) {
 
             return redirect()->action([MyPageController::class, 'myPage']);
@@ -172,7 +248,29 @@ class TopController extends Controller
             ]);
             $flashMessage = "成功";
         }
-        
+
         return back()->with('FollowMessage', $flashMessage);
+    }
+
+
+    public function setZero($x)
+    {
+        return $x = 0;
+    }
+
+    public function setThumbnail($bookID)
+    {
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
+        return $thumbnailUrl;
+    }
+
+    public function setThumbnailSmall($bookID)
+    {
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=5&source=gbs_api';
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
+        return $thumbnailUrl;
     }
 }

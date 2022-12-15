@@ -24,21 +24,30 @@ class MyPagesSeeder extends Seeder
             ['id' => 1,
             'favoriteBook' => '苦しかったときの話をしようか',
             'favoriteAuthor' => '森岡毅',
-            'freeText' => 'Hello!'],
+            'freeText' => 'Hello!',
+            'showWantToBook' => null,
+            'showFinishedBook' => null,
+            'showFollowList' => null],
         ]);
 
         \DB::table('MyPages')->insert([
             ['id' => 2,
             'favoriteBook' => 'となりのトトロ',
             'favoriteAuthor' => '宮崎駿',
-            'freeText' => 'TOTORO!'],
+            'freeText' => 'TOTORO!',
+            'showWantToBook' => 1,
+            'showFinishedBook' => 1,
+            'showFollowList' => 1],
         ]);
 
         \DB::table('MyPages')->insert([
             ['id' => 3,
             'favoriteBook' => 'おいしいごはんが食べられますように',
             'favoriteAuthor' => '高瀬隼子',
-            'freeText' => 'お腹すいた'],
+            'freeText' => 'お腹すいた',
+            'showWantToBook' => 1,
+            'showFinishedBook' => null,
+            'showFollowList' => 1],
         ]);
     }
 }

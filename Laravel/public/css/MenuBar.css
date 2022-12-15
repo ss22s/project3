@@ -1,6 +1,7 @@
-/* .BarBox{
+ .BarBox{
     width: 30%;
 }
+/*
 .MenuBar{
     display:inline-block; 
     width:50%;
@@ -10,3 +11,89 @@
     margin-top: 0;
     background-color: aqua;
 } */
+.menuBar {
+    text-align: left;
+}
+
+.menu1 {
+    background-color: #eee8e1;
+    color: #454541;
+    border: none;
+    position: relative;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.searchbooksOnly{
+    background-color: transparent;
+}
+
+.menu1 div {
+    position: absolute;
+    left: 7px;
+    height: 4px;
+    width: 30px;
+    background-color: #454541;
+    border-radius: 2px;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.menu1 div:nth-of-type(1) {
+    bottom: 30px;
+}
+
+.menu1 div:nth-of-type(2) {
+    bottom: 20px;
+}
+
+.menu1 div:nth-of-type(3) {
+    bottom: 10px;
+}
+
+.offcanvas-header {
+    background-color: #eee8e1;
+    color: #D2B48C;
+}
+
+.toppagelink {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 20px;
+    color: #efefef;
+    background: #D2B48C;
+    border: solid 3px#D2B48C;
+    border-radius: 10px;
+}
+
+.toppagelink:hover {
+    color: #efefef;
+}
+
+.message {
+    font-size: 18px;
+}
+
+.mypagelink {
+    font-size: 24px;
+    color: #454541;
+}
+
+.mypagelink:hover {
+    font-size: 24px;
+    color: #D2B48C;
+}
+
+.logoutlink {
+    font-size: 24px;
+    color: #454541;
+}
+
+.logoutlink:hover {
+    font-size: 24px;
+    color: #D2B48C;
+}

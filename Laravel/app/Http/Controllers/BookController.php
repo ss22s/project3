@@ -152,22 +152,24 @@ class BookController extends Controller
         //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
 
-            $bookDatas[$x]['id'] = $bookDataSet->id;
-            //本かどうか確かめる　 本ならISBNとタイトルを取る
+            $bookData['id'] = $bookDataSet->id;
 
-            $bookDatas[$x]['isbn13'] = $this->setISBN($bookDataSet);
+            $bookData['thumbnail'] = $this->setThumbnail($bookDataSet->id);
 
-            $bookDatas[$x]['title'] = $bookDataSet->volumeInfo->title;
+            $bookData['isbn13'] = $this->setISBN($bookDataSet);
+
+            $bookData['title'] = $bookDataSet->volumeInfo->title;
 
             //作者名がなければ不明で登録
-            $bookDatas[$x]['author'] = $this->setAuthor($bookDataSet);
+            $bookData['author'] = $this->setAuthor($bookDataSet);
 
             //カテゴリ
-            $bookDatas[$x]['categories'] = $this->setCategories($bookDataSet);
+            $bookData['categories'] = $this->setCategories($bookDataSet);
 
             //詳細
-            $bookDatas[$x]['description'] = $this->setDescription($bookDataSet);
+            $bookData['description'] = $this->setDescription($bookDataSet);
 
+            $bookDatas[$x] = $bookData;
             $x++;
         }
 
@@ -249,6 +251,7 @@ class BookController extends Controller
                 $finishedBooks[$x]['author'] = $bookDataGet['author'];
 
                 // $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                $finishedBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
@@ -293,8 +296,10 @@ class BookController extends Controller
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
 
-        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
-
+        $open = $request->input('Open');
+        if ($open != 0) {
+            $open = null;
+        }
         //created_atの日付
         $today = date("Y-m-d H:i:s");
         //user情報
@@ -309,7 +314,7 @@ class BookController extends Controller
             'evaluation' => $reportDatasGet['evaluation'],
             "selectedComment" =>  $selectedComment,
             "comment" => $reportDatasGet['comment'],
-            "Open" => $reportDatasGet['open'],
+            "Open" => $open,
             "created_at" => $today
         ]);
 
