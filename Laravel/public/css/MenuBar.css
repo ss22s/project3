@@ -97,3 +97,13 @@
     font-size: 24px;
     color: #D2B48C;
 }
+
+.loginlink {
+    font-size: 24px;
+    color: #454541;
+}
+
+.loginlink:hover {
+    font-size: 24px;
+    color: #D2B48C;
+}
