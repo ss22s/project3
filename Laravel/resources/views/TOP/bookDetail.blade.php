@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,10 +15,10 @@
     </div>
     <div class="page">本の詳細ページ<div>
     <div>
-    <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200"><br>
-        タイトル：{{$bookData['book']}} <br>
-        著者：{{$bookData['author']}} <br>
-        カテゴリ：{{$bookData['categories']}}
+        <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200"><br>
+            タイトル：{{$bookData['book']}} <br>
+            著者：{{$bookData['author']}} <br>
+            カテゴリ：{{$bookData['categories']}}
     </div>
 
     <div>
