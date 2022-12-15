@@ -97,6 +97,17 @@ body {
     margin-right: 5%;
 }
 
+.searchbookdatas {
+    border:solid 3px#454541;
+    border-radius:10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 1rem;
+    background-color: #f8f5f2ca;
+    display: flex;
+    /* display: inline-block; */
+}
+
 /*読みたい本リストの部分CSS*/
 .bookdatas {
     border:solid 3px#454541;
@@ -125,6 +136,7 @@ h2 {
 
 .datacss {
     text-align: left;
+    
 }
 
 .pagebutton {
@@ -164,7 +176,7 @@ h2 {
     margin: 5px;
     padding: 0;
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
   }
 .bookInfo{
     margin: 0 0 0 20px;

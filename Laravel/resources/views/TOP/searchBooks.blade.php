@@ -26,6 +26,7 @@
 
                 // if()
             });
+            // if($('.searchwords').)
 
         })
     </script>
@@ -139,7 +140,7 @@
                 @foreach($bookDatas as $bookData)
                 <form action="/write" method="post">
                     @csrf
-                    <p class="bookdatas">
+                    <p class="searchbookdatas">
                         <input type="hidden" name="bookID" value="{{$bookData['id']}}">
                         <button class="buttoncss datacss">
 
