@@ -71,7 +71,7 @@
 }
 
 .toppagelink:hover {
-    color: #efefef;
+    opacity: 0.7;
 }
 
 .message {

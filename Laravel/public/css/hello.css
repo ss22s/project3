@@ -27,6 +27,9 @@
     border:solid 3px#D2B48C;
     border-radius:10px;
 }
+.mypagelink:hover{
+    opacity: 0.7;
+}
 
 .login{
     text-align:right;
@@ -44,6 +47,9 @@
     background:#D2B48C;
     border:solid 3px#D2B48C;
     border-radius:10px;
+}
+.loginlink:hover{
+    opacity: 0.7;
 }
 
 .logout{
@@ -69,7 +75,9 @@
     border:solid 3px#D2B48C;
     border-radius:10px;
 }
-
+.logoutlink:hover{
+    opacity: 0.7;
+}
 
 .toppage{
     padding-top:180px;
