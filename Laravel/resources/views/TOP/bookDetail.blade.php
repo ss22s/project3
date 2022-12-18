@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-
+<div class="MenuBar">
+    @include('MenuBar')
+    </div>
     <h3>本の詳細ページ</h3>
 
 <div>
