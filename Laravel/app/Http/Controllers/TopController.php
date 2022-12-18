@@ -129,6 +129,21 @@ class TopController extends Controller
     //st002023@m01.kyoto-kcg.ac.jp
 
 
+    public function bookReportsList(Request $request){
+        $searchType = $request->input('searchType');
+        $searhWords = $request->input('searchWords');
+
+
+        if($searchType == "title"){
+            $BookData = book::where('book',$searhWords)->get();
+        } else if($searchType == "author"){
+            dd("作者");
+        }
+
+        return view('/hello');
+    }
+
+
     public function userPage($userID)
     {
 
