@@ -343,13 +343,15 @@ class BookController extends Controller
         //bookテーブルにまだ登録されていなければ登録する
         if (!(DB::table('books')->where('bookID', $bookID)->exists())) {
             $bookDataGet = $this->booksearchId($bookID);
-            //dd($bookDataGet);
+            if($this->setISBN($bookDataGet) == "不明"){
+                $setISBN = "0";
+            }
 
             DB::table('books')->insert([
                 'bookID' => $bookID,
                 'book' => $bookDataGet->volumeInfo->title,
                 'author' => $this->setAuthor($bookDataGet),
-                'ISBN' => $this->setISBN($bookDataGet),
+                'ISBN' => $setISBN,
                 'categories' => $this->setCategories($bookDataGet),
             ]);
         }

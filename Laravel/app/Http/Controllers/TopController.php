@@ -146,6 +146,7 @@ class TopController extends Controller
                 //本の情報
                 $bookData['bookid'] = $bookDataSet['bookID']; 
                 $bookData['title'] = $bookDataSet['book'];
+                $bookData['author'] = $bookDataSet['author'];
                 $bookData['thumbnail'] = $this->setThumbnail($bookDataSet['bookID']);
 
                 //感想
@@ -157,7 +158,7 @@ class TopController extends Controller
                     $bookData['userid'] = member::where('id',$bookReportDataGet['id'])->value('name');
                     $day = explode(' ',$bookReportDataGet['created_at']);
                     $bookData['created_at'] = $day[0];
-                    $bookData['evaluation'] = $bookReportDataGet['evaluvation'];
+                    $bookData['evaluation'] = $bookReportDataGet['evaluation'];
                     
                     $selectedCommentsExplode = explode(',', $bookReportDataGet['selectedComment']);
                     $commentVar = 0;
@@ -170,10 +171,11 @@ class TopController extends Controller
                 $bookDatas[$x] = $bookData;
                 $x++;
             }
-            dd($bookDatas);
+            
+            //dd($bookDatas);
 
 
-        return view('/hello');
+        return view('/TOP/searchResult',compact('bookDatas','searchType','searchWords'));
     }
 
 
