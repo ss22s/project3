@@ -38,7 +38,7 @@
                     <label class="content">本のタイトル</label><br>
                     <input type="hidden" name="bookID" value="{{$bookID}}">
                     <!-- <input type="text" name="book" placeholder="例：となりのトトロ"> -->
-                    <b>{{$book}}</b>
+                    <b>「{{$book}}」</b>
                     <button class="change" method="get" formaction="/selectBooks">変更する</button>
                 </div>
                 <br>
