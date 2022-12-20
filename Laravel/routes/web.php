@@ -42,6 +42,9 @@ Route::get('/ranking','App\Http\Controllers\TopController@ranking');
 
 Route::get('/topMain','App\Http\Controllers\TopController@topMain');
 
+Route::post('/bookReportsList','App\Http\Controllers\TopController@bookReportsList');
+
+
 
 
 //お問い合わせ

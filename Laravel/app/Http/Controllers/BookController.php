@@ -18,9 +18,11 @@ class BookController extends Controller
 
         $selectedCommentsCountSet = array_fill(0, 10, 0);
         foreach ($selectedCommentsCountSet as $commentAdd) {
-            $selectedCommentsCount[$x]['value'] = $x;
-            $selectedCommentsCount[$x]['comment'] = $this->commentAdd($x);
-            $selectedCommentsCount[$x]['number'] = "0";
+            $selectedCommentsCount['value'] = $x;
+            $selectedCommentsCount['comment'] = $this->commentAdd($x);
+            $selectedCommentsCount['number'] = "0";
+
+            $selectedCommentsCount[$x] = $selectedCommentsCount;
             $x++;
         }
         //TODO27:本データを外部から取る場合、書き換え
@@ -211,13 +213,15 @@ class BookController extends Controller
                 $bookDataGet = book::where('bookID', $bookID)->first();
                 // dd($bookDataGet);
 
-                $wantBooks[$x]['bookID'] = $bookID;
-                $wantBooks[$x]['book'] = $bookDataGet['book'];
+                $wantBook['bookID'] = $bookID;
+                $wantBook['book'] = $bookDataGet['book'];
 
                 //作者
-                $wantBooks[$x]['author'] = $bookDataGet['author'];
+                $wantBook['author'] = $bookDataGet['author'];
 
-                $wantBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
+                $wantBook['thumbnail'] = $this->setThumbnail($bookID);
+
+                $wantBooks[$x] = $wantBook;
 
                 // $wantBooks[$x]['genre'] = $bookDataSet['genre'];
 

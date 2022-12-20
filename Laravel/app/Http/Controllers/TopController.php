@@ -37,13 +37,15 @@ class TopController extends Controller
         //take,limitで上から決まった件数(7)のみviewへ
         $this->setZero($x);
         foreach ($bookDatasGet as $bookDatas) {
-            $rankingDatas[$x]['bookID'] = $bookDatas['bookID'];
+            $rankingDataSet['bookID'] = $bookDatas['bookID'];
             $bookDataSet = book::where('bookID', $bookDatas['bookID'])->first();
-            $rankingDatas[$x]['book'] = $bookDataSet['book'];
-            $rankingDatas[$x]['author'] = $bookDataSet['author'];
-            $rankingDatas[$x]['categories'] = $bookDataSet['categories'];
-            $rankingDatas[$x]['thumbnail'] = $this->setThumbnail($bookDatas['bookID']);
-            $rankingDatas[$x]['count'] = bookReport::where('bookID', $bookDatas['bookID'])->count();
+            $rankingDataSet['book'] = $bookDataSet['book'];
+            $rankingDataSet['author'] = $bookDataSet['author'];
+            $rankingDataSet['categories'] = $bookDataSet['categories'];
+            $rankingDataSet['thumbnail'] = $this->setThumbnail($bookDatas['bookID']);
+            $rankingDataSet['count'] = bookReport::where('bookID', $bookDatas['bookID'])->count();
+            
+            $rankingDatas[$x] = $rankingDataSet;
             $x++;
         }
 
@@ -53,7 +55,7 @@ class TopController extends Controller
 
     public function newBookReport(Request $request)
     {
-        //openが公開になっている、日付が新しいもの(latest,or,idの大きい順)を検索
+        //openが公開(null)になっている、日付が新しいもの(latest,or,idの大きい順)を検索
         $bookReportDatas = bookReport::where('Open', null)->latest()->take(6)->get();
         $x = 0;
 
@@ -129,6 +131,32 @@ class TopController extends Controller
     //st002023@m01.kyoto-kcg.ac.jp
 
 
+    public function bookReportsList(Request $request){
+        $searchType = $request->input('searchType');
+        $searhWords = $request->input('searchWords');
+
+        if($searchType == "title"){
+            $bookDatasGet = book::where('book','LIKE','%'.$searhWords.'%')->get();
+            foreach ($bookDatasGet as $bookDataSet) {
+                //本の情報
+                $bookData['bookid'] = $bookDataSet['bookID']; 
+                $bookData['title'] = $bookDataSet['book'];
+                $bookData['thumbnail'] = $this->setThumbnail($bookDataSet['bookID']);
+
+                //感想
+                $bookReportData = bookReport::where('bookID',$bookDataSet['bookID'])->where('Open',null)->take(3)->get();
+                
+            }
+            dd($bookReportData);
+
+        } else if($searchType == "author"){
+            dd("作者");
+        }
+
+        return view('/hello');
+    }
+
+
     public function userPage($userID)
     {
 
@@ -163,15 +191,16 @@ class TopController extends Controller
                     $finishedBookDatasGet = finishedBook::where('id', $userID)->orderBy('date', 'desc')->take(3)->get();
                     $x = 0;
                     foreach ($finishedBookDatasGet as $finishedBookDataGet) {
-                        $userFinishedBookdatas[$x]['bookID'] = $finishedBookDataGet['bookID'];
-                        $userFinishedBookdatas[$x]['book'] = book::where('bookID', $finishedBookDataGet['bookID'])->value('book');
+                        $userFinishedBookdata['bookID'] = $finishedBookDataGet['bookID'];
+                        $userFinishedBookdata['book'] = book::where('bookID', $finishedBookDataGet['bookID'])->value('book');
                         //日付関連
                         $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                         $finishDate = explode("-", $finishDateGet[0]);
 
-                        $userFinishedBookdatas[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
-                        $userFinishedBookdatas[$x]['reviewID'] = $finishedBookDataGet['reviewID'];
+                        $userFinishedBookdata['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                        $userFinishedBookdata['reviewID'] = $finishedBookDataGet['reviewID'];
 
+                        $userFinishedBookdatas[$x] = $userFinishedBookdata;
                         $x++;
                     }
                 } else {
@@ -187,9 +216,10 @@ class TopController extends Controller
                     $followListGet = followList::where('id', $userID)->get();
                     $x = 0;
                     foreach ($followListGet as $followListSet) {
-                        $userFollowLists[$x]['followerID'] = $followListSet['followerID'];
-                        $userFollowLists[$x]['followerName'] = member::where('id', $userFollowLists[$x]['followerID'])->value('name');
+                        $userFollowListSet['followerID'] = $followListSet['followerID'];
+                        $userFollowListSet['followerName'] = member::where('id', $userFollowListSet['followerID'])->value('name');
 
+                        $userFollowLists[$x] = $userFollowListSet;
                         $x++;
                     }
                 } else {
@@ -204,20 +234,20 @@ class TopController extends Controller
                 $bookReportGet = DB::table('bookReports')->where('id', $userID)->where('Open', null)->latest()->take(5)->get();
                 $x = 0;
                 foreach ($bookReportGet as $bookReportset) {
-                    $userBookReport['reviewID'] = $bookReportset->reviewID;
+                    $userBookReportdata['reviewID'] = $bookReportset->reviewID;
             
                     //book関連
-                    $userBookReport['bookID'] = $bookReportset->bookID;
-                    $userBookReport["book"] = book::where('bookID', $userBookReport['bookID'])->value('book');
-                    $userBookReport['thumbnail'] = $this->setThumbnail($bookReportset->bookID);
+                    $userBookReportdata['bookID'] = $bookReportset->bookID;
+                    $userBookReportdata["book"] = book::where('bookID', $userBookReportdata['bookID'])->value('book');
+                    $userBookReportdata['thumbnail'] = $this->setThumbnail($bookReportset->bookID);
                     //感想関連
-                    $userBookReport["evaluation"] = $bookReportset->evaluation;
-                    $userBookReport["selectedComment"] = $bookReportset->selectedComment;
-                    $userBookReport["comment"] = $bookReportset->comment;
+                    $userBookReportdata["evaluation"] = $bookReportset->evaluation;
+                    $userBookReportdata["selectedComment"] = $bookReportset->selectedComment;
+                    $userBookReportdata["comment"] = $bookReportset->comment;
                     $day = explode(" ", $bookReportset->created_at);
-                    $userBookReport["created_at"] = $day[0];
+                    $userBookReportdata["created_at"] = $day[0];
 
-                    $userBookReportdatas[$x] = $userBookReport;
+                    $userBookReportdatas[$x] = $userBookReportdata;
 
                     $x++;
                 }
