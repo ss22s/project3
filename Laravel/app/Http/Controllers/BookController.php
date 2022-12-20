@@ -18,11 +18,11 @@ class BookController extends Controller
 
         $selectedCommentsCountSet = array_fill(0, 10, 0);
         foreach ($selectedCommentsCountSet as $commentAdd) {
-            $selectedCommentsCount['value'] = $x;
-            $selectedCommentsCount['comment'] = $this->commentAdd($x);
-            $selectedCommentsCount['number'] = "0";
+            $selectedCommentCount['value'] = $x;
+            $selectedCommentCount['comment'] = $this->commentAdd($x);
+            $selectedCommentCount['number'] = "0";
 
-            $selectedCommentsCount[$x] = $selectedCommentsCount;
+            $selectedCommentsCount[$x] = $selectedCommentCount;
             $x++;
         }
         //TODO27:本データを外部から取る場合、書き換え
