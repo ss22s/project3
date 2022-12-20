@@ -4,8 +4,6 @@
 }
 .menuBar{
     width: 30%;
-}
-.menuBar {
     text-align: left;
 }
 
@@ -117,7 +115,47 @@
 .page{
     text-align: center;
     color:#D2B48C;
-    /* font-size:50px; */
+    font-size:50px;
     padding-top:30px;
     border-bottom:2px dashed #D2B48C;
+}
+
+.main{
+    text-align:center;
+    background-color:#eee8e1;
+    color:#454541;
+}
+
+.data{
+   display:inline-block;
+   text-align:left;
+   font-size:22px;
+   margin:20px;
+   vertical-align:-30px;
+}
+
+.favorite{
+    display:inline-block;
+    text-decoration:none;
+    margin-top:20px;
+    padding: 10px 30px;
+    color: #efefef;
+    background: #D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius: 10px;
+}
+.favorite:hover{
+    opacity: 0.7;
+    color:#efefef;
+}
+.message{
+    display:inline-block;
+    position:relative;
+    right:200px;
+}
+
+.line{
+    margin:20px;
+    padding-top:10px;
+    border-top:2px dashed #D2B48C;
 }
