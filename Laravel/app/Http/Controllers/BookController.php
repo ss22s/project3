@@ -245,23 +245,24 @@ class BookController extends Controller
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
                 $bookID = $finishedBookDataGet['bookID'];
-                $finishedBooks[$x]['bookID'] = $bookID;
+                $finishedBook['bookID'] = $bookID;
 
                 $bookDataGet = book::where('bookID', $finishedBookDataGet['bookID'])->first();
                 // $bookDataGet = $this->booksearchId($bookID);
 
-                $finishedBooks[$x]['book'] = $bookDataGet['book'];
+                $finishedBook['book'] = $bookDataGet['book'];
 
-                $finishedBooks[$x]['author'] = $bookDataGet['author'];
+                $finishedBook['author'] = $bookDataGet['author'];
 
-                // $finishedBooks[$x]['genre'] = $bookDataget['genre'];
-                $finishedBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
+                // $finishedBook['genre'] = $bookDataget['genre'];
+                $finishedBook['thumbnail'] = $this->setThumbnail($bookID);
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
 
-                $finishedBooks[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                $finishedBook['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
 
+                $finishedBooks[$x] = $finishedBook;
                 $x++;
             }
         } else {
@@ -359,7 +360,7 @@ class BookController extends Controller
     }
 
 
-    public function commentAdd($comment)
+    public static function commentAdd($comment)
     {
         if ($comment == 0) {
             return "感動した";
@@ -518,4 +519,12 @@ class BookController extends Controller
         $thumbnailUrl = $frontUrl . $bookID . $backUrl;
         return $thumbnailUrl;
     }
+    public function setThumbnailSmall($bookID)
+    {
+        $frontUrl = 'http://books.google.com/books/content?id=';
+        $backUrl =  '&printsec=frontcover&img=1&zoom=5&source=gbs_api';
+        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
+        return $thumbnailUrl;
+    }
+
 }
