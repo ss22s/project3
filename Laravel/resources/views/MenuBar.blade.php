@@ -12,13 +12,15 @@
 
   <link href="css/MenuBar.css" type="text/css" rel="stylesheet">
   <title>Menubar</title>
-</head>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  メニュー
+
+<button class="menu1 searchbooksOnly" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  <div></div>
+  <div></div>
+  <div></div>
 </button>
 
-<div class="offcanvas offcanvas-start menu BarBox" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
+<div class="offcanvas offcanvas-start menu BarBox" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">  
+<div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>

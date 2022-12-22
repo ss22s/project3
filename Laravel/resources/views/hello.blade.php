@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/hello.css">
     <title>Document</title>
 </head>
-<body>
-    <div class="main">
+<body class="main">
+    <div>
         <div class="mypage">
             <a class="mypagelink" href="/myPage">マイページ</a>
         </div>
@@ -44,8 +44,11 @@
 
         <hr class="line">
         <div>
-            <a class="toppagelink" href="/selectBooks">感想を書く</a>
-        </div>
+            <a class="toppagelink" href="/selectBooks">
+                感想を書く
+            </a>
+        
+            </div>
     </div>
 </body>
 </html>

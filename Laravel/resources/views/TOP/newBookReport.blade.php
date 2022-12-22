@@ -9,10 +9,11 @@
     <title>新着感想</title>
 </head>
 
-<body class="top">
-    <div>
+<div class="menuBar">
         @include('MenuBar')
-    </div>
+</div>
+
+<body class="top">
     @csrf
     @php
     $data = 0;
@@ -28,12 +29,14 @@
                 <p class="booklink">{{$bookData['book']}}</p>
             </a>
             <span class="image">
-            <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
+            <img src="{{$bookData['thumbnail']}}" alt="書影" width="180" height="220">
             </span>
             <p class="p1">
                 <hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}
             </p>
+            <a class="user" href="{{route('user',['userID' => $bookData['userID']])}}"> 
             <p class="p2">{{$bookData['userName']}}</p>
+            </a>
             <p class="p3">更新日:{{$bookData['created_at']}}</p>
         </div>
     </div>

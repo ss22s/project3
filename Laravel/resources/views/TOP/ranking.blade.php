@@ -5,17 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" type="text/css" href="css/ranking.css">
+  <link rel="stylesheet" type="text/css" href="css/ranking.css">
 </head>
 <title>TOP-ランキング</title>
 </head>
 
 <body>
-    <div class="MenuBar">
+    <div class="main">
+    <div class="menuBar">
         @include('MenuBar')
     </div>
-    <div class="main">
         <div class="page">ランキング</div>
         @csrf
         @php
