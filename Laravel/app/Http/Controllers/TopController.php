@@ -188,7 +188,7 @@ class TopController extends Controller
             $userData['name'] = member::where('id', $userID)->value('name');
             $userData['id'] = $userID;
 
-            //読みたい本リスト
+            //読みたい本リスト.
             if (DB::table('MyPages')->where('id', $userID)->where('showWantToBook', null)->exists()) {
                 if (DB::table('wantToBooks')->where('id', $userID)->where('finished', null)->exists()) {
                     $wantToBookDatasGet = wantBook::where('id', $userID)->where('finished', null)->orderBy('registered_at', 'desc')->take(3)->get();
@@ -231,7 +231,7 @@ class TopController extends Controller
             } else if (DB::table('MyPages')->where('id', $userID)->where('showFinishedBook', null)->exists()) {
                 $userFinishedBookdatas = "非公開";
             } else {
-                $userWantToBookdatas = "";
+                $userFinishedBookdatas = "";
             }
 
             //フォローリスト
