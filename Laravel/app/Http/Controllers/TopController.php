@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\BookController;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -70,8 +69,8 @@ class TopController extends Controller
             $newBookReportData["book"] = book::where('bookID', $newBookReportData['bookID'])->value('book');
             $newBookReportData['thumbnail'] = $this->setThumbnail($bookReportData['bookID']);
             //感想関連
-            // $newBookReportData["evaluation"] = $bookReportData["evaluation"];
-            // $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
+            $newBookReportData["evaluation"] = $bookReportData["evaluation"];
+            $newBookReportData["selectedComment"] = $bookReportData["selectedComment"];
             $newBookReportData["comment"] = $bookReportData["comment"];
             $day = explode(" ", $bookReportData['created_at']);
             $newBookReportData["created_at"] = $day[0];
@@ -141,7 +140,7 @@ class TopController extends Controller
         } else if($searchType == "author"){
             $bookDatasGet = book::where('author','LIKE','%'.$searchWords.'%')->get();
         }
-            $x = 0;
+        $x = 0;
             foreach ($bookDatasGet as $bookDataSet) {
                 //本の情報
                 $bookData['bookid'] = $bookDataSet['bookID']; 
@@ -154,7 +153,7 @@ class TopController extends Controller
                 $y = 0;
                 //dd($bookReportDataGet);
                 // foreach($bookReportDataGet as $bookReportDataSet){
-                    // dd($bookReportDataGet);
+                    
                     $bookData['userid'] = member::where('id',$bookReportDataGet['id'])->value('name');
                     $day = explode(' ',$bookReportDataGet['created_at']);
                     $bookData['created_at'] = $day[0];
@@ -171,11 +170,9 @@ class TopController extends Controller
                 $bookDatas[$x] = $bookData;
                 $x++;
             }
-            
             //dd($bookDatas);
 
-
-        return view('/TOP/searchResult',compact('bookDatas','searchType','searchWords'));
+            return view('/TOP/searchResult',compact('bookDatas','searchType','searchWords'));
     }
 
 
@@ -238,10 +235,10 @@ class TopController extends Controller
                     $followListGet = followList::where('id', $userID)->get();
                     $x = 0;
                     foreach ($followListGet as $followListSet) {
-                        $userFollowList['followerID'] = $followListSet['followerID'];
-                        $userFollowList['followerName'] = member::where('id', $userFollowList['followerID'])->value('name');
+                        $userFollowListSet['followerID'] = $followListSet['followerID'];
+                        $userFollowListSet['followerName'] = member::where('id', $userFollowListSet['followerID'])->value('name');
 
-                        $userFollowLists[$x] = $userFollowList;
+                        $userFollowLists[$x] = $userFollowListSet;
                         $x++;
                     }
                 } else {

@@ -245,24 +245,23 @@ class BookController extends Controller
             $x = 0;
             foreach ($finishedBookDatasGet as $finishedBookDataGet) {
                 $bookID = $finishedBookDataGet['bookID'];
-                $finishedBook['bookID'] = $bookID;
+                $finishedBooks[$x]['bookID'] = $bookID;
 
                 $bookDataGet = book::where('bookID', $finishedBookDataGet['bookID'])->first();
                 // $bookDataGet = $this->booksearchId($bookID);
 
-                $finishedBook['book'] = $bookDataGet['book'];
+                $finishedBooks[$x]['book'] = $bookDataGet['book'];
 
-                $finishedBook['author'] = $bookDataGet['author'];
+                $finishedBooks[$x]['author'] = $bookDataGet['author'];
 
-                // $finishedBook['genre'] = $bookDataget['genre'];
-                $finishedBook['thumbnail'] = $this->setThumbnail($bookID);
+                // $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                $finishedBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
 
-                $finishedBook['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
+                $finishedBooks[$x]['finishDate'] = $finishDate[0] . "年" .  $finishDate[1] . "月" .  $finishDate[2] . "日";
 
-                $finishedBooks[$x] = $finishedBook;
                 $x++;
             }
         } else {
@@ -343,7 +342,9 @@ class BookController extends Controller
         //bookテーブルにまだ登録されていなければ登録する
         if (!(DB::table('books')->where('bookID', $bookID)->exists())) {
             $bookDataGet = $this->booksearchId($bookID);
-            if($this->setISBN($bookDataGet) == "不明"){
+            //dd($bookDataGet);
+            $setISBN = $this->setISBN($bookDataGet);
+            if($setISBN == "不明"){
                 $setISBN = "0";
             }
 
@@ -485,7 +486,7 @@ class BookController extends Controller
         return $categories;
     }
 
-    public function setISBN($bookData)
+    public static function setISBN($bookData)
     {
         if (property_exists($bookData->volumeInfo, 'industryIdentifiers')) {
 
@@ -514,19 +515,11 @@ class BookController extends Controller
         return $description;
     }
 
-    public function setThumbnail($bookID)
+    public static function setThumbnail($bookID)
     {
         $frontUrl = 'http://books.google.com/books/content?id=';
         $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
         $thumbnailUrl = $frontUrl . $bookID . $backUrl;
         return $thumbnailUrl;
     }
-    public function setThumbnailSmall($bookID)
-    {
-        $frontUrl = 'http://books.google.com/books/content?id=';
-        $backUrl =  '&printsec=frontcover&img=1&zoom=5&source=gbs_api';
-        $thumbnailUrl = $frontUrl . $bookID . $backUrl;
-        return $thumbnailUrl;
-    }
-
 }

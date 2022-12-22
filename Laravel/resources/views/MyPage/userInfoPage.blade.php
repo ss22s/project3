@@ -6,6 +6,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- 自前CSS -->
+    <link rel="stylesheet" type="text/css" href="css/userInfo.css">
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -13,14 +15,15 @@
     
     <title>ユーザ情報</title>
 </head>
-<body>
-
-    <h4>ユーザ情報編集</h4>
+<body class="main">
+    <div class="box1">
+    <h4 class="menu">ユーザ情報編集</h4>
         <b>ユーザ名：</b>{{$userData['name']}} <br>
         <b>メールアドレス：</b>{{$userData['email']}} <br>
         <b>イチオシの一冊：</b>{{$userData['favoriteBook']}} <br>
         <b>好きな著者：</b>{{$userData['favoriteAuthor']}} <br>
         <b>自由記述欄：</b>{{$userData['freeText']}}<br>
+    </div>
 
         <!-- モーダルを開くボタン・リンク -->
     <!--TODO:foreach文で出す際にdata-targetとidを感想のIDにする-->
@@ -35,7 +38,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">感想</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">ユーザー情報編集</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -44,15 +47,15 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
-                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}" size="35"><br>
-                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}" size="35"><br>
-                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}" size="35"><br>
-                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}" size="35"><br>
-                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}" size="35"><br>
+                        <div class="label"><b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"></div>
+                        <div class="label"><b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"></div>
+                        <div class="label"><b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
+                        <div class="label"><b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
+                        <div class="label"><b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
+                    <button type="submit" class="btn btn-primary savebtn">保存</button>
                     </form>
                 </div>
                 </div>
@@ -60,7 +63,7 @@
         </div>
     </div>
 
-    <a href="/userExit">退会したい</a>
+    <a class="link" href="/userExit">退会したい</a>
 
 </body>
 </html>
