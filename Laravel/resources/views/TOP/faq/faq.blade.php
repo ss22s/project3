@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="css/faq.css">
 </head>
 <body>
+    <div class="MenuBar">
+        @include('MenuBar')
+    </div>
     <div class="page">よくあるご質問</div>
     <ul class="accordion-area">
         <li>
@@ -105,5 +108,6 @@
         });
         });
     </script>
+    <link rel="stylesheet" type="text/css" href="css/faq.css">
 </body>
 </html>
