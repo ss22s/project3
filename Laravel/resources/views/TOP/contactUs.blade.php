@@ -6,13 +6,13 @@
     <link rel="stylesheet" type="text/css" href="css/contactUs.css">
 </head>
 <body>
-    <a href="/faq" class="faq"><h1>よくあるご質問</h1></a>
     <div>
-        <h1>ご意見 / お問い合わせ</h1>
+        <div class="page">ご意見 / お問い合わせ</div>
+        <div class="faqlink"><a href="/faq" class="faq">よくあるご質問</a></div>
         <div>
             <form action="/confirm" class="form" method="post" name="form" onsubmit="return validate()">
             @csrf    
-                
+            
                 <div class="contents">
                     <label class="label_left">お名前</label>
                     <input type="text" name="name" placeholder="例）田中太郎" value="">
@@ -38,6 +38,7 @@
                 </div>
             </form>
         </div>
+        <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
     </div>
     <script type="text/javascript">
         $(function(){

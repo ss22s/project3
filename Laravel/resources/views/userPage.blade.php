@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザーページ</title>
+    <link rel="stylesheet" type="text/css" href="css/userDetail.css">
 </head>
 
 <body>
     <div class="MenuBar">
         @include('MenuBar')
     </div>
-    <h4>{{$userData['name']}}さんのページ</h4>
+    <h4>{{$userData['name']}}さんのページ</h4>.
     <p>
         <b>イチオシの一冊：</b>{{$userData['favoriteBook']}}<br>
         <b>好きな著者：</b>{{$userData['favoriteAuthor']}}<br>
