@@ -37,6 +37,7 @@
                 <div class="window">
                     <label class="close" for="pop-up">×</label>
                     <!-- 書影(※書影にもリンクつける) -->
+
                     <!-- ひとこと感想 -->
                     <!-- コメント感想 -->
                     <!-- 読んだ日 -->
@@ -49,7 +50,9 @@
                     <div id="right">
                         <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">{{$finishedBook['book']}}</a>
                         <p class="text">{{$finishedBook['author']}}</p>
-                        <p class="text">{{$finishedBook['genre']}}</p>
+                        <p class="text">{{$finishedBook['finishDate']}}</p>
+
+                        <!-- カテゴリ -->
                     </div>
                 </div>
             </div>
