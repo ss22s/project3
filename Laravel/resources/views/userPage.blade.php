@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/userDetail.css">
 </head>
 
-<body class="aaa">
+<body>
     <div class="MenuBar">
         @include('MenuBar')
     </div>
