@@ -109,50 +109,53 @@ class MyPageController extends Controller
 
 
     //ユーザ情報編集ページ
-    public function userInfoChange(Request $request){
-        
+    public function userInfoChange(Request $request)
+    {
+
         //ログイン済みデータ取得
         $user = Auth::user();
-        
-        $userDataGet = User::where('id',$user['id'])->first();
+
+        $userDataGet = User::where('id', $user['id'])->first();
 
         $userData['id'] = $userDataGet['id'];
         $userData['name'] = $userDataGet['name'];
         $userData['email'] = $userDataGet['email'];
 
         //本に関するデータ
-        $userBookDataGet = MyPage::where('id',$user['id'])->first();
+        $userBookDataGet = MyPage::where('id', $user['id'])->first();
 
         $userData['favoriteBook'] = $userBookDataGet['favoriteBook'];
         $userData['favoriteAuthor'] = $userBookDataGet['favoriteAuthor'];
         $userData['freeText'] = $userBookDataGet['freeText'];
-        
 
-        return view('MyPage/userInfoPage',compact('userData'));
+
+        return view('MyPage/userInfoPage', compact('userData'));
     }
 
     //読みたい本リストページ表示
-    public function wantToBooks(Request $request){
+    public function wantToBooks(Request $request)
+    {
         //ログイン済みデータ取得
         $user = Auth::user();
 
         //回す分の変数
         $x = 0;
 
-        $wantBookGet = wantBook::where('id',$user['id'])->get(); 
-        
+
+        $wantBookGet = wantBook::where('id', $user['id'])->get();
+
 
         foreach ($wantBookGet as $wantBookSet) {
             $bookID = $wantBookSet['bookID'];
             $wantBooks[$x]['bookID'] = $bookID;
 
-            $wantBooks[$x]['book'] = book::where('bookID',$bookID)->first();
+            $wantBooks[$x]['book'] = book::where('bookID', $bookID)->first();
 
             $x++;
         }
 
-        
-        return view('MyPage/wantToBooksPage',compact('wantBooks'));
+
+        return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
 
     //読んだ本リストページ表示
@@ -170,10 +173,10 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-        
+
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
-            
+
             $reviewID = $finishedBooksSet['reviewID'];
             $finishedBooks[$x]['reviewID'] = $reviewID;
             //本関連
@@ -197,13 +200,11 @@ class MyPageController extends Controller
                     $loopVar++;
                 }
                 //コメント
-                $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
-
-                
+                $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
             }
             $x++;
         }
-        return view('Mypage/finishedBooksPage',compact('finishedBooks'));
+        return view('Mypage/finishedBooksPage', compact('finishedBooks'));
     }
 
     //一言コメント変換
@@ -239,7 +240,6 @@ class MyPageController extends Controller
         if ($comment == 9) {
             return "つまらなかった";
         }
-
     }
 
     //ユーザー情報編集処理
