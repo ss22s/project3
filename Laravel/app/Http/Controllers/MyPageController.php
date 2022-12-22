@@ -140,7 +140,7 @@ class MyPageController extends Controller
         $x = 0;
 
         $wantBookGet = wantBook::where('id',$user['id'])->get(); 
-        dd($wantBookGet);
+        
 
         foreach ($wantBookGet as $wantBookSet) {
             $bookID = $wantBookSet['bookID'];
