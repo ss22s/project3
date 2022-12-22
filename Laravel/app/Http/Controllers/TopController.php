@@ -231,7 +231,7 @@ class TopController extends Controller
             } else if (DB::table('MyPages')->where('id', $userID)->where('showFinishedBook', null)->exists()) {
                 $userFinishedBookdatas = "非公開";
             } else {
-                $userWantToBookdatas = "";
+                $userFinishedBookdatas = "";
             }
 
             //フォローリスト
