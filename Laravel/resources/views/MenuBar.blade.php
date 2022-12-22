@@ -13,7 +13,7 @@
   <link href="css/MenuBar.css" type="text/css" rel="stylesheet">
   <title>Menubar</title>
 
-<button class="menu1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+<button class="menu1 searchbooksOnly" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
   <div></div>
   <div></div>
   <div></div>

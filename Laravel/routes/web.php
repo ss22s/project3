@@ -42,6 +42,9 @@ Route::get('/ranking','App\Http\Controllers\TopController@ranking');
 
 Route::get('/topMain','App\Http\Controllers\TopController@topMain');
 
+Route::post('/bookReportsList','App\Http\Controllers\TopController@bookReportsList');
+
+
 
 
 //お問い合わせ
@@ -99,11 +102,18 @@ Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
 //マイページ編集
 Route::post('/changeName','App\Http\Controllers\MyPageController@changeName');
 //退会処理
-Route::get('/userCancel',function(){
-    return view('MyPage/userCancel');
+Route::get('/userExit',function(){
+    return view('MyPage/userExit');
 });
+
+
+Route::post('/userExit','App\Http\Controllers\MyPageController@userExit');
 
     Route::get('/searchBox',function(){
         return view('searchBox');
     });
 
+
+Route::get('/MenuBar',function(){
+    return view('MenuBar');
+});
