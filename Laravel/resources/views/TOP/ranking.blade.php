@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="css/ranking.css">
 </head>
-    <title>TOP-ランキング</title>
+<title>TOP-ランキング</title>
 </head>
 
 <body>
@@ -24,7 +24,9 @@
 
         @if($rank == 1)
         <div class="box1">
-            <h4 class="ranking"><div class="rank1">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+            <h4 class="ranking">
+                <div class="rank1">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a>
+            </h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">
                 <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
@@ -37,7 +39,9 @@
         @endphp
         @elseif($rank == 2)
         <div class="box1">
-            <h4 class="ranking"><div class="rank2">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+            <h4 class="ranking">
+                <div class="rank2">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a>
+            </h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">
             <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
@@ -50,7 +54,9 @@
         @endphp
         @elseif($rank == 3)
         <div class="box1">
-            <h4 class="ranking"><div class="rank3">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+            <h4 class="ranking">
+                <div class="rank3">{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a>
+            </h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">
             <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
@@ -63,7 +69,9 @@
         @endphp
         @else
         <div class="box2">
-            <h4 class="ranking"><div>{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a></h4>
+            <h4 class="ranking">
+                <div>{{$rank}}位</div><a class="title" href="{{ route('book.detail', $bookData['bookID'] )}}">{{$bookData['book']}}</a>
+            </h4>
             <!-- 書影(※書影にもリンクつける) -->
             <span class="image">
             <img src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
@@ -81,6 +89,7 @@
         </div>
         <br>
     </div>
-    
+
 </body>
+
 </html>

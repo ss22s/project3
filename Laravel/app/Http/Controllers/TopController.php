@@ -133,27 +133,46 @@ class TopController extends Controller
 
     public function bookReportsList(Request $request){
         $searchType = $request->input('searchType');
-        $searhWords = $request->input('searchWords');
+        $searchWords = $request->input('searchWords');
 
         if($searchType == "title"){
-            $bookDatasGet = book::where('book','LIKE','%'.$searhWords.'%')->get();
+            $bookDatasGet = book::where('book','LIKE','%'.$searchWords.'%')->get();
+        } else if($searchType == "author"){
+            $bookDatasGet = book::where('author','LIKE','%'.$searchWords.'%')->get();
+        }
+        $x = 0;
             foreach ($bookDatasGet as $bookDataSet) {
                 //本の情報
                 $bookData['bookid'] = $bookDataSet['bookID']; 
                 $bookData['title'] = $bookDataSet['book'];
+                $bookData['author'] = $bookDataSet['author'];
                 $bookData['thumbnail'] = $this->setThumbnail($bookDataSet['bookID']);
 
                 //感想
-                $bookReportData = bookReport::where('bookID',$bookDataSet['bookID'])->where('Open',null)->take(3)->get();
-                
+                $bookReportDataGet = bookReport::where('bookID',$bookDataSet['bookID'])->where('Open',null)->first();
+                $y = 0;
+                //dd($bookReportDataGet);
+                // foreach($bookReportDataGet as $bookReportDataSet){
+                    
+                    $bookData['userid'] = member::where('id',$bookReportDataGet['id'])->value('name');
+                    $day = explode(' ',$bookReportDataGet['created_at']);
+                    $bookData['created_at'] = $day[0];
+                    $bookData['evaluation'] = $bookReportDataGet['evaluation'];
+                    
+                    $selectedCommentsExplode = explode(',', $bookReportDataGet['selectedComment']);
+                    $commentVar = 0;
+                    foreach($selectedCommentsExplode as $selectedComment){
+                        $bookData['selectedComment'][$commentVar] = BookController::commentAdd($selectedComment);
+                        $commentVar++;
+                    }
+                    $y++;
+                // }
+                $bookDatas[$x] = $bookData;
+                $x++;
             }
-            dd($bookReportData);
+            //dd($bookDatas);
 
-        } else if($searchType == "author"){
-            dd("作者");
-        }
-
-        return view('/hello');
+            return view('/TOP/searchResult',compact('bookDatas','searchType','searchWords'));
     }
 
 

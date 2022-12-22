@@ -13,7 +13,7 @@
         <div class="menuBar">
             @include('MenuBar')
         </div>
-            <div class="page">本の詳細ページ</div><br>
+            <div class="page">本の詳細</div><br>
                 <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200">
                     <div class="data">    
                         タイトル：{{$bookData['book']}} <br>
