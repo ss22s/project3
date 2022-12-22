@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+
 //使用するDB
 use App\Models\User;
 use App\Models\myPage;
@@ -18,20 +19,21 @@ use App\Models\followList;
 
 class MyPageController extends Controller
 {
+
     public function setZero($x)
     {
         return $x = 0;
     }
 
     //マイページ表示
-    public function myPage(Request $request)
+
+    public function myPage()
     {
         //ログイン済みデータ取得
         $user = Auth::user();
         if (Auth::user() == null) {
             return view('MyPage/myPage');
         }
-
         $myPageDataGet = myPage::where('id', $user['id'])->first();
         $userDataGet = member::where('id', $user['id'])->first();
 
@@ -41,8 +43,9 @@ class MyPageController extends Controller
         $myData['userEmail'] = $userDataGet['email'];
         //マイページ関連
         $myData['favoriteBook'] = $myPageDataGet['favoriteBook'];
-        $myData['favoriteAuther'] = $myPageDataGet['favoriteAuthor'];
+        $myData['favoriteAuthor'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
+
 
         //変数置く
         $x = 0;
@@ -100,9 +103,9 @@ class MyPageController extends Controller
         } else {
             $followLists = "";
         }
-
         return view('MyPage/myPage', compact('myData', 'myFinishedBookdatas', 'myWantToBookdatas', 'followLists'));
     }
+
 
     //ユーザ情報編集ページ
     public function userInfoChange(Request $request){
@@ -129,8 +132,25 @@ class MyPageController extends Controller
 
     //読みたい本リストページ表示
     public function wantToBooks(Request $request){
+        //ログイン済みデータ取得
+        $user = Auth::user();
 
-        return view('MyPage/wantToBooksPage');
+        //回す分の変数
+        $x = 0;
+
+        $wantBookGet = wantBook::where('id',$user['id'])->get(); 
+
+        foreach ($wantBookGet as $wantBookSet) {
+            $bookID = $wantBookSet['bookID'];
+            $wantBooks[$x]['bookID'] = $bookID;
+
+            $wantBooks[$x]['book'] = book::where('bookID',$bookID)->first();
+
+            $x++;
+        }
+
+        
+        return view('MyPage/wantToBooksPage',compact('wantBooks'));
     }
 
     //読んだ本リストページ表示
@@ -148,7 +168,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-
+        
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
             
@@ -157,8 +177,8 @@ class MyPageController extends Controller
             //本関連
             $finishedBooks[$x]['bookID'] = $finishedBooksSet['bookID'];
             $finishedBooks[$x]['book'] = book::where('bookID', $finishedBooksSet['bookID'])->value('book');
-            $finishedBooks[$x]['auther'] = book::where('bookID', $finishedBooksSet['bookID'])->value('auther');
-            $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
+            $finishedBooks[$x]['author'] = book::where('bookID', $finishedBooksSet['bookID'])->value('author');
+            // $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
             //感想関連
             //TODO:感想はまだ書いてなくて読んだ本リストに追加だけした時、Keyを持たせて区別するかreviewのnullで判断するか
             if ($finishedBooksSet['reviewID'] != null) {
@@ -175,10 +195,10 @@ class MyPageController extends Controller
                 //コメント
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
 
-                $x++;
+                
             }
+            $x++;
         }
-
         return view('Mypage/finishedBooksPage',compact('finishedBooks'));
     }
 
@@ -215,5 +235,22 @@ class MyPageController extends Controller
         if ($comment == 9) {
             return "つまらなかった";
         }
+
+    }
+
+    //ユーザー情報編集処理
+    public function changeName(Request $request){
+        $userID = Auth::id();
+        DB::table('users')->where('id',$userID)->update(['name' => $request->name]);
+        DB::table('users')->where('id',$userID)->update(['email' => $request->email]);
+        DB::table('MyPages')->where('id',$userID)->update(['favoriteBook' => $request->favoriteBook]);
+        DB::table('MyPages')->where('id',$userID)->update(['favoriteAuthor' => $request->favoriteAuthor]);
+        DB::table('MyPages')->where('id',$userID)->update(['freeText' => $request->freeText]);
+        return back();
+    }
+    public function userExit(Request $request){
+        DB::table('users')->where('id',Auth::id())->update(['exit' => 1]);
+        Auth::logout();
+        return view('/hello');
     }
 }

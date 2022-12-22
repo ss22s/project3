@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('finishedBooks', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->integer('bookID');
+            $table->string('bookID');
             $table->dateTime('date');
-            $table->unsignedBigInteger('reviewID');
+            $table->unsignedBigInteger('reviewID')->nullable();
             $table->integer('delete')->nullable();
 
             $table->foreign('reviewID')->references('reviewID')->on('bookReports');

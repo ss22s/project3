@@ -1,35 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/newBookReport.css">
     <title>新着感想</title>
 </head>
-<body>
+
+<div class="menuBar">
+        @include('MenuBar')
+</div>
+
+<body class="top">
     @csrf
     @php
-        $data = 0;
+    $data = 0;
     @endphp
-
+    <div class="page">新着感想</div>
     @foreach($newBookReportDatas as $bookData)
-        @if($data == 6)
-            @break
-        @else
-        <div style="text-align:center;">
-            <div style="display:inline-block; border:2px solid; border-radius:30px; text-align:center; margin:20px; padding:10px; width:450px;">
-                    <a href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}"><h2 style="text-align:center">{{$bookData['book']}}</h2></a>
-                    <span style="display:inline-block; border:1px solid; font-size:50px; margin:20px; padding:40px;">書影</span>
-                    <!-- <img src = "書籍画像"> -->
-                    <p style="display:inline-block; padding:5px;"><hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}</p>
-                    <p style="text-align:right; font-size:18px;">[icon]　{{$bookData['userName']}}</p>
-                    <p style="text-align:right">更新日:{{$bookData['created_at']}}</p>
-            </div>
+    @if($data == 6)
+    @break
+    @else
+    <div class="main">
+        <div class="box">
+            <a class="title" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
+                <p class="booklink">{{$bookData['book']}}</p>
+            </a>
+            <span class="image">
+            <img src="{{$bookData['thumbnail']}}" alt="書影" width="180" height="220">
+            </span>
+            <p class="p1">
+                <hr><text style="font-size:20px;">【感想】</text><br>{!! nl2br(e(Str::limit($bookData['comment'], 200))) !!}
+            </p>
+            <a class="user" href="{{route('user',['userID' => $bookData['userID']])}}"> 
+            <p class="p2">{{$bookData['userName']}}</p>
+            </a>
+            <p class="p3">更新日:{{$bookData['created_at']}}</p>
         </div>
-            @php
-                $data++;
-            @endphp
-        @endif
+    </div>
+    @php
+    $data++;
+    @endphp
+    @endif
     @endforeach
+    <div>
+        <a class="toppagelink" href="/">TOPへ</a>
+    </div>
+    <br>
 </body>
+
 </html>

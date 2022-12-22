@@ -21,52 +21,59 @@ class booksSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         \DB::table('books')->insert([
-            ['bookID' => 1001,
+            ['bookID' => 'Y2YPcgAACAAJ',
             'book' => 'となりのトトロ',
-            'auther' => 'スタジオジブリ',
-            'genre' => '児童書'],
+            'author' => '不明',
+            'ISBN' => 9784196695813,
+            'categories' => 'Animation (Cinematography)'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1002,
+            ['bookID' => 'xMMeNwAACAAJ',
             'book' => 'カラフル',
-            'auther' => '森絵都',
-            'genre' => '児童書'],
+            'author' => '森絵都',
+            'ISBN' => 9784167741013,
+            'categories' => 'Fantasy fiction'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1003,
+            ['bookID' => 'jfApAQAAMAAJ',
             'book' => 'ハリーポッターと賢者の石',
-            'auther' => 'J・K・ローリング',
-            'genre' => '児童書'],
+            'author' => 'J.K. ローリング',
+            'ISBN' => 9784915512377,
+            'categories' => '不明'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1004,
-            'book' => '基本情報技術者過去問題集',
-            'auther' => '技術評論社',
-            'genre' => '問題集'],
+            ['bookID' => 'FccyEAAAQBAJ',
+            'book' => 'かんたん合格 基本情報技術者過去問題集 令和3年度下期',
+            'author' => '株式会社ノマド・ワークス',
+            'ISBN' => 9784295011538,
+            'categories' => 'Computers'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1005,
-            'book' => 'Myojo',
-            'auther' => '集英社',
-            'genre' => '雑誌'],
+            ['bookID' => 'FLc9zwEACAAJ',
+            'book' => 'Myojo LIVE!',
+            'author' => '不明',
+            'ISBN' => 9784081023509,
+            'categories' => '不明'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1006,
-            'book' => 'カードキャプターさくら',
-            'auther' => 'CLAMP',
-            'genre' => '少女漫画'],
+            ['bookID' => 'FA-dDQAAQBAJ',
+            'book' => 'カードキャプターさくら　クリアカード編（１）',
+            'author' => 'ＣＬＡＭＰ',
+            'ISBN' => 9784063930993,
+            'categories' => 'Comics & Graphic Novels'],
         ]);
 
         \DB::table('books')->insert([
-            ['bookID' => 1007,
+            ['bookID' => 'ZM9MzQEACAAJ',
             'book' => 'わたしの美しい庭',
-            'auther' => '凪良ゆう',
-            'genre' => '小説・文芸'],
+            'author' => '凪良ゆう',
+            'ISBN' => 9784591164853,
+            'categories' => '不明'],
         ]);
     }
 }

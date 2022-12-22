@@ -42,6 +42,9 @@ Route::get('/ranking','App\Http\Controllers\TopController@ranking');
 
 Route::get('/topMain','App\Http\Controllers\TopController@topMain');
 
+Route::post('/bookReportsList','App\Http\Controllers\TopController@bookReportsList');
+
+
 
 
 //お問い合わせ
@@ -61,11 +64,33 @@ Route::get('/wantToBooks','App\Http\Controllers\MypageController@wantToBooks')->
 //読んだ本リストページ
 Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks')->middleware('auth');
 
+//listページ関連
+Route::get('/listDelete/{bookID}','App\Http\COntrollers\ListController@delete')
+    ->name('list.delete');
+
+//user
+Route::get('/user/{userID}','App\Http\Controllers\TopController@userPage')
+->name('user');
+Route::get('/follow/{userID}','App\Http\Controllers\TopController@userFollow')
+->name('user.follow')->middleware('auth');
+
 //book関連
     //感想を書く
-    Route::get('/reportWrite','App\Http\Controllers\BookController@write')->middleware('auth');
-    Route::post('/reportRegister','App\Http\Controllers\BookController@register');
+    Route::get('/selectBooks','App\Http\Controllers\BookController@searchPageGet')->middleware('auth');
+    Route::post('/selectBooks','App\Http\Controllers\BookController@searchPageGet')->middleware('auth');
 
+    Route::post('searchBooks','App\Http\Controllers\BookController@search');
+
+    Route::post('selectFromsearch','App\Http\Controllers\BookController@selectFromsearch');
+    Route::post('selectFromwantToBooks','App\Http\Controllers\BookController@selectFromwantToBooks');
+    Route::post('selectFromfinishedBooks','App\Http\Controllers\BookController@selectFromfinishedBooks');
+
+    Route::post('before','App\Http\Controllers\BookController@search');
+    Route::post('next','App\Http\Controllers\BookController@search');
+
+    Route::post('/write','App\Http\Controllers\BookController@write');
+
+    Route::post('/reportRegister','App\Http\Controllers\BookController@register');
     //読みたい本リストに追加
     Route::get('/wantBook/{bookID}','App\Http\COntrollers\BookController@WantBookAdd')
         ->name('book.wantBookAdd');
@@ -73,3 +98,22 @@ Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks
 //本の詳細ページ
 Route::get('/detail/{bookID}','App\Http\Controllers\BookController@detail')
     ->name('book.detail');
+
+//マイページ編集
+Route::post('/changeName','App\Http\Controllers\MyPageController@changeName');
+//退会処理
+Route::get('/userExit',function(){
+    return view('MyPage/userExit');
+});
+
+
+Route::post('/userExit','App\Http\Controllers\MyPageController@userExit');
+
+    Route::get('/searchBox',function(){
+        return view('searchBox');
+    });
+
+
+Route::get('/MenuBar',function(){
+    return view('MenuBar');
+});

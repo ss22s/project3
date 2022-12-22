@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('bookReports', function (Blueprint $table) {
             $table->id('reviewID');
             $table->unsignedBigInteger('id');
-            $table->integer('bookID');
+            $table->string('bookID');
             $table->integer('evaluation');
             $table->string('selectedComment');
             $table->string('comment',10000);
-            $table->integer('Open');
+            $table->integer('Open')->nullable();
             $table->dateTime('created_at');
 
             $table->foreign('id')->references('id')->on('users');
