@@ -1,0 +1,102 @@
+
+
+.main {
+    background-color:#eee8e1;
+    text-align: center;
+}
+
+.box1 {
+    display:inline-block;
+    background:#efefef;
+    border:solid 3px#454541;
+    border-radius:10px;
+    font-size:20px;
+    padding:15px;
+    color:#454541;
+    margin:20px;
+    width:840px;
+    text-align: left;
+}
+
+.menu {
+    font-size:26px;
+    color:#D2B48C;
+    text-align:center;
+}
+
+.btn-primary {
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+
+.btn-primary:hover {
+    color: #efefef;
+    background-color: #D2B48C;
+    border-color: #D2B48C;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #efefef;
+  background-color: #D2B48C;
+  border-color: #D2B48C;
+}
+
+.btn-primary:focus, .btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.link{
+    color:#454541;
+    text-decoration: underline;
+}
+.link:hover{
+    color:#D2B48C;
+}
+
+/*↓↓↓modal開いた枠の中↓↓↓*/
+.modal-body {
+    text-align: left;
+}
+
+.label {
+    display: inline-block;
+    margin: 5px;
+}
+
+.label input {
+    width: 250px;
+}
+
+.closebtn {
+    display:inline-block;
+    text-decoration:none;
+    padding:3px 5px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background: grey;
+    border:solid 3px grey;
+    border-radius: 5px;
+}
+
+.savebtn {
+    display:inline-block;
+    text-decoration:none;
+    padding:3px 5px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius: 5px;
+}
