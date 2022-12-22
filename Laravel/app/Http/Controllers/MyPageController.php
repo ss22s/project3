@@ -200,11 +200,26 @@ class MyPageController extends Controller
                     $loopVar++;
                 }
                 //コメント
+
+                $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
+
+                // $finishedBooks[$x] = $finishedBooks
+                
+            } else{
+                $finishedBooks[$x]['date'] = "";
+                $finishedBooks[$x]['selectedComment'][0]= "" ;
+                $finishedBooks[$x]['comment'] = "";
+
+
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
+
             }
             $x++;
+            
         }
-        return view('Mypage/finishedBooksPage', compact('finishedBooks'));
+        dd($finishedBooks);
+        return view('Mypage/finishedBooksPage',compact('finishedBooks'));
+
     }
 
     //一言コメント変換
