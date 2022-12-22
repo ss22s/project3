@@ -18,9 +18,11 @@ class BookController extends Controller
 
         $selectedCommentsCountSet = array_fill(0, 10, 0);
         foreach ($selectedCommentsCountSet as $commentAdd) {
-            $selectedCommentsCount[$x]['value'] = $x;
-            $selectedCommentsCount[$x]['comment'] = $this->commentAdd($x);
-            $selectedCommentsCount[$x]['number'] = "0";
+            $selectedCommentCount['value'] = $x;
+            $selectedCommentCount['comment'] = $this->commentAdd($x);
+            $selectedCommentCount['number'] = "0";
+
+            $selectedCommentsCount[$x] = $selectedCommentCount;
             $x++;
         }
         //TODO27:本データを外部から取る場合、書き換え
@@ -152,22 +154,24 @@ class BookController extends Controller
         //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
 
-            $bookDatas[$x]['id'] = $bookDataSet->id;
-            //本かどうか確かめる　 本ならISBNとタイトルを取る
+            $bookData['id'] = $bookDataSet->id;
 
-            $bookDatas[$x]['isbn13'] = $this->setISBN($bookDataSet);
+            $bookData['thumbnail'] = $this->setThumbnail($bookDataSet->id);
 
-            $bookDatas[$x]['title'] = $bookDataSet->volumeInfo->title;
+            $bookData['isbn13'] = $this->setISBN($bookDataSet);
+
+            $bookData['title'] = $bookDataSet->volumeInfo->title;
 
             //作者名がなければ不明で登録
-            $bookDatas[$x]['author'] = $this->setAuthor($bookDataSet);
+            $bookData['author'] = $this->setAuthor($bookDataSet);
 
             //カテゴリ
-            $bookDatas[$x]['categories'] = $this->setCategories($bookDataSet);
+            $bookData['categories'] = $this->setCategories($bookDataSet);
 
             //詳細
-            $bookDatas[$x]['description'] = $this->setDescription($bookDataSet);
+            $bookData['description'] = $this->setDescription($bookDataSet);
 
+            $bookDatas[$x] = $bookData;
             $x++;
         }
 
@@ -209,13 +213,15 @@ class BookController extends Controller
                 $bookDataGet = book::where('bookID', $bookID)->first();
                 // dd($bookDataGet);
 
-                $wantBooks[$x]['bookID'] = $bookID;
-                $wantBooks[$x]['book'] = $bookDataGet['book'];
+                $wantBook['bookID'] = $bookID;
+                $wantBook['book'] = $bookDataGet['book'];
 
                 //作者
-                $wantBooks[$x]['author'] = $bookDataGet['author'];
+                $wantBook['author'] = $bookDataGet['author'];
 
-                $wantBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
+                $wantBook['thumbnail'] = $this->setThumbnail($bookID);
+
+                $wantBooks[$x] = $wantBook;
 
                 // $wantBooks[$x]['genre'] = $bookDataSet['genre'];
 
@@ -249,6 +255,7 @@ class BookController extends Controller
                 $finishedBooks[$x]['author'] = $bookDataGet['author'];
 
                 // $finishedBooks[$x]['genre'] = $bookDataget['genre'];
+                $finishedBooks[$x]['thumbnail'] = $this->setThumbnail($bookID);
                 //日付関連
                 $finishDateGet = explode(" ", $finishedBookDataGet['date']);
                 $finishDate = explode("-", $finishDateGet[0]);
@@ -293,8 +300,10 @@ class BookController extends Controller
         $selectedCommentGet = $request->input('selectedComment');
         $selectedComment = implode(',', $selectedCommentGet);
 
-        $reportDatasGet = $request->only('bookID', 'finishedDate', 'evaluation', 'selectedComment', 'comment', 'open');
-
+        $open = $request->input('Open');
+        if ($open != 0) {
+            $open = null;
+        }
         //created_atの日付
         $today = date("Y-m-d H:i:s");
         //user情報
@@ -309,7 +318,7 @@ class BookController extends Controller
             'evaluation' => $reportDatasGet['evaluation'],
             "selectedComment" =>  $selectedComment,
             "comment" => $reportDatasGet['comment'],
-            "Open" => $reportDatasGet['open'],
+            "Open" => $open,
             "created_at" => $today
         ]);
 

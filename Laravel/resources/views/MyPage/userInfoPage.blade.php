@@ -47,11 +47,19 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
+<<<<<<< HEAD
+                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}" size="35"><br>
+                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}" size="35"><br>
+                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}" size="35"><br>
+                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}" size="35"><br>
+                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}" size="35"><br>
+=======
                         <div class="label"><b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"></div>
                         <div class="label"><b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"></div>
                         <div class="label"><b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
                         <div class="label"><b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
                         <div class="label"><b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
+>>>>>>> 2026
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
@@ -63,7 +71,11 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+    <a href="/userExit">退会したい</a>
+=======
     <a class="link" href="/userCancel">退会したい</a>
+>>>>>>> 2026
 
 </body>
 </html>

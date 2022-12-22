@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('evaluation');
             $table->string('selectedComment');
             $table->string('comment',10000);
-            $table->integer('Open');
+            $table->integer('Open')->nullable();
             $table->dateTime('created_at');
 
             $table->foreign('id')->references('id')->on('users');
