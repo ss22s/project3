@@ -27,7 +27,9 @@
         <!-- 書影(※書影にもリンクつける) -->
         <div class="box">
             <label class="open title" for="pop-up">
-                <span class="image">書影</span>
+                <span class="image">
+                    <img src="{{$finishedBook['thumbnail']}}" alt="書影" width="120" height="160">
+                </span>
                 {{$finishedBook['book']}}
             </label>
 
@@ -44,14 +46,14 @@
                     <!-- 編集ボタン→編集ページに移動 -->
                     <!-- 削除ボタン -->
                     <div id="left">
-                        <span class="image">書影</span>
+                        <span class="image">
+                            <img src="{{$finishedBook['thumbnail']}}" alt="書影" width="120" height="160">
+                        </span>
                         <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">本の詳細</a>
                     </div>
                     <div id="right">
                         <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">{{$finishedBook['book']}}</a>
                         <p class="text">{{$finishedBook['author']}}</p>
-                        <p class="text">{{$finishedBook['finishDate']}}</p>
-
                         <!-- カテゴリ -->
                     </div>
                 </div>
