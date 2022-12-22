@@ -90,9 +90,9 @@
     <div>
         <h5>フォロー</h5>
         @if($userFollowLists == "")
-    読んだ本リストに登録された本がありません。
+    フォローしている人はいません。
     @elseif($userFollowLists == "非公開")
-    読んだ本リストは非公開です。
+    フォローリストは非公開です。
     @else
     <div>
         <p class="data">
