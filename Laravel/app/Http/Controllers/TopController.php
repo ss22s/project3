@@ -44,7 +44,7 @@ class TopController extends Controller
             $rankingDataSet['categories'] = $bookDataSet['categories'];
             $rankingDataSet['thumbnail'] = $this->setThumbnail($bookDatas['bookID']);
             $rankingDataSet['count'] = bookReport::where('bookID', $bookDatas['bookID'])->count();
-            
+
             $rankingDatas[$x] = $rankingDataSet;
             $x++;
         }
@@ -131,48 +131,49 @@ class TopController extends Controller
     //st002023@m01.kyoto-kcg.ac.jp
 
 
-    public function bookReportsList(Request $request){
+    public function bookReportsList(Request $request)
+    {
         $searchType = $request->input('searchType');
         $searchWords = $request->input('searchWords');
 
-        if($searchType == "title"){
-            $bookDatasGet = book::where('book','LIKE','%'.$searchWords.'%')->get();
-        } else if($searchType == "author"){
-            $bookDatasGet = book::where('author','LIKE','%'.$searchWords.'%')->get();
+        if ($searchType == "title") {
+            $bookDatasGet = book::where('book', 'LIKE', '%' . $searchWords . '%')->get();
+        } else if ($searchType == "author") {
+            $bookDatasGet = book::where('author', 'LIKE', '%' . $searchWords . '%')->get();
         }
         $x = 0;
-            foreach ($bookDatasGet as $bookDataSet) {
-                //本の情報
-                $bookData['bookid'] = $bookDataSet['bookID']; 
-                $bookData['title'] = $bookDataSet['book'];
-                $bookData['author'] = $bookDataSet['author'];
-                $bookData['thumbnail'] = $this->setThumbnail($bookDataSet['bookID']);
+        foreach ($bookDatasGet as $bookDataSet) {
+            //本の情報
+            $bookData['bookid'] = $bookDataSet['bookID'];
+            $bookData['title'] = $bookDataSet['book'];
+            $bookData['author'] = $bookDataSet['author'];
+            $bookData['thumbnail'] = $this->setThumbnail($bookDataSet['bookID']);
 
-                //感想
-                $bookReportDataGet = bookReport::where('bookID',$bookDataSet['bookID'])->where('Open',null)->first();
-                $y = 0;
-                //dd($bookReportDataGet);
-                // foreach($bookReportDataGet as $bookReportDataSet){
-                    
-                    $bookData['userid'] = member::where('id',$bookReportDataGet['id'])->value('name');
-                    $day = explode(' ',$bookReportDataGet['created_at']);
-                    $bookData['created_at'] = $day[0];
-                    $bookData['evaluation'] = $bookReportDataGet['evaluation'];
-                    
-                    $selectedCommentsExplode = explode(',', $bookReportDataGet['selectedComment']);
-                    $commentVar = 0;
-                    foreach($selectedCommentsExplode as $selectedComment){
-                        $bookData['selectedComment'][$commentVar] = BookController::commentAdd($selectedComment);
-                        $commentVar++;
-                    }
-                    $y++;
-                // }
-                $bookDatas[$x] = $bookData;
-                $x++;
+            //感想
+            $bookReportDataGet = bookReport::where('bookID', $bookDataSet['bookID'])->where('Open', null)->first();
+            $y = 0;
+            //dd($bookReportDataGet);
+            // foreach($bookReportDataGet as $bookReportDataSet){
+
+            $bookData['userid'] = member::where('id', $bookReportDataGet['id'])->value('name');
+            $day = explode(' ', $bookReportDataGet['created_at']);
+            $bookData['created_at'] = $day[0];
+            $bookData['evaluation'] = $bookReportDataGet['evaluation'];
+
+            $selectedCommentsExplode = explode(',', $bookReportDataGet['selectedComment']);
+            $commentVar = 0;
+            foreach ($selectedCommentsExplode as $selectedComment) {
+                $bookData['selectedComment'][$commentVar] = BookController::commentAdd($selectedComment);
+                $commentVar++;
             }
-            //dd($bookDatas);
+            $y++;
+            // }
+            $bookDatas[$x] = $bookData;
+            $x++;
+        }
+        //dd($bookDatas);
 
-            return view('/TOP/searchResult',compact('bookDatas','searchType','searchWords'));
+        return view('/TOP/searchResult', compact('bookDatas', 'searchType', 'searchWords'));
     }
 
 
@@ -202,6 +203,8 @@ class TopController extends Controller
                 }
             } else if (DB::table('MyPages')->where('id', $userID)->where('showWantToBook', null)->exists()) {
                 $userWantToBookdatas = "非公開";
+            } else {
+                $userWantToBookdatas = "";
             }
 
             //読んだ本リスト
@@ -227,6 +230,8 @@ class TopController extends Controller
                 }
             } else if (DB::table('MyPages')->where('id', $userID)->where('showFinishedBook', null)->exists()) {
                 $userFinishedBookdatas = "非公開";
+            } else {
+                $userWantToBookdatas = "";
             }
 
             //フォローリスト
@@ -246,15 +251,15 @@ class TopController extends Controller
                 }
             } else {
                 $userFollowLists = "非公開";
+            
             }
-
             //書いた感想
             if (DB::table('bookReports')->where('id', $userID)->where('Open', null)->exists()) {
                 $bookReportGet = DB::table('bookReports')->where('id', $userID)->where('Open', null)->latest()->take(5)->get();
                 $x = 0;
                 foreach ($bookReportGet as $bookReportset) {
                     $userBookReportdata['reviewID'] = $bookReportset->reviewID;
-            
+
                     //book関連
                     $userBookReportdata['bookID'] = $bookReportset->bookID;
                     $userBookReportdata["book"] = book::where('bookID', $userBookReportdata['bookID'])->value('book');
@@ -270,11 +275,11 @@ class TopController extends Controller
 
                     $x++;
                 }
-            }else {
+            } else {
                 $userBookReportdatas = "";
             }
 
-            return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists','userBookReportdatas'));
+            return view('userPage', compact('userData', 'userWantToBookdatas', 'userFinishedBookdatas', 'userFollowLists', 'userBookReportdatas'));
         } else if ($myData['id'] == $userID) {
 
             return redirect()->action([MyPageController::class, 'myPage']);
