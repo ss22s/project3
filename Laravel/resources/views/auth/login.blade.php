@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+<link rel="stylesheet" type="text/css" href="css/login.css">
 @section('content')
 @if(session('path'))
 ログインして
@@ -73,4 +72,3 @@
         </div>
     </div>
 </div>
-@endsection
