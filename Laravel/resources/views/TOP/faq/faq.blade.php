@@ -22,7 +22,7 @@
                 <div class="box">
                     <p>
                         トップページの「感想を書く」ボタンをクリックすると読んだ本やその感想を登録することができるページに飛びます。<br>
-                        <a class="reportWriteLink" href="/reportWrite">こちら</a>から登録ページに飛ぶことができます。
+                        <a class="reportWriteLink" href="/selectBooks">こちら</a>から登録ページに飛ぶことができます。
                     </p>
                 </div>
             <!-- </section> -->
