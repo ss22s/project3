@@ -199,10 +199,18 @@ class MyPageController extends Controller
                 //コメント
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
 
+                // $finishedBooks[$x] = $finishedBooks
                 
+            } else{
+                $finishedBooks[$x]['date'] = "";
+                $finishedBooks[$x]['selectedComment'][0]= "" ;
+                $finishedBooks[$x]['comment'] = "";
+
             }
             $x++;
+            
         }
+        dd($finishedBooks);
         return view('Mypage/finishedBooksPage',compact('finishedBooks'));
     }
 
