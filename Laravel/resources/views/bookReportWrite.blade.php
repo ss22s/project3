@@ -30,7 +30,7 @@
         <div class="menuBar">
             @include('MenuBar')
         </div>
-        <div class="page">本の感想を書く!</div><br>
+        <div class="page">本の感想を書く</div><br>
         <div>
             <form action="/reportRegister" method="post">
                 @csrf
