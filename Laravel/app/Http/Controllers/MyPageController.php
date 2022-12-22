@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -139,6 +140,7 @@ class MyPageController extends Controller
         $x = 0;
 
         $wantBookGet = wantBook::where('id',$user['id'])->get(); 
+        dd($wantBookGet);
 
         foreach ($wantBookGet as $wantBookSet) {
             $bookID = $wantBookSet['bookID'];
@@ -178,7 +180,9 @@ class MyPageController extends Controller
             $finishedBooks[$x]['bookID'] = $finishedBooksSet['bookID'];
             $finishedBooks[$x]['book'] = book::where('bookID', $finishedBooksSet['bookID'])->value('book');
             $finishedBooks[$x]['author'] = book::where('bookID', $finishedBooksSet['bookID'])->value('author');
-            // $finishedBooks[$x]['genre'] = book::where('bookID', $finishedBooksSet['bookID'])->value('genre');
+            $finishedBooks[$x]['categories'] = book::where('bookID', $finishedBooksSet['bookID'])->value('categories');
+            $finishedBooks[$x]['thumbnail'] =  BookController::setThumbnail($finishedBooksSet['bookID']);
+
             //感想関連
             //TODO:感想はまだ書いてなくて読んだ本リストに追加だけした時、Keyを持たせて区別するかreviewのnullで判断するか
             if ($finishedBooksSet['reviewID'] != null) {
