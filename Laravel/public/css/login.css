@@ -1,24 +1,67 @@
-.container {
+body {
     background-color:#eee8e1;
-    height: 100vh;
   }
 
-  #login .container #login-row #login-column #login-box {
-    margin-top: 120px;
-    max-width: 600px;
-    height: 320px;
-    border: 3px solid #454541;
+h1 {
+    text-align: center;
+    padding-top: 90px;
+}
 
-    background:#f4f2f0;
+.card{
+    width: 40%;
+    margin: 20px auto;
+    border:1px solid #a48660;
+    background-color: #f4f2f0;
+    padding: 50px;
+    box-sizing: border-box;
+    padding-left: 80px;
+}
+
+.col-md-4.col-form-label.text-md-end{
+  display:inline-block;
+  text-align: right;
+  width: 150px;
+}
+
+.form-control{
+  width: 350px;
+  height: 40px;
+}
+
+.row.mb-3{
+  padding-bottom: 30px;
+}
+
+.row.mb-0{
+  text-align: center;
+  padding-top: 10px;
+}
+
+#passReq{
+  margin-top: 30px;
+}
+
+.col-md-6.offset-md-4{
+  text-align: right;
+  padding-right: 100px;
+}
+
+.card-body{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.link{
+  display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
     border-radius:10px;
-
-    
-    /*border:1px solid #a48660;*/
-
-  }
-  #login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
-  }
-  #login .container #login-row #login-column #login-box #login-form #register-link {
-    margin-top: -85px;
-  }
+}
+.linkButton{
+  text-align:right;
+}
