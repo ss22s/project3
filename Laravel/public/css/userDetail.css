@@ -2,9 +2,50 @@
     background-color:#eee8e1;
 }
 
-h4 {
-    color: red;
-    font-size: 30px;
+.title {
+    text-align: center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
+}
+
+.prof {
+    margin-top: 20px;
+    margin-left: 30%;
+    font-size: 22px;
+}
+
+.button {
+    text-align: center;
+}
+
+.followButton {
+    display:inline-block;
+    text-decoration:none;
+    margin-top:10px;
+    padding: 10px 30px;
+    color: #efefef;
+    background: #D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius: 10px;
+}
+
+.followButton:hover {
+    opacity: 0.7;
+    color:#efefef;
+}
+
+.contents {
+    margin-top: 20px;
+    margin-left: 35%;
+    font-size: 20px;
+}
+
+.line{
+    margin:20px;
+    padding-top:10px;
+    border-top:2px dashed #D2B48C;
 }
 
 /* メニューバーのCSS */
