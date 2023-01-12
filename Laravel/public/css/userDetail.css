@@ -1,8 +1,8 @@
-body {
+.userPageBody {
     background-color:#eee8e1;
 }
 
 h4 {
-    color: lightskyblue;
+    color: red;
     font-size: 30px;
 }
