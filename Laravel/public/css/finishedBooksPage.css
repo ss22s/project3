@@ -70,30 +70,9 @@
     margin: 0 20px;
 }
 
-
-.p1 {
-    display: inline-block;
-    padding: 5px;
-}
-
-.user {
-    color: #454541;
-}
-
-.user:hover {
-    color: #D2B48C;
-}
-
-.p2 {
-    text-align: right;
-    font-size: 18px;
-}
-
-.p3 {
+.edit {
     text-align: right;
 }
-
-
 
 .toppagelink {
     display: inline-block;

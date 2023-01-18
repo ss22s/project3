@@ -38,8 +38,7 @@
                 感想：{{$finishedBook['comment']}}</p>
             </div>
             <div class="edit">
-                <a href="#" class="edit">編集</a>
-                <a href="#" class="edit">削除</a>
+                <a href="#">→感想を編集する</a>
             </div>
         </div>
         @endforeach
