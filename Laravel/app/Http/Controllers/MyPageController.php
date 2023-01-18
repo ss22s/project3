@@ -149,11 +149,10 @@ class MyPageController extends Controller
             $bookID = $wantBookSet['bookID'];
             $wantBooks[$x]['bookID'] = $bookID;
 
-            $wantBooks[$x]['book'] = book::where('bookID', $bookID)->first();
-
+            $wantBooks[$x] = book::where('bookID', $bookID)->first();
+            $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
             $x++;
         }
-
 
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
@@ -191,7 +190,7 @@ class MyPageController extends Controller
             if ($finishedBooksSet['reviewID'] != null) {
                 //日付
                 $date = explode(" ", bookReport::where('reviewID', $reviewID)->value('created_at'));
-                $finishedBooks[$x]['date'] = $date[0];
+                $finishedBooks[$x]['finishDate'] = $date[0];
                 //一言コメント(多重配列)
                 $commentGet = explode(",", bookReport::where('reviewID', $reviewID)->value('selectedComment'));
                 $loopVar = 0;
@@ -201,24 +200,37 @@ class MyPageController extends Controller
                 }
                 //コメント
 
-                $finishedBooks[$x]['comment'] = bookReport::where('reviewID',$reviewID)->value('comment');
+                $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
 
                 // $finishedBooks[$x] = $finishedBooks
-                
-            } else{
-                $finishedBooks[$x]['date'] = "";
-                $finishedBooks[$x]['selectedComment'][0]= "" ;
+
+            } else {
+                $finishedBooks[$x]['reviewID'] = 0;
+                $finishedBooks[$x]['finishDate'] = "";
+                $finishedBooks[$x]['selectedComment'][0] = "";
                 $finishedBooks[$x]['comment'] = "";
 
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
-
             }
             $x++;
-            
         }
         //dd($finishedBooks);
-        return view('Mypage/finishedBooksPage',compact('finishedBooks'));
+        return view('Mypage/finishedBooksPage', compact('finishedBooks'));
+    }
 
+    public function edit($reviewID)
+    {
+
+        $user = Auth::user();
+
+        if ($reviewID == 0) {
+            return view('hello');
+        }
+        $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
+        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
+
+        //dd($reviewData);
+        return view('Mypage/bookReportsEdit', compact('reviewData'));
     }
 
     //一言コメント変換
@@ -257,17 +269,19 @@ class MyPageController extends Controller
     }
 
     //ユーザー情報編集処理
-    public function changeName(Request $request){
+    public function changeName(Request $request)
+    {
         $userID = Auth::id();
-        DB::table('users')->where('id',$userID)->update(['name' => $request->name]);
-        DB::table('users')->where('id',$userID)->update(['email' => $request->email]);
-        DB::table('MyPages')->where('id',$userID)->update(['favoriteBook' => $request->favoriteBook]);
-        DB::table('MyPages')->where('id',$userID)->update(['favoriteAuthor' => $request->favoriteAuthor]);
-        DB::table('MyPages')->where('id',$userID)->update(['freeText' => $request->freeText]);
+        DB::table('users')->where('id', $userID)->update(['name' => $request->name]);
+        DB::table('users')->where('id', $userID)->update(['email' => $request->email]);
+        DB::table('MyPages')->where('id', $userID)->update(['favoriteBook' => $request->favoriteBook]);
+        DB::table('MyPages')->where('id', $userID)->update(['favoriteAuthor' => $request->favoriteAuthor]);
+        DB::table('MyPages')->where('id', $userID)->update(['freeText' => $request->freeText]);
         return back();
     }
-    public function userExit(Request $request){
-        DB::table('users')->where('id',Auth::id())->update(['exit' => 1]);
+    public function userExit(Request $request)
+    {
+        DB::table('users')->where('id', Auth::id())->update(['exit' => 1]);
         Auth::logout();
         return view('/hello');
     }
