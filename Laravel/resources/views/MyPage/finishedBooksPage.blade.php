@@ -21,6 +21,7 @@
     </div>
     <div class="page">読んだ本リスト</div>
     <div class="main">
+   
         @csrf
         @foreach($finishedBooks as $finishedBook)
         <div class="box">

@@ -171,7 +171,7 @@ class TopController extends Controller
             $bookDatas[$x] = $bookData;
             $x++;
         }
-        //dd($bookDatas);
+        dd($bookDatas);
 
         return view('/TOP/searchResult', compact('bookDatas', 'searchType', 'searchWords'));
     }

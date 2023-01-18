@@ -172,7 +172,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-
+        
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
 
@@ -203,11 +203,12 @@ class MyPageController extends Controller
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
 
                 // $finishedBooks[$x] = $finishedBooks
-
-            } else {
+                
+            } else{
                 $finishedBooks[$x]['reviewID'] = 0;
                 $finishedBooks[$x]['finishDate'] = "";
-                $finishedBooks[$x]['selectedComment'][0] = "";
+                $finishedBooks[$x]['selectedComment'][0]= "" ;
+
                 $finishedBooks[$x]['comment'] = "";
 
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
@@ -231,6 +232,20 @@ class MyPageController extends Controller
 
         //dd($reviewData);
         return view('Mypage/bookReportsEdit', compact('reviewData'));
+    }
+
+    public function edit($reviewID){
+        
+        $user = Auth::user();
+
+        if($reviewID == 0){
+            return view('hello');
+        }
+        $reviewData = bookReport::where('reviewID',$reviewID)->where('id',$user['id'])->first();
+        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
+
+        //dd($reviewData);
+        return view('Mypage/bookReportsEdit',compact('reviewData'));
     }
 
     //一言コメント変換

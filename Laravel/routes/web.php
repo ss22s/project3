@@ -62,12 +62,12 @@ Route::get('/userInfo', 'App\Http\Controllers\MypageController@userInfoChange')-
 //読みたい本リストページ
 Route::get('/wantToBooks', 'App\Http\Controllers\MypageController@wantToBooks')->middleware('auth');
 //読んだ本リストページ
-Route::get('/finishedBooks', 'App\Http\Controllers\MyPageController@finishedBooks')->middleware('auth');
+Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks')->middleware('auth');
 //読んだ本リスト編集
-Route::get('/bookReportEdit/{reviewID}', 'App\Http\Controllers\MypageController@edit')
+Route::get('/bookReportEdit/{reviewID}','App\Http\Controllers\MypageController@edit')
     ->name('bookReport.edit');
 //listページ関連
-Route::get('/listDelete/{bookID}', 'App\Http\Controllers\ListController@delete')
+Route::get('/listDelete/{bookID}','App\Http\Controllers\ListController@delete')
     ->name('list.delete');
 
 //user
