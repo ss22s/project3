@@ -149,11 +149,10 @@ class MyPageController extends Controller
             $bookID = $wantBookSet['bookID'];
             $wantBooks[$x]['bookID'] = $bookID;
 
-            $wantBooks[$x]['book'] = book::where('bookID', $bookID)->first();
-
+            $wantBooks[$x] = book::where('bookID', $bookID)->first();
+            $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
             $x++;
         }
-
 
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
@@ -173,7 +172,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-
+        
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
 
@@ -191,7 +190,7 @@ class MyPageController extends Controller
             if ($finishedBooksSet['reviewID'] != null) {
                 //日付
                 $date = explode(" ", bookReport::where('reviewID', $reviewID)->value('created_at'));
-                $finishedBooks[$x]['date'] = $date[0];
+                $finishedBooks[$x]['finishDate'] = $date[0];
                 //一言コメント(多重配列)
                 $commentGet = explode(",", bookReport::where('reviewID', $reviewID)->value('selectedComment'));
                 $loopVar = 0;
@@ -206,7 +205,8 @@ class MyPageController extends Controller
                 // $finishedBooks[$x] = $finishedBooks
                 
             } else{
-                $finishedBooks[$x]['date'] = "";
+                $finishedBooks[$x]['reviewID'] = 0;
+                $finishedBooks[$x]['finishDate'] = "";
                 $finishedBooks[$x]['selectedComment'][0]= "" ;
                 $finishedBooks[$x]['comment'] = "";
 
@@ -219,6 +219,20 @@ class MyPageController extends Controller
         //dd($finishedBooks);
         return view('Mypage/finishedBooksPage',compact('finishedBooks'));
 
+    }
+
+    public function edit($reviewID){
+        
+        $user = Auth::user();
+
+        if($reviewID == 0){
+            return view('hello');
+        }
+        $reviewData = bookReport::where('reviewID',$reviewID)->where('id',$user['id'])->first();
+        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
+
+        //dd($reviewData);
+        return view('Mypage/bookReportsEdit',compact('reviewData'));
     }
 
     //一言コメント変換

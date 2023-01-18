@@ -22,6 +22,7 @@
     <div class="page">読んだ本リスト</div>
 
     <div class="main">
+   
         @csrf
         @foreach($finishedBooks as $finishedBook)
         <!-- 書影(※書影にもリンクつける) -->
