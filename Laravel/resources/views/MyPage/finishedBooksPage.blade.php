@@ -16,46 +16,30 @@
 </head>
 
 <body class="top">
-    {{-- TODO:読んだ本リストのページ --}}
-    {{-- finishedBooksにデータ入っるのでforeachなどで回すと取り出せる！ 
-        感想はまだ書いてないけど、読んだ本リストに追加したものはfor回している中でif(reviewID != null) で判断できる--}}
+    <div class="menuBar">
+        @include('MenuBar')
+    </div>
     <div class="page">読んだ本リスト</div>
-
     <div class="main">
    
         @csrf
         @foreach($finishedBooks as $finishedBook)
-        <!-- 書影(※書影にもリンクつける) -->
         <div class="box">
-            <label class="open title" for="pop-up">
-                <span class="image">書影</span>
-                {{$finishedBook['book']}}
-            </label>
-
-            <!-- <img src = "書籍画像"> -->
-            <input type="checkbox" id="pop-up">
-            <div class="overlay">
-                <div class="window">
-                    <label class="close" for="pop-up">×</label>
-                    <!-- 書影(※書影にもリンクつける) -->
-
-                    <!-- ひとこと感想 -->
-                    <!-- コメント感想 -->
-                    <!-- 読んだ日 -->
-                    <!-- 編集ボタン→編集ページに移動 -->
-                    <!-- 削除ボタン -->
-                    <div id="left">
-                        <span class="image">書影</span>
-                        <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">本の詳細</a>
-                    </div>
-                    <div id="right">
-                        <a class="text" href="{{ route('book.detail', $finishedBook['bookID'] )}}">{{$finishedBook['book']}}</a>
-                        <p class="text">{{$finishedBook['author']}}</p>
-                        <p class="text">{{$finishedBook['finishDate']}}</p>
-
-                        <!-- カテゴリ -->
-                    </div>
-                </div>
+            <a class="title" href="{{ route('book.detail', $finishedBook['bookID'] )}}">
+                <p class="booklink">{{$finishedBook['book']}}</p>
+            </a>
+            <p class="author">{{$finishedBook['author']}}</p>
+            <span class="image">
+                <img src="{{$finishedBook['thumbnail']}}" alt="書影" width="180" height="220">
+            </span>
+            <div class="info">
+                カテゴリ：{{$finishedBook['categories']}}<br>
+                読んだ日：{{$finishedBook['date']}}<br>
+                一言感想：{{$finishedBook['selectedComment'][0]}}<br>
+                感想：{{$finishedBook['comment']}}</p>
+            </div>
+            <div class="edit">
+                <a href="#">→感想を編集する</a>
             </div>
         </div>
         @endforeach
