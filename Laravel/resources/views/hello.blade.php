@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/hello.css">
-    <title>Document</title>
+    <title>Shererary</title>
 </head>
 <body class="main">
-!
+
     <div>
         <div class="mypage">
             <a class="mypagelink" href="/myPage">マイページ</a>
@@ -34,11 +34,19 @@
             @endauth
         </div>
 
+        <div class="logo">
+            <img src="{{ asset('img/logo2.png')}}" alt="logo">
+        </div>
+
         <div class="toppage">
             <hr class="line">
             <a class="toppagelink" href="/">Top</a><br>
             <a class="toppagelink" href="/ranking">ランキング</a><br>
+<<<<<<< HEAD
             <a class="toppagelink" href="/newBookReport">新着感想</a><br>
+=======
+            <a class="toppagelink" href="/newBookReport">新着感想</a><br>  
+>>>>>>> f814767f26f69dc2472bdcf8c6eb8c54945eb7c9
             <a class="toppagelink" href="/contactUs">お問い合わせ</a>
         </div>
 
