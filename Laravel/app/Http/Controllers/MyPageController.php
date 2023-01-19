@@ -234,19 +234,6 @@ class MyPageController extends Controller
         return view('Mypage/bookReportsEdit', compact('reviewData'));
     }
 
-    public function edit($reviewID){
-        
-        $user = Auth::user();
-
-        if($reviewID == 0){
-            return view('hello');
-        }
-        $reviewData = bookReport::where('reviewID',$reviewID)->where('id',$user['id'])->first();
-        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
-
-        //dd($reviewData);
-        return view('Mypage/bookReportsEdit',compact('reviewData'));
-    }
 
     //一言コメント変換
     public function commentAdd($comment)
