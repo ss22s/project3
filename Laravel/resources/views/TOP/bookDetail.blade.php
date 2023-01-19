@@ -16,9 +16,9 @@
             <div class="page">本の詳細</div><br>
                 <img src="{{$bookThumbnail}}" alt="書影" width="150" height="200">
                     <div class="data">    
-                        タイトル：{{$bookData['book']}} <br>
-                        著者：{{$bookData['author']}} <br>
-                        カテゴリ：{{$bookData['categories']}}
+                        <b>タイトル：</b>{{$bookData['book']}} <br>
+                        <b>著者：</b>{{$bookData['author']}} <br>
+                        <b>カテゴリ：</b>{{$bookData['categories']}}
                     </div>
 
                 <br>
@@ -41,15 +41,13 @@
             <div class="line">
                 <h4>感想</h4>
                 @foreach($reportDatas as $reportData)
-                <hr>
-                <div>
+                <div class="comment">
                 <b>名前：</b>{{$reportData['name']}}<br>
                 <b>評価：</b>{{$reportData['evaluation']}}<br>
                 <b>一言コメント：</b>{{$reportData['selectedComment']}}<br>
-                <b>感想：</b>{{$reportData['comment']}}<br>
+                <b>【感想】</b><br>{{$reportData['comment']}}<br>
                 </div>
                 @endforeach
-                <hr>
             </div>
             <a class="toppagelink"  href="/">TOPへ</a>
     </div>
