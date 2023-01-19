@@ -28,6 +28,10 @@
             </p>
         </div>
         <br>
+        <div class="graph">
+            設定した目標冊数/月に対しての達成度グラフを表示する
+        </div>
+        <br>
         <div class="list">
             <div class="box2">
                 <h1 class="content">フォロー</h1>
