@@ -22,7 +22,6 @@
             <span class="image">
                 <img src="{{$wantBook['thumbnail']}}" alt="書影" width="180" height="220">
             </span>
-            <p class="p3">登録日:{{$wantBook['registerDate']}}</p>
         </div>
         @endforeach
     </div>

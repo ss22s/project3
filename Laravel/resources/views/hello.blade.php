@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/hello.css">
-    <title>Document</title>
+    <title>Shererary</title>
 </head>
 <body class="main">
+<<<<<<< HEAD
 
+=======
+>>>>>>> c33634da225d3bc25120323b789651e255ca8ff9
     <div>
         <div class="mypage">
             <a class="mypagelink" href="/myPage">マイページ</a>
@@ -32,6 +35,10 @@
             <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
                 @csrf
             @endauth
+        </div>
+
+        <div class="logo">
+            <img src="{{ asset('img/logo2.png')}}" alt="logo">
         </div>
 
         <div class="toppage">
