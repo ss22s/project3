@@ -30,6 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>確認画面</title>
+    <link rel="stylesheet" type="text/css" href="css/confirm.css">
 </head>
 <body>
     <h2>確認画面</h2>
