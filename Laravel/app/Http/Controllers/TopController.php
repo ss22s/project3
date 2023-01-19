@@ -141,6 +141,11 @@ class TopController extends Controller
         } else if ($searchType == "author") {
             $bookDatasGet = book::where('author', 'LIKE', '%' . $searchWords . '%')->get();
         }
+        
+        dd($bookDatasGet->toArray());
+        if(is_array($bookDatasGet)){
+            dd("AAAAAAAAAA");
+        }
         $x = 0;
         foreach ($bookDatasGet as $bookDataSet) {
             //本の情報

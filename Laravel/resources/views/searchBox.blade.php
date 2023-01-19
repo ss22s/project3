@@ -18,7 +18,9 @@
         <input type="text" name="searchWords">
         <button>検索</button>
     </form>
-    
+    <div>
+        
+    </div>
 </body>
 
 </html>
