@@ -2,6 +2,11 @@ body {
     background-color:#eee8e1;
 }
 
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+
 .page {
     text-align:center;
     color:#D2B48C;
@@ -80,6 +85,9 @@ body {
     padding: 10px 20px;
     margin: 0 5px;
 }
+
+.linkbutton {
+    text-align: right;
 
 .faqlink {
     text-align: right;

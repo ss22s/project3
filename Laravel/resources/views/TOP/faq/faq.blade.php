@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/faq.css">
 </head>
 <body>
+
     <div class="MenuBar">
         @include('MenuBar')
     </div>
