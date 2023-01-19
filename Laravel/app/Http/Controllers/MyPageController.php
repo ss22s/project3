@@ -234,7 +234,6 @@ class MyPageController extends Controller
         return view('Mypage/bookReportsEdit', compact('reviewData'));
     }
 
-
     //一言コメント変換
     public function commentAdd($comment)
     {

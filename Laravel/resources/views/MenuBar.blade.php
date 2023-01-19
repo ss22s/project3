@@ -10,53 +10,54 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-  <link href="css/MenuBar.css" type="text/css" rel="stylesheet">
+  <link href="{{ asset('/css/MenuBar.css') }}" type="text/css" rel="stylesheet">
   <title>Menubar</title>
 
-<button class="menu1 searchbooksOnly" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  <div></div>
-  <div></div>
-  <div></div>
-</button>
+  <button class="menu1 searchbooksOnly" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
 
-<div class="offcanvas offcanvas-start menu BarBox" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">  
-<div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      <a class="toppagelink" href="/">Top</a><br>
-      <a class="toppagelink" href="/ranking">ランキング</a><br>
-      <a class="toppagelink" href="/newBookReport">新着感想</a><br>
-      <a class="toppagelink" href="/contactUs">お問い合わせ</a>
+  <div class="offcanvas offcanvas-start menu BarBox" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <br><br>
-    <div>
-      @guest
-      <a class="loginlink" href="/login">ログイン</a><br>
-      <a class="loginlink" href="/register">新規登録</a>
-      @endguest
-      @auth
-    </div>
+    <div class="offcanvas-body">
+      <div>
+        <a class="toppagelink" href="/">Top</a><br>
+        <a class="toppagelink" href="/ranking">ランキング</a><br>
+        <a class="toppagelink" href="/newBookReport">新着感想</a><br>
+        <a class="toppagelink" href="/chatRoom">掲示板</a><br>
+        <a class="toppagelink" href="/contactUs">お問い合わせ</a>
+      </div>
+      <br><br>
+      <div>
+        @guest
+        <a class="loginlink" href="/login">ログイン</a><br>
+        <a class="loginlink" href="/register">新規登録</a>
+        @endguest
+        @auth
+      </div>
 
-    <div class="logout">
-      <p class="message">
-        <b>{{Auth::user()->name}}</b>としてログイン済み<br>
-      </p>
-      <div class="mypage">
-            <a class="mypagelink" href="/myPage">マイページ</a>
+      <div class="logout">
+        <p class="message">
+          <b>{{Auth::user()->name}}</b>としてログイン済み<br>
+        </p>
+        <div class="mypage">
+          <a class="mypagelink" href="/myPage">マイページ</a>
         </div>
-      <a class="logoutlink" href={{ route('logout') }} onclick="event.preventDefault();
+        <a class="logoutlink" href={{ route('logout') }} onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
-        ログアウト
-      </a>
-      <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
-        @csrf
-        @endauth
-      </form>
-    </div>
-    <!-- <div class="dropdown mt-3">
+          ログアウト
+        </a>
+        <form id='logout-form' action={{ route('logout')}} method="POST" style="display: none;">
+          @csrf
+          @endauth
+        </form>
+      </div>
+      <!-- <div class="dropdown mt-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
         Dropdown button
       </button>
@@ -66,5 +67,5 @@
         <li><a class="dropdown-item" href="#">Something else here</a></li>
       </ul>
     </div> -->
+    </div>
   </div>
-</div>
