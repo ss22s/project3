@@ -7,10 +7,7 @@
     <title>Shererary</title>
 </head>
 <body class="main">
-<<<<<<< HEAD
 
-=======
->>>>>>> c33634da225d3bc25120323b789651e255ca8ff9
     <div>
         <div class="mypage">
             <a class="mypagelink" href="/myPage">マイページ</a>
