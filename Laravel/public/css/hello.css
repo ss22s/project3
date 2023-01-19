@@ -82,6 +82,10 @@
     color: #efefef;
 }
 
+.logo{
+    text-align:left;
+}
+
 .toppage{
     padding-top:20px;
 }
