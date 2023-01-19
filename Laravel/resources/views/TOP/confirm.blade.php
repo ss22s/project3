@@ -33,8 +33,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" type="text/css" href="css/confirm.css">
 </head>
 <body>
-    <h2>確認画面</h2>
-    <p>下記の内容でメッセージを送信します。よろしければ「送信」ボタンを押してください。</p>
+    <div class="page">確認画面</div>
+    <div class="p">下記の内容でメッセージを送信します。よろしければ「送信」ボタンを押してください。</div>
 
     <form action="/complete" method="POST">
     @csrf
