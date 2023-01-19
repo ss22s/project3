@@ -13,7 +13,7 @@
     <div class="MenuBar">
         @include('MenuBar')
     </div>
-    <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
+    <!-- <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div> -->
     <h1>よくあるご質問</h1>
     <div class="page">よくあるご質問</div>
     <ul class="accordion-area">
