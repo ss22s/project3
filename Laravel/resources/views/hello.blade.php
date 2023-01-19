@@ -42,11 +42,7 @@
             <hr class="line">
             <a class="toppagelink" href="/">Top</a><br>
             <a class="toppagelink" href="/ranking">ランキング</a><br>
-<<<<<<< HEAD
             <a class="toppagelink" href="/newBookReport">新着感想</a><br>
-=======
-            <a class="toppagelink" href="/newBookReport">新着感想</a><br>  
->>>>>>> f814767f26f69dc2472bdcf8c6eb8c54945eb7c9
             <a class="toppagelink" href="/contactUs">お問い合わせ</a>
         </div>
 

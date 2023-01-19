@@ -28,10 +28,6 @@
             </p>
         </div>
         <br>
-<<<<<<< HEAD
-=======
-        <br>
->>>>>>> f814767f26f69dc2472bdcf8c6eb8c54945eb7c9
         <div class="list">
             <div class="box2">
                 <h1 class="content">フォロー</h1>
