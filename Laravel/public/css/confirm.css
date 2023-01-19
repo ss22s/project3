@@ -14,3 +14,48 @@ body {
     text-align: center;
     margin-top: 30px;
 }
+
+.content {
+    margin-top: 20px;
+    margin-left: 25%;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.input {
+    margin-left: 3%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.naiyou {
+    width: 80%;
+}
+
+.btnset {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn {
+    background: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #9c9c9c;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 5px;
+}
