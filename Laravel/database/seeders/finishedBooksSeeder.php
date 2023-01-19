@@ -21,67 +21,91 @@ class finishedBooksSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'Y2YPcgAACAAJ',
-            'date' => '2022-01-15 15:25:00',
-            'reviewID' => 1,
-            'delete' => null]
+            [
+                'finishedID' => 1,
+                'id' => 1,
+                'bookID' => 'Y2YPcgAACAAJ',
+                'date' => '2022-01-15 15:25:00',
+                'reviewID' => 1,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 2,
-            'bookID' => 'FA-dDQAAQBAJ',
-            'date' => '2022-02-15 11:54:00',
-            'reviewID' => 3,
-            'delete' => 1]
+            [
+                'finishedID' => 2,
+                'id' => 2,
+                'bookID' => 'FA-dDQAAQBAJ',
+                'date' => '2022-02-15 11:54:00',
+                'reviewID' => 3,
+                'delete' => 1
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'FLc9zwEACAAJ',
-            'date' => '2022-03-18 16:24:00',
-            'reviewID' => null,
-            'delete' => null]
+            [
+                'finishedID' => 3,
+                'id' => 1,
+                'bookID' => 'FLc9zwEACAAJ',
+                'date' => '2022-03-18 16:24:00',
+                'reviewID' => null,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 3,
-            'bookID' => 'xMMeNwAACAAJ',
-            'date' => '2022-03-23 13:54:00',
-            'reviewID' => 2,
-            'delete' => null]
+            [
+                'finishedID' => 4,
+                'id' => 3,
+                'bookID' => 'xMMeNwAACAAJ',
+                'date' => '2022-03-23 13:54:00',
+                'reviewID' => 2,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'jfApAQAAMAAJ',
-            'date' => '2021-03-18 16:24:00',
-            'reviewID' => null,
-            'delete' => null]
+            [
+                'finishedID' => 5,
+                'id' => 1,
+                'bookID' => 'jfApAQAAMAAJ',
+                'date' => '2021-03-18 16:24:00',
+                'reviewID' => null,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'xMMeNwAACAAJ',
-            'date' => '2022-05-08 10:20:00',
-            'reviewID' => null,
-            'delete' => null]
+            [
+                'finishedID' => 6,
+                'id' => 1,
+                'bookID' => 'xMMeNwAACAAJ',
+                'date' => '2022-05-08 10:20:00',
+                'reviewID' => null,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'FccyEAAAQBAJ',
-            'date' => '2020-09-13 12:00:00',
-            'reviewID' => null,
-            'delete' => null]
+            [
+                'finishedID' => 7,
+                'id' => 1,
+                'bookID' => 'FccyEAAAQBAJ',
+                'date' => '2020-09-13 12:00:00',
+                'reviewID' => null,
+                'delete' => null
+            ]
         ]);
 
         \DB::table('finishedBooks')->insert([
-            ['id' => 1,
-            'bookID' => 'FA-dDQAAQBAJ',
-            'date' => '2021-12-24 00:00:00',
-            'reviewID' => null,
-            'delete' => null]
+            [
+                'finishedID' => 8,
+                'id' => 1,
+                'bookID' => 'FA-dDQAAQBAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => null,
+                'delete' => null
+            ]
         ]);
     }
 }
