@@ -21,7 +21,7 @@
     </div>
     <div class="page">読んだ本リスト</div>
     <div class="main">
-   
+
         @csrf
         @foreach($finishedBooks as $finishedBook)
         <div class="box">
@@ -39,7 +39,7 @@
                 感想：{{$finishedBook['comment']}}</p>
             </div>
             <div class="edit">
-                <a href="#">→感想を編集する</a>
+                <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を編集する</a>           
             </div>
         </div>
         @endforeach
