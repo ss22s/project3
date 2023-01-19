@@ -9,6 +9,7 @@ use App\Models\Book;
 use App\Models\bookReport;
 use App\Models\finishedBook;
 use App\Models\wantBook;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -45,7 +46,29 @@ class BookController extends Controller
         array_multisort($NumGet, SORT_DESC, $selectedCommentsCount);
         $selectedCommentsTop = array_slice($selectedCommentsCount, 0, 3);
 
-        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop'));
+        //感想取得
+        $reportDatasGet = bookReport::where('bookID',$bookID)->where('Open',null)->get();
+        
+        $x = 0;
+        foreach ($reportDatasGet as $reportDataGet) {
+
+            $reportDataSet['name'] = User::where('id',$reportDataGet['id'])->value('name');
+            $reportDataSet['evaluation'] = $reportDataGet['evaluation'];
+
+            $selectedComments = explode(',',$reportDataGet['selectedComment']);
+            foreach ($selectedComments as $selectedComment) {
+                $reportDataSet['selectedComment'] = $this->commentAdd($selectedComment);
+                if($selectedComment !== end($selectedComments)){
+                    $reportDataSet['selectedComment'] .= ",";
+                }
+                
+            }
+            $reportDataSet['comment'] = $reportDataGet['comment'];
+
+            $reportDatas[$x] = $reportDataSet;
+            $x++;
+        }
+        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop','reportDatas'));
     }
 
     public function searchPageGet(Request $request)
