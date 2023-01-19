@@ -50,6 +50,8 @@ class BookController extends Controller
         $reportDatasGet = bookReport::where('bookID',$bookID)->where('Open',null)->get();
         
         $x = 0;
+
+        if(isset($reportDatasGet)){
         foreach ($reportDatasGet as $reportDataGet) {
 
             $reportDataSet['name'] = User::where('id',$reportDataGet['id'])->value('name');
@@ -68,6 +70,10 @@ class BookController extends Controller
             $reportDatas[$x] = $reportDataSet;
             $x++;
         }
+        } else {
+            $reportDatas = null;
+        
+    }
         return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop','reportDatas'));
     }
 
@@ -463,7 +469,7 @@ class BookController extends Controller
 
     //値をセットするfunction
 
-    public function setAuthor($bookData)
+    public static function setAuthor($bookData)
     {
         $authors = "";
         if (!(property_exists($bookData->volumeInfo, 'authors'))) {
@@ -486,7 +492,7 @@ class BookController extends Controller
         return $authors;
     }
 
-    public function setCategories($bookData)
+    public static function setCategories($bookData)
     {
         if (!(property_exists($bookData->volumeInfo, 'categories'))) {
             $categories = "不明";
@@ -528,7 +534,7 @@ class BookController extends Controller
         return $ISBN;
     }
 
-    public function setDescription($bookData)
+    public static function setDescription($bookData)
     {
         if (!(property_exists($bookData->volumeInfo, 'description'))) {
             $description = "";

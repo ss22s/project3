@@ -111,9 +111,7 @@ Route::get('/userExit', function () {
 
 Route::post('/userExit', 'App\Http\Controllers\MyPageController@userExit');
 
-Route::get('/searchBox', function () {
-    return view('searchBox');
-});
+Route::get('/searchBox', 'App\Http\Controllers\TopController@searchBox');
 
 
 Route::get('/MenuBar', function () {
