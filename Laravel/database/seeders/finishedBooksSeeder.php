@@ -28,10 +28,7 @@ class finishedBooksSeeder extends Seeder
                 'date' => '2022-01-15 15:25:00',
                 'reviewID' => 1,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 2,
                 'id' => 2,
@@ -39,10 +36,7 @@ class finishedBooksSeeder extends Seeder
                 'date' => '2022-02-15 11:54:00',
                 'reviewID' => 3,
                 'delete' => 1
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 3,
                 'id' => 1,
@@ -50,60 +44,85 @@ class finishedBooksSeeder extends Seeder
                 'date' => '2022-03-18 16:24:00',
                 'reviewID' => null,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 4,
-                'id' => 3,
-                'bookID' => 'xMMeNwAACAAJ',
+                'id' => 1,
+                'bookID' => 'FccyEAAAQBAJ',
                 'date' => '2022-03-23 13:54:00',
                 'reviewID' => 2,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 5,
                 'id' => 1,
                 'bookID' => 'jfApAQAAMAAJ',
                 'date' => '2021-03-18 16:24:00',
-                'reviewID' => null,
+                'reviewID' => 9,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 6,
                 'id' => 1,
                 'bookID' => 'xMMeNwAACAAJ',
                 'date' => '2022-05-08 10:20:00',
-                'reviewID' => null,
+                'reviewID' => 4,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 7,
                 'id' => 1,
                 'bookID' => 'FccyEAAAQBAJ',
                 'date' => '2020-09-13 12:00:00',
-                'reviewID' => null,
+                'reviewID' => 6,
                 'delete' => null
-            ]
-        ]);
-
-        \DB::table('finishedBooks')->insert([
+            ],
             [
                 'finishedID' => 8,
                 'id' => 1,
                 'bookID' => 'FA-dDQAAQBAJ',
                 'date' => '2021-12-24 00:00:00',
-                'reviewID' => null,
+                'reviewID' => 3,
+                'delete' => null
+            ],
+            [
+                'finishedID' => 9,
+                'id' => 2,
+                'bookID' => 'Y2YPcgAACAAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => 5,
+                'delete' => null
+            ],
+            [
+                'finishedID' => 10,
+                'id' => 3,
+                'bookID' => 'xMMeNwAACAAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => 7,
+                'delete' => null
+            ],
+            [
+                'finishedID' => 11,
+                'id' => 3,
+                'bookID' => 'Y2YPcgAACAAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => 8,
+                'delete' => null
+            ],
+            [
+                'finishedID' => 12,
+                'id' => 1,
+                'bookID' => 'ZM9MzQEACAAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => 10,
+                'delete' => null
+            ],
+            [
+                'finishedID' => 13,
+                'id' => 2,
+                'bookID' => 'ZM9MzQEACAAJ',
+                'date' => '2021-12-24 00:00:00',
+                'reviewID' => 11,
                 'delete' => null
             ]
         ]);
