@@ -33,7 +33,9 @@
             @endauth
         </div>
 
-        <img src="{{ asset('img/logo.png')}}" alt="logo">
+        <div class="logo">
+            <img src="{{ asset('img/logo2.png')}}" alt="logo">
+        </div>
 
         <div class="toppage">
             <hr class="line">
