@@ -159,3 +159,13 @@
     padding-top:10px;
     border-top:2px dashed #D2B48C;
 }
+
+.comment{
+    display:inline-block;
+    background-color:#efefef;
+    border:2px solid;
+    border-radius:30px;
+    margin:20px;
+    padding:10px;
+    width:40%;
+}
