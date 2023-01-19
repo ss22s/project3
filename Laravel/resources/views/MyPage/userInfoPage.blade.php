@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="linkset">
+    <div align="center">
         <a class="link" href="/myPage">マイページに戻る</a>
         <div class="btn"><a class="link" href="/userExit">退会したい</a></div>
     </div>
