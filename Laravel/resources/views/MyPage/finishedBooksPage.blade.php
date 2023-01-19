@@ -34,7 +34,7 @@
             </span>
             <div class="info">
                 カテゴリ：{{$finishedBook['categories']}}<br>
-                読んだ日：{{$finishedBook['date']}}<br>
+                読んだ日：{{$finishedBook['finishDate']}}<br>
                 一言感想：{{$finishedBook['selectedComment'][0]}}<br>
                 感想：{{$finishedBook['comment']}}</p>
             </div>
