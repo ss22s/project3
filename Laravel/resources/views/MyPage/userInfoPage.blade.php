@@ -62,8 +62,10 @@
             </div>
         </div>
     </div>
-
-    <a class="link" href="/userExit">退会したい</a>
-
+    <div class="linkset">
+        <a class="link" href="/myPage">マイページに戻る</a>
+        <div class="btn"><a class="link" href="/userExit">退会したい</a></div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="css/userInfo.css">
 </body>
 </html>

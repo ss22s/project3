@@ -53,6 +53,14 @@
   box-shadow: none;
 }
 
+.linkset {
+    text-align: center;
+}
+
+.btn {
+    margin-left: 50px;
+}
+
 .link{
     color:#454541;
     text-decoration: underline;
