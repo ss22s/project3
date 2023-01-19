@@ -230,7 +230,7 @@ class MyPageController extends Controller
         $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
         $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
 
-        //dd($reviewData);
+        
         return view('Mypage/bookReportsEdit', compact('reviewData'));
     }
 
