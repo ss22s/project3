@@ -40,6 +40,8 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
+        /*$pash = \Session::pull('url.intended');
+        return $path;*/
         return '/';
     }
     public function showLoginForm()

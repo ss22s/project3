@@ -3,6 +3,25 @@ body {
 }
 
 .linkbutton {
+    text-align: right;
+}
+
+.toppagelink {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:15px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
     text-align: center;
 }
 
