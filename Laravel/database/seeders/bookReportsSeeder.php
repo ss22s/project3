@@ -63,7 +63,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 5,
-                'id' => 1,
+                'id' => 2,
                 'bookID' => 'Y2YPcgAACAAJ',
                 'evaluation' =>2,
                 'selectedComment' => '5',
@@ -83,7 +83,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 7,
-                'id' => 1,
+                'id' => 3,
                 'bookID' => 'xMMeNwAACAAJ',
                 'evaluation' => 3,
                 'selectedComment' => '2',
@@ -93,7 +93,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 8,
-                'id' => 2,
+                'id' => 3,
                 'bookID' => 'Y2YPcgAACAAJ',
                 'evaluation' => 5,
                 'selectedComment' => '2',
@@ -123,7 +123,7 @@ class bookReportsSeeder extends Seeder
             ],
             [
                 'reviewID' => 11,
-                'id' => 1,
+                'id' => 2,
                 'bookID' => 'ZM9MzQEACAAJ',
                 'evaluation' => 4,
                 'selectedComment' => '2',
