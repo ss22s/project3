@@ -68,6 +68,7 @@ if(!empty($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
 <head>
     <meta charset="UTF-8">
     <title>送信完了</title>
+    <link rel="stylesheet" type="text/css" href="css/confirm.css">
 </head>
 <body>
     <h2>送信完了</h2>
