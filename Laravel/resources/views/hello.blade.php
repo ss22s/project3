@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/hello.css">
-    <title>Document</title>
+    <title>Shererary</title>
 </head>
 <body class="main">
     <div>
@@ -32,6 +32,8 @@
                 @csrf
             @endauth
         </div>
+
+        <img src="{{ asset('img/logo.png')}}" alt="logo">
 
         <div class="toppage">
             <hr class="line">
