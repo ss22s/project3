@@ -7,6 +7,7 @@
     <title>Shererary</title>
 </head>
 <body class="main">
+
     <div>
         <div class="mypage">
             <a class="mypagelink" href="/myPage">マイページ</a>

@@ -223,15 +223,16 @@ class MyPageController extends Controller
     {
 
         $user = Auth::user();
+        $reviewExist = null;
 
         if ($reviewID == 0) {
-            return view('hello');
-        }
+            $reviewExist = 1;
+        } else {
         $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
         $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
-
+        }
         
-        return view('Mypage/bookReportsEdit', compact('reviewData'));
+        return view('Mypage/bookReportsEdit', compact('reviewData','reviewExist'));
     }
 
     //一言コメント変換
