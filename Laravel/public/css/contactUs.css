@@ -122,3 +122,15 @@ h1 {
     border:solid#D2B48C;
     border-radius:10px;
 }
+
+.faq:hover {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}

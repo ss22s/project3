@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    感想検索
     <form action="/bookReportsList" method="post">
         @csrf
         <select name="searchType">

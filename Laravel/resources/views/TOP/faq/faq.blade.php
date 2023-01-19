@@ -10,8 +10,10 @@
     <link rel="stylesheet" type="text/css" href="css/faq.css">
 </head>
 <body>
-    <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
-    <h1>よくあるご質問</h1>
+
+    <div class="MenuBar">
+        @include('MenuBar')
+    </div>
     <div class="page">よくあるご質問</div>
     <ul class="accordion-area">
         <li>
@@ -21,7 +23,7 @@
                 <div class="box">
                     <p>
                         トップページの「感想を書く」ボタンをクリックすると読んだ本やその感想を登録することができるページに飛びます。<br>
-                        <a class="reportWriteLink" href="/reportWrite">こちら</a>から登録ページに飛ぶことができます。
+                        <a class="reportWriteLink" href="/selectBooks">こちら</a>から登録ページに飛ぶことができます。
                     </p>
                 </div>
             <!-- </section> -->
@@ -107,5 +109,6 @@
         });
         });
     </script>
+    <link rel="stylesheet" type="text/css" href="css/faq.css">
 </body>
 </html>

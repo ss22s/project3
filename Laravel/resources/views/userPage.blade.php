@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザーページ</title>
-    <link rel="stylesheet" type="text/css" href="css/userDetail.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/userDetail.css') }}">
 </head>
 
-<body>
+<body class="userPageBody">
     <div class="MenuBar">
         @include('MenuBar')
     </div>
-    <h4>{{$userData['name']}}さんのページ</h4>
+    <div class="title">{{$userData['name']}}さんのページ</div>
     <p>
-        <b>イチオシの一冊：</b>{{$userData['favoriteBook']}}<br>
-        <b>好きな著者：</b>{{$userData['favoriteAuthor']}}<br>
-        <b>自由記述欄：</b>{{$userData['text']}}
+        <div class="prof"><b>イチオシの一冊：</b>{{$userData['favoriteBook']}}</div>
+        <div class="prof"><b>好きな著者：</b>{{$userData['favoriteAuthor']}}</div>
+        <div class="prof"><b>自由記述欄：</b>{{$userData['text']}}</div>
     </p>
-    <div>
-        <a href="{{ route('user.follow', $userData['id'] )}}">{{$userData['name']}}さんをフォローする</a>
+    <div class="line">
+        <div class="button"><a href="{{ route('user.follow', $userData['id'] )}}" class="followButton">{{$userData['name']}}さんをフォローする</a></div>
         <div>
             @if(session('FollowMessage') == "成功")
             フォローしました！
@@ -30,7 +30,9 @@
     </div>
 
     <p>
-    <h5>最近の感想</h5>
+    <div class="line">
+    <div class="prof"><b>最近の感想</b></div>
+    <div class="contents">
     @if($userWantToBookdatas == "")
     感想はありません。
     @else
@@ -49,10 +51,12 @@
         </div>
     @endforeach
     @endif
+    </div>
     </p>
 
     <p>
-    <h5>読みたい本リスト</h5>
+    <div class="prof"><b>読みたい本リスト</b></div>
+    <div class="contents">
     @if($userWantToBookdatas == "")
     読みたい本リストに登録された本がありません。
     @elseif($userWantToBookdatas == "非公開")
@@ -67,10 +71,12 @@
         </p>
     </div>
     @endif
+    </div>
     </p>
 
     <p>
-    <h5>読んだ本リスト</h5>
+    <div class="prof"><b>読んだ本リスト</b></div>
+    <div class="contents">
     @if($userFinishedBookdatas == "")
     読んだ本リストに登録された本がありません。
     @elseif($userFinishedBookdatas == "非公開")
@@ -85,14 +91,16 @@
         </p>
     </div>
     @endif
+    </div>
     </p>
 
     <div>
-        <h5>フォロー</h5>
+    <div class="prof"><b>フォロー</b></div>
+    <div class="contents">
         @if($userFollowLists == "")
-    読んだ本リストに登録された本がありません。
+    フォローしている人はいません。
     @elseif($userFollowLists == "非公開")
-    読んだ本リストは非公開です。
+    フォローリストは非公開です。
     @else
     <div>
         <p class="data">
@@ -104,6 +112,10 @@
     </div>
     @endif
     </div>
+    </div>
+    </div>
+    <div class="button"><a class="toppagelink"  href="/">TOPへ</a></div>
+    <link rel="stylesheet" type="text/css" href="css/userDetail.css">
 </body>
 
 </html>

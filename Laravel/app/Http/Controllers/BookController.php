@@ -343,12 +343,16 @@ class BookController extends Controller
         if (!(DB::table('books')->where('bookID', $bookID)->exists())) {
             $bookDataGet = $this->booksearchId($bookID);
             //dd($bookDataGet);
+            $setISBN = $this->setISBN($bookDataGet);
+            if($setISBN == "不明"){
+                $setISBN = "0";
+            }
 
             DB::table('books')->insert([
                 'bookID' => $bookID,
                 'book' => $bookDataGet->volumeInfo->title,
                 'author' => $this->setAuthor($bookDataGet),
-                'ISBN' => $this->setISBN($bookDataGet),
+                'ISBN' => $setISBN,
                 'categories' => $this->setCategories($bookDataGet),
             ]);
         }
@@ -359,7 +363,7 @@ class BookController extends Controller
     }
 
 
-    public function commentAdd($comment)
+    public static function commentAdd($comment)
     {
         if ($comment == 0) {
             return "感動した";
@@ -482,7 +486,7 @@ class BookController extends Controller
         return $categories;
     }
 
-    public function setISBN($bookData)
+    public static function setISBN($bookData)
     {
         if (property_exists($bookData->volumeInfo, 'industryIdentifiers')) {
 
@@ -511,7 +515,7 @@ class BookController extends Controller
         return $description;
     }
 
-    public function setThumbnail($bookID)
+    public static function setThumbnail($bookID)
     {
         $frontUrl = 'http://books.google.com/books/content?id=';
         $backUrl =  '&printsec=frontcover&img=1&zoom=1&source=gbs_api';
