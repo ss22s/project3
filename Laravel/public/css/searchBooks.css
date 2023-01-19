@@ -1,3 +1,7 @@
+
+
+/*searchBooksのcssここから*/
+
 .top {
     margin-top: 0;
     padding-top: 0;
@@ -5,7 +9,10 @@
     /* background-color:#eee8e1; */
     font-size: 25px;
     background-color: whitesmoke;
-    width: 100%;
+    width: 94%;
+    /* border: #454541 2px solid;
+    padding-top: 5px; */
+    
 }
 
 .nav {
@@ -13,10 +20,14 @@
     padding: auto;
     display: flex;
     height: auto;
-    width: 100%;
+    width: 94%;
+    /* border: #454541 2px solid;
+    padding-bottom: 5px; */
+
     /* background-color:#eee8e1; */
     /* padding-bottom: 10px; */
 }
+
 .top>.nav {
     /* padding-left: 10px; */
     position: fixed;
@@ -29,14 +40,14 @@ main {
 }
 
 body {
-    background-color: #eee8e1; 
+    background-color: #eee8e1;
 }
 
-.btn{
+.btn {
     display: inline-block;
 }
 
-.form-inline{
+.form-inline {
     display: flex;
     width: 100%;
 }
@@ -56,7 +67,7 @@ body {
 .select {
     font-size: 20px;
     padding: 10px;
-    background-color: #eee8e1;
+    background-color: whitesmoke;
     width: 100%;
     height: auto;
     border: 3px solid #4D4B49;
@@ -65,7 +76,7 @@ body {
 }
 
 
-.buttoncss{
+.buttoncss {
     display: inline-block;
     background-color: transparent;
     border: none;
@@ -77,32 +88,105 @@ body {
     height: auto;
     font-size: 20px;
 }
+#searchContent{
+    border:solid 3px#454541;
+    border-radius:10px;
+    padding:15px;
+    color:#454541;
+    background:#efefef;
+    margin-right: 5%;
+}
 
-/*読みたい本リストの部分CSS*/
-.bookdata{
-    border: thick  #4D4B49 double;
-    border-bottom: thick  #4D4B49 double;
+.searchbookdatas {
+    border:solid 3px#454541;
+    border-radius:10px;
     width: 90%;
     margin: auto;
     margin-top: 1rem;
-    background-color: #f8f5f2ca ;
-    
+    background-color: #f8f5f2ca;
+    display: flex;
+    /* display: inline-block; */
 }
-.bookselectdata{
+
+/*読みたい本リストの部分CSS*/
+.bookdatas {
+    border:solid 3px#454541;
+    border-radius:10px;
+    width: 100%;
+    margin: auto;
+    margin-top: 1rem;
+    background-color: #f8f5f2ca;
+    display: flex;
+    /* display: inline-block; */
+}
+
+
+.bookselectdata {
     display: inline-block;
+
+}
+
+.linecss {
+    border-width: 50px;
+}
+
+h2 {
+    border-bottom: 10px solid;
+}
+
+.datacss {
+    text-align: left;
     
 }
 
-.linecss{
-    border-width: 50px;
+.pagebutton {
+    margin-left: 20%;
+    margin-right: 20%;
 }
-h2{
-    border-bottom: 10px solid;
+.pagecount{
+    font-size:  30px;
 }
-.datacss{
+
+ div#content {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+ div#main {
+    width: 94%;
+    float: right;
+}
+
+  nav {
+    width: 6%;
+    float: left;
+    position: fixed;
+    height: 100%;
+}
+
+.bookdata{
+    display: flex;
+    width: 100%;
+   margin: 5px;
+   align-items: center;
+}
+.bookdata .img {
+   
+    margin: 5px;
+    padding: 0;
+    overflow: hidden;
+    /* position: relative; */
+  }
+.bookInfo{
+    margin: 0 0 0 20px;
+    padding: 0;
     text-align: left;
+ 
 }
-.pagebutton{
-   margin-left: 20%;
-   margin-right: 20%;
-}
+/* .bookPhoto{
+    float: left;
+    position: fixed;
+    width:90px;
+     height:120px;
+} */

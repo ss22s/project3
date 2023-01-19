@@ -6,6 +6,13 @@ h1 {
     text-align: center;
     padding: 20px;
     margin: 0;
+
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
 }
 
 .form {
@@ -81,6 +88,15 @@ h1 {
 
 .linkbutton {
     text-align: right;
+
+.faqlink {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 120px;
+}
+
+.linkbutton {
+    text-align: center;
 }
 
 .toppagelink {

@@ -1,0 +1,21 @@
+#content {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  
+}
+
+#main {
+  width: 94%;
+  float: right;
+}
+.bookInfo{
+  background-color: aqua;
+}
+nav {
+  width: 6%;
+  float: left;
+  position: fixed;
+  height: 100%;
+  
+}

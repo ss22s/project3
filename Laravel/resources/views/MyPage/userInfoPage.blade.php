@@ -38,7 +38,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">感想</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">ユーザー情報編集</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -47,15 +47,15 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
-                        <b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}" size="35"><br>
-                        <b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}" size="35"><br>
-                        <b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}" size="35"><br>
-                        <b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}" size="35"><br>
-                        <b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}" size="35"><br>
+                        <div class="label"><b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"></div>
+                        <div class="label"><b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"></div>
+                        <div class="label"><b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
+                        <div class="label"><b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
+                        <div class="label"><b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
+                    <button type="submit" class="btn btn-primary savebtn">保存</button>
                     </form>
                 </div>
                 </div>
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <a href="/userExit">退会したい</a>
+    <a class="link" href="/userExit">退会したい</a>
 
 </body>
 </html>
