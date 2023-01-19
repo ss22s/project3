@@ -1,3 +1,36 @@
 body {
     background-color:#eee8e1;
 }
+
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
+}
+
+.content {
+    margin-top: 30px;
+    margin-left: 10%;
+}
+
+p {
+    width: 80%;
+}
+
+.linkbtn {
+    text-align: center;
+}
+
+.toppagelink {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}

@@ -68,14 +68,18 @@ if(!empty($_SESSION['token']) && $_POST['token'] === $_SESSION['token']) {
 <head>
     <meta charset="UTF-8">
     <title>送信完了</title>
-    <link rel="stylesheet" type="text/css" href="css/confirm.css">
+    <link rel="stylesheet" type="text/css" href="css/complete.css">
 </head>
 <body>
-    <h2>送信完了</h2>
-    <p>メッセージありがとうございました。入力したメールアドレス宛に確認メールを送信致しましたので、ご確認ください。</p>
-    <p>なお、数十分経過してもメールが届かない場合はメッセージを送信できていない可能性がございます。お手数ですが、お問い合わせページよりもう一度メッセージの送信をお願い致します。</p>
-    <a href="/">
-        <button class="btn" type="button">トップページに戻る</button>
-    </a>
+    <div class="page">送信完了</div>
+    <div class="content">
+        <p>メッセージありがとうございました。入力したメールアドレス宛に確認メールを送信致しましたので、ご確認ください。</p>
+        <p>なお、数十分経過してもメールが届かない場合はメッセージを送信できていない可能性がございます。お手数ですが、お問い合わせページよりもう一度メッセージの送信をお願い致します。</p>
+    </div>
+    <div class="linkbtn">
+        <a href="/">
+            <button class="toppagelink" type="button">TOPへ</button>
+        </a>
+    </div>
 </body>
 </html>
