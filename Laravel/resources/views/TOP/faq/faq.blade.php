@@ -12,6 +12,7 @@
 <body>
     <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
     <h1>よくあるご質問</h1>
+    <div class="page">よくあるご質問</div>
     <ul class="accordion-area">
         <li>
             <div class="faq">
@@ -79,6 +80,7 @@
             </div>
         </li>
     </ul>
+    <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a></div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>

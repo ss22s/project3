@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザーページ</title>
+    <link rel="stylesheet" type="text/css" href="css/userDetail.css">
 </head>
 
 <body>
@@ -30,6 +31,24 @@
 
     <p>
     <h5>最近の感想</h5>
+    @if($userWantToBookdatas == "")
+    感想はありません。
+    @else
+    @foreach($userBookReportdatas as $userBookReportdata)
+    <div class="box">
+            <a class="title" href="{{route('book.detail',['bookID'=>$userBookReportdata['bookID']])}}">
+                <p class="booklink">{{$userBookReportdata['book']}}</p>
+            </a>
+            <span class="image">
+            <img src="{{$userBookReportdata['thumbnail']}}" alt="書影" width="50" height="70">
+            </span>
+            <p class="p1">
+                【感想】<br>{!! nl2br(e(Str::limit($userBookReportdata['comment'], 200))) !!}
+            </p>
+            <p class="p3">更新日:{{$userBookReportdata['created_at']}}</p>
+        </div>
+    @endforeach
+    @endif
     </p>
 
     <p>
@@ -45,7 +64,6 @@
             <a class="title" href="{{ route('book.detail', $userWantToBookdata['bookID'] )}}">{{$userWantToBookdata['book']}}</a>
             <br>
             @endforeach
-            ︙
         </p>
     </div>
     @endif
@@ -64,7 +82,6 @@
             <a class="title" href="{{ route('book.detail', $userFinishedBookdata['bookID'] )}}">{{$userFinishedBookdata['book']}}</a>
             <br>
             @endforeach
-            ︙
         </p>
     </div>
     @endif
@@ -83,7 +100,6 @@
             <a href="{{route('user',['userID' => $userfollowList['followerID']])}}"> {{$userfollowList['followerName']}}</a>
             <br>
             @endforeach
-            ︙
         </p>
     </div>
     @endif
