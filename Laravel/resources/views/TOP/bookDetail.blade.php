@@ -40,6 +40,16 @@
             </div>
             <div class="line">
                 <h4>感想</h4>
+                @foreach($reportDatas as $reportData)
+                <hr>
+                <div>
+                <b>名前：</b>{{$reportData['name']}}<br>
+                <b>評価：</b>{{$reportData['evaluation']}}<br>
+                <b>一言コメント：</b>{{$reportData['selectedComment']}}<br>
+                <b>感想：</b>{{$reportData['comment']}}<br>
+                </div>
+                @endforeach
+                <hr>
             </div>
             <a class="toppagelink"  href="/">TOPへ</a>
     </div>
