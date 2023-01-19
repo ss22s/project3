@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="css/contactUs.css">
 </head>
 <body>
+    <div class="MenuBar">
+        @include('MenuBar')
+    </div>
     <div>
         <div class="linkbutton"><a class="toppagelink" href="/">TOPへ</a><a href="/faq" class="faq">よくあるご質問</a></div>
         <h1>ご意見 / お問い合わせ</h1>
@@ -56,5 +59,6 @@
             });
         });
     </script>
+    <link rel="stylesheet" type="text/css" href="css/contactUs.css">
 </body>
 </html>
