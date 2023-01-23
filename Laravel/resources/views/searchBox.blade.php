@@ -51,19 +51,19 @@
             <div class="main">
                 <div class="box">
                     <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
-                    <p class="LinkTab">
+                    <div class="LinkTab">
+                    <form action="/write" method="post">
+                        @csrf
+                        <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
+                        <button class="buttonLink">感想を書く</button>
+                    </form>
                         @if($bookData['exsists'])
                         <a class="bookLink" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
                             感想を見る</a>
                         @else
 
                         @endif
-                    <form action="/write" method="post">
-                        @csrf
-                        <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
-                        <button>感想を書く</button>
-                    </form>
-                    </p>
+</div>
                     <div class="flex">
                         <p class="bookPhoto">
                             <img class="thumbnail" src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
