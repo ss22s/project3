@@ -151,12 +151,12 @@ class TopController extends Controller
         if ($request->input('next') != null) {
             //echo "NEXT";
             $pageCount++;
-            $count = ($count + 10);
+            $count = ($count + 15);
         }
         if ($request->input('before') != null) {
             // echo "BEFORE";
             $pageCount--;
-            $count = ($count - 10);
+            $count = ($count - 15);
             if ($count < 0) {
                 $count = 0;
             }
@@ -183,12 +183,13 @@ class TopController extends Controller
             $foreachCount++;
         }
         // dd($searchURL);
-        $url = $searchURL . '&maxResults=10' . '&startIndex=' . $count;
+        $url = $searchURL . '&maxResults=15' . '&startIndex=' . $count;
         $searchGet = file_get_contents($url);
         // echo $url;
         $searchDatas = json_decode($searchGet);
-
+        if($searchDatas->totalItems != 0){
         $bookDatasGet = $searchDatas->items;
+        $bookTotal = $searchDatas->totalItems;
 
         $x = 0;
         $bookDatas = array();
@@ -216,11 +217,15 @@ class TopController extends Controller
             //詳細
             $bookData['description'] = BookController::setDescription($bookDataSet);
 
+            //感想があるか検索
             $bookDatas[$x] = $bookData;
             $x++;
         }
+    }else{
+        $bookDatas = 0;
+    }
         //dd($bookDatas);
-        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords'));
+        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords','bookTotal'));
     }
 
 
