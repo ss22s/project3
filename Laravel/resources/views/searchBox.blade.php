@@ -48,24 +48,37 @@
         <div>
             @foreach($bookDatas as $bookData)
 
-<div class="main">
-            <div class="box">
-            <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
-            <div class="flex">    
-            <p class="bookPhoto">
-                <img class="thumbnail" src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
-                </p>
-                <p class="booktext">
-                
-                <b>著者：</b>{{$bookData['author']}}<br>
-                <b>カテゴリ：</b>{{$bookData['categories']}}<br>
-                <b>ISBN：</b>{{$bookData['isbn13']}}<br>
-                <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
-                <b>説明：</b>{{ Str::limit($bookData['description'], 100) }}
-                </p>
-</div>
+            <div class="main">
+                <div class="box">
+                    <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
+                    <p class="LinkTab">
+                        @if($bookData['exsists'])
+                        <a class="bookLink" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
+                            感想を見る</a>
+                        @else
+
+                        @endif
+                    <form action="/write" method="post">
+                        @csrf
+                        <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
+                        <button>感想を書く</button>
+                    </form>
+                    </p>
+                    <div class="flex">
+                        <p class="bookPhoto">
+                            <img class="thumbnail" src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
+                        </p>
+                        <p class="booktext">
+
+                            <b>著者：</b>{{$bookData['author']}}<br>
+                            <b>カテゴリ：</b>{{$bookData['categories']}}<br>
+                            <b>ISBN：</b>{{$bookData['isbn13']}}<br>
+                            <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
+                            <b>説明：</b>{{ Str::limit($bookData['description'], 100) }}
+                        </p>
+                    </div>
+                </div>
             </div>
-</div>
 
             @endforeach
             <div class="pagebutton">

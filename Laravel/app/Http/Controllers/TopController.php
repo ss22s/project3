@@ -151,12 +151,12 @@ class TopController extends Controller
         if ($request->input('next') != null) {
             //echo "NEXT";
             $pageCount++;
-            $count = ($count + 15);
+            $count = ($count + 20);
         }
         if ($request->input('before') != null) {
             // echo "BEFORE";
             $pageCount--;
-            $count = ($count - 15);
+            $count = ($count - 20);
             if ($count < 0) {
                 $count = 0;
             }
@@ -183,7 +183,7 @@ class TopController extends Controller
             $foreachCount++;
         }
         // dd($searchURL);
-        $url = $searchURL . '&maxResults=15' . '&startIndex=' . $count;
+        $url = $searchURL . '&maxResults=20' . '&startIndex=' . $count;
         $searchGet = file_get_contents($url);
         // echo $url;
         $searchDatas = json_decode($searchGet);
@@ -200,7 +200,7 @@ class TopController extends Controller
         //$count++;
         foreach ($bookDatasGet as $bookDataSet) {
 
-            $bookData['id'] = $bookDataSet->id;
+            $bookData['bookID'] = $bookDataSet->id;
 
             $bookData['thumbnail'] = BookController::setThumbnail($bookDataSet->id);
 
@@ -218,6 +218,9 @@ class TopController extends Controller
             $bookData['description'] = BookController::setDescription($bookDataSet);
 
             //感想があるか検索
+            $bookReportsExsists = bookReport::where('bookID',$bookData['bookID'])->exists();
+            $bookData['exsists'] = $bookReportsExsists;
+
             $bookDatas[$x] = $bookData;
             $x++;
         }
