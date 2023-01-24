@@ -27,7 +27,7 @@
                     <br>
                     <div>
                         <label class="content">読み終わった日</label><br>
-                        <input type="date" name="finishedDate" value="">
+                        <input type="date" name="finishedDate" value="{{ $reviewData['finishedDate']}}">
                     </div>
                     <br>
                     <div>

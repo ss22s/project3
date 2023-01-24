@@ -233,7 +233,7 @@ class MyPageController extends Controller
             $commentGet =  $reviewData->selectedComment;
 
             $date = explode(" ", $reviewData['created_at']);
-            $reviewData['finishedDate'] = $date;
+            $reviewData['finishedDate'] = $date[0];
             $loopVar = 0;
             if (is_array($commentGet)) {
                 foreach ($commentGet as $commentSet) {
