@@ -8,6 +8,10 @@ button {
     text-decoration: underline;
 }
 
+button:hover {
+    color: #D2B48C;
+}
+
 .top {
     min-height: 100vh;
     background-color: #eee8e1;
@@ -90,6 +94,10 @@ button {
 
 .edit a {
     color: #454541;
+}
+
+.edit a:hover {
+    color: #D2B48C;
 }
 
 .toppagelink {

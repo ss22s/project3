@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bookReportsEdit.css')  }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bookReportWrite.css')  }}">
     <title>感想-編集ページ</title>
 </head>
 
@@ -18,7 +18,8 @@
         <div>
             <div class="page">感想を編集する</div><br>
             <div>
-                <form action="/reportRegister" method="post">
+                <form action="/reportEdit" method="post">
+                    <input type="hidden" name="reviewID" value="{{ $reviewData['reviewID']}}">
                     @csrf
                     <div>
                         <label class="content">本のタイトル</label><br>
@@ -33,12 +34,24 @@
                     <div>
                         <label class="content">評価：</label>
                         <select name="evaluation">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="0" <?php if ($reviewData['evaluation'] == '0') {
+                                                    echo 'selected';
+                                                } ?>>0</option>
+                            <option value="1" <?php if ($reviewData['evaluation'] == '1') {
+                                                    echo 'selected';
+                                                } ?>>1</option>
+                            <option value="2" <?php if ($reviewData['evaluation'] == '2') {
+                                                    echo 'selected';
+                                                } ?>>2</option>
+                            <option value="3" <?php if ($reviewData['evaluation'] == '3') {
+                                                    echo 'selected';
+                                                } ?>>3</option>
+                            <option value="4" <?php if ($reviewData['evaluation'] == '4') {
+                                                    echo 'selected';
+                                                } ?>>4</option>
+                            <option value="5" <?php if ($reviewData['evaluation'] == '5') {
+                                                    echo 'selected';
+                                                } ?>>5</option>
                         </select>
                     </div>
                     <br>
@@ -68,8 +81,12 @@
                     <br>
                     <div>
                         <label>公開状態：</label>
-                        <input type="radio" name="open" value="0">公開
-                        <input type="radio" name="open" value="1" checked>非公開
+                        <input type="radio" name="open" value="0" <?php if (is_null($reviewData['Open'])) {
+                                                                        echo 'checked';
+                                                                    } ?>>公開
+                        <input type="radio" name="open" value="1" <?php if (!is_null($reviewData['Open'])) {
+                                                                        echo 'checked';
+                                                                    } ?>>非公開
                     </div>
                     <br>
                     <div>

@@ -39,7 +39,15 @@
                 </div>
                 @elseif($finishedBook['reviewID'] != 0)
                 読んだ日：{{$finishedBook['finishDate']}}<br>
-                一言感想：{{$finishedBook['selectedComment'][0]}}<br>
+                評価：{{$finishedBook['evaluation']}}<br>
+                一言感想：
+                @foreach($finishedBook['selectedComment'] as $selectedComment)
+                {{$selectedComment}}
+                @if(next($finishedBook['selectedComment']))
+                /
+                @endif
+                @endforeach
+                <br>
                 感想：{{$finishedBook['comment']}}</p>
                 @endif
             </div>
