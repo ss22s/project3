@@ -454,6 +454,7 @@ class BookController extends Controller
         //return view('/');
     }
 
+    
     public static function wantBookAddTo(Request $request)
     {
         $bookID = $request->input('bookID');
