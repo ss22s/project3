@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\MyPageController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -72,7 +75,9 @@ class BookController extends Controller
         } else {
             $reportDatas = null;
         }
-        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop', 'reportDatas'));
+        $Message = "";
+        
+        return view('TOP/bookDetail', compact('Message','bookData', 'bookThumbnail', 'selectedCommentsTop', 'reportDatas'));
     }
 
     public function searchPageGet(Request $request)
@@ -458,6 +463,10 @@ class BookController extends Controller
     public static function wantBookAddTo(Request $request)
     {
         $bookID = $request->input('bookID');
+        $count = $request->input('count');
+        $pageCount = $request->input('pageCount');
+        $searchType = $request->input('searchType');
+        $searchWords = $request->input('searchWords');
 
         $user = Auth::user();
         //registered_atの日付
@@ -465,8 +474,8 @@ class BookController extends Controller
 
         $today = date("Y-m-d H:i:s");
 
-        if (!(DB::table('wantToBook')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
-            DB::table('wantToBook')->insert([
+        if (!(DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
+            DB::table('wantToBooks')->insert([
                 [
                     'id' => $user['id'],
                     'bookiD' => $bookID,
@@ -478,8 +487,69 @@ class BookController extends Controller
         }else {
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
+        //ここからBookrepostsと同じ
+        $params  = array();
+        if ($searchType == "title") {
+            $params += array('intitle' => $searchWords);
+        } else if ($searchType == "author") {
+            $params += array('inauthor' => $searchWords);
+        }
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q=';
+        $foreachCount = 0;
+        $searchURL = "";
+        foreach ($params as $key => $value) {
+            if ($foreachCount == 0) {
+                $searchURL = $baseURL . $key . ':' . $value;
+            } else {
+                $searchURL .= '+' . $key . ':' . $value;
+            }
+            $foreachCount++;
+        }
+        // dd($searchURL);
+        $url = $searchURL . '&maxResults=20' . '&startIndex=' . $count;
+        $searchGet = file_get_contents($url);
+        // echo $url;
+        $searchDatas = json_decode($searchGet);
+        if($searchDatas->totalItems != 0){
+        $bookDatasGet = $searchDatas->items;
+        $bookTotal = $searchDatas->totalItems;
 
-        return view('/hello');
+        $x = 0;
+        $bookDatas = array();
+        $bookcount = 0;
+        if (!($request->input('before') != null)) {
+            //?
+        }
+        //$count++;
+        foreach ($bookDatasGet as $bookDataSet) {
+
+            $bookData['bookID'] = $bookDataSet->id;
+
+            $bookData['thumbnail'] = BookController::setThumbnail($bookDataSet->id);
+
+            $bookData['isbn13'] = BookController::setISBN($bookDataSet);
+
+            $bookData['title'] = $bookDataSet->volumeInfo->title;
+
+            //作者名がなければ不明で登録
+            $bookData['author'] = BookController::setAuthor($bookDataSet);
+
+            //カテゴリ
+            $bookData['categories'] = BookController::setCategories($bookDataSet);
+
+            //詳細
+            $bookData['description'] = BookController::setDescription($bookDataSet);
+
+            //感想があるか検索
+            $bookReportsExsists = bookReport::where('bookID',$bookData['bookID'])->exists();
+            $bookData['exsists'] = $bookReportsExsists;
+
+            $bookDatas[$x] = $bookData;
+            $x++;
+        }
+    }
+        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords','bookTotal','flashMessage'));
+        //return view('/hello');
     }
 
     public function booksearchId($bookID)

@@ -135,8 +135,10 @@ class TopController extends Controller
     {
         
         $searchWords = null;
+    $flashMessage = null;
 
-        return view('searchBox', compact( 'searchWords'));
+
+        return view('searchBox', compact( 'flashMessage','searchWords'));
     }
 
     public function bookReportsList(Request $request)
@@ -227,8 +229,10 @@ class TopController extends Controller
     }else{
         $bookDatas = 0;
     }
+    
+    $flashMessage = null;
         //dd($bookDatas);
-        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords','bookTotal'));
+        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords','bookTotal','flashMessage'));
     }
 
 
