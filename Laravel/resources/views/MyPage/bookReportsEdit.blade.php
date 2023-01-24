@@ -22,13 +22,12 @@
                     @csrf
                     <div>
                         <label class="content">本のタイトル</label><br>
-                        <!-- <input type="text" name="book" placeholder="例：となりのトトロ"> -->
-                        <b>「　　　」</b>
+                        <b>「 {{ $reviewData['book']}} 」</b>
                     </div>
                     <br>
                     <div>
                         <label class="content">読み終わった日</label><br>
-                        <input type="date" name="finishedDate">
+                        <input type="date" name="finishedDate" value="">
                     </div>
                     <br>
                     <div>
