@@ -9,6 +9,7 @@ use App\Models\Book;
 use App\Models\bookReport;
 use App\Models\finishedBook;
 use App\Models\wantBook;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -45,7 +46,33 @@ class BookController extends Controller
         array_multisort($NumGet, SORT_DESC, $selectedCommentsCount);
         $selectedCommentsTop = array_slice($selectedCommentsCount, 0, 3);
 
-        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop'));
+        //感想取得
+        $reportDatasGet = bookReport::where('bookID', $bookID)->where('Open', null)->get();
+
+        $x = 0;
+
+        if (isset($reportDatasGet)) {
+            foreach ($reportDatasGet as $reportDataGet) {
+
+                $reportDataSet['name'] = User::where('id', $reportDataGet['id'])->value('name');
+                $reportDataSet['evaluation'] = $reportDataGet['evaluation'];
+
+                $selectedComments = explode(',', $reportDataGet['selectedComment']);
+                foreach ($selectedComments as $selectedComment) {
+                    $reportDataSet['selectedComment'] = $this->commentAdd($selectedComment);
+                    if ($selectedComment !== end($selectedComments)) {
+                        $reportDataSet['selectedComment'] .= ",";
+                    }
+                }
+                $reportDataSet['comment'] = $reportDataGet['comment'];
+
+                $reportDatas[$x] = $reportDataSet;
+                $x++;
+            }
+        } else {
+            $reportDatas = null;
+        }
+        return view('TOP/bookDetail', compact('bookData', 'bookThumbnail', 'selectedCommentsTop', 'reportDatas'));
     }
 
     public function searchPageGet(Request $request)
@@ -344,7 +371,7 @@ class BookController extends Controller
             $bookDataGet = $this->booksearchId($bookID);
             //dd($bookDataGet);
             $setISBN = $this->setISBN($bookDataGet);
-            if($setISBN == "不明"){
+            if ($setISBN == "不明") {
                 $setISBN = "0";
             }
 
@@ -397,7 +424,7 @@ class BookController extends Controller
         }
     }
 
-    public function wantBookAdd($bookID)
+    public static function wantBookAdd($bookID)
     {
         //TODO:読みたい本リストに追加する
         $user = Auth::user();
@@ -422,6 +449,37 @@ class BookController extends Controller
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
         //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
+        $previous = explode("/",url()->previous());
+        //dd($previous);
+        // if(end($previous) == "bookReportsList"){
+        //     return view('');
+        // }
+        return back()->with('Message', $flashMessage);
+        //return view('/');
+    }
+
+    public static function wantBookAddTo(Request $request)
+    {
+        $user = Auth::user();
+        //registered_atの日付
+        
+
+        $today = date("Y-m-d H:i:s");
+
+        if (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
+            DB::table('finishedBooks')->insert([
+                [
+                    'id' => $user['id'],
+                    'bookiD' => $bookID,
+                    'date' => $today,
+                    'reviewID' => 0,
+                    'delete' => null
+                ],
+            ]);
+            $flashMessage = "リストに追加しました！";
+        }else {
+            $flashMessage = "この本は既に読んだ本リストに追加されています";
+        }
 
         return back()->with('Message', $flashMessage);
     }
@@ -440,7 +498,7 @@ class BookController extends Controller
 
     //値をセットするfunction
 
-    public function setAuthor($bookData)
+    public static function setAuthor($bookData)
     {
         $authors = "";
         if (!(property_exists($bookData->volumeInfo, 'authors'))) {
@@ -463,7 +521,7 @@ class BookController extends Controller
         return $authors;
     }
 
-    public function setCategories($bookData)
+    public static function setCategories($bookData)
     {
         if (!(property_exists($bookData->volumeInfo, 'categories'))) {
             $categories = "不明";
@@ -505,10 +563,10 @@ class BookController extends Controller
         return $ISBN;
     }
 
-    public function setDescription($bookData)
+    public static function setDescription($bookData)
     {
         if (!(property_exists($bookData->volumeInfo, 'description'))) {
-            $description = "";
+            $description = "不明";
         } else {
             $description = $bookData->volumeInfo->description;
         }

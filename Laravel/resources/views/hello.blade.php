@@ -39,7 +39,7 @@
 
         <div class="toppage">
             <hr class="line">
-            <a class="toppagelink" href="/">Top</a><br>
+            <a class="toppagelink" href="/searchBox">本の検索</a><br>
             <a class="toppagelink" href="/ranking">ランキング</a><br>
             <a class="toppagelink" href="/newBookReport">新着感想</a><br>  
             <a class="toppagelink" href="/contactUs">お問い合わせ</a>
