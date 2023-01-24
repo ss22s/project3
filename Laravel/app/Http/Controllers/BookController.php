@@ -449,36 +449,33 @@ class BookController extends Controller
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
         //TODO:成功を失敗でCSS分ける場合はMessageをMessageKeyで区別できるように変更する
-        $previous = explode("/",url()->previous());
-        //dd($previous);
-        // if(end($previous) == "bookReportsList"){
-        //     return view('');
-        // }
+        
         return back()->with('Message', $flashMessage);
         //return view('/');
     }
 
     public static function wantBookAddTo(Request $request)
     {
+        $bookID = $request->input('bookID');
+
         $user = Auth::user();
         //registered_atの日付
         
 
         $today = date("Y-m-d H:i:s");
 
-        if (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
-            DB::table('finishedBooks')->insert([
+        if (!(DB::table('wantToBook')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
+            DB::table('wantToBook')->insert([
                 [
                     'id' => $user['id'],
                     'bookiD' => $bookID,
-                    'date' => $today,
-                    'reviewID' => 0,
-                    'delete' => null
+                    'registered_at' => $today,
+                    'finished' => null
                 ],
             ]);
             $flashMessage = "リストに追加しました！";
         }else {
-            $flashMessage = "この本は既に読んだ本リストに追加されています";
+            $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
 
         return back()->with('Message', $flashMessage);
