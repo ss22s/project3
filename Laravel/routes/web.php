@@ -47,6 +47,7 @@ Route::post('/bookReportsList', 'App\Http\Controllers\TopController@bookReportsL
 
 
 
+
 //お問い合わせ
 Route::get('/contactUs', 'App\Http\Controllers\TopController@contactUS');
 Route::post('/confirm', 'App\Http\Controllers\TopController@confirm');
@@ -94,8 +95,10 @@ Route::post('/write', 'App\Http\Controllers\BookController@write');
 
 Route::post('/reportRegister', 'App\Http\Controllers\BookController@register');
 //読みたい本リストに追加
-Route::get('/wantBook/{bookID}', 'App\Http\COntrollers\BookController@WantBookAdd')
-    ->name('book.wantBookAdd');
+Route::get('/wantBook/{bookID}', 'App\Http\Controllers\BookController@wantBookAdd')
+    ->name('book.wantBookAdd')->middleware('auth');
+Route::post('/wantBookAdd','App\Http\Controllers\BookController@wantBookAddTo')
+    ->name('/bookReportList');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')
@@ -103,6 +106,10 @@ Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')
 
 //マイページ編集
 Route::post('/changeName', 'App\Http\Controllers\MyPageController@changeName');
+
+Route::get('/delete/{bookID}','App\Http\Controllers\ListController@delete')
+    ->name('book.delete');
+
 //退会処理
 Route::get('/userExit', function () {
     return view('MyPage/userExit');
@@ -111,9 +118,7 @@ Route::get('/userExit', function () {
 
 Route::post('/userExit', 'App\Http\Controllers\MyPageController@userExit');
 
-Route::get('/searchBox', function () {
-    return view('searchBox');
-});
+Route::get('/searchBox', 'App\Http\Controllers\TopController@searchBox');
 
 
 Route::get('/MenuBar', function () {

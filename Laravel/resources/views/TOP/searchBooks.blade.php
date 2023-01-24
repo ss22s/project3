@@ -114,14 +114,7 @@
                 @if(session('select') == 'search')
                 <div id="searchContent">
                     <h3>検索する</h3>
-                    <!-- <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13 など</h5>
-            <h5>複数のワードで検索する際はワードの間にスペースを入れて下さい</h5> -->
-                    <!-- <form action="/searchBooks" method="post">
-                @csrf
-                <input type="text" name="searchWord" value="{{session('searchWord')}}" placeholder="例:となりのトトロ" required>
-                <input type="hidden" name="count" value="{{$count}}">
-                <button type="submit" name="searchbook">検索</button>
-            </form> -->
+                    
                     <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13</h5>
                     <form action="/searchBooks" method="post">
                         @csrf
