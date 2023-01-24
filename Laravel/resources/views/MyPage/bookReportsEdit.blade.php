@@ -59,18 +59,38 @@
                         <label class="content">ひとこと感想（複数選択可）</label>
                         <br>
                         <div class="check">
-                            <input type="checkbox" name="selectedComment[]" value="0">感動した
-                            <input type="checkbox" name="selectedComment[]" value="1">笑った
-                            <input type="checkbox" name="selectedComment[]" value="2">面白かった
-                            <input type="checkbox" name="selectedComment[]" value="3">怖かった
-                            <input type="checkbox" name="selectedComment[]" value="4">ぞくぞくした
+                            <input type="checkbox" name="selectedComment[]" value="0" <?php if (strpos($reviewData['selectedComment'], 0) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>感動した
+                            <input type="checkbox" name="selectedComment[]" value="1" <?php if (strpos($reviewData['selectedComment'], 1) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>笑った
+                            <input type="checkbox" name="selectedComment[]" value="2" <?php if (strpos($reviewData['selectedComment'], 2) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>面白かった
+                            <input type="checkbox" name="selectedComment[]" value="3" <?php if (strpos($reviewData['selectedComment'], 3) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>怖かった
+                            <input type="checkbox" name="selectedComment[]" value="4" <?php if (strpos($reviewData['selectedComment'], 4) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>ぞくぞくした
                         </div>
                         <div class="check">
-                            <input type="checkbox" name="selectedComment[]" value="5">文章が好き
-                            <input type="checkbox" name="selectedComment[]" value="6">描写が綺麗
-                            <input type="checkbox" name="selectedComment[]" value="7">泣いた
-                            <input type="checkbox" name="selectedComment[]" value="8">オススメしたい
-                            <input type="checkbox" name="selectedComment[]" value="9">つまらなかった
+                            <input type="checkbox" name="selectedComment[]" value="5" <?php if (strpos($reviewData['selectedComment'], 5) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>文章が好き
+                            <input type="checkbox" name="selectedComment[]" value="6" <?php if (strpos($reviewData['selectedComment'], 6) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>描写が綺麗
+                            <input type="checkbox" name="selectedComment[]" value="7" <?php if (strpos($reviewData['selectedComment'], 7) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>泣いた
+                            <input type="checkbox" name="selectedComment[]" value="8" <?php if (strpos($reviewData['selectedComment'], 8) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>オススメしたい
+                            <input type="checkbox" name="selectedComment[]" value="9" <?php if (strpos($reviewData['selectedComment'], 9) !== false) {
+                                                                                            echo 'checked';
+                                                                                        } ?>>つまらなかった
                         </div>
                     </div>
                     <br>
