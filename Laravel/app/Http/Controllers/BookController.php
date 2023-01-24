@@ -454,6 +454,7 @@ class BookController extends Controller
         //return view('/');
     }
 
+
     public static function wantBookAddTo(Request $request)
     {
         $bookID = $request->input('bookID');
@@ -478,7 +479,7 @@ class BookController extends Controller
             $flashMessage = "この本は既に読みたい本リストに追加されています";
         }
 
-        return back()->with('Message', $flashMessage);
+        return view('/hello');
     }
 
     public function booksearchId($bookID)
