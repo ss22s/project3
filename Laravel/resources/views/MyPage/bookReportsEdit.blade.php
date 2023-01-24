@@ -16,10 +16,7 @@
 
         <!-- 分岐 -->
         <div>
-            @if($reviewExist == 1)
-            <p>感想がありません</p>
-            @elseif($reviewExist == null)
-            <div class="page">本の感想を編集する</div><br>
+            <div class="page">感想を編集する</div><br>
             <div>
                 <form action="/reportRegister" method="post">
                     @csrf
@@ -27,6 +24,7 @@
                         <label class="content">本のタイトル</label><br>
                         <!-- <input type="text" name="book" placeholder="例：となりのトトロ"> -->
                         <b>「　　　」</b>
+                        <p>{{$reviewData['book']}}</p>
                     </div>
                     <br>
                     <div>
@@ -82,7 +80,6 @@
                     <br>
                 </form>
             </div>
-            @endif
         </div>
 
     </div>
