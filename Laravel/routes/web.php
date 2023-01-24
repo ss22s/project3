@@ -47,6 +47,7 @@ Route::post('/bookReportsList', 'App\Http\Controllers\TopController@bookReportsL
 
 
 
+
 //お問い合わせ
 Route::get('/contactUs', 'App\Http\Controllers\TopController@contactUS');
 Route::post('/confirm', 'App\Http\Controllers\TopController@confirm');
@@ -96,8 +97,8 @@ Route::post('/reportRegister', 'App\Http\Controllers\BookController@register');
 //読みたい本リストに追加
 Route::get('/wantBook/{bookID}', 'App\Http\Controllers\BookController@wantBookAdd')
     ->name('book.wantBookAdd')->middleware('auth');
-Route::get('finishedBook/{bookID}','App\Http\Controllers\BookController@finishedBookAdd')
-    ->name('book.finishedBookAdd')->middleware('auth');
+Route::post('/wantBookAdd','App\Http\Controllers\BookController@wantBookAddTo')
+    ->name('/bookReportList');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')

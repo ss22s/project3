@@ -57,12 +57,15 @@
                         <div class="box">
                             <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
                             <div class="LinkTab">
-                                <form>
+                                <form action="/wantBookAdd">
                                     @csrf
-                                    
+                                    <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
+                                    <input type="hidden" name="searchWords" value="{{$searchWords}}">
+                                    <input type="hidden" name="searchType" value="{{$searchType}}">
+                                    <input type="hidden" name="count" value="{{$count}}">
+                            <input type="hidden" name="pageCount" value="{{$pageCount}}">
                                 </form>
                                 <a class="listLink" href="{{ route('book.wantBookAdd', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
-                                <a class="listLink" href="{{ route('book.finishedBookAdd', $bookData['bookID'] )}}">読んだ本リストに追加する</a>
                             <!-- </div>
                             <div class="LinkTab"> -->
                                 <form action="/write" method="post">

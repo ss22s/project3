@@ -458,10 +458,12 @@ class BookController extends Controller
         //return view('/');
     }
 
-    public static function finishedBookAdd($bookID)
+    public static function wantBookAddTo(Request $request)
     {
         $user = Auth::user();
         //registered_atの日付
+        
+
         $today = date("Y-m-d H:i:s");
 
         if (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists())) {
