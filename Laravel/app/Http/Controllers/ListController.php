@@ -28,7 +28,7 @@ class ListController extends Controller
 
 
         $key = "削除に成功しました！";
-        // }
+        
         $user = Auth::user();
 
         //回す分の変数
@@ -52,6 +52,7 @@ class ListController extends Controller
         // return view('/wantToBooksPage',compact('key'));
     }
     public function reportEdit(request $request){
+        //TODO:感想DB編集
         return view('/hello');
     }
 }

@@ -133,12 +133,12 @@ class TopController extends Controller
 
     public function searchBox()
     {
-        
+
         $searchWords = null;
-    $flashMessage = null;
+        $flashMessage = null;
 
 
-        return view('searchBox', compact( 'flashMessage','searchWords'));
+        return view('searchBox', compact('flashMessage', 'searchWords'));
     }
 
     public function bookReportsList(Request $request)
@@ -189,50 +189,50 @@ class TopController extends Controller
         $searchGet = file_get_contents($url);
         // echo $url;
         $searchDatas = json_decode($searchGet);
-        if($searchDatas->totalItems != 0){
-        $bookDatasGet = $searchDatas->items;
-        $bookTotal = $searchDatas->totalItems;
+        if ($searchDatas->totalItems != 0) {
+            $bookDatasGet = $searchDatas->items;
+            $bookTotal = $searchDatas->totalItems;
 
-        $x = 0;
-        $bookDatas = array();
-        $bookcount = 0;
-        if (!($request->input('before') != null)) {
-            //?
+            $x = 0;
+            $bookDatas = array();
+            $bookcount = 0;
+            if (!($request->input('before') != null)) {
+                //?
+            }
+            //$count++;
+            foreach ($bookDatasGet as $bookDataSet) {
+
+                $bookData['bookID'] = $bookDataSet->id;
+
+                $bookData['thumbnail'] = BookController::setThumbnail($bookDataSet->id);
+
+                $bookData['isbn13'] = BookController::setISBN($bookDataSet);
+
+                $bookData['title'] = $bookDataSet->volumeInfo->title;
+
+                //作者名がなければ不明で登録
+                $bookData['author'] = BookController::setAuthor($bookDataSet);
+
+                //カテゴリ
+                $bookData['categories'] = BookController::setCategories($bookDataSet);
+
+                //詳細
+                $bookData['description'] = BookController::setDescription($bookDataSet);
+
+                //感想があるか検索
+                $bookReportsExsists = bookReport::where('bookID', $bookData['bookID'])->exists();
+                $bookData['exsists'] = $bookReportsExsists;
+
+                $bookDatas[$x] = $bookData;
+                $x++;
+            }
+        } else {
+            $bookDatas = 0;
         }
-        //$count++;
-        foreach ($bookDatasGet as $bookDataSet) {
 
-            $bookData['bookID'] = $bookDataSet->id;
-
-            $bookData['thumbnail'] = BookController::setThumbnail($bookDataSet->id);
-
-            $bookData['isbn13'] = BookController::setISBN($bookDataSet);
-
-            $bookData['title'] = $bookDataSet->volumeInfo->title;
-
-            //作者名がなければ不明で登録
-            $bookData['author'] = BookController::setAuthor($bookDataSet);
-
-            //カテゴリ
-            $bookData['categories'] = BookController::setCategories($bookDataSet);
-
-            //詳細
-            $bookData['description'] = BookController::setDescription($bookDataSet);
-
-            //感想があるか検索
-            $bookReportsExsists = bookReport::where('bookID',$bookData['bookID'])->exists();
-            $bookData['exsists'] = $bookReportsExsists;
-
-            $bookDatas[$x] = $bookData;
-            $x++;
-        }
-    }else{
-        $bookDatas = 0;
-    }
-    
-    $flashMessage = null;
+        $flashMessage = null;
         //dd($bookDatas);
-        return view('searchBox', compact('count','pageCount','bookDatas', 'searchType', 'searchWords','bookTotal','flashMessage'));
+        return view('searchBox', compact('count', 'pageCount', 'bookDatas', 'searchType', 'searchWords', 'bookTotal', 'flashMessage'));
     }
 
 

@@ -109,6 +109,7 @@
                             @csrf
                             <input type="hidden" name="searchType" value="{{$searchType}}">
                             <input type="hidden" name="searchWords" value="{{$searchWords}}">
+                            <input type="hidden" name="totalItem" value="{{$bookTotal}}">
                             <input type="hidden" name="count" value="{{$count}}">
                             <input type="hidden" name="pageCount" value="{{$pageCount}}">
                             @if($pageCount == 1)
