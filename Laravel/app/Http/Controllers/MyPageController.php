@@ -133,7 +133,7 @@ class MyPageController extends Controller
     }
 
     //読みたい本リストページ表示
-    public function wantToBooks(Request $request)
+    public function wantToBooks()
     {
         //ログイン済みデータ取得
         $user = Auth::user();
@@ -141,8 +141,7 @@ class MyPageController extends Controller
         //回す分の変数
         $x = 0;
 
-
-        $wantBookGet = wantBook::where('id', $user['id'])->get();
+        $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
 
 
         foreach ($wantBookGet as $wantBookSet) {
@@ -153,7 +152,7 @@ class MyPageController extends Controller
             $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
             $x++;
         }
-
+        
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
 
