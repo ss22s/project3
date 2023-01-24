@@ -93,6 +93,10 @@
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.delete:hover {
+    background: #D2B48C;
+}
+
 .toppagelink {
     display: inline-block;
     text-decoration: none;

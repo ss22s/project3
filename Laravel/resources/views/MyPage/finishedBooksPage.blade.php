@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/finishedBooksPage.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/finishedBooksPage.css') }}">
     <title>読んだ本リスト</title>
 </head>
 
@@ -39,14 +39,25 @@
                 </div>
                 @elseif($finishedBook['reviewID'] != 0)
                 読んだ日：{{$finishedBook['finishDate']}}<br>
-                一言感想：{{$finishedBook['selectedComment'][0]}}<br>
+                評価：{{$finishedBook['evaluation']}}<br>
+                一言感想：
+                @foreach($finishedBook['selectedComment'] as $selectedComment)
+                {{$selectedComment}}
+                @if(next($finishedBook['selectedComment']))
+                /
+                @endif
+                @endforeach
+                <br>
                 感想：{{$finishedBook['comment']}}</p>
                 @endif
             </div>
             <div class="edit">
                 @if($finishedBook['reviewID'] == 0)
                 <!-- 感想がない場合は新規に感想を書くページに遷移 -->
-                <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を書く</a>
+                <form action="/write" method="post">
+                    @csrf
+                    <input type="hidden" name="bookID" value="{{ $finishedBook['bookID'] }}"><button>→感想を書く</button>
+                </form>
                 @elseif($finishedBook['reviewID'] != 0)
                 <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を編集する</a>
                 @endif
