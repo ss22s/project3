@@ -142,16 +142,19 @@ class MyPageController extends Controller
         $x = 0;
 
         $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
-
-
+        
+        
         foreach ($wantBookGet as $wantBookSet) {
             $bookID = $wantBookSet['bookID'];
             $wantBooks[$x]['bookID'] = $bookID;
-
+            
             $wantBooks[$x] = book::where('bookID', $bookID)->first();
+            
             $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
+            
             $x++;
         }
+        
 
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }

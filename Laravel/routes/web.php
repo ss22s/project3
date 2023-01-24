@@ -90,8 +90,8 @@ Route::post('selectFromsearch', 'App\Http\Controllers\BookController@selectFroms
 Route::post('selectFromwantToBooks', 'App\Http\Controllers\BookController@selectFromwantToBooks');
 Route::post('selectFromfinishedBooks', 'App\Http\Controllers\BookController@selectFromfinishedBooks');
 
-Route::post('before', 'App\Http\Controllers\BookController@search');
-Route::post('next', 'App\Http\Controllers\BookController@search');
+Route::post('before', 'App\Http\Controllers\BookController@beforeBookSearch');
+Route::post('next', 'App\Http\Controllers\BookController@nextBookSearch');
 
 Route::post('/write', 'App\Http\Controllers\BookController@write');
 
@@ -122,6 +122,8 @@ Route::post('/userExit', 'App\Http\Controllers\MyPageController@userExit');
 
 Route::get('/searchBox', 'App\Http\Controllers\TopController@searchBox');
 
+Route::post('beforeSearchBox', 'App\Http\Controllers\TopController@beforeSearchBox');
+Route::post('nextSearchBox', 'App\Http\Controllers\TopController@nextSearchBox');
 
 Route::get('/MenuBar', function () {
     return view('MenuBar');

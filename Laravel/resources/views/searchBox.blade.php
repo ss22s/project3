@@ -113,13 +113,17 @@
                             <input type="hidden" name="count" value="{{$count}}">
                             <input type="hidden" name="pageCount" value="{{$pageCount}}">
                             @if($pageCount == 1)
-                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ" disabled>
+                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/beforeSearchBox" value="前へ" disabled>
                             @else
-                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ">
+                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/beforeSearchBox" value="前へ">
                             @endif
                             <!-- <input type="hidden" name="count" value="{{$count}}"> -->
                             <b class="pagecount">{{$pageCount}}</b>
-                            <input type="submit" class="pagebuttoncss" name="next" formaction="/next" value="次へ">
+                            @if($bookTotal < 20 || $count+20 > $bookTotal)
+                            <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ" disabled>
+                        @else
+                        <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ">
+@endif
                         </form>
                     </div>
                 </div>

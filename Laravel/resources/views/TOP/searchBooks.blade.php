@@ -85,9 +85,6 @@
 
 <body>
 
-
-    <!--TODO27:ボタン押したら開く感じにしてもいいね 上か左でどの手段か選択　それが開いてる感じ-->
-    <!--TODO27:詳細検索をつけてもいい　クリックすると開くかModal-->
     <div id="content">
         <div id="main">
             <div class="top">
@@ -112,15 +109,14 @@
             </div>
             <main>
                 @if(session('select') == 'search')
-                <div id="searchContent">
-                    <h3>検索する</h3>
+                <div class="searchContent">
                     
-                    <h5>検索できる項目:書籍のタイトル、著者名、ISBN10 /ISBN13</h5>
-                    <form action="/searchBooks" method="post">
+                    <b class="cooperation">書籍のタイトル、著者名、ISBN10 /ISBN13で検索できます。</b>
+                    <form id="formCss" action="/searchBooks" method="post">
                         @csrf
-                        <b>本のタイトル</b> &nbsp;<input class="searchwords" id="searchTitle" type="text" name="searchTitle" value="{{session('searchTitle')}}" placeholder="例:こころ"><br>
-                        <b>著者</b> &nbsp;<input class="searchwords" id="searchAuthor" type="text" name="searchAuthor" value="{{session('searchAuthor')}}" placeholder="例:夏目漱石"><br>
-                        <b>ISBN</b> &nbsp;<input class="searchwords" id="searchISBN" type="text" name="searchISBN" value="{{session('searchISBN')}}" placeholder="例:9784903620305"><br>
+                        <b class="formTitle">本のタイトル</b> &nbsp;<input class="searchwords" id="searchTitle" type="text" name="searchTitle" value="{{$searchTitle}}" placeholder="例:こころ"><br>
+                        <b class="formTitle">著者</b> &nbsp;<input class="searchwords" id="searchAuthor" type="text" name="searchAuthor" value="{{$searchAuthor}}" placeholder="例:夏目漱石"><br>
+                        <b class="formTitle">ISBN</b> &nbsp;<input class="searchwords" id="searchISBN" type="text" name="searchISBN" value="{{$searchISBN}}" placeholder="例:9784903620305"><br>
                         <button type="submit" name="searchBooks" disabled>検索</button>
                     </form>
                 </div>
@@ -130,39 +126,58 @@
                 @if($bookDatas == [])
                 <b>何も見つかりませんでした。検索ワードを変えて検索してみてください</b>
                 @else
+                <div>
+                <b>{{$bookTotal}}</b>件がヒットしました
+                </div>
                 @foreach($bookDatas as $bookData)
-                <form action="/write" method="post">
-                    @csrf
-                    <p class="searchbookdatas">
-                        <input type="hidden" name="bookID" value="{{$bookData['id']}}">
-                        <button class="buttoncss datacss">
+                <div class="main">
+                        <div class="box">
+                            <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
+                            <div class="LinkTab">
+                                <form action="/write" method="post">
+                                    @csrf
+                                    <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
+                                    <button class="buttonLink">感想を書く</button>
+                                </form>
+                            </div>
+                            <div class="flex">
+                                <p class="bookPhoto">
+                                    <img class="thumbnail" src="{{$bookData['thumbnail']}}" alt="書影" width="120" height="160">
+                                </p>
+                                <p class="booktext">
 
-                            <b>本のタイトル：</b>{{$bookData['title']}}<br>
-                            <b>著者：</b>{{$bookData['author']}}<br>
-                            <b>カテゴリ：</b>{{$bookData['categories']}}<br>
-                            <b>ISBN：</b>{{$bookData['isbn13']}}<br>
-                            <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
-                            <b>説明：</b>{{ Str::limit($bookData['description'], 200) }}
-                        </button>
-                    </p>
-                </form>
+                                    <b>著者：</b>{{$bookData['author']}}<br>
+                                    <b>カテゴリ：</b>{{$bookData['categories']}}<br>
+                                    <b>ISBN：</b>{{$bookData['isbn13']}}<br>
+                                    <!-- <b>説明：</b>{{$bookData['description']}}<br> -->
+                                    <b>説明：</b>{{ Str::limit($bookData['description'], 100) }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 @endforeach
                 <div class="pagebutton">
                     <form method="post" class="form-inline">
                         @csrf
-                        <input type="hidden" name="searchTitle" value="{{session('searchTitle')}}">
-                        <input type="hidden" name="searchAuthor" value="{{session('searchAuthor')}}">
-                        <input type="hidden" name="searchISBN" value="{{session('searchISBN')}}">
+                        <input type="hidden" name="searchTitle" value="{{$searchTitle}}">
+                        <input type="hidden" name="searchAuthor" value="{{$searchAuthor}}">
+                        <input type="hidden" name="searchISBN" value="{{$searchISBN}}">
+                        <input type="hidden" name="totalItem" value="{{$bookTotal}}">
                         <input type="hidden" name="count" value="{{$count}}">
                         <input type="hidden" name="pageCount" value="{{$pageCount}}">
                         @if($pageCount == 1)
-                        <input type="submit" class="buttoncss pagecount" name="before" formaction="/before" value="前へ" disabled>
+                        <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ" disabled>
                         @else
-                        <input type="submit" class="buttoncss pagecount" name="before" formaction="/before" value="前へ">
+                        <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ">
                         @endif
                         <!-- <input type="hidden" name="count" value="{{$count}}"> -->
                         <b class="pagecount">{{$pageCount}}</b>
-                        <input type="submit" class="buttoncss" name="next" formaction="/next" value="次へ">
+                        @if($bookTotal < 20 || $count+20 > $bookTotal)
+                        <input type="submit" class="pagebuttoncss pagecount" name="next" formaction="/next" value="次へ" disabled>
+                        @else
+                        <input type="submit" class="pagebuttoncss pagecount" name="next" formaction="/next" value="次へ">
+                        @endif
                     </form>
                 </div>
                 @endif
@@ -172,31 +187,37 @@
                 <!--  style="display:none" -->
                 @if(session('select') == 'wantToBooks')
                 <div id="wantToBooksContent">
-                    <h3>読みたい本リストから選択する</h3>
+                    <div class="searchContent"><b class="cooperation">読みたい本リストから選択する</b></div>
                     @if($wantBooks == "")
                     読みたい本リストに登録された本がありません。
 
                     @else
                     @foreach($wantBooks as $wantBook)
-                    <div class="bookselectdata">
-                        <form action="/write" method="post" class="bookselectdata">
-                            @csrf
-                            <p class="bookdatas">
-                                <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
-                                <button class="buttoncss">
-                                    <div class="bookdata">
-                                        <figure class="img">
-                                            <img src="{{$wantBook['thumbnail']}}" alt="書影" width="90" height="120">
-                                        </figure>
-                                        <div class="bookInfo">
-                                            <b> 本のタイトル：</b>{{$wantBook['book']}}<br>
-                                            <b>著者：</b>{{$wantBook['author']}}<br>
-                                        </div>
-                                    </div>
-                                </button>
-                            </p>
-                        </form>
+                    <div class="main">
+                        <div class="box">
+                            <p class="bookTitle"><b>{{$wantBook['book']}}</b></p>
+                            <div class="LinkTab">
+                                <form action="/write" method="post">
+                                    @csrf
+                                    <input type="hidden" name="bookID" value="{{$wantBook['bookID']}}">
+                                    <button class="buttonLink">感想を書く</button>
+                                </form>
+                            </div>
+                            <div class="flex">
+                                <p class="bookPhoto">
+                                    <img class="thumbnail" src="{{$wantBook['thumbnail']}}" alt="書影" width="120" height="160">
+                                </p>
+                                <p class="booktext">
+
+                                    <b>著者：</b>{{$wantBook['author']}}<br>
+                                    <b>ISBN</b>{{$wantBook['ISBN']}}<br>
+                                    <b>カテゴリ：</b>{{$wantBook['categories']}}<br>
+                                    
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    
                     @endforeach
 
                     @endif
@@ -205,7 +226,7 @@
                 @endif
                 @if(session('select') == 'finishedBooks')
                 <div id="finishedBooksContent">
-                    <h3>読んだ本リストから選択する</h3>
+                    <div class="searchContent"><b class="cooperation">読んだ本リストから選択する</b></div>
                     @if($finishedBooks == "")
                     読んだ本リストに登録された本がない、または全てに感想が書かれています。
                     感想を編集する場合は<a href="">ここ</a>から
@@ -213,27 +234,29 @@
                     @else
                     @csrf
                     @foreach($finishedBooks as $finishedBook)
-                    <div class="bookselectdata">
+                    <div class="main">
+                        <div class="box">
+                            <p class="bookTitle"><b>{{$finishedBook['book']}}</b></p>
+                            <div class="LinkTab">
+                                <form action="/write" method="post">
+                                    @csrf
+                                    <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
+                                    <button class="buttonLink">感想を書く</button>
+                                </form>
+                            </div>
+                            <div class="flex">
+                                <p class="bookPhoto">
+                                    <img class="thumbnail" src="{{$finishedBook['thumbnail']}}" alt="書影" width="120" height="160">
+                                </p>
+                                <p class="booktext">
 
-                        <form action="/write" method="post">
-                            @csrf
-                            <input type="hidden" name="bookID" value="{{$finishedBook['bookID']}}">
-                            <p class="bookdatas">
-                                <button class="buttoncss">
-                                <div class="bookdata">
-                                        <figure class="img">
-                                            <img src="{{$finishedBook['thumbnail']}}" alt="書影" width="90" height="120">
-                                        </figure>
-                                        <div class="bookInfo">
-                                            <b> 本のタイトル：</b>{{$finishedBook['book']}}<br>
-                                            <b>著者：</b>{{$finishedBook['author']}}<br>
-                                            <b>読み終わった日：</b>{{$finishedBook['finishDate']}}
-                                        </div>
-                                    </div>                                    
-                                </button>
-                            </p>
-                        </form>
-
+                                    <b>著者：</b>{{$finishedBook['author']}}<br>
+                                    <b>ISBN</b>{{$finishedBook['ISBN']}}<br>
+                                    <b>カテゴリ：</b>{{$finishedBook['categories']}}<br>
+                                    <b>読み終わった日：</b>{{$finishedBook['finishDate']}}<br>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                     @endif
