@@ -190,6 +190,7 @@ class MyPageController extends Controller
                 //日付
                 $date = explode(" ", bookReport::where('reviewID', $reviewID)->value('created_at'));
                 $finishedBooks[$x]['finishDate'] = $date[0];
+                $finishedBooks[$x]['evaluation'] = bookReport::where('reviewID',$reviewID)->value('evaluation');
                 //一言コメント(多重配列)
                 $commentGet = explode(",", bookReport::where('reviewID', $reviewID)->value('selectedComment'));
                 $loopVar = 0;
@@ -234,7 +235,6 @@ class MyPageController extends Controller
 
             $date = explode(" ", $reviewData['created_at']);
             $reviewData['finishedDate'] = $date[0];
-            dd($reviewData);
             $loopVar = 0;
             if (is_array($commentGet)) {
                 foreach ($commentGet as $commentSet) {
