@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/wantToBooksPage.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/wantToBooksPage.css') }}">
     <title>読みたい本リスト</title>
 </head>
 

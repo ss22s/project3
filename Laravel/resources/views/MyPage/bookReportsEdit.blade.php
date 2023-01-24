@@ -24,7 +24,6 @@
                         <label class="content">本のタイトル</label><br>
                         <!-- <input type="text" name="book" placeholder="例：となりのトトロ"> -->
                         <b>「　　　」</b>
-                        <p>{{$reviewData['book']}}</p>
                     </div>
                     <br>
                     <div>
