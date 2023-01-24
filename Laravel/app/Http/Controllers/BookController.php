@@ -58,6 +58,7 @@ class BookController extends Controller
             foreach ($reportDatasGet as $reportDataGet) {
 
                 $reportDataSet['name'] = User::where('id', $reportDataGet['id'])->value('name');
+                $reportDataSet['id'] = $reportDataGet['id'];
                 $reportDataSet['evaluation'] = $reportDataGet['evaluation'];
 
                 $selectedComments = explode(',', $reportDataGet['selectedComment']);
@@ -395,8 +396,10 @@ class BookController extends Controller
         }
 
         //入った場所に返す
-        //eturn redirect('home')->with('result', '感想の登録の成功しました！');
-        return view('hello');
+        session(['message' => " 感想の登録に成功しました！"]);
+        //入った場所に返す
+        return redirect()->action([MyPageController::class, 'myPage']);
+        
     }
 
 

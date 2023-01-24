@@ -47,7 +47,11 @@ class MyPageController extends Controller
         $myData['favoriteAuthor'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
 
-
+        $previous = explode("/",url()->previous());
+        // dd($previous);
+        if($previous[3] != "bookReportEdit" &&  $previous[3] != "write"){
+            session()->forget('message');
+        }
         //変数置く
         $x = 0;
 

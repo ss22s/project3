@@ -47,7 +47,7 @@
                 <h4>感想</h4>
                 @foreach($reportDatas as $reportData)
                 <div class="comment">
-                <b>名前：</b>{{$reportData['name']}}<br>
+                <b>名前：</b><a class="user" href="{{route('user',['userID' => $reportData['id']])}}"> {{$reportData['name']}}</a><br>
                 <b>評価：</b>{{$reportData['evaluation']}}<br>
                 <b>一言コメント：</b>{{$reportData['selectedComment']}}<br>
                 <b>【感想】</b><br>{{$reportData['comment']}}<br>
