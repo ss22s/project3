@@ -16,6 +16,9 @@
     <title>ユーザ情報</title>
 </head>
 <body class="main">
+    <div class="menuBar">
+        @include('MenuBar')
+    </div>
     <div class="box1">
     <h4 class="menu">ユーザ情報編集</h4>
         <b>ユーザ名：</b>{{$userData['name']}} <br>
