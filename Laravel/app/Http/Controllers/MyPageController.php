@@ -152,7 +152,7 @@ class MyPageController extends Controller
             $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
             $x++;
         }
-        
+
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
 
@@ -171,7 +171,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-        
+
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
 
@@ -202,11 +202,11 @@ class MyPageController extends Controller
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
 
                 // $finishedBooks[$x] = $finishedBooks
-                
-            } else{
+
+            } else {
                 $finishedBooks[$x]['reviewID'] = 0;
                 $finishedBooks[$x]['finishDate'] = "";
-                $finishedBooks[$x]['selectedComment'][0]= "" ;
+                $finishedBooks[$x]['selectedComment'][0] = "";
 
                 $finishedBooks[$x]['comment'] = "";
 
@@ -227,11 +227,23 @@ class MyPageController extends Controller
         if ($reviewID == 0) {
             $reviewExist = 1;
         } else {
-        $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
-        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
+            $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
+            $reviewData['book'] = book::where('bookid', $reviewData['bookID'])->value('book');
+            $x = 0;
+            $commentGet =  $reviewData->selectedComment;
+            $loopVar = 0;
+            if (is_array($commentGet)) {
+                foreach ($commentGet as $commentSet) {
+                    $selectedCommentString[$loopVar] = $this->commentAdd($commentSet);
+                    $loopVar++;
+                }
+            } else {
+                $selectedComment = $this->commentAdd($commentGet);
+                $selectedCommentString[$loopVar] = $selectedComment;
+            }
+            $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
         }
-        
-        return view('Mypage/bookReportsEdit', compact('reviewData','reviewExist'));
+        return view('Mypage/bookReportsEdit', compact('reviewData', 'reviewExist','selectedCommentString'));
     }
 
     //一言コメント変換
