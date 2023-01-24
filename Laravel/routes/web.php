@@ -106,6 +106,10 @@ Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')
 
 //マイページ編集
 Route::post('/changeName', 'App\Http\Controllers\MyPageController@changeName');
+
+Route::get('/delete/{bookID}','App\Http\Controllers\ListController@delete')
+    ->name('book.delete');
+
 //退会処理
 Route::get('/userExit', function () {
     return view('MyPage/userExit');

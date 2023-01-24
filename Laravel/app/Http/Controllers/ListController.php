@@ -16,24 +16,20 @@ class ListController extends Controller
         $user = Auth::user();
 
         //どこから来たか取得
-        $urlGet = url()->previous();
-        $DBdecide = explode("/",$urlGet);
+        // $urlGet = url()->previous();
+        // $DBdecide = explode("/",$urlGet);
 
         //コメント用のkey
-        $key = "";
+        // $key = "";
         
-        if(end($DBdecide) == "wantToBooks"){
+        // if(end($DBdecide) == "wantToBooks"){
             //読みたい本リストのDBから削除する
             //wantBook::where('id',$user['id'])->where('bookID',$bookID)->where('finished',null)->delete();
             wantBook::where('id',$user['id'])->where('bookID',$bookID)->where('finished',null)->update(['finished' => 1]);
 
-        }else if(end($DBdecide) == "finishedBooks"){
-            finishedBook::where('id',$user['id'])->where('bookID',$bookID)->update(['finished' => 1]);
+            $key = "削除に成功しました！";
+        // }
 
-        }else{
-
-        }
-        return back()->with("message",'');
-
+        return view('/wantToBooksPage',compact('key'));
     }
 }
