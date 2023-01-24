@@ -67,6 +67,8 @@ Route::get('/finishedBooks','App\Http\Controllers\MyPageController@finishedBooks
 //読んだ本リスト編集
 Route::get('/bookReportEdit/{reviewID}','App\Http\Controllers\MypageController@edit')
     ->name('bookReport.edit');
+//感想編集
+Route::post('/reportEdit','App\Http\Controllers\ListController@reportedit');
 //listページ関連
 Route::get('/listDelete/{bookID}','App\Http\Controllers\ListController@delete')
     ->name('list.delete');
@@ -97,7 +99,7 @@ Route::post('/reportRegister', 'App\Http\Controllers\BookController@register');
 //読みたい本リストに追加
 Route::get('/wantBook/{bookID}', 'App\Http\Controllers\BookController@wantBookAdd')
     ->name('book.wantBookAdd')->middleware('auth');
-Route::post('/wantBookAdd','App\Http\Controllers\BookController@wantBookAddTo')
+Route::post('/wantBookAddTo','App\Http\Controllers\BookController@wantBookAddTo')
     ->name('/bookReportList');
 
 //本の詳細ページ

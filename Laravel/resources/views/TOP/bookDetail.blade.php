@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/bookDetail.css')  }}">
     <title>本の詳細</title>
+    <script>
+        if ('{{$Message}}' != "") {
+            alert('{{$Message}}');
+        }
+    </script>
 </head>
 
 <body>

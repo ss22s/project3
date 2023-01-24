@@ -247,7 +247,7 @@ class MyPageController extends Controller
             }
             $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
         }
-        //dd($reviewData);
+        // dd($reviewData);
         return view('Mypage/bookReportsEdit', compact('reviewData', 'reviewExist','selectedCommentString'));
     }
 

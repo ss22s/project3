@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('/css/searchBox.css')  }}" rel="stylesheet" type="text/css">
     <title>検索箱</title>
+    <script>
+        if ('{{$flashMessage}}' != "") {
+            alert('{{$flashMessage}}');
+        }
+    </script>
+
 </head>
 
 <body>
@@ -57,16 +63,16 @@
                         <div class="box">
                             <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
                             <div class="LinkTab">
-                                <form action="/wantBookAdd">
+                                <form action="/wantBookAddTo" method="post">
                                     @csrf
                                     <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
                                     <input type="hidden" name="searchWords" value="{{$searchWords}}">
                                     <input type="hidden" name="searchType" value="{{$searchType}}">
                                     <input type="hidden" name="count" value="{{$count}}">
-                            <input type="hidden" name="pageCount" value="{{$pageCount}}">
+                                    <input type="hidden" name="pageCount" value="{{$pageCount}}">
+                                    <button class="buttonLink">読みたい本リストに追加する</button>
                                 </form>
-                                <a class="listLink" href="{{ route('book.wantBookAdd', $bookData['bookID'] )}}">読みたい本リストに追加する</a>
-                            <!-- </div>
+                                <!-- </div>
                             <div class="LinkTab"> -->
                                 <form action="/write" method="post">
                                     @csrf
@@ -106,13 +112,13 @@
                             <input type="hidden" name="count" value="{{$count}}">
                             <input type="hidden" name="pageCount" value="{{$pageCount}}">
                             @if($pageCount == 1)
-                            <input type="submit" class="buttoncss pagecount" name="before" formaction="/before" value="前へ" disabled>
+                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ" disabled>
                             @else
-                            <input type="submit" class="buttoncss pagecount" name="before" formaction="/before" value="前へ">
+                            <input type="submit" class="pagebuttoncss pagecount" name="before" formaction="/before" value="前へ">
                             @endif
                             <!-- <input type="hidden" name="count" value="{{$count}}"> -->
                             <b class="pagecount">{{$pageCount}}</b>
-                            <input type="submit" class="buttoncss" name="next" formaction="/next" value="次へ">
+                            <input type="submit" class="pagebuttoncss" name="next" formaction="/next" value="次へ">
                         </form>
                     </div>
                 </div>
