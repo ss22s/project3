@@ -31,7 +31,7 @@
     border: 2px solid;
     border-radius: 30px;
     margin: 20px;
-    padding: 20px;
+    padding: 5px 20px 25px 20px;
     width: 380px;
     height: 650px;
 }
@@ -70,8 +70,16 @@
     margin: 0 20px;
 }
 
+.noComment {
+    text-align: center;
+}
+
 .edit {
     text-align: right;
+}
+
+.edit a {
+    color: #454541;
 }
 
 .toppagelink {

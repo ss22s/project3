@@ -34,12 +34,22 @@
             </span>
             <div class="info">
                 カテゴリ：{{$finishedBook['categories']}}<br>
+                @if($finishedBook['reviewID'] == 0)
+                <div class="noComment">- 感想がありません -</p>
+                </div>
+                @elseif($finishedBook['reviewID'] != 0)
                 読んだ日：{{$finishedBook['finishDate']}}<br>
                 一言感想：{{$finishedBook['selectedComment'][0]}}<br>
                 感想：{{$finishedBook['comment']}}</p>
+                @endif
             </div>
             <div class="edit">
-                <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を編集する</a>           
+                @if($finishedBook['reviewID'] == 0)
+                <!-- 感想がない場合は新規に感想を書くページに遷移 -->
+                <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を書く</a>
+                @elseif($finishedBook['reviewID'] != 0)
+                <a href="{{ route('bookReport.edit', $finishedBook['reviewID'] )}}">→感想を編集する</a>
+                @endif
             </div>
         </div>
         @endforeach
