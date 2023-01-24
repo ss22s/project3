@@ -231,6 +231,9 @@ class MyPageController extends Controller
             $reviewData['book'] = book::where('bookid', $reviewData['bookID'])->value('book');
             $x = 0;
             $commentGet =  $reviewData->selectedComment;
+
+            $date = explode(" ", $reviewData['created_at']);
+            $reviewData['finishedDate'] = $date;
             $loopVar = 0;
             if (is_array($commentGet)) {
                 foreach ($commentGet as $commentSet) {
@@ -243,6 +246,7 @@ class MyPageController extends Controller
             }
             $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
         }
+        //dd($reviewData);
         return view('Mypage/bookReportsEdit', compact('reviewData', 'reviewExist','selectedCommentString'));
     }
 
