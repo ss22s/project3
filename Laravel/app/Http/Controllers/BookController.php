@@ -89,7 +89,7 @@ class BookController extends Controller
         $searchAuthor = null;
         $searchISBN = null;
         session(['select' => 'search']);
-        return view('TOP/searchBooks', compact('searchTitle','searchAuthor','searchISBN','count'));
+        return view('TOP/searchBooks', compact('searchTitle', 'searchAuthor', 'searchISBN', 'count'));
     }
 
     public function search(Request $request)
@@ -103,17 +103,17 @@ class BookController extends Controller
         }
 
         $searchTitleGet = $request->input('searchTitle');
-        
+
         $searchAuthorGet = $request->input('searchAuthor');
         $searchISBNGet = $request->input('searchISBN');
 
         list($bookDatas, $bookTotal) = $this->searchBooksAndSetbookDatas($searchTitleGet, $searchAuthorGet, $searchISBNGet, $count);
 
-        
+
         $searchTitle = $searchTitleGet;
         $searchAuthor = $searchAuthorGet;
         $searchISBN = $searchISBNGet;
-        
+
         session(['page' => 'true']);
         session(['select' => 'search']);
 
@@ -135,7 +135,7 @@ class BookController extends Controller
         }
 
         list($bookDatas, $bookTotal) = $this->searchBooksAndSetbookDatas($searchTitle, $searchAuthor, $searchISBN, $count);
-        
+
         return view('TOP/searchBooks', compact('searchTitle', 'searchAuthor', 'searchISBN', 'count', 'bookDatas', 'pageCount', 'bookTotal'));
     }
     public function nextBookSearch(Request $request)
@@ -150,9 +150,8 @@ class BookController extends Controller
         $count = ($count + 20);
 
         list($bookDatas, $bookTotal) = $this->searchBooksAndSetbookDatas($searchTitle, $searchAuthor, $searchISBN, $count);
-        
-        return view('TOP/searchBooks', compact('searchTitle', 'searchAuthor', 'searchISBN', 'count', 'bookDatas', 'pageCount', 'bookTotal'));
 
+        return view('TOP/searchBooks', compact('searchTitle', 'searchAuthor', 'searchISBN', 'count', 'bookDatas', 'pageCount', 'bookTotal'));
     }
 
     public function searchBooksAndSetBookDatas($searchTitleGet, $searchAuthorGet, $searchISBNGet, $count)
@@ -228,7 +227,7 @@ class BookController extends Controller
         $searchISBN = null;
         $request->session()->forget('page');
         session(['select' => 'search']);
-        return view('TOP/searchBooks', compact('searchTitle','searchAuthor','searchISBN','count'));
+        return view('TOP/searchBooks', compact('searchTitle', 'searchAuthor', 'searchISBN', 'count'));
     }
 
     public function selectFromwantToBooks(Request $request)
@@ -349,16 +348,26 @@ class BookController extends Controller
 
         //登録：新着感想
         //reviewは自動加算.userはログイン情報sessionからもらう
-
-        DB::table('bookReports')->insert([
-            'id' => $userData['id'],
-            'bookID' => $bookID,
-            'evaluation' => $reportDatasGet['evaluation'],
-            "selectedComment" =>  $selectedComment,
-            "comment" => $reportDatasGet['comment'],
-            "Open" => $open,
-            "created_at" => $today
-        ]);
+        if(!(DB::table('bookReports')->where('id',$userData['id'])->where('bookID',$bookID)->exists())){
+            DB::table('bookReports')->insert([
+                'id' => $userData['id'],
+                'bookID' => $bookID,
+                'evaluation' => $reportDatasGet['evaluation'],
+                "selectedComment" =>  $selectedComment,
+                "comment" => $reportDatasGet['comment'],
+                "Open" => $open,
+                "created_at" => $today
+            ]);
+        } else {
+            DB::table('bookReports')->where('id',$userData['id'])->where('bookID',$bookID)->update([
+                'evaluation' => $reportDatasGet['evaluation'],
+                "selectedComment" =>  $selectedComment,
+                "comment" => $reportDatasGet['comment'],
+                "Open" => $open,
+                "created_at" => $today
+            ]);
+        }
+        
 
 
         $reviewIDget = bookReport::where('id', $userData['id'])->where('bookID', $bookID)->value('reviewID');
@@ -399,7 +408,6 @@ class BookController extends Controller
         session(['message' => " 感想の登録に成功しました！"]);
         //入った場所に返す
         return redirect()->action([MyPageController::class, 'myPage']);
-        
     }
 
 
@@ -464,7 +472,7 @@ class BookController extends Controller
                 if ($setISBN == "不明") {
                     $setISBN = "0";
                 }
-    
+
                 DB::table('books')->insert([
                     'bookID' => $bookID,
                     'book' => $bookDataGet->volumeInfo->title,
@@ -473,6 +481,9 @@ class BookController extends Controller
                     'categories' => BookController::setCategories($bookDataGet),
                 ]);
             }
+            $flashMessage = "リストに追加しました！";
+        } else if ((DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->where('finished', '1')->exists()) && (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists()))) {
+            DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->where('finished', 1)->update(['finished' => null]);
             $flashMessage = "リストに追加しました！";
         } else {
             $flashMessage = "この本は既に読みたい本リストに追加されています";
@@ -514,7 +525,7 @@ class BookController extends Controller
                 if ($setISBN == "不明") {
                     $setISBN = "0";
                 }
-    
+
                 DB::table('books')->insert([
                     'bookID' => $bookID,
                     'book' => $bookDataGet->volumeInfo->title,
@@ -524,6 +535,9 @@ class BookController extends Controller
                 ]);
             }
 
+            $flashMessage = "リストに追加しました！";
+        } else if ((DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->where('finished', '1')->exists()) && (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists()))) {
+            DB::table('wantToBooks')->where('id', $user['id'])->where('bookID', $bookID)->where('finished', 1)->update(['finished' => null]);
             $flashMessage = "リストに追加しました！";
         } else {
             $flashMessage = "この本は既に読みたい本リストに追加されています";

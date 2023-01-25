@@ -177,7 +177,7 @@ class MyPageController extends Controller
         $x = 0;
 
         //読んだ本リスト取得
-        $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
+        $finishedBooksGet = finishedBook::where('id', $user['id'])->orderBy('date', 'desc')->get();
 
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
