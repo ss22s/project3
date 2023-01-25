@@ -9,11 +9,14 @@
     padding-top:30px;
     border-bottom:2px dashed #D2B48C;
 }
+.linkColor{
+    text-align: center;
+    color:#D2B48C;
+}
 
 .prof {
     margin-top: 20px;
     margin-left: 30%;
-    font-size: 22px;
 }
 
 .button {

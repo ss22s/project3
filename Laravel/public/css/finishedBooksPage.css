@@ -1,3 +1,17 @@
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    text-decoration: underline;
+}
+
+button:hover {
+    color: #D2B48C;
+}
+
 .top {
     min-height: 100vh;
     background-color: #eee8e1;
@@ -31,7 +45,7 @@
     border: 2px solid;
     border-radius: 30px;
     margin: 20px;
-    padding: 20px;
+    padding: 5px 20px 25px 20px;
     width: 380px;
     height: 650px;
 }
@@ -70,8 +84,20 @@
     margin: 0 20px;
 }
 
+.noComment {
+    text-align: center;
+}
+
 .edit {
     text-align: right;
+}
+
+.edit a {
+    color: #454541;
+}
+
+.edit a:hover {
+    color: #D2B48C;
 }
 
 .toppagelink {

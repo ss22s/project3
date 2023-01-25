@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/wantToBooksPage.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/wantToBooksPage.css') }}">
     <title>読みたい本リスト</title>
 </head>
 
@@ -16,6 +16,8 @@
         @csrf
         @foreach($wantBooks as $wantBook)
         <div class="box">
+            <!-- 削除ボタン -->
+            <a href="{{ route('book.delete', $wantBook['bookID'] )}}" class="delete" onclick="return confirm('読みたい本リストから削除しますか？');"></a>
             <a class="title" href="{{ route('book.detail', $wantBook['bookID'] )}}">
                 <p class="booklink">{{$wantBook['book']}}</p>
             </a>

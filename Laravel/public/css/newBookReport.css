@@ -36,17 +36,21 @@
     height:650px;
 }
 
-.title{
+.linkBook{
     color:#454541;
-}
-.title:hover{
-    color:#D2B48C;
-}
-
-.booklink{
     padding:15px;
     font-size:26px;
     font-weight:700;
+}
+
+/* .title{
+    color:#454541;
+    padding:15px;
+    font-size:26px;
+    font-weight:700;
+} */
+.linkBook:hover{
+    color:#D2B48C;
 }
 
 .image{

@@ -102,3 +102,9 @@
     border:solid 3px#D2B48C;
     border-radius: 5px;
 }
+
+label{
+    display: inline-block;
+    text-align: right;
+    width: 150px;
+}

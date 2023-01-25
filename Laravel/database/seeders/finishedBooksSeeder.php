@@ -71,7 +71,7 @@ class finishedBooksSeeder extends Seeder
             ],
             [
                 'finishedID' => 7,
-                'id' => 1,
+                'id' => 3,
                 'bookID' => 'FccyEAAAQBAJ',
                 'date' => '2020-09-13 12:00:00',
                 'reviewID' => 6,
