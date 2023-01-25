@@ -28,7 +28,6 @@
             </p>
         </div>
         <br>
-        <br>
         <div class="list">
             <div class="box2">
                 <h1 class="content">フォロー</h1>

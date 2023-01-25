@@ -16,6 +16,9 @@
     <title>ユーザ情報</title>
 </head>
 <body class="main">
+    <div class="menuBar">
+        @include('MenuBar')
+    </div>
     <div class="box1">
     <h4 class="menu">ユーザ情報編集</h4>
         <b>ユーザ名：</b>{{$userData['name']}} <br>
@@ -47,11 +50,11 @@
                         {{--内容--}}
                         <form action="/changeName" method="post" accept-charset="UTF-8">
 		                {{ csrf_field() }}
-                        <div class="label"><b>ユーザー名：</b><input type="text" name="name" value="{{$userData['name']}}"></div>
-                        <div class="label"><b>メールアドレス：</b><input type="text" name="email" value="{{$userData['email']}}"></div>
-                        <div class="label"><b>イチオシの一冊：</b><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
-                        <div class="label"><b>好きな著者：</b><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
-                        <div class="label"><b>自由記述欄：</b><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
+                        <div class="label"><label><b>ユーザー名：</b></label><input type="text" name="name" value="{{$userData['name']}}"></div>
+                        <div class="label"><label><b>メールアドレス：</b></label><input type="text" name="email" value="{{$userData['email']}}"></div>
+                        <div class="label"><label><b>イチオシの一冊：</b></label><input type="text" name="favoriteBook" value="{{$userData['favoriteBook']}}"></div>
+                        <div class="label"><label><b>好きな著者：</b></label><input type="text" name="favoriteAuthor" value="{{$userData['favoriteAuthor']}}"></div>
+                        <div class="label"><label><b>自由記述欄：</b></label><input type="text" name="freeText" value="{{$userData['freeText']}}"></div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary closebtn" data-dismiss="modal">閉じる</button>
