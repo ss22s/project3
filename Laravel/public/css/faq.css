@@ -1,8 +1,55 @@
 body {
-    background-color: white;
+    background-color: #eee8e1;
 }
+
+.linkbutton {
+    text-align: right;
+}
+
+.toppagelink {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:15px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}
+
 h1 {
     text-align: center;
     padding: 20px;
     margin: 20px;
+    text-align: center;
+}
+
+.toppagelink {
+    display:inline-block;
+    text-decoration: none;
+    padding:10px 20px;
+    margin:15px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid#D2B48C;
+    border-radius:10px;
+}
+
+.page {
+    text-align:center;
+    color:#D2B48C;
+    font-size:50px;
+    padding-top:30px;
+    border-bottom:2px dashed #D2B48C;
+}
+
+.faq {
+    background-color: #f4f2f0;
+    border: 1px solid #a48660;
+}
+
+.box {
+    background-color: #eee8e1;
 }

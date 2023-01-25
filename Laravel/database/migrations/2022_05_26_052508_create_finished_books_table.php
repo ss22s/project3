@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('finishedBooks', function (Blueprint $table) {
+            $table->id('finishedID');
             $table->unsignedBigInteger('id');
             $table->string('bookID');
             $table->dateTime('date');

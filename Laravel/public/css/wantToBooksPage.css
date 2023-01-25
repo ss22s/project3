@@ -1,0 +1,128 @@
+.top {
+    min-height: 100vh;
+    background-color: #eee8e1;
+    text-align: center;
+}
+
+.page {
+    text-align: center;
+    color: #D2B48C;
+    font-size: 50px;
+    padding-top: 30px;
+    border-bottom: 2px dashed #D2B48C;
+}
+
+.main {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 50px;
+    text-align: center;
+    background-color: #eee8e1;
+    /* #eaddcd */
+    /* #eee8e1 */
+    color: #454541;
+    margin-right: -10px;
+}
+
+.box {
+    display: inline-block;
+    vertical-align: top;
+    background-color: #efefef;
+    border: 2px solid;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 5px 20px 25px 20px;
+    width: 380px;
+    height: 400px;
+}
+
+.title {
+    color: #454541;
+}
+
+.title:hover {
+    color: #D2B48C;
+}
+
+.author {
+    margin: 0;
+}
+
+.booklink {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.image {
+    display: inline-block;
+    border: 1px solid;
+    font-size: 50px;
+    margin: 20px;
+    /* padding:40px; */
+    padding: 10px;
+}
+
+.delete {
+    margin-top: 5px;
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #777772;
+}
+
+.delete::before,
+.delete::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: #fff;
+}
+
+.delete::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.delete::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.delete:hover {
+    background: #D2B48C;
+}
+
+.toppagelink {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 20px;
+    color: #efefef;
+    background: #D2B48C;
+    border: solid 3px#D2B48C;
+    border-radius: 10px;
+}
+
+.toppagelink:hover {
+    color: #efefef;
+}
+
+/* .btnClass{
+    text-align:right;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    width: 100%;
+    height: auto;
+    font-size: 20px;
+    text-decoration: underline; */

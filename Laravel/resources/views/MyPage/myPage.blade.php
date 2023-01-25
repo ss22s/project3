@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/Mypage.css">
     <title>マイページ</title>
+    @if(session('message') != '')
+    <script>
+       alert("{{session('message')}}");
+    </script>
+    @endif
 </head>
 
 <body>
@@ -26,10 +31,6 @@
                 <b class="bold">好きな著者：</b>{{$myData['favoriteAuthor']}} <br>
                 <b class="bold">自由記述欄：</b>{{$myData['freeText']}}
             </p>
-        </div>
-        <br>
-        <div class="graph">
-            設定した目標冊数/月に対しての達成度グラフを表示する
         </div>
         <br>
         <div class="list">

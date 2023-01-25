@@ -1,0 +1,88 @@
+body {
+    background-color:#eee8e1;
+  }
+
+h1 {
+    text-align: center;
+    padding-top: 90px;
+}
+
+.card{
+    width: 40%;
+    margin: 20px auto;
+    border:1px solid #a48660;
+    background-color: #f4f2f0;
+    padding: 50px;
+    box-sizing: border-box;
+    padding-left: 80px;
+}
+
+.col-md-4.col-form-label.text-md-end{
+  display:inline-block;
+  text-align: right;
+  width: 150px;
+}
+
+.form-control{
+  width: 350px;
+  height: 40px;
+}
+
+.row.mb-3{
+  padding-bottom: 30px;
+}
+
+.row.mb-0{
+  text-align: center;
+  padding-top: 10px;
+}
+
+#passReq{
+  margin-top: 30px;
+}
+
+.col-md-6.offset-md-4{
+  text-align: right;
+  padding-right: 100px;
+}
+
+.card-body{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.link{
+  display:inline-block;
+    text-decoration:none;
+    padding:10px 30px;
+    margin:5px;
+    font-size:20px;
+    color:#efefef;
+    background:#D2B48C;
+    border:solid 3px#D2B48C;
+    border-radius:10px;
+}
+.linkButton{
+  text-align:right;
+}
+
+.row.mb-0 button {
+  background: black;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+
+.row.mb-0 button:hover {
+  background: #9c9c9c;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: 0 5px;
+}
