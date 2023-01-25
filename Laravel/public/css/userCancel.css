@@ -34,3 +34,11 @@ body {
     background-color: rgb(177, 5, 5);
     border: solid 3px rgb(177, 5, 5);
 }
+
+.link{
+    color:#454541;
+    text-decoration: underline;
+}
+.link:hover{
+    color:#D2B48C;
+}

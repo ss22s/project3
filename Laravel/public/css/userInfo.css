@@ -53,6 +53,10 @@
   box-shadow: none;
 }
 
+.btn {
+    margin-left: 50px;
+}
+
 .link{
     color:#454541;
     text-decoration: underline;

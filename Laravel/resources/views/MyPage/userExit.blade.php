@@ -24,7 +24,8 @@
     </div>
 
     <div>
-        <div align="center">     
+        <div align="center">  
+        <a class="link" href="/myPage">マイページに戻る</a>   
         <button type="button" class="btn btn-primary taikaibtn" data-toggle="modal" data-target="#exampleBook">
             退会する
         </button>
