@@ -78,8 +78,7 @@ class ListController extends Controller
             'evaluation' => $reportDatasGet['evaluation'],
             "selectedComment" =>  $selectedComment,
             "comment" => $reportDatasGet['comment'],
-            "Open" => $open,
-            "created_at" => $today
+            "Open" => $open
         ]);
 
 
