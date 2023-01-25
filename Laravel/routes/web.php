@@ -101,6 +101,8 @@ Route::get('/wantBook/{bookID}', 'App\Http\Controllers\BookController@wantBookAd
     ->name('book.wantBookAdd')->middleware('auth');
 Route::post('/wantBookAddTo','App\Http\Controllers\BookController@wantBookAddTo')
     ->name('/bookReportList')->middleware('auth');
+    Route::post('/finishedBookAddTo','App\Http\Controllers\BookController@finishedBookAddTo')
+    ->name('/bookReportList')->middleware('auth');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('reviewID')->nullable();
             $table->integer('delete')->nullable();
 
-            $table->foreign('reviewID')->references('reviewID')->on('bookReports');
+            // $table->foreign('reviewID')->references('reviewID')->on('bookReports');
             $table->foreign('id')->references('id')->on('users');
         });
     }

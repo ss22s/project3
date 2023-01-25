@@ -380,6 +380,10 @@ class BookController extends Controller
                 'date' => $reportDatasGet['finishedDate'],
                 'reviewID' => $reviewIDget,
             ]);
+        } else if((DB::table('finishedBooks')->where('id', $userData['id'])->where('bookID', $bookID)->exists())){
+            DB::table('finishedBooks')->where('id', $userData['id'])->where('bookID', $bookID)->update([
+                'reviewID' => $reviewIDget,
+            ]);
         }
         if ((DB::table('wantToBooks')->where('id', $userData['id'])->where('bookID', $bookID)->exists())) {
             DB::table('wantToBooks')->where('id', $userData['id'])->where('bookID', $bookID)->update([
@@ -572,9 +576,118 @@ class BookController extends Controller
             $x = 0;
             $bookDatas = array();
             $bookcount = 0;
-            if (!($request->input('before') != null)) {
-                //?
+            
+            //$count++;
+            foreach ($bookDatasGet as $bookDataSet) {
+
+                $bookData['bookID'] = $bookDataSet->id;
+
+                $bookData['thumbnail'] = BookController::setThumbnail($bookDataSet->id);
+
+                $bookData['isbn13'] = BookController::setISBN($bookDataSet);
+
+                $bookData['title'] = $bookDataSet->volumeInfo->title;
+
+                //作者名がなければ不明で登録
+                $bookData['author'] = BookController::setAuthor($bookDataSet);
+
+                //カテゴリ
+                $bookData['categories'] = BookController::setCategories($bookDataSet);
+
+                //詳細
+                $bookData['description'] = BookController::setDescription($bookDataSet);
+
+                //感想があるか検索
+                    $bookReportsExsists = bookReport::where('bookID', $bookData['bookID'])->exists();
+                    $bookData['exsists'] = $bookReportsExsists;
+
+                    $bookDatas[$x] = $bookData;
+                    $x++;
             }
+        }
+        return view('searchBox', compact('count', 'pageCount', 'bookDatas', 'searchType', 'searchWords', 'bookTotal', 'flashMessage'));
+        //return view('/hello');
+    }
+
+    public static function finishedBookAddTo(Request $request){
+
+        $bookID = $request->input('bookID');
+        $count = $request->input('count');
+        $pageCount = $request->input('pageCount');
+        $searchType = $request->input('searchType');
+        $searchWords = $request->input('searchWords');
+
+        $user = Auth::user();
+        //registered_atの日付
+
+
+        $today = date("Y-m-d H:i:s");
+
+        if (!(DB::table('finishedBooks')->where('id', $user['id'])->where('bookID', $bookID)->exists()) && (!(DB::table('bookReports')->where('id', $user['id'])->where('bookID', $bookID)->exists()))) {
+            DB::table('finishedBooks')->insert([
+                [
+                    'id' => $user['id'],
+                    'bookiD' => $bookID,
+                    'date' => $today,
+                    'reviewID' => null,
+                    'delete' => null
+                    
+                ],
+            ]);
+            if (!(DB::table('books')->where('bookID', $bookID)->exists())) {
+                $bookDataGet = BookController::booksearchId($bookID);
+                //dd($bookDataGet);
+                $setISBN = BookController::setISBN($bookDataGet);
+                if ($setISBN == "不明") {
+                    $setISBN = "0";
+                }
+
+                DB::table('books')->insert([
+                    'bookID' => $bookID,
+                    'book' => $bookDataGet->volumeInfo->title,
+                    'author' => BookController::setAuthor($bookDataGet),
+                    'ISBN' => $setISBN,
+                    'categories' => BookController::setCategories($bookDataGet),
+                ]);
+            }
+
+            $flashMessage = "リストに追加しました！";
+        } else {
+            $flashMessage = "この本は既に読んだ本リストに追加されています";
+        }
+        //ここからBookrepostsと同じ
+        $params  = array();
+        if ($searchType == "title") {
+            $params += array('intitle' => $searchWords);
+        } else if ($searchType == "author") {
+            $params += array('inauthor' => $searchWords);
+        }
+
+        $baseURL = 'https://www.googleapis.com/books/v1/volumes?&q=';
+        $foreachCount = 0;
+        $searchURL = "";
+
+        foreach ($params as $key => $value) {
+            if ($foreachCount == 0) {
+                $searchURL = $baseURL . $key . ':' . $value;
+            } else {
+                $searchURL .= '+' . $key . ':' . $value;
+            }
+            $foreachCount++;
+        }
+        // dd($searchURL);
+        $url = $searchURL . '&maxResults=20' . '&startIndex=' . $count;
+        $searchGet = file_get_contents($url);
+        // echo $url;
+        $searchDatas = json_decode($searchGet);
+        if ($searchDatas->totalItems != 0) {
+            $bookDatasGet = $searchDatas->items;
+            $bookTotal = $searchDatas->totalItems;
+
+            $x = 0;
+            $bookDatas = array();
+            $bookcount = 0;
+            
             //$count++;
             foreach ($bookDatasGet as $bookDataSet) {
 
@@ -603,9 +716,11 @@ class BookController extends Controller
                 $x++;
             }
         }
+
         return view('searchBox', compact('count', 'pageCount', 'bookDatas', 'searchType', 'searchWords', 'bookTotal', 'flashMessage'));
-        //return view('/hello');
+
     }
+
 
     public static function booksearchId($bookID)
     {

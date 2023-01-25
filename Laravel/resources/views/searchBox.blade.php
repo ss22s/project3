@@ -17,7 +17,7 @@
 <body>
     <div id="content">
         <div id="main">
-            <div id="searchDescription">
+            <div class="searchDescription">
                 本を検索します。<br>
                 感想が既に書かれているもののみ、<span class="blue">感想を見る</span>ボタンから感想を見ることができます。<br></b>
             </div>
@@ -63,17 +63,18 @@
                         <div class="box">
                             <p class="bookTitle"><b>{{$bookData['title']}}</b></p>
                             <div class="LinkTab">
-                                <form action="/wantBookAddTo" method="post">
+                                <form method="post">
                                     @csrf
                                     <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
                                     <input type="hidden" name="searchWords" value="{{$searchWords}}">
                                     <input type="hidden" name="searchType" value="{{$searchType}}">
                                     <input type="hidden" name="count" value="{{$count}}">
                                     <input type="hidden" name="pageCount" value="{{$pageCount}}">
-                                    <button class="buttonLink">読みたい本リストに追加する</button>
+                                    <input type="submit" class="buttonLink" formaction="/wantBookAddTo" value="読みたい本リストに追加する">
+                                    <input type="submit" class="buttonLink" formaction="/finishedBookAddTo" value="読んだ本リストに追加する">
                                 </form>
-                                <!-- </div>
-                            <div class="LinkTab"> -->
+                            </div>
+                            <div class="LinkTab">
                                 <form action="/write" method="post">
                                     @csrf
                                     <input type="hidden" name="bookID" value="{{$bookData['bookID']}}">
@@ -119,11 +120,11 @@
                             @endif
                             <!-- <input type="hidden" name="count" value="{{$count}}"> -->
                             <b class="pagecount">{{$pageCount}}</b>
-                            @if($bookTotal < 20 || $count+20 > $bookTotal)
-                            <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ" disabled>
-                        @else
-                        <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ">
-@endif
+                            @if($bookTotal < 20 || $count+20> $bookTotal)
+                                <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ" disabled>
+                                @else
+                                <input type="submit" class="pagebuttoncss" name="next" formaction="/nextSearchBox" value="次へ">
+                                @endif
                         </form>
                     </div>
                 </div>
