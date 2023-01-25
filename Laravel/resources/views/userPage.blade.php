@@ -65,7 +65,7 @@
     <div>
         <p class="data">
             @foreach($userWantToBookdatas as $userWantToBookdata)
-            <a class="title" href="{{ route('book.detail', $userWantToBookdata['bookID'] )}}">{{$userWantToBookdata['book']}}</a>
+            <a class="linkColor" href="{{ route('book.detail', $userWantToBookdata['bookID'] )}}">{{$userWantToBookdata['book']}}</a>
             <br>
             @endforeach
         </p>
@@ -85,7 +85,7 @@
     <div>
         <p class="data">
             @foreach($userFinishedBookdatas as $userFinishedBookdata)
-            <a class="title" href="{{ route('book.detail', $userFinishedBookdata['bookID'] )}}">{{$userFinishedBookdata['book']}}</a>
+            <a class="linkColor" href="{{ route('book.detail', $userFinishedBookdata['bookID'] )}}">{{$userFinishedBookdata['book']}}</a>
             <br>
             @endforeach
         </p>

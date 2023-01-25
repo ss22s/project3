@@ -25,7 +25,7 @@
     @else
     <div class="main">
         <div class="box">
-            <a class="title" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
+            <a class="linkBook" href="{{route('book.detail',['bookID'=>$bookData['bookID']])}}">
                 <p class="booklink">{{$bookData['book']}}</p>
             </a>
             <span class="image">

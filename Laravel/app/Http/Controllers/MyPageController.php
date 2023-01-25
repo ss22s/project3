@@ -47,7 +47,11 @@ class MyPageController extends Controller
         $myData['favoriteAuthor'] = $myPageDataGet['favoriteAuthor'];
         $myData['freeText'] = $myPageDataGet['freeText'];
 
-
+        $previous = explode("/",url()->previous());
+        // dd($previous);
+        if($previous[3] != "bookReportEdit" &&  $previous[3] != "write"){
+            session()->forget('message');
+        }
         //変数置く
         $x = 0;
 
@@ -133,7 +137,7 @@ class MyPageController extends Controller
     }
 
     //読みたい本リストページ表示
-    public function wantToBooks(Request $request)
+    public function wantToBooks()
     {
         //ログイン済みデータ取得
         $user = Auth::user();
@@ -141,18 +145,20 @@ class MyPageController extends Controller
         //回す分の変数
         $x = 0;
 
-
-        $wantBookGet = wantBook::where('id', $user['id'])->get();
-
-
+        $wantBookGet = wantBook::where('id', $user['id'])->where('finished', null)->get();
+        
+        
         foreach ($wantBookGet as $wantBookSet) {
             $bookID = $wantBookSet['bookID'];
             $wantBooks[$x]['bookID'] = $bookID;
-
+            
             $wantBooks[$x] = book::where('bookID', $bookID)->first();
+            
             $wantBooks[$x]['thumbnail'] =  BookController::setThumbnail($bookID);
+            
             $x++;
         }
+        
 
         return view('MyPage/wantToBooksPage', compact('wantBooks'));
     }
@@ -172,7 +178,7 @@ class MyPageController extends Controller
 
         //読んだ本リスト取得
         $finishedBooksGet = finishedBook::where('id', $user['id'])->get();
-        
+
         foreach ($finishedBooksGet as $finishedBooksSet) {
 
 
@@ -191,6 +197,7 @@ class MyPageController extends Controller
                 //日付
                 $date = explode(" ", bookReport::where('reviewID', $reviewID)->value('created_at'));
                 $finishedBooks[$x]['finishDate'] = $date[0];
+                $finishedBooks[$x]['evaluation'] = bookReport::where('reviewID',$reviewID)->value('evaluation');
                 //一言コメント(多重配列)
                 $commentGet = explode(",", bookReport::where('reviewID', $reviewID)->value('selectedComment'));
                 $loopVar = 0;
@@ -203,11 +210,11 @@ class MyPageController extends Controller
                 $finishedBooks[$x]['comment'] = bookReport::where('reviewID', $reviewID)->value('comment');
 
                 // $finishedBooks[$x] = $finishedBooks
-                
-            } else{
+
+            } else {
                 $finishedBooks[$x]['reviewID'] = 0;
                 $finishedBooks[$x]['finishDate'] = "";
-                $finishedBooks[$x]['selectedComment'][0]= "" ;
+                $finishedBooks[$x]['selectedComment'][0] = "";
 
                 $finishedBooks[$x]['comment'] = "";
 
@@ -228,11 +235,27 @@ class MyPageController extends Controller
         if ($reviewID == 0) {
             $reviewExist = 1;
         } else {
-        $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
-        $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
+            $reviewData = bookReport::where('reviewID', $reviewID)->where('id', $user['id'])->first();
+            $reviewData['book'] = book::where('bookid', $reviewData['bookID'])->value('book');
+            $x = 0;
+            $commentGet =  $reviewData->selectedComment;
+
+            $date = explode(" ", $reviewData['created_at']);
+            $reviewData['finishedDate'] = $date[0];
+            $loopVar = 0;
+            if (is_array($commentGet)) {
+                foreach ($commentGet as $commentSet) {
+                    $selectedCommentString[$loopVar] = $this->commentAdd($commentSet);
+                    $loopVar++;
+                }
+            } else {
+                $selectedComment = $this->commentAdd($commentGet);
+                $selectedCommentString[$loopVar] = $selectedComment;
+            }
+            $reviewData['thumbnail'] = BookController::setThumbnail($reviewData['bookID']);
         }
-        
-        return view('Mypage/bookReportsEdit', compact('reviewData','reviewExist'));
+        // dd($reviewData);
+        return view('Mypage/bookReportsEdit', compact('reviewData', 'reviewExist','selectedCommentString'));
     }
 
     //一言コメント変換

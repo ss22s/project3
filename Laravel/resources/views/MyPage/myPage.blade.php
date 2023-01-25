@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/Mypage.css">
     <title>マイページ</title>
+    @if(session('message') != '')
+    <script>
+       alert("{{session('message')}}");
+    </script>
+    @endif
 </head>
 
 <body>

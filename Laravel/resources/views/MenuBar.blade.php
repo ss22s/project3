@@ -27,9 +27,12 @@
     <div class="offcanvas-body">
       <div>
         <a class="toppagelink" href="/">Top</a><br>
+        <a class="toppagelink" href="/searchBox">本の検索</a><br>
         <a class="toppagelink" href="/ranking">ランキング</a><br>
         <a class="toppagelink" href="/newBookReport">新着感想</a><br>
         <a class="toppagelink" href="/contactUs">お問い合わせ</a>
+
+        
       </div>
       <br><br>
       <div>
@@ -38,8 +41,11 @@
         <a class="loginlink" href="/register">新規登録</a>
         @endguest
         @auth
+        <a class="toppagelink" href="/selectBooks">
+                感想を書く
+            </a>
       </div>
-
+      <br>
       <div class="logout">
         <p class="message">
           <b>{{Auth::user()->name}}</b>としてログイン済み<br>
