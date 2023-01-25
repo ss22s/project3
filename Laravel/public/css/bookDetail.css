@@ -165,6 +165,7 @@
     display:inline-block;
     background-color:#efefef;
     border:2px solid;
+    border-radius:30px;
     margin:20px;
     padding:10px;
     width:40%;
