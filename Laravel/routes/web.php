@@ -93,14 +93,14 @@ Route::post('selectFromfinishedBooks', 'App\Http\Controllers\BookController@sele
 Route::post('before', 'App\Http\Controllers\BookController@beforeBookSearch');
 Route::post('next', 'App\Http\Controllers\BookController@nextBookSearch');
 
-Route::post('/write', 'App\Http\Controllers\BookController@write');
+Route::post('/write', 'App\Http\Controllers\BookController@write')->middleware('auth');;;
 
 Route::post('/reportRegister', 'App\Http\Controllers\BookController@register');
 //読みたい本リストに追加
 Route::get('/wantBook/{bookID}', 'App\Http\Controllers\BookController@wantBookAdd')
     ->name('book.wantBookAdd')->middleware('auth');
 Route::post('/wantBookAddTo','App\Http\Controllers\BookController@wantBookAddTo')
-    ->name('/bookReportList');
+    ->name('/bookReportList')->middleware('auth');
 
 //本の詳細ページ
 Route::get('/detail/{bookID}', 'App\Http\Controllers\BookController@detail')

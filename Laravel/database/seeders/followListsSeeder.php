@@ -22,7 +22,7 @@ class followListsSeeder extends Seeder
 
         \DB::table('followLists')->insert([
             [
-                'id' => 1,
+                'id' => 2,
                 'followerID' => 1
             ],
             [
